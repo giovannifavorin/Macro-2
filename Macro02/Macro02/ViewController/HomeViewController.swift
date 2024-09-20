@@ -10,7 +10,7 @@ import UIKit
 class HomeViewController: UIViewController {
     
     var viewModel: HomeViewModel
-    var label: UILabel!
+    var label: TextComponent!
     
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
@@ -25,10 +25,13 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .white
-        label = UILabel()
-        label.text = "HOME VIEW"
-        label.textColor = .black
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label = TextComponent()
+//        label.text = "HOME VIEW"
+//        label.textColor = .black
+//        label.translatesAutoresizingMaskIntoConstraints = false
+        label.definirTexto(string: "AGR VAI")
+        
+        
         view.addSubview(label)
         
         constraints()
