@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import SwiftUI
 
 class HomeViewController: UIViewController {
     
-    var viewModel: HomeViewModel
+    @ObservedObject var viewModel: HomeViewModel
     var label: UILabel!
+    var button: UIButton!
     
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
@@ -31,13 +33,28 @@ class HomeViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(label)
         
+        button = UIButton()
+        button.setTitle("Counsciousness Exam", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.addTarget(self, action: #selector(navigateToCounsciousnessExam), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(button)
+        
         constraints()
     }
     
-    func constraints() {
+    private func constraints() {
         NSLayoutConstraint.activate([
             label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            
+            button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            button.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 8)
         ])
+    }
+    
+    // MARK: - Navigation #selector methods
+    @objc private func navigateToCounsciousnessExam() {
+        self.viewModel.selectedNavigation = .counsciousnessExam
     }
 }

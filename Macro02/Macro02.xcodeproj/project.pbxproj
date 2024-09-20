@@ -20,6 +20,9 @@
 		B8F8DD182C8B8EB600D24769 /* Macro02Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F8DD172C8B8EB600D24769 /* Macro02Tests.swift */; };
 		B8F8DD222C8B8EB600D24769 /* Macro02UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F8DD212C8B8EB600D24769 /* Macro02UITests.swift */; };
 		B8F8DD242C8B8EB600D24769 /* Macro02UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F8DD232C8B8EB600D24769 /* Macro02UITestsLaunchTests.swift */; };
+		F1EDE14A2C9CD045007A6403 /* CounsciousnessExamCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EDE1492C9CD043007A6403 /* CounsciousnessExamCoordinator.swift */; };
+		F1EDE14E2C9CD0D2007A6403 /* CounsciousnessExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EDE14D2C9CD0D2007A6403 /* CounsciousnessExamViewController.swift */; };
+		F1EDE1502C9CD126007A6403 /* CounsciousnessExamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EDE14F2C9CD120007A6403 /* CounsciousnessExamViewModel.swift */; };
 		F1F6BE432C99FDD700F4C7FF /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F6BE422C99FDCC00F4C7FF /* ApplicationCoordinator.swift */; };
 		F1F6BE452C99FF2100F4C7FF /* MainTabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F6BE442C99FF2100F4C7FF /* MainTabBarCoordinator.swift */; };
 		F1F6BE572C9A078B00F4C7FF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F6BE562C9A078200F4C7FF /* HomeViewController.swift */; };
@@ -74,6 +77,9 @@
 		B8F8DD1D2C8B8EB600D24769 /* Macro02UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Macro02UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8F8DD212C8B8EB600D24769 /* Macro02UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macro02UITests.swift; sourceTree = "<group>"; };
 		B8F8DD232C8B8EB600D24769 /* Macro02UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macro02UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		F1EDE1492C9CD043007A6403 /* CounsciousnessExamCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounsciousnessExamCoordinator.swift; sourceTree = "<group>"; };
+		F1EDE14D2C9CD0D2007A6403 /* CounsciousnessExamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounsciousnessExamViewController.swift; sourceTree = "<group>"; };
+		F1EDE14F2C9CD120007A6403 /* CounsciousnessExamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounsciousnessExamViewModel.swift; sourceTree = "<group>"; };
 		F1F6BE422C99FDCC00F4C7FF /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
 		F1F6BE442C99FF2100F4C7FF /* MainTabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarCoordinator.swift; sourceTree = "<group>"; };
 		F1F6BE562C9A078200F4C7FF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -134,6 +140,7 @@
 				F1F6BE622C9B5C9F00F4C7FF /* DailyLiturgyViewController.swift */,
 				F1F6BE642C9B5DE600F4C7FF /* BibleViewController.swift */,
 				F1F6BE662C9B5E0500F4C7FF /* AboutViewController.swift */,
+				F1EDE14D2C9CD0D2007A6403 /* CounsciousnessExamViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -141,6 +148,7 @@
 		B8783F7C2C99F2AF00661148 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				F1EDE14F2C9CD120007A6403 /* CounsciousnessExamViewModel.swift */,
 				B8783F832C99F43300661148 /* ViewModel.swift */,
 				F1F6BE5B2C9A0C4100F4C7FF /* HomeViewModel.swift */,
 				F1F6BE732C9B644500F4C7FF /* ConfessionViewModel.swift */,
@@ -249,6 +257,14 @@
 			path = Macro02UITests;
 			sourceTree = "<group>";
 		};
+		F1EDE1482C9CD022007A6403 /* Home Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				F1EDE1492C9CD043007A6403 /* CounsciousnessExamCoordinator.swift */,
+			);
+			path = "Home Coordinators";
+			sourceTree = "<group>";
+		};
 		F1F6BE462C99FFB100F4C7FF /* Main Tab Bar */ = {
 			isa = PBXGroup;
 			children = (
@@ -261,10 +277,11 @@
 		F1F6BE682C9B60B700F4C7FF /* Tab Bar Coordinators */ = {
 			isa = PBXGroup;
 			children = (
+				F1F6BE692C9B60D500F4C7FF /* HomeCoordinator.swift */,
+				F1EDE1482C9CD022007A6403 /* Home Coordinators */,
 				F1F6BE712C9B631600F4C7FF /* AboutCoordinator.swift */,
 				F1F6BE6F2C9B62FE00F4C7FF /* BibleCoordinator.swift */,
 				F1F6BE6B2C9B627B00F4C7FF /* ConfessionCoordinator.swift */,
-				F1F6BE692C9B60D500F4C7FF /* HomeCoordinator.swift */,
 				F1F6BE6D2C9B62E900F4C7FF /* DailyLiturgyCoordinator.swift */,
 			);
 			path = "Tab Bar Coordinators";
@@ -400,6 +417,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1EDE14E2C9CD0D2007A6403 /* CounsciousnessExamViewController.swift in Sources */,
 				F1F6BE722C9B631C00F4C7FF /* AboutCoordinator.swift in Sources */,
 				F1F6BE5C2C9A0C4100F4C7FF /* HomeViewModel.swift in Sources */,
 				B8783F842C99F43800661148 /* ViewModel.swift in Sources */,
@@ -412,9 +430,11 @@
 				F1F6BE672C9B5E0500F4C7FF /* AboutViewController.swift in Sources */,
 				F1F6BE452C99FF2100F4C7FF /* MainTabBarCoordinator.swift in Sources */,
 				F1F6BE762C9B647700F4C7FF /* DailyLiturgyViewModel.swift in Sources */,
+				F1EDE1502C9CD126007A6403 /* CounsciousnessExamViewModel.swift in Sources */,
 				F1F6BE7A2C9B649C00F4C7FF /* AboutViewModel.swift in Sources */,
 				F1F6BE432C99FDD700F4C7FF /* ApplicationCoordinator.swift in Sources */,
 				F1F6BE652C9B5DE600F4C7FF /* BibleViewController.swift in Sources */,
+				F1EDE14A2C9CD045007A6403 /* CounsciousnessExamCoordinator.swift in Sources */,
 				B8783F882C99F45000661148 /* TextComponent.swift in Sources */,
 				B8783F902C99F63A00661148 /* DataModel.xcdatamodeld in Sources */,
 				F1F6BE742C9B644C00F4C7FF /* ConfessionViewModel.swift in Sources */,

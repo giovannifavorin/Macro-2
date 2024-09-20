@@ -6,11 +6,17 @@
 //
 
 import UIKit
+import Combine
 
 class HomeCoordinator: Coordinator {
     
     var rootViewController: UINavigationController
     var viewModel = HomeViewModel()
+    
+    var childCoordinators: [Coordinator] = []
+    
+    // Subscription para manter o Combine observando mudanças
+    private var cancellables = Set<AnyCancellable>()
     
     lazy var homeViewController: HomeViewController = {
         let vc = HomeViewController(viewModel: viewModel)
@@ -19,10 +25,68 @@ class HomeCoordinator: Coordinator {
     
     init() {
         self.rootViewController = UINavigationController()
-        self.rootViewController.navigationBar.isTranslucent = true
+//        self.rootViewController.navigationBar.isTranslucent = true
     }
     
     func start() {
         rootViewController.setViewControllers([homeViewController], animated: false)
+        
+        // Observando mudanças na selectedNavigation
+        viewModel.$selectedNavigation
+            .receive(on: RunLoop.main)
+            .sink { [weak self] selectedNavigation in
+                self?.handleNavigation(selectedNavigation)
+            }
+            .store(in: &cancellables)
     }
+    
+    private func handleNavigation(_ navigation: NavigationCases) {
+        switch navigation {
+        case .counsciousnessExam:
+            startCounsciousnessExamCoordinator()
+            
+        case .liturgicalCalendar:
+            startLiturgicalCalendarCoordinator()
+            
+        case .penance:
+            startPenanceCoordinator()
+            
+        case .todaysSaint:
+            startTodaysSaintCoordinator()
+            
+        case .prayers:
+            startPrayersCoordinator()
+            
+        case .none:
+            break
+        }
+    }
+    
+    private func startCounsciousnessExamCoordinator() {
+        let counsciousnessExamCoordinator = CounsciousnessExamCoordinator()
+        self.childCoordinators.append(counsciousnessExamCoordinator)
+        
+        counsciousnessExamCoordinator.start()
+        // Nesse caso, usamos o "pushViewController" pois a próxima rootViewController é uma UIViewController
+        // Se fosse uma UINavigationController, usaríamos o "setViewControllers".
+        self.rootViewController.pushViewController(counsciousnessExamCoordinator.rootViewController, animated: true)
+    }
+    
+    private func startLiturgicalCalendarCoordinator() {
+        
+    }
+    
+    private func startPenanceCoordinator() {
+        
+    }
+    
+    private func startTodaysSaintCoordinator() {
+        
+    }
+    
+    private func startPrayersCoordinator() {
+        
+    }
+    
+    
 }
