@@ -12,7 +12,8 @@ class HomeViewController: UIViewController {
     
     @ObservedObject var viewModel: HomeViewModel
     var label: UILabel!
-    var button: UIButton!
+    var counsExamBt: UIButton!
+    var prayersBt: UIButton!
     
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
@@ -33,14 +34,24 @@ class HomeViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(label)
         
-        button = UIButton()
-        button.setTitle("Counsciousness Exam", for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.addTarget(self, action: #selector(navigateToCounsciousnessExam), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(button)
-        
+        setupBts()
         constraints()
+    }
+    
+    private func setupBts() {
+        counsExamBt = UIButton()
+        counsExamBt.setTitle("Counsciousness Exam", for: .normal)
+        counsExamBt.setTitleColor(.systemBlue, for: .normal)
+        counsExamBt.addTarget(self, action: #selector(navigateToCounsciousnessExam), for: .touchUpInside)
+        counsExamBt.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(counsExamBt)
+        
+        prayersBt = UIButton()
+        prayersBt.setTitle("Prayers", for: .normal)
+        prayersBt.setTitleColor(.systemBlue, for: .normal)
+        prayersBt.addTarget(self, action: #selector(navigateToPrayers), for: .touchUpInside)
+        prayersBt.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(prayersBt)
     }
     
     private func constraints() {
@@ -48,13 +59,20 @@ class HomeViewController: UIViewController {
             label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             
-            button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            button.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 8)
+            counsExamBt.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            counsExamBt.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 16),
+            
+            prayersBt.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            prayersBt.topAnchor.constraint(equalTo: counsExamBt.bottomAnchor, constant: 8)
         ])
     }
     
     // MARK: - Navigation #selector methods
     @objc private func navigateToCounsciousnessExam() {
         self.viewModel.selectedNavigation = .counsciousnessExam
+    }
+    
+    @objc private func navigateToPrayers() {
+        self.viewModel.selectedNavigation = .prayers
     }
 }

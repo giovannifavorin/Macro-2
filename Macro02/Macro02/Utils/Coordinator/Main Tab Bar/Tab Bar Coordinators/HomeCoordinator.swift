@@ -66,10 +66,20 @@ class HomeCoordinator: Coordinator {
         let counsciousnessExamCoordinator = CounsciousnessExamCoordinator()
         self.childCoordinators.append(counsciousnessExamCoordinator)
         
+        let transition = CATransition()
+        transition.duration = 0.3
+        transition.type = .push
+        transition.subtype = .fromRight
+        transition.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        transition.fillMode = .forwards
+        transition.isRemovedOnCompletion = false
+        
+        self.rootViewController.view.layer.add(transition, forKey: kCATransition)
+        
         counsciousnessExamCoordinator.start()
         // Nesse caso, usamos o "pushViewController" pois a próxima rootViewController é uma UIViewController
         // Se fosse uma UINavigationController, usaríamos o "setViewControllers".
-        self.rootViewController.pushViewController(counsciousnessExamCoordinator.rootViewController, animated: true)
+        self.rootViewController.pushViewController(counsciousnessExamCoordinator.rootViewController, animated: false)
     }
     
     private func startLiturgicalCalendarCoordinator() {
@@ -85,8 +95,21 @@ class HomeCoordinator: Coordinator {
     }
     
     private func startPrayersCoordinator() {
+        let prayersCoordinator = PrayersCoordinator()
+        self.childCoordinators.append(prayersCoordinator)
         
+        let transition = CATransition()
+        transition.duration = 0.3
+        transition.type = .push
+        transition.subtype = .fromRight
+        transition.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        transition.fillMode = .forwards
+        transition.isRemovedOnCompletion = false
+        
+        self.rootViewController.view.layer.add(transition, forKey: kCATransition)
+        
+        prayersCoordinator.start()
+        self.rootViewController.pushViewController(prayersCoordinator.rootViewController, animated: false)
     }
-    
     
 }
