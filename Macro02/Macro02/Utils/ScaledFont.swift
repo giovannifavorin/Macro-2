@@ -6,21 +6,45 @@
 //
 
 import UIKit
+extension UIFont {
+    // Função que retorna a fonte personalizada com suporte a Dynamic Type
+    static func customFont(for style: FontStyle) -> UIFont {
+        let fontMetrics: UIFontMetrics
+        let customFont: UIFont
+        
+        switch style {
+        case .titulo1:
+            customFont = UIFont(name: "CustomFont-Bold", size: 24.0) ?? UIFont.systemFont(ofSize: 24.0, weight: .bold)
+            fontMetrics = UIFontMetrics(forTextStyle: .largeTitle)
+            
+        case .titulo2:
+            customFont = UIFont(name: "CustomFont-SemiBold", size: 20.0) ?? UIFont.systemFont(ofSize: 20.0, weight: .semibold)
+            fontMetrics = UIFontMetrics(forTextStyle: .title2)
+            
+        case .textoNormal:
+            customFont = UIFont(name: "CustomFont-Regular", size: 16.0) ?? UIFont.systemFont(ofSize: 16.0, weight: .regular)
+            fontMetrics = UIFontMetrics(forTextStyle: .body)
+            
+        case .textoSecundario:
+            customFont = UIFont(name: "CustomFont-Regular", size: 14.0) ?? UIFont.systemFont(ofSize: 14.0, weight: .regular)
+            fontMetrics = UIFontMetrics(forTextStyle: .subheadline)
+            
+        case .textoDetalhe:
+            customFont = UIFont(name: "CustomFont-Light", size: 12.0) ?? UIFont.systemFont(ofSize: 12.0, weight: .light)
+            fontMetrics = UIFontMetrics(forTextStyle: .footnote)
+        }
+        
+        // Aplica o escalonamento dinâmico usando UIFontMetrics
+        return fontMetrics.scaledFont(for: customFont)
+    }
+}
 
 extension UILabel {
-    
-    /// Modificador que permite dynamic type usando valores fixos de fonte
-    /// - Parameters:
-    ///   - name: O nome da fonte a ser usada. O padrão é o nome da família da fonte do sistema.
-    ///   - size: O tamanho da fonte.
-    ///   - weight: O peso da fonte. O padrão é `.regular`.
-    func setScaledFont(name: String = UIFont.systemFont(ofSize: 0).familyName, size: CGFloat, weight: UIFont.Weight = .regular) {
-        let fontMetrics = UIFontMetrics(forTextStyle: .body)
-        // Corrigido: usa a família da fonte e cria uma com o peso específico
-        let customFont = UIFont(name: name, size: size) ?? UIFont.systemFont(ofSize: size)
-        let weightedFont = customFont.withWeight(weight)
-        self.font = fontMetrics.scaledFont(for: weightedFont)
-        self.adjustsFontForContentSizeCategory = true // Habilita o ajuste dinâmico
+    /// Define a fonte escalável usando o estilo customizado com suporte a Dynamic Type
+    /// - Parameter style: Estilo da fonte baseado no enum `FontStyle`
+    func setFontStyle(_ style: FontStyle) {
+        self.font = UIFont.customFont(for: style)
+        self.adjustsFontForContentSizeCategory = true // Ativa o Dynamic Type
     }
 }
 

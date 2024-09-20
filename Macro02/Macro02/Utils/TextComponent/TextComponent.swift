@@ -20,7 +20,7 @@ class TextComponent: UILabel {
     
     private func setupView() {
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.setScaledFont(size: 18, weight: .regular)
+        self.font = UIFont.customFont(for: .titulo1)
         self.textColor = .label
         self.textAlignment = .center
         self.numberOfLines = 0  // Permite múltiplas linhas
@@ -31,10 +31,22 @@ class TextComponent: UILabel {
         self.isUserInteractionEnabled = true
         self.accessibilityLabel = accessibilityLabel ?? self.text // Define o texto como o rótulo de acessibilidade
         self.accessibilityTraits = .staticText
+        self.adjustsFontForContentSizeCategory = true
+
     }
     
     func definirTexto(string:  String.LocalizationValue) {
         self.text = String(localized:string, table: nil)
     }
 }
+
+// Enum que define os diferentes estilos de fonte que podem ser usados
+enum FontStyle {
+    case titulo1
+    case titulo2
+    case textoNormal
+    case textoSecundario
+    case textoDetalhe
+}
+
 

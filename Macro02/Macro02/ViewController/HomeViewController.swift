@@ -29,6 +29,7 @@ class HomeViewController: UIViewController {
 //        label.text = "HOME VIEW"
 //        label.textColor = .black
 //        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.customFont(for: .titulo1)
         label.definirTexto(string: "AGR VAI")
         
         
