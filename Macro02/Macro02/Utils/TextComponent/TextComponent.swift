@@ -39,14 +39,3 @@ class TextComponent: UILabel {
         self.text = String(localized:string, table: nil)
     }
 }
-
-// Enum que define os diferentes estilos de fonte que podem ser usados
-enum FontStyle {
-    case titulo1
-    case titulo2
-    case textoNormal
-    case textoSecundario
-    case textoDetalhe
-}
-
-

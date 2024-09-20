@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		AF9C0F662C9DB5B7008187EC /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = AF9C0F652C9DB5B7008187EC /* Localizable.xcstrings */; };
 		AF9C0F6A2C9DB867008187EC /* ScaledFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C0F692C9DB863008187EC /* ScaledFont.swift */; };
+		AF9C0F6C2C9DC11B008187EC /* FontStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C0F6B2C9DC10E008187EC /* FontStyle.swift */; };
 		B8783F822C99F32E00661148 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8783F812C99F32E00661148 /* CoordinatorProtocol.swift */; };
 		B8783F842C99F43800661148 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8783F832C99F43300661148 /* ViewModel.swift */; };
 		B8783F862C99F44200661148 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8783F852C99F44200661148 /* DataManager.swift */; };
@@ -61,6 +62,7 @@
 /* Begin PBXFileReference section */
 		AF9C0F652C9DB5B7008187EC /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		AF9C0F692C9DB863008187EC /* ScaledFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaledFont.swift; sourceTree = "<group>"; };
+		AF9C0F6B2C9DC10E008187EC /* FontStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontStyle.swift; sourceTree = "<group>"; };
 		B8783F812C99F32E00661148 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		B8783F832C99F43300661148 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		B8783F852C99F44200661148 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				B8783F872C99F45000661148 /* TextComponent.swift */,
+				AF9C0F6B2C9DC10E008187EC /* FontStyle.swift */,
 			);
 			path = TextComponent;
 			sourceTree = "<group>";
@@ -427,6 +430,7 @@
 				B8783F902C99F63A00661148 /* DataModel.xcdatamodeld in Sources */,
 				F1F6BE742C9B644C00F4C7FF /* ConfessionViewModel.swift in Sources */,
 				F1F6BE782C9B648C00F4C7FF /* BibleViewModel.swift in Sources */,
+				AF9C0F6C2C9DC11B008187EC /* FontStyle.swift in Sources */,
 				B8F8DD032C8B8EB500D24769 /* SceneDelegate.swift in Sources */,
 				F1F6BE6E2C9B62E900F4C7FF /* DailyLiturgyCoordinator.swift in Sources */,
 				B8783F8A2C99F58600661148 /* Model.swift in Sources */,
