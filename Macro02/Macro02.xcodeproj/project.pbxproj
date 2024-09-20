@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AF9C0F662C9DB5B7008187EC /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = AF9C0F652C9DB5B7008187EC /* Localizable.xcstrings */; };
+		AF9C0F6A2C9DB867008187EC /* ScaledFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C0F692C9DB863008187EC /* ScaledFont.swift */; };
 		B8783F822C99F32E00661148 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8783F812C99F32E00661148 /* CoordinatorProtocol.swift */; };
 		B8783F842C99F43800661148 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8783F832C99F43300661148 /* ViewModel.swift */; };
 		B8783F862C99F44200661148 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8783F852C99F44200661148 /* DataManager.swift */; };
@@ -59,6 +60,7 @@
 
 /* Begin PBXFileReference section */
 		AF9C0F652C9DB5B7008187EC /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		AF9C0F692C9DB863008187EC /* ScaledFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaledFont.swift; sourceTree = "<group>"; };
 		B8783F812C99F32E00661148 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		B8783F832C99F43300661148 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		B8783F852C99F44200661148 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 		B8783F7E2C99F2BF00661148 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				AF9C0F692C9DB863008187EC /* ScaledFont.swift */,
 				B8F8DD092C8B8EB600D24769 /* Assets.xcassets */,
 				B8783F802C99F2D300661148 /* TextComponent */,
 				B8783F7F2C99F2C600661148 /* Coordinator */,
@@ -416,6 +419,7 @@
 				F1F6BE672C9B5E0500F4C7FF /* AboutViewController.swift in Sources */,
 				F1F6BE452C99FF2100F4C7FF /* MainTabBarCoordinator.swift in Sources */,
 				F1F6BE762C9B647700F4C7FF /* DailyLiturgyViewModel.swift in Sources */,
+				AF9C0F6A2C9DB867008187EC /* ScaledFont.swift in Sources */,
 				F1F6BE7A2C9B649C00F4C7FF /* AboutViewModel.swift in Sources */,
 				F1F6BE432C99FDD700F4C7FF /* ApplicationCoordinator.swift in Sources */,
 				F1F6BE652C9B5DE600F4C7FF /* BibleViewController.swift in Sources */,

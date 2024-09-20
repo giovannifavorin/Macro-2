@@ -11,6 +11,7 @@ class TextComponent: UILabel {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
+        addAccessibility()
     }
     
     required init?(coder: NSCoder) {
@@ -18,11 +19,11 @@ class TextComponent: UILabel {
     }
     
     private func setupView() {
-        self.font = UIFont.systemFont(ofSize: 16)
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.setScaledFont(size: 18, weight: .regular)
         self.textColor = .label
         self.textAlignment = .center
         self.numberOfLines = 0  // Permite múltiplas linhas
-        self.translatesAutoresizingMaskIntoConstraints = false
         
     }
     
@@ -36,3 +37,4 @@ class TextComponent: UILabel {
         self.text = String(localized:string, table: nil)
     }
 }
+
