@@ -50,8 +50,6 @@ class PrayerOptionsModalViewController: UIViewController {
         closeButton = UIButton()
         closeButton.setTitle("Close", for: .normal)
         closeButton.setTitleColor(.systemBlue, for: .normal)
-//        closeButton.setImage(UIImage(systemName: "x.mark"), for: .normal)
-//        closeButton.tintColor = .systemBlue
         closeButton.addTarget(self, action: #selector(closeModal), for: .touchUpInside)
         
         closeButton.translatesAutoresizingMaskIntoConstraints = false

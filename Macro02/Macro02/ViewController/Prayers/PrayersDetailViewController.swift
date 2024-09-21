@@ -15,13 +15,6 @@ class PrayersDetailViewController: UIViewController, UITableViewDelegate, UITabl
     var tableView: UITableView!
     var prayers: [Prayer]!
     
-//    lazy var selectedCategory: PrayerCategory = {
-//        if let selectedCategory = viewModel.selectedCategory {
-//            return selectedCategory
-//        }
-//        return selectedCategory
-//    }()
-    
     init(viewModel: PrayersViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)

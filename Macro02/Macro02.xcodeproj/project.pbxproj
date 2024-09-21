@@ -150,16 +150,13 @@
 		B8783F7B2C99F29F00661148 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				F1EDE1602C9E5482007A6403 /* CounsciousnessExam */,
+				F1EDE15F2C9E5451007A6403 /* Prayers */,
 				F1F6BE562C9A078200F4C7FF /* HomeViewController.swift */,
 				F1F6BE602C9B5AC200F4C7FF /* ConfessionViewController.swift */,
 				F1F6BE622C9B5C9F00F4C7FF /* DailyLiturgyViewController.swift */,
 				F1F6BE642C9B5DE600F4C7FF /* BibleViewController.swift */,
 				F1F6BE662C9B5E0500F4C7FF /* AboutViewController.swift */,
-				F1EDE14D2C9CD0D2007A6403 /* CounsciousnessExamViewController.swift */,
-				F1EDE1532C9E04AE007A6403 /* PrayersCategoryViewController.swift */,
-				F1EDE1572C9E0FCC007A6403 /* PrayersDetailViewController.swift */,
-				F1EDE15B2C9E2F64007A6403 /* FullPrayerViewController.swift */,
-				F1EDE15D2C9E4105007A6403 /* PrayerOptionsModalViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -284,6 +281,25 @@
 				F1EDE1492C9CD043007A6403 /* CounsciousnessExamCoordinator.swift */,
 			);
 			path = "Home Coordinators";
+			sourceTree = "<group>";
+		};
+		F1EDE15F2C9E5451007A6403 /* Prayers */ = {
+			isa = PBXGroup;
+			children = (
+				F1EDE1532C9E04AE007A6403 /* PrayersCategoryViewController.swift */,
+				F1EDE1572C9E0FCC007A6403 /* PrayersDetailViewController.swift */,
+				F1EDE15B2C9E2F64007A6403 /* FullPrayerViewController.swift */,
+				F1EDE15D2C9E4105007A6403 /* PrayerOptionsModalViewController.swift */,
+			);
+			path = Prayers;
+			sourceTree = "<group>";
+		};
+		F1EDE1602C9E5482007A6403 /* CounsciousnessExam */ = {
+			isa = PBXGroup;
+			children = (
+				F1EDE14D2C9CD0D2007A6403 /* CounsciousnessExamViewController.swift */,
+			);
+			path = CounsciousnessExam;
 			sourceTree = "<group>";
 		};
 		F1F6BE462C99FFB100F4C7FF /* Main Tab Bar */ = {

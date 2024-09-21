@@ -14,7 +14,6 @@ class PrayersCoordinator: Coordinator {
     
     lazy var rootViewController: PrayersCategoryViewController = {
         let vc = PrayersCategoryViewController(viewModel: viewModel)
-//        vc.hidesBottomBarWhenPushed = false
         return vc
     }()
     
