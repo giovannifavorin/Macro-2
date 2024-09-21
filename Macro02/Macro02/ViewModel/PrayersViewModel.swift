@@ -12,6 +12,7 @@ class PrayersViewModel: ObservableObject {
     @Published var prayerCategories: [PrayerCategory] = []
     @Published var selectedCategory: PrayerCategory?
     @Published var selectedPrayer: Prayer?
+    @Published var fontSize: CGFloat = 17.0
     
     // TO-DO: Popular arrays com chamadas de API
     private let prayers = [Prayer(id: UUID(),

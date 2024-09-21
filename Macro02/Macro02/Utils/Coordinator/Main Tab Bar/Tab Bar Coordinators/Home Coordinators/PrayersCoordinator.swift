@@ -40,6 +40,7 @@ class PrayersCoordinator: Coordinator {
             }
             .store(in: &cancellables)
         
+        
     }
     
     private func handleNavigationCategory(to: PrayerCategory) {
@@ -47,6 +48,8 @@ class PrayersCoordinator: Coordinator {
     }
     
     private func handleNavigationPrayer(to: Prayer) {
-        self.rootViewController.navigationController?.pushViewController(FullPrayerViewController(viewModel: viewModel), animated: true)
+        let vc = FullPrayerViewController(viewModel: viewModel)
+        vc.hidesBottomBarWhenPushed = true
+        self.rootViewController.navigationController?.pushViewController(vc, animated: true)
     }
 }
