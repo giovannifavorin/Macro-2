@@ -8,7 +8,7 @@
 import UIKit
 
 
-// Enum que define os diferentes estilos de fonte que podem ser usados
+/// Enum que define os estilos de fonte do projeto
 enum FontStyle {
     case titulo1
     case titulo2
@@ -18,8 +18,8 @@ enum FontStyle {
 }
 
 extension UIFont {
-    // Função que retorna a fonte personalizada com suporte a Dynamic Type
-    static func customFont(for style: FontStyle) -> UIFont {
+    /// Função que retorna a fonte personalizada e já adiciona Dynamic Types a ela
+    static func customFont(_ style: FontStyle) -> UIFont {
         let fontMetrics: UIFontMetrics
         let customFont: UIFont
         

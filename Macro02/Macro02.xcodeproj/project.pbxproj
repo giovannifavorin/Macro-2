@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		AF9C0F662C9DB5B7008187EC /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = AF9C0F652C9DB5B7008187EC /* Localizable.xcstrings */; };
-		AF9C0F6A2C9DB867008187EC /* ScaledFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C0F692C9DB863008187EC /* ScaledFont.swift */; };
-		AF9C0F6C2C9DC11B008187EC /* FontStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C0F6B2C9DC10E008187EC /* FontStyle.swift */; };
+		AF9C0FDA2CA1E5F3008187EC /* FontStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C0FD62CA1E5F3008187EC /* FontStyle.swift */; };
+		AF9C0FDB2CA1E5F3008187EC /* ButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C0FD52CA1E5F3008187EC /* ButtonComponent.swift */; };
+		AF9C0FDC2CA1E5F3008187EC /* setDynamicFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C0FD72CA1E5F3008187EC /* setDynamicFont.swift */; };
+		AF9C0FDD2CA1E5F3008187EC /* TextComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C0FD82CA1E5F3008187EC /* TextComponent.swift */; };
 		B8783F822C99F32E00661148 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8783F812C99F32E00661148 /* CoordinatorProtocol.swift */; };
 		B8783F842C99F43800661148 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8783F832C99F43300661148 /* ViewModel.swift */; };
 		B8783F862C99F44200661148 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8783F852C99F44200661148 /* DataManager.swift */; };
-		B8783F882C99F45000661148 /* TextComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8783F872C99F45000661148 /* TextComponent.swift */; };
 		B8783F8A2C99F58600661148 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8783F892C99F58600661148 /* Model.swift */; };
 		B8783F902C99F63A00661148 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B8783F8E2C99F63A00661148 /* DataModel.xcdatamodeld */; };
 		B8F8DD012C8B8EB500D24769 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F8DD002C8B8EB500D24769 /* AppDelegate.swift */; };
@@ -61,12 +62,13 @@
 
 /* Begin PBXFileReference section */
 		AF9C0F652C9DB5B7008187EC /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
-		AF9C0F692C9DB863008187EC /* ScaledFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaledFont.swift; sourceTree = "<group>"; };
-		AF9C0F6B2C9DC10E008187EC /* FontStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontStyle.swift; sourceTree = "<group>"; };
+		AF9C0FD52CA1E5F3008187EC /* ButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponent.swift; sourceTree = "<group>"; };
+		AF9C0FD62CA1E5F3008187EC /* FontStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontStyle.swift; sourceTree = "<group>"; };
+		AF9C0FD72CA1E5F3008187EC /* setDynamicFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = setDynamicFont.swift; sourceTree = "<group>"; };
+		AF9C0FD82CA1E5F3008187EC /* TextComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextComponent.swift; sourceTree = "<group>"; };
 		B8783F812C99F32E00661148 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		B8783F832C99F43300661148 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		B8783F852C99F44200661148 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
-		B8783F872C99F45000661148 /* TextComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextComponent.swift; sourceTree = "<group>"; };
 		B8783F892C99F58600661148 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		B8783F8F2C99F63A00661148 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		B8F8DCFD2C8B8EB500D24769 /* Macro02.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Macro02.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -124,6 +126,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AF9C0FD92CA1E5F3008187EC /* TextComponents 2 */ = {
+			isa = PBXGroup;
+			children = (
+				AF9C0FD52CA1E5F3008187EC /* ButtonComponent.swift */,
+				AF9C0FD62CA1E5F3008187EC /* FontStyle.swift */,
+				AF9C0FD72CA1E5F3008187EC /* setDynamicFont.swift */,
+				AF9C0FD82CA1E5F3008187EC /* TextComponent.swift */,
+			);
+			path = "TextComponents 2";
+			sourceTree = "<group>";
+		};
 		B8783F792C99F28600661148 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,9 +183,8 @@
 		B8783F7E2C99F2BF00661148 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				AF9C0F692C9DB863008187EC /* ScaledFont.swift */,
+				AF9C0FD92CA1E5F3008187EC /* TextComponents 2 */,
 				B8F8DD092C8B8EB600D24769 /* Assets.xcassets */,
-				B8783F802C99F2D300661148 /* TextComponent */,
 				B8783F7F2C99F2C600661148 /* Coordinator */,
 				B8783F7D2C99F2B900661148 /* DataManager */,
 			);
@@ -187,15 +199,6 @@
 				F1F6BE462C99FFB100F4C7FF /* Main Tab Bar */,
 			);
 			path = Coordinator;
-			sourceTree = "<group>";
-		};
-		B8783F802C99F2D300661148 /* TextComponent */ = {
-			isa = PBXGroup;
-			children = (
-				B8783F872C99F45000661148 /* TextComponent.swift */,
-				AF9C0F6B2C9DC10E008187EC /* FontStyle.swift */,
-			);
-			path = TextComponent;
 			sourceTree = "<group>";
 		};
 		B8783F912C99F68100661148 /* Delegate */ = {
@@ -419,18 +422,19 @@
 				B8783F862C99F44200661148 /* DataManager.swift in Sources */,
 				B8783F822C99F32E00661148 /* CoordinatorProtocol.swift in Sources */,
 				B8F8DD012C8B8EB500D24769 /* AppDelegate.swift in Sources */,
+				AF9C0FDA2CA1E5F3008187EC /* FontStyle.swift in Sources */,
+				AF9C0FDB2CA1E5F3008187EC /* ButtonComponent.swift in Sources */,
+				AF9C0FDC2CA1E5F3008187EC /* setDynamicFont.swift in Sources */,
+				AF9C0FDD2CA1E5F3008187EC /* TextComponent.swift in Sources */,
 				F1F6BE672C9B5E0500F4C7FF /* AboutViewController.swift in Sources */,
 				F1F6BE452C99FF2100F4C7FF /* MainTabBarCoordinator.swift in Sources */,
 				F1F6BE762C9B647700F4C7FF /* DailyLiturgyViewModel.swift in Sources */,
-				AF9C0F6A2C9DB867008187EC /* ScaledFont.swift in Sources */,
 				F1F6BE7A2C9B649C00F4C7FF /* AboutViewModel.swift in Sources */,
 				F1F6BE432C99FDD700F4C7FF /* ApplicationCoordinator.swift in Sources */,
 				F1F6BE652C9B5DE600F4C7FF /* BibleViewController.swift in Sources */,
-				B8783F882C99F45000661148 /* TextComponent.swift in Sources */,
 				B8783F902C99F63A00661148 /* DataModel.xcdatamodeld in Sources */,
 				F1F6BE742C9B644C00F4C7FF /* ConfessionViewModel.swift in Sources */,
 				F1F6BE782C9B648C00F4C7FF /* BibleViewModel.swift in Sources */,
-				AF9C0F6C2C9DC11B008187EC /* FontStyle.swift in Sources */,
 				B8F8DD032C8B8EB500D24769 /* SceneDelegate.swift in Sources */,
 				F1F6BE6E2C9B62E900F4C7FF /* DailyLiturgyCoordinator.swift in Sources */,
 				B8783F8A2C99F58600661148 /* Model.swift in Sources */,

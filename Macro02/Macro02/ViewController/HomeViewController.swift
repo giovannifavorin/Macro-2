@@ -11,6 +11,7 @@ class HomeViewController: UIViewController {
     
     var viewModel: HomeViewModel
     var label: TextComponent!
+    var btn: ButtonComponent!
     
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
@@ -29,9 +30,15 @@ class HomeViewController: UIViewController {
 //        label.text = "HOME VIEW"
 //        label.textColor = .black
 //        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.customFont(for: .titulo1)
-        label.definirTexto(string: "AGR VAI")
+        label.font = UIFont.customFont(.titulo1)
+        label.setText(string: "AGR VAI")
         
+        self.btn = ButtonComponent()
+        view.addSubview(btn)
+        btn.configure(label: label) {
+            print("CACHOOORRO")
+        }
+        print("aasljkd")
         
         view.addSubview(label)
         
@@ -41,7 +48,10 @@ class HomeViewController: UIViewController {
     func constraints() {
         NSLayoutConstraint.activate([
             label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            
+            btn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            btn.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 40)
         ])
     }
 }
