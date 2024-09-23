@@ -13,9 +13,7 @@
 		B8783F882C99F45000661148 /* TextComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8783F872C99F45000661148 /* TextComponent.swift */; };
 		B8783F8A2C99F58600661148 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8783F892C99F58600661148 /* Model.swift */; };
 		B8783F902C99F63A00661148 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B8783F8E2C99F63A00661148 /* DataModel.xcdatamodeld */; };
-		B8E9CC192CA1F1FE00B21598 /* PreparatoryPrayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E9CC182CA1F1FE00B21598 /* PreparatoryPrayerModel.swift */; };
-		B8E9CC1B2CA1F20A00B21598 /* ActOfContritionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E9CC1A2CA1F20A00B21598 /* ActOfContritionModel.swift */; };
-		B8E9CC1D2CA1F21300B21598 /* ExaminationQuestionsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E9CC1C2CA1F21300B21598 /* ExaminationQuestionsModel.swift */; };
+		B8E9CC192CA1F1FE00B21598 /* SpiritualPreparationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E9CC182CA1F1FE00B21598 /* SpiritualPreparationModel.swift */; };
 		B8F8DD012C8B8EB500D24769 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F8DD002C8B8EB500D24769 /* AppDelegate.swift */; };
 		B8F8DD032C8B8EB500D24769 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F8DD022C8B8EB500D24769 /* SceneDelegate.swift */; };
 		B8F8DD0A2C8B8EB600D24769 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8F8DD092C8B8EB600D24769 /* Assets.xcassets */; };
@@ -66,9 +64,7 @@
 		B8783F872C99F45000661148 /* TextComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextComponent.swift; sourceTree = "<group>"; };
 		B8783F892C99F58600661148 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		B8783F8F2C99F63A00661148 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
-		B8E9CC182CA1F1FE00B21598 /* PreparatoryPrayerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreparatoryPrayerModel.swift; sourceTree = "<group>"; };
-		B8E9CC1A2CA1F20A00B21598 /* ActOfContritionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActOfContritionModel.swift; sourceTree = "<group>"; };
-		B8E9CC1C2CA1F21300B21598 /* ExaminationQuestionsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExaminationQuestionsModel.swift; sourceTree = "<group>"; };
+		B8E9CC182CA1F1FE00B21598 /* SpiritualPreparationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpiritualPreparationModel.swift; sourceTree = "<group>"; };
 		B8F8DCFD2C8B8EB500D24769 /* Macro02.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Macro02.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8F8DD002C8B8EB500D24769 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B8F8DD022C8B8EB500D24769 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -128,9 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				B8783F892C99F58600661148 /* Model.swift */,
-				B8E9CC182CA1F1FE00B21598 /* PreparatoryPrayerModel.swift */,
-				B8E9CC1A2CA1F20A00B21598 /* ActOfContritionModel.swift */,
-				B8E9CC1C2CA1F21300B21598 /* ExaminationQuestionsModel.swift */,
+				B8E9CC182CA1F1FE00B21598 /* SpiritualPreparationModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -343,7 +337,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1540;
-				LastUpgradeCheck = 1540;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					B8F8DCFC2C8B8EB500D24769 = {
 						CreatedOnToolsVersion = 15.4;
@@ -415,10 +409,9 @@
 				F1F6BE702C9B630200F4C7FF /* BibleCoordinator.swift in Sources */,
 				F1F6BE6C2C9B62B200F4C7FF /* ConfessionCoordinator.swift in Sources */,
 				F1F6BE572C9A078B00F4C7FF /* HomeViewController.swift in Sources */,
-				B8E9CC192CA1F1FE00B21598 /* PreparatoryPrayerModel.swift in Sources */,
+				B8E9CC192CA1F1FE00B21598 /* SpiritualPreparationModel.swift in Sources */,
 				B8783F862C99F44200661148 /* DataManager.swift in Sources */,
 				B8783F822C99F32E00661148 /* CoordinatorProtocol.swift in Sources */,
-				B8E9CC1B2CA1F20A00B21598 /* ActOfContritionModel.swift in Sources */,
 				B8F8DD012C8B8EB500D24769 /* AppDelegate.swift in Sources */,
 				F1F6BE672C9B5E0500F4C7FF /* AboutViewController.swift in Sources */,
 				F1F6BE452C99FF2100F4C7FF /* MainTabBarCoordinator.swift in Sources */,
@@ -436,7 +429,6 @@
 				F1F6BE6A2C9B60DD00F4C7FF /* HomeCoordinator.swift in Sources */,
 				F1F6BE612C9B5AC200F4C7FF /* ConfessionViewController.swift in Sources */,
 				F1F6BE632C9B5C9F00F4C7FF /* DailyLiturgyViewController.swift in Sources */,
-				B8E9CC1D2CA1F21300B21598 /* ExaminationQuestionsModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -660,7 +652,6 @@
 		B8F8DD2B2C8B8EB600D24769 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -680,7 +671,6 @@
 		B8F8DD2C2C8B8EB600D24769 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -700,7 +690,6 @@
 		B8F8DD2E2C8B8EB600D24769 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TLC9D54B8V;
@@ -718,7 +707,6 @@
 		B8F8DD2F2C8B8EB600D24769 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TLC9D54B8V;
