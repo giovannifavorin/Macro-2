@@ -10,7 +10,7 @@ import UIKit
 class DailyLiturgyViewController: UIViewController {
 
     var viewModel: DailyLiturgyViewModel
-    var label: UILabel!
+    var label: TextComponent!
     
     init(viewModel: DailyLiturgyViewModel) {
         self.viewModel = viewModel
@@ -25,11 +25,10 @@ class DailyLiturgyViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-        label = UILabel()
-        label.text = "DAILY LITURGY VIEW"
-        label.textColor = .black
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label = TextComponent("DAILY LITURGY VIEW")
+        label.font = UIFont.setCustomFont(.textoDetalhe)
         view.addSubview(label)
+        
         
         constraints()
     }

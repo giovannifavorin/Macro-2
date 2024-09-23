@@ -10,7 +10,7 @@ import UIKit
 class AboutViewController: UIViewController {
 
     var viewModel: AboutViewModel
-    var label: UILabel!
+    var label: TextComponent!
     
     init(viewModel: AboutViewModel) {
         self.viewModel = viewModel
@@ -25,10 +25,7 @@ class AboutViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .white
-        label = UILabel()
-        label.text = "ABOUT VIEW"
-        label.textColor = .black
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label = TextComponent("ABOUT VIEW")
         view.addSubview(label)
         
         constraints()
