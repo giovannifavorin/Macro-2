@@ -49,8 +49,8 @@ class ButtonComponent: UIButton {
     }
     
     ///Configura a Label de button e adiciona uma função a ele
-    func configure(label: TextComponent, action: (() -> Void)? = nil) {
-        self.textComponent = label
+    func configure(_ text: String, action: (() -> Void)? = nil) {
+        self.textComponent.text = text
         self.action = action
         self.accessibilityLabel = self.textComponent.text
     }

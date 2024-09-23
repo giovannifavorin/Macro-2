@@ -10,7 +10,7 @@ import UIKit
 class ConfessionViewController: UIViewController {
     
     var viewModel: ConfessionViewModel
-    var label: UILabel!
+    var label: TextComponent!
     
     init(viewModel: ConfessionViewModel) {
         self.viewModel = viewModel
@@ -25,10 +25,8 @@ class ConfessionViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .white
-        label = UILabel()
-        label.text = "CONFESSION VIEW"
-        label.textColor = .black
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label = TextComponent("CONFESSION VIEW")
+        label.font = UIFont.setCustomFont(.textoNormal)
         view.addSubview(label)
         
         constraints()

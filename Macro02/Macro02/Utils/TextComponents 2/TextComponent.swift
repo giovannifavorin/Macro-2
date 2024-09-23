@@ -16,6 +16,14 @@ class TextComponent: UILabel {
         addAccessibility()
     }
     
+    /// Novo init que aceita uma String.LocalizationValue
+    init(_ text: String.LocalizationValue) {
+        super.init(frame: .zero)
+        setupView()
+        setText(string: text)
+        addAccessibility()
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -23,7 +31,7 @@ class TextComponent: UILabel {
     /// Faz a configuração básica de todo texto
     private func setupView() {
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.font = UIFont.customFont(.textoNormal)
+        self.font = UIFont.setCustomFont(.textoNormal)
         self.textColor = .label
         self.textAlignment = .center
         self.numberOfLines = 0  // Permite múltiplas linhas

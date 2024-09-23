@@ -19,7 +19,7 @@ enum FontStyle {
 
 extension UIFont {
     /// Função que retorna a fonte personalizada e já adiciona Dynamic Types a ela
-    static func customFont(_ style: FontStyle) -> UIFont {
+    static func setCustomFont(_ style: FontStyle) -> UIFont {
         let fontMetrics: UIFontMetrics
         let customFont: UIFont
         

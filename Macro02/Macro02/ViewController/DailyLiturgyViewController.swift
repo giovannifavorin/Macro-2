@@ -25,13 +25,9 @@ class DailyLiturgyViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-        label = TextComponent()
-        label.setDynamicFont(size: 20, weight: .bold)
-        label.setText(string: "DAILY LITURGY VIEW")
-//        label.textColor = .black
-//        label.translatesAutoresizingMaskIntoConstraints = false
+        label = TextComponent("DAILY LITURGY VIEW")
+        label.font = UIFont.setCustomFont(.textoDetalhe)
         view.addSubview(label)
-//        UILabel.setFontStyle(.textoNormal)
         
         
         constraints()
