@@ -11,7 +11,7 @@ class SinDataManager {
 
     // MARK: - Persistent Container
     lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "DataModel") // Nome do modelo Core Data (.xcdatamodeld)
+        let container = NSPersistentContainer(name: "DataModel")
         container.loadPersistentStores { (storeDescription, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
@@ -33,7 +33,6 @@ class SinDataManager {
         }
     }
     
-    // Referência ao contexto do Core Data (Agora acessado diretamente via o singleton)
     var context: NSManagedObjectContext {
         return persistentContainer.viewContext
     }
