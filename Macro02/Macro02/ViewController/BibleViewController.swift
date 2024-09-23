@@ -10,7 +10,7 @@ import UIKit
 class BibleViewController: UIViewController {
 
     var viewModel: BibleViewModel
-    var label: UILabel!
+    var label: TextComponent!
     
     init(viewModel: BibleViewModel) {
         self.viewModel = viewModel
@@ -25,10 +25,8 @@ class BibleViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .white
-        label = UILabel()
-        label.text = "BIBLE VIEW"
-        label.textColor = .black
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label = TextComponent("BIBLE VIEW")
+        label.font = UIFont.setCustomFont(.titulo2)
         view.addSubview(label)
         
         constraints()

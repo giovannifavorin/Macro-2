@@ -10,7 +10,7 @@ import UIKit
 class HomeViewController: UIViewController {
     
     var viewModel: HomeViewModel
-    var label: UILabel!
+    var label: TextComponent!
     
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
@@ -25,10 +25,9 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .white
-        label = UILabel()
-        label.text = "HOME VIEW"
-        label.textColor = .black
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label = TextComponent("HOME VIEW")
+        label.font = UIFont.setCustomFont(.titulo1)
+        
         view.addSubview(label)
         
         constraints()
@@ -37,7 +36,7 @@ class HomeViewController: UIViewController {
     func constraints() {
         NSLayoutConstraint.activate([
             label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ])
     }
 }
