@@ -1,15 +1,16 @@
 //
-//  ConfessionViewController.swift
+//  MyConfessionViewController.swift
 //  Macro02
 //
-//  Created by Victor Dantas on 18/09/24.
+//  Created by Victor Dantas on 23/09/24.
 //
 
 import UIKit
 
-class ConfessionViewController: UIViewController {
-    
+class MyConfessionViewController: UIViewController {
+
     var viewModel: ConfessionViewModel
+    
     var label: UILabel!
     
     init(viewModel: ConfessionViewModel) {
@@ -23,18 +24,23 @@ class ConfessionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = .white
-        label = UILabel()
-        label.text = "CONFESSION VIEW"
-        label.textColor = .black
-        label.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(label)
         
+        view.backgroundColor = .white
+        
+        setupLbl()
         constraints()
     }
     
-    func constraints() {
+    private func setupLbl() {
+        label = UILabel()
+        label.text = "TELA SUAS CONFISSOES"
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(label)
+    }
+    
+    private func constraints() {
         NSLayoutConstraint.activate([
             label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             label.centerYAnchor.constraint(equalTo: view.centerYAnchor)

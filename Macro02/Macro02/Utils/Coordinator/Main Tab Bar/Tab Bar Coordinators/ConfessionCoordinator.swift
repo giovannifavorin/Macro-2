@@ -6,16 +6,19 @@
 //
 
 import UIKit
+import Combine
 
 class ConfessionCoordinator: Coordinator {
     
     var rootViewController: UINavigationController
     var viewModel = ConfessionViewModel()
     
-    lazy var confessionViewController: ConfessionViewController = {
-        let vc = ConfessionViewController(viewModel: viewModel)
+    lazy var confessionAuthViewController: ConfessionAuthViewController = {
+        let vc = ConfessionAuthViewController(viewModel: viewModel)
         return vc
     }()
+    
+    var cancellables = Set<AnyCancellable>()
     
     init() {
         self.rootViewController = UINavigationController()
@@ -23,6 +26,19 @@ class ConfessionCoordinator: Coordinator {
     }
     
     func start() {
-        rootViewController.setViewControllers([confessionViewController], animated: false)
+        rootViewController.setViewControllers([confessionAuthViewController], animated: false)
+        
+        viewModel.$isSuccessfullyAuthorized
+            .receive(on: RunLoop.main)
+            .sink { [weak self] success in
+                self?.handleNavigation(success)
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func handleNavigation(_ success: Bool) {
+        if success {
+            rootViewController.pushViewController(MyConfessionViewController(viewModel: viewModel), animated: true)
+        }
     }
 }
