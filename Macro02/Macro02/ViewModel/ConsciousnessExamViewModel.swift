@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class CounsciousnessExamViewModel: ObservableObject {
+class ConsciousnessExamViewModel: ObservableObject {
     
 //    @Published var poppedBackToHome: Bool = false
 //    @Published var sins: [Sin] = []

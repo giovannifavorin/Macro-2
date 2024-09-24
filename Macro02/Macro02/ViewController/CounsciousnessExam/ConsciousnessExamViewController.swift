@@ -8,13 +8,11 @@
 import UIKit
 import SwiftUI
 
-class CounsciousnessExamViewController: UIViewController {
+class ConsciousnessExamViewController: UIViewController {
 
-    @ObservedObject var viewModel: CounsciousnessExamViewModel
+    @ObservedObject var viewModel: ConsciousnessExamViewModel
     
-    
-    
-    init(viewModel: CounsciousnessExamViewModel) {
+    init(viewModel: ConsciousnessExamViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
