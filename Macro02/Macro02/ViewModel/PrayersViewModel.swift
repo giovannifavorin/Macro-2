@@ -10,8 +10,10 @@ import SwiftUI
 class PrayersViewModel: ObservableObject {
     
     @Published var prayerCategories: [PrayerCategory] = []
-    @Published var selectedCategory: PrayerCategory?
-    @Published var selectedPrayer: Prayer?
+    // ------ "private(set)" -- Define a propriedade @Published para apenas "get",
+    //                          deixando o papel de alterar o valor da propriedade ("set") exclusivamente para a ViewModel
+    @Published private(set) var selectedCategory: PrayerCategory?
+    @Published private(set) var selectedPrayer: Prayer?
     @Published var fontSize: CGFloat = 17.0
     
     // TO-DO: Popular arrays com chamadas de API

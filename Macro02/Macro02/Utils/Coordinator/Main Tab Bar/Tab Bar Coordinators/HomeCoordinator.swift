@@ -10,6 +10,7 @@ import Combine
 
 class HomeCoordinator: Coordinator {
     
+    // MARK: - VARIÁVEIS
     var rootViewController: UINavigationController
     var viewModel = HomeViewModel()
     
@@ -18,17 +19,20 @@ class HomeCoordinator: Coordinator {
     // Subscription para manter o Combine observando mudanças
     private var cancellables = Set<AnyCancellable>()
     
+    // Primeira view a ser apresentada ao iniciar a Navegação
     lazy var homeViewController: HomeViewController = {
         let vc = HomeViewController(viewModel: viewModel)
         return vc
     }()
     
+    // MARK: - INIT
     init() {
         self.rootViewController = UINavigationController()
-//        self.rootViewController.navigationBar.isTranslucent = true
     }
     
+    // MARK: - START
     func start() {
+        // Aqui define-se a primeira view a ser apresentada
         rootViewController.setViewControllers([homeViewController], animated: false)
         
         // Observando mudanças na selectedNavigation
@@ -40,7 +44,9 @@ class HomeCoordinator: Coordinator {
             .store(in: &cancellables)
     }
     
+    // MARK: - FUNÇÕES AUXILIARES
     private func handleNavigation(_ navigation: NavigationCases) {
+        // Inicia a navegação dependendo do botão selecionado na Home
         switch navigation {
         case .counsciousnessExam:
             startCounsciousnessExamCoordinator()
