@@ -10,8 +10,7 @@ import UIKit
 class MyConfessionViewController: UIViewController {
 
     var viewModel: ConfessionViewModel
-    
-    var label: UILabel!
+    var label: TextComponent!
     
     init(viewModel: ConfessionViewModel) {
         self.viewModel = viewModel
@@ -24,20 +23,15 @@ class MyConfessionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        view.backgroundColor = .white
+        label = TextComponent("CONFESSION VIEW")
+        label.font = UIFont.setCustomFont(.textoNormal)
+        view.addSubview(label)
         
         view.backgroundColor = .white
         
-        setupLbl()
         constraints()
-    }
-    
-    private func setupLbl() {
-        label = UILabel()
-        label.text = "TELA SUAS CONFISSOES"
-        label.textColor = .black
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.addSubview(label)
     }
     
     private func constraints() {

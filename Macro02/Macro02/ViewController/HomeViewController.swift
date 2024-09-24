@@ -11,9 +11,9 @@ import SwiftUI
 class HomeViewController: UIViewController {
     
     @ObservedObject var viewModel: HomeViewModel
-    var label: UILabel!
     var counsExamBt: UIButton!
     var prayersBt: UIButton!
+    var label: TextComponent!
     
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
@@ -28,10 +28,9 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .white
-        label = UILabel()
-        label.text = "HOME VIEW"
-        label.textColor = .black
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label = TextComponent("HOME VIEW")
+        label.font = UIFont.setCustomFont(.titulo1)
+        
         view.addSubview(label)
         
         setupBts()
