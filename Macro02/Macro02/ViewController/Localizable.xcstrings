@@ -1,0 +1,31 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "ABOUT VIEW" : {
+
+    },
+    "BIBLE VIEW" : {
+
+    },
+    "Clique em mim e eu clicarei de volta" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "touth in me and i will touch again"
+          }
+        }
+      }
+    },
+    "CONFESSION VIEW" : {
+
+    },
+    "HOME VIEW" : {
+
+    },
+    "OK TEXTO" : {
+
+    }
+  },
+  "version" : "1.0"
+}

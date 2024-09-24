@@ -1,18 +1,18 @@
 //
-//  BibleViewController.swift
+//  MyConfessionViewController.swift
 //  Macro02
 //
-//  Created by Victor Dantas on 18/09/24.
+//  Created by Victor Dantas on 23/09/24.
 //
 
 import UIKit
 
-class BibleViewController: UIViewController {
+class MyConfessionViewController: UIViewController {
 
-    var viewModel: BibleViewModel
+    var viewModel: ConfessionViewModel
     var label: TextComponent!
     
-    init(viewModel: BibleViewModel) {
+    init(viewModel: ConfessionViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -25,14 +25,16 @@ class BibleViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .white
-        label = TextComponent("BIBLE VIEW")
-        label.font = UIFont.setCustomFont(.titulo2)
+        label = TextComponent("CONFESSION VIEW")
+        label.font = UIFont.setCustomFont(.textoNormal)
         view.addSubview(label)
+        
+        view.backgroundColor = .white
         
         constraints()
     }
     
-    func constraints() {
+    private func constraints() {
         NSLayoutConstraint.activate([
             label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             label.centerYAnchor.constraint(equalTo: view.centerYAnchor)

@@ -1,5 +1,5 @@
 //
-//  ConfessionViewController.swift
+//  ConfessionAuthViewController.swift
 //  Macro02
 //
 //  Created by Victor Dantas on 18/09/24.
@@ -7,10 +7,12 @@
 
 import UIKit
 
-class ConfessionViewController: UIViewController {
+class ConfessionAuthViewController: UIViewController {
     
     var viewModel: ConfessionViewModel
+    
     var label: UILabel!
+    var button: UIButton!
     
     init(viewModel: ConfessionViewModel) {
         self.viewModel = viewModel
@@ -31,14 +33,29 @@ class ConfessionViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(label)
         
+        setupBt()
         constraints()
     }
     
-    func constraints() {
+    private func setupBt() {
+        self.button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
+        button.center = view.center
+        button.setTitle("Authorize", for: .normal)
+        button.backgroundColor = .darkGray
+        button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+        
+        view.addSubview(button)
+    }
+    
+    private func constraints() {
         NSLayoutConstraint.activate([
             label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             label.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
+    }
+    
+    @objc private func didTapButton() {
+        viewModel.authenticateWithFaceID()
     }
 
 }

@@ -17,7 +17,7 @@ enum NavigationCases {
     
     case liturgicalCalendar
     case penance
-    case consciousnessExam
+    case counsciousnessExam
     case todaysSaint
     case prayers
     
