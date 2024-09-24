@@ -15,15 +15,15 @@ extension UILabel {
     ///   - name: O nome da fonte a ser usada. O padrão é o nome da família da fonte do sistema.
     ///   - size: O tamanho da fonte.
     ///   - weight: O peso da fonte. O padrão é `.regular`.
-    func setDynamicFont(name: String? = nil, size: CGFloat, weight: UIFont.Weight = .regular) {
+    func setDynamicFont(name: String? = nil, size: CGFloat, weight: UIFont.Weight? = .regular) {
         
         var font: UIFont
         
         if let name = name {
-            font = UIFont(name: name, size: size) ?? UIFont.systemFont(ofSize: size, weight: weight)
+            font = UIFont(name: name, size: size) ?? UIFont.systemFont(ofSize: size, weight: weight ?? .regular)
 
         } else {
-            font = UIFont.systemFont(ofSize: size, weight: weight)
+            font = UIFont.systemFont(ofSize: size, weight: weight ?? .regular)
         }
     
         self.font = UIFontMetrics(forTextStyle: .body).scaledFont(for: font)

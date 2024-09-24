@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		AF9C0F662C9DB5B7008187EC /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = AF9C0F652C9DB5B7008187EC /* Localizable.xcstrings */; };
 		AF9C0FDA2CA1E5F3008187EC /* FontStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C0FD62CA1E5F3008187EC /* FontStyle.swift */; };
-		AF9C0FDB2CA1E5F3008187EC /* ButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C0FD52CA1E5F3008187EC /* ButtonComponent.swift */; };
 		AF9C0FDC2CA1E5F3008187EC /* setDynamicFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C0FD72CA1E5F3008187EC /* setDynamicFont.swift */; };
 		AF9C0FDD2CA1E5F3008187EC /* TextComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C0FD82CA1E5F3008187EC /* TextComponent.swift */; };
 		B8783F822C99F32E00661148 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8783F812C99F32E00661148 /* CoordinatorProtocol.swift */; };
@@ -62,7 +61,6 @@
 
 /* Begin PBXFileReference section */
 		AF9C0F652C9DB5B7008187EC /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
-		AF9C0FD52CA1E5F3008187EC /* ButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponent.swift; sourceTree = "<group>"; };
 		AF9C0FD62CA1E5F3008187EC /* FontStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontStyle.swift; sourceTree = "<group>"; };
 		AF9C0FD72CA1E5F3008187EC /* setDynamicFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = setDynamicFont.swift; sourceTree = "<group>"; };
 		AF9C0FD82CA1E5F3008187EC /* TextComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextComponent.swift; sourceTree = "<group>"; };
@@ -129,7 +127,6 @@
 		AF9C0FD92CA1E5F3008187EC /* TextComponents 2 */ = {
 			isa = PBXGroup;
 			children = (
-				AF9C0FD52CA1E5F3008187EC /* ButtonComponent.swift */,
 				AF9C0FD62CA1E5F3008187EC /* FontStyle.swift */,
 				AF9C0FD72CA1E5F3008187EC /* setDynamicFont.swift */,
 				AF9C0FD82CA1E5F3008187EC /* TextComponent.swift */,
@@ -423,7 +420,6 @@
 				B8783F822C99F32E00661148 /* CoordinatorProtocol.swift in Sources */,
 				B8F8DD012C8B8EB500D24769 /* AppDelegate.swift in Sources */,
 				AF9C0FDA2CA1E5F3008187EC /* FontStyle.swift in Sources */,
-				AF9C0FDB2CA1E5F3008187EC /* ButtonComponent.swift in Sources */,
 				AF9C0FDC2CA1E5F3008187EC /* setDynamicFont.swift in Sources */,
 				AF9C0FDD2CA1E5F3008187EC /* TextComponent.swift in Sources */,
 				F1F6BE672C9B5E0500F4C7FF /* AboutViewController.swift in Sources */,
