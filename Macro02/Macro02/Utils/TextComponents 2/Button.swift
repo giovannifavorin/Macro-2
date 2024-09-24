@@ -1,14 +1,13 @@
 //
-//  ButtonComponent.swift
+//  Button.swift
 //  Macro02
 //
-//  Created by Thiago Pereira de Menezes on 20/09/24.
+//  Created by Thiago Pereira de Menezes on 24/09/24.
 //
 
 import UIKit
 
-class ButtonComponent: UIButton {
-    
+class Buttton: UIButton {
     private var action: (() -> Void)?
     
     // Inicializador que aceita um texto de localização e uma ação de clique

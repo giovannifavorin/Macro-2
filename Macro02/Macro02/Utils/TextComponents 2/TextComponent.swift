@@ -44,7 +44,6 @@ class TextComponent: UILabel {
         self.accessibilityLabel = accessibilityLabel ?? self.text // Define o texto como o texto de acessibilidade
         self.accessibilityTraits = .staticText
         self.adjustsFontForContentSizeCategory = true
-
     }
     
     /// Define texto com Localizable
