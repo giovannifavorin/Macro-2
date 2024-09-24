@@ -1,14 +1,14 @@
 //
-//  ConfessionViewController.swift
+//  MyConfessionViewController.swift
 //  Macro02
 //
-//  Created by Victor Dantas on 18/09/24.
+//  Created by Victor Dantas on 23/09/24.
 //
 
 import UIKit
 
-class ConfessionViewController: UIViewController {
-    
+class MyConfessionViewController: UIViewController {
+
     var viewModel: ConfessionViewModel
     var label: TextComponent!
     
@@ -29,10 +29,12 @@ class ConfessionViewController: UIViewController {
         label.font = UIFont.setCustomFont(.textoNormal)
         view.addSubview(label)
         
+        view.backgroundColor = .white
+        
         constraints()
     }
     
-    func constraints() {
+    private func constraints() {
         NSLayoutConstraint.activate([
             label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             label.centerYAnchor.constraint(equalTo: view.centerYAnchor)
