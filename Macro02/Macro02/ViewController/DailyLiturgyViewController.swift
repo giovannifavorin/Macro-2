@@ -11,6 +11,7 @@ class DailyLiturgyViewController: UIViewController {
 
     var viewModel: DailyLiturgyViewModel
     var label: TextComponent!
+    var button: ButtonComponent!
     
     init(viewModel: DailyLiturgyViewModel) {
         self.viewModel = viewModel
@@ -25,18 +26,27 @@ class DailyLiturgyViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-        label = TextComponent("DAILY LITURGY VIEW")
-        label.font = UIFont.setCustomFont(.textoDetalhe)
-        view.addSubview(label)
         
+        label = TextComponent("OK TEXTO")
+        label.font = UIFont.setCustomFont(.textoDetalhe)
+        
+        button = ButtonComponent("Clique em mim e eu clicarei de volta") {
+            print("Eu fui clicado")
+        }
+
+        view.addSubview(label)
+        view.addSubview(button)
         
         constraints()
     }
-    
+
     func constraints() {
         NSLayoutConstraint.activate([
             label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            
+            button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            button.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 20),
         ])
     }
 

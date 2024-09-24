@@ -7,13 +7,23 @@
     "BIBLE VIEW" : {
 
     },
+    "Clique em mim e eu clicarei de volta" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "touth in me and i will touch again"
+          }
+        }
+      }
+    },
     "CONFESSION VIEW" : {
 
     },
-    "DAILY LITURGY VIEW" : {
+    "HOME VIEW" : {
 
     },
-    "HOME VIEW" : {
+    "OK TEXTO" : {
 
     }
   },
