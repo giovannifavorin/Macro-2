@@ -10,7 +10,7 @@ import UIKit
 struct Prayer {
     var id: UUID
     var title: String
-    var text: String
+    var content: String
 }
 
 struct PrayerCategory {

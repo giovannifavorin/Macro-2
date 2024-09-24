@@ -51,7 +51,7 @@ class FullPrayerViewController: UIViewController {
         self.prayerText = UILabel()
         
         prayerTitle.text = viewModel.selectedPrayer?.title
-        prayerText.text = viewModel.selectedPrayer?.text
+        prayerText.text = viewModel.selectedPrayer?.content
         
         prayerTitle.textColor = .black
         prayerText.textColor = .black
