@@ -7,11 +7,6 @@
 
 import Foundation
 
-struct Prayer {
-    let title: String
-    let content: String
-}
-
 struct ExaminationQuestion {
     let question: String
     var isAnswered: Bool = false

@@ -19,28 +19,28 @@ class PrayersViewModel: ObservableObject {
     // TO-DO: Popular arrays com chamadas de API
     private let prayers = [Prayer(id: UUID(),
                       title: "Prayer 1 - Category 1 Title",
-                      text: "Prayer 1 - Category 1 text\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ligula arcu, maximus vitae sollicitudin pretium, ultrices accumsan tellus. In hac habitasse platea dictumst. Praesent accumsan sapien mauris, eget imperdiet dui convallis pretium. Vestibulum sagittis gravida tortor, vitae facilisis metus porta ut. Pellentesque tempor sem ut felis dignissim viverra."),
+                      content: "Prayer 1 - Category 1 text\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ligula arcu, maximus vitae sollicitudin pretium, ultrices accumsan tellus. In hac habitasse platea dictumst. Praesent accumsan sapien mauris, eget imperdiet dui convallis pretium. Vestibulum sagittis gravida tortor, vitae facilisis metus porta ut. Pellentesque tempor sem ut felis dignissim viverra."),
                
                Prayer(id: UUID(),
                       title: "Prayer 2 - Category 1 Title",
-                      text: "Prayer 2 - Category 1 text\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ligula arcu, maximus vitae sollicitudin pretium, ultrices accumsan tellus. In hac habitasse platea dictumst. Praesent accumsan sapien mauris, eget imperdiet dui convallis pretium. Vestibulum sagittis gravida tortor, vitae facilisis metus porta ut. Pellentesque tempor sem ut felis dignissim viverra."),
+                      content: "Prayer 2 - Category 1 text\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ligula arcu, maximus vitae sollicitudin pretium, ultrices accumsan tellus. In hac habitasse platea dictumst. Praesent accumsan sapien mauris, eget imperdiet dui convallis pretium. Vestibulum sagittis gravida tortor, vitae facilisis metus porta ut. Pellentesque tempor sem ut felis dignissim viverra."),
                
                Prayer(id: UUID(),
                       title: "Prayer 3 - Category 1 Title",
-                      text: "Prayer 3 - Category 1 text\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ligula arcu, maximus vitae sollicitudin pretium, ultrices accumsan tellus. In hac habitasse platea dictumst. Praesent accumsan sapien mauris, eget imperdiet dui convallis pretium. Vestibulum sagittis gravida tortor, vitae facilisis metus porta ut. Pellentesque tempor sem ut felis dignissim viverra.")
+                      content: "Prayer 3 - Category 1 text\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ligula arcu, maximus vitae sollicitudin pretium, ultrices accumsan tellus. In hac habitasse platea dictumst. Praesent accumsan sapien mauris, eget imperdiet dui convallis pretium. Vestibulum sagittis gravida tortor, vitae facilisis metus porta ut. Pellentesque tempor sem ut felis dignissim viverra.")
                    ]
     
     private let prayers2 = [Prayer(id: UUID(),
                       title: "Prayer 1 - Category 2 Title",
-                      text: "Prayer 1 - Category 2 text\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ligula arcu, maximus vitae sollicitudin pretium, ultrices accumsan tellus. In hac habitasse platea dictumst. Praesent accumsan sapien mauris, eget imperdiet dui convallis pretium. Vestibulum sagittis gravida tortor, vitae facilisis metus porta ut. Pellentesque tempor sem ut felis dignissim viverra."),
+                      content: "Prayer 1 - Category 2 text\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ligula arcu, maximus vitae sollicitudin pretium, ultrices accumsan tellus. In hac habitasse platea dictumst. Praesent accumsan sapien mauris, eget imperdiet dui convallis pretium. Vestibulum sagittis gravida tortor, vitae facilisis metus porta ut. Pellentesque tempor sem ut felis dignissim viverra."),
                
                Prayer(id: UUID(),
                       title: "Prayer 2 - Category 2 Title",
-                      text: "Prayer 2 - Category 2 text\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ligula arcu, maximus vitae sollicitudin pretium, ultrices accumsan tellus. In hac habitasse platea dictumst. Praesent accumsan sapien mauris, eget imperdiet dui convallis pretium. Vestibulum sagittis gravida tortor, vitae facilisis metus porta ut. Pellentesque tempor sem ut felis dignissim viverra."),
+                      content: "Prayer 2 - Category 2 text\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ligula arcu, maximus vitae sollicitudin pretium, ultrices accumsan tellus. In hac habitasse platea dictumst. Praesent accumsan sapien mauris, eget imperdiet dui convallis pretium. Vestibulum sagittis gravida tortor, vitae facilisis metus porta ut. Pellentesque tempor sem ut felis dignissim viverra."),
                
                Prayer(id: UUID(),
                       title: "Prayer 3 - Category 2 Title",
-                      text: "Prayer 3 - Category 2 text\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ligula arcu, maximus vitae sollicitudin pretium, ultrices accumsan tellus. In hac habitasse platea dictumst. Praesent accumsan sapien mauris, eget imperdiet dui convallis pretium. Vestibulum sagittis gravida tortor, vitae facilisis metus porta ut. Pellentesque tempor sem ut felis dignissim viverra.")
+                      content: "Prayer 3 - Category 2 text\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ligula arcu, maximus vitae sollicitudin pretium, ultrices accumsan tellus. In hac habitasse platea dictumst. Praesent accumsan sapien mauris, eget imperdiet dui convallis pretium. Vestibulum sagittis gravida tortor, vitae facilisis metus porta ut. Pellentesque tempor sem ut felis dignissim viverra.")
                    ]
     
     init() {
