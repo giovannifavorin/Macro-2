@@ -11,6 +11,7 @@
 		AF9C0FDA2CA1E5F3008187EC /* FontStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C0FD62CA1E5F3008187EC /* FontStyle.swift */; };
 		AF9C0FDC2CA1E5F3008187EC /* setDynamicFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C0FD72CA1E5F3008187EC /* setDynamicFont.swift */; };
 		AF9C0FDD2CA1E5F3008187EC /* TextComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C0FD82CA1E5F3008187EC /* TextComponent.swift */; };
+		AFC862112CA32A7100167ECB /* ButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC862102CA32A7100167ECB /* ButtonComponent.swift */; };
 		B8783F822C99F32E00661148 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8783F812C99F32E00661148 /* CoordinatorProtocol.swift */; };
 		B8783F842C99F43800661148 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8783F832C99F43300661148 /* ViewModel.swift */; };
 		B8783F862C99F44200661148 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8783F852C99F44200661148 /* DataManager.swift */; };
@@ -64,6 +65,7 @@
 		AF9C0FD62CA1E5F3008187EC /* FontStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontStyle.swift; sourceTree = "<group>"; };
 		AF9C0FD72CA1E5F3008187EC /* setDynamicFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = setDynamicFont.swift; sourceTree = "<group>"; };
 		AF9C0FD82CA1E5F3008187EC /* TextComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextComponent.swift; sourceTree = "<group>"; };
+		AFC862102CA32A7100167ECB /* ButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponent.swift; sourceTree = "<group>"; };
 		B8783F812C99F32E00661148 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		B8783F832C99F43300661148 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		B8783F852C99F44200661148 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 		AF9C0FD92CA1E5F3008187EC /* TextComponents 2 */ = {
 			isa = PBXGroup;
 			children = (
+				AFC862102CA32A7100167ECB /* ButtonComponent.swift */,
 				AF9C0FD62CA1E5F3008187EC /* FontStyle.swift */,
 				AF9C0FD72CA1E5F3008187EC /* setDynamicFont.swift */,
 				AF9C0FD82CA1E5F3008187EC /* TextComponent.swift */,
@@ -421,6 +424,7 @@
 				B8F8DD012C8B8EB500D24769 /* AppDelegate.swift in Sources */,
 				AF9C0FDA2CA1E5F3008187EC /* FontStyle.swift in Sources */,
 				AF9C0FDC2CA1E5F3008187EC /* setDynamicFont.swift in Sources */,
+				AFC862112CA32A7100167ECB /* ButtonComponent.swift in Sources */,
 				AF9C0FDD2CA1E5F3008187EC /* TextComponent.swift in Sources */,
 				F1F6BE672C9B5E0500F4C7FF /* AboutViewController.swift in Sources */,
 				F1F6BE452C99FF2100F4C7FF /* MainTabBarCoordinator.swift in Sources */,
