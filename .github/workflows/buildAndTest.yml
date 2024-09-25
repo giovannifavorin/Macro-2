@@ -24,4 +24,4 @@ jobs:
         run: gem install fastlane 
 
       - name: Run tests
-        run: cd Macro02/; fastlane test
+        run: cd Macro02/; fastlane tests
