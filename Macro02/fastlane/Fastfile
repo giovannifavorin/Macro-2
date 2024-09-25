@@ -16,7 +16,7 @@
 default_platform(:ios)
 
 platform :ios do
-  desc "Run Tests"
+  desc "Run Unit and UI tests"
   lane :tests do
     run_tests(scheme: "Macro02")
   end
