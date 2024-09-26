@@ -10,8 +10,6 @@ import Combine
 
 class CounsciousnessExamCoordinator: Coordinator {
     
-    var viewModel = ConsciousnessExamViewModel()
-    
     lazy var rootViewController: ConsciousnessExamViewController = {
         let vc = ConsciousnessExamViewController()
         vc.hidesBottomBarWhenPushed = true // esconde a tab bar
