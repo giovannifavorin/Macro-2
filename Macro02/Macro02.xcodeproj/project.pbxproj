@@ -11,6 +11,7 @@
 		AF9C0FDA2CA1E5F3008187EC /* FontStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C0FD62CA1E5F3008187EC /* FontStyle.swift */; };
 		AF9C0FDC2CA1E5F3008187EC /* setDynamicFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C0FD72CA1E5F3008187EC /* setDynamicFont.swift */; };
 		AF9C0FDD2CA1E5F3008187EC /* TextComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C0FD82CA1E5F3008187EC /* TextComponent.swift */; };
+		AFC683B72CA48B7900389DD8 /* LiturgiaDiariaAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC683B62CA48B7900389DD8 /* LiturgiaDiariaAPI.swift */; };
 		AFC862112CA32A7100167ECB /* ButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC862102CA32A7100167ECB /* ButtonComponent.swift */; };
 		B8783F822C99F32E00661148 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8783F812C99F32E00661148 /* CoordinatorProtocol.swift */; };
 		B8783F842C99F43800661148 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8783F832C99F43300661148 /* ViewModel.swift */; };
@@ -77,6 +78,7 @@
 		AF9C0FD62CA1E5F3008187EC /* FontStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontStyle.swift; sourceTree = "<group>"; };
 		AF9C0FD72CA1E5F3008187EC /* setDynamicFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = setDynamicFont.swift; sourceTree = "<group>"; };
 		AF9C0FD82CA1E5F3008187EC /* TextComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextComponent.swift; sourceTree = "<group>"; };
+		AFC683B62CA48B7900389DD8 /* LiturgiaDiariaAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiturgiaDiariaAPI.swift; sourceTree = "<group>"; };
 		AFC862102CA32A7100167ECB /* ButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponent.swift; sourceTree = "<group>"; };
 		B8783F812C99F32E00661148 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		B8783F832C99F43300661148 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 			children = (
 				B8783F892C99F58600661148 /* Model.swift */,
 				B8E9CC182CA1F1FE00B21598 /* SpiritualPreparation.swift */,
+				AFC683B62CA48B7900389DD8 /* LiturgiaDiariaAPI.swift */,
 				F1EDE1592C9E156A007A6403 /* Prayer.swift */,
 			);
 			path = Model;
@@ -503,6 +506,7 @@
 				F1EDE14A2C9CD045007A6403 /* CounsciousnessExamCoordinator.swift in Sources */,
 				B8783F902C99F63A00661148 /* DataModel.xcdatamodeld in Sources */,
 				F1F6BE742C9B644C00F4C7FF /* ConfessionViewModel.swift in Sources */,
+				AFC683B72CA48B7900389DD8 /* LiturgiaDiariaAPI.swift in Sources */,
 				F1F6BE782C9B648C00F4C7FF /* BibleViewModel.swift in Sources */,
 				B8F8DD032C8B8EB500D24769 /* SceneDelegate.swift in Sources */,
 				F1F6BE6E2C9B62E900F4C7FF /* DailyLiturgyCoordinator.swift in Sources */,
@@ -688,7 +692,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2GNPFRN684;
+				DEVELOPMENT_TEAM = 5Y55P884H9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Macro02/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
@@ -722,7 +726,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2GNPFRN684;
+				DEVELOPMENT_TEAM = 5Y55P884H9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Macro02/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
