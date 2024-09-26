@@ -4,7 +4,11 @@
     "ABOUT VIEW" : {
 
     },
+    "BIBLE VIEW" : {
+
+    },
     "Clique em mim e eu clicarei de volta" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -18,9 +22,6 @@
 
     },
     "HOME VIEW" : {
-
-    },
-    "OK TEXTO" : {
 
     }
   },
