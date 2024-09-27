@@ -1,136 +1,178 @@
-//
-//  DailyLiturgyViewController.swift
-//  Macro02
-//
-//  Created by Victor Dantas on 18/09/24.
-//
-
 import UIKit
 
 class DailyLiturgyViewController: UIViewController {
-
-    // MARK: - Properties
-    var viewModel: DailyLiturgyViewModel
-    var apiManager = LiturgiaDiariaAPI()  // Instância da API
-    var activityIndicator: UIActivityIndicatorView!
     
-    // Dados da liturgia
-    var liturgia: Liturgia?
-
     // MARK: - UI Elements
-    private let tableView = UITableView()
+    let titleLabel = UILabel()
+    let textSizeButton = UIButton()
+    let liturgyCardView = UIView()
+    let segmentedControl = UISegmentedControl(items: ["1 Leitura", "Salmos", "Evangelho"])
+    let liturgyTextView = UITextView()
+    let settingsButton = UIButton(type: .system)
+    
+    let modalView = UIView()
+    let viewModel: DailyLiturgyViewModel!
+    let apiManager = LiturgiaDiariaAPI()
 
+    var currentLiturgia: Liturgia? // Armazena os dados atuais da liturgia
+    
     // MARK: - Initializer
     init(viewModel: DailyLiturgyViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        self.setupView()
+        fetchLiturgyData()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK: - Lifecycle Methods
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupView()
-        fetchLiturgiaDiaria()
-    }
-
-    // MARK: - Setup Methods
-    private func setupView() {
+    // MARK: - Setup Views
+    func setupView() {
         view.backgroundColor = .white
-
-        // Configura a tabela
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-        view.addSubview(tableView)
-
-        // Adiciona o indicador de carregamento (spinner)
-        activityIndicator = UIActivityIndicatorView(style: .large)
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(activityIndicator)
-        activityIndicator.startAnimating()
-
-        // Define as constraints
+        
+        // Title Label Setup
+        titleLabel.text = "Liturgia Diária"
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 24)
+        titleLabel.textColor = .black
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(titleLabel)
+        
+        // Button for changing text size
+        textSizeButton.setTitle("Aa", for: .normal)
+        textSizeButton.setTitleColor(.black, for: .normal)
+        textSizeButton.addTarget(self, action: #selector(didTapTextSizeButton), for: .touchUpInside)
+        textSizeButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(textSizeButton)
+        
+        // Liturgy Card View
+        liturgyCardView.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        liturgyCardView.layer.cornerRadius = 8
+        liturgyCardView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(liturgyCardView)
+        
+        // Segment Control
+        segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.addTarget(self, action: #selector(didChangeSegment), for: .valueChanged)
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(segmentedControl)
+        
+        // Liturgy Text View
+        liturgyTextView.font = UIFont.systemFont(ofSize: 16)
+        liturgyTextView.isEditable = false
+        liturgyTextView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(liturgyTextView)
+        
+        // Button to open settings modal
+        settingsButton.setTitle("⚙️", for: .normal)
+        settingsButton.addTarget(self, action: #selector(didTapSettingsButton), for: .touchUpInside)
+        settingsButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(settingsButton)
+        
+        // Set up Modal View (initially hidden)
+        setupModalView()
+        
+        // Set up constraints
         setupConstraints()
     }
-
-    // MARK: - API Methods
-    private func fetchLiturgiaDiaria() {
-        apiManager.fetchLiturgia { [weak self] result in
-            DispatchQueue.main.async {
-                self?.activityIndicator.stopAnimating()  // Para o spinner quando os dados chegam
-                
-                switch result {
-                case .success(let liturgia):
-                    self?.liturgia = liturgia
-                    self?.tableView.reloadData()  // Atualiza a tabela com os dados da liturgia
-                case .failure(let error):
-                    self?.showError(error.localizedDescription)
-                }
-            }
-        }
-    }
-
-    // MARK: - Error Handling
-    private func showError(_ message: String) {
-        let alert = UIAlertController(title: "Erro", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
-    }
-
-    // MARK: - Layout Methods
-    private func setupConstraints() {
+    
+    // MARK: - Setup Modal View
+    func setupModalView() {
+        modalView.backgroundColor = .lightGray
+        modalView.layer.cornerRadius = 16
+        modalView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(modalView)
+        
+        // Initially hide modal
+        modalView.isHidden = true
+        
         NSLayoutConstraint.activate([
-            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            modalView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            modalView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            modalView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16),
+            modalView.heightAnchor.constraint(equalToConstant: 200)
         ])
     }
-}
-
-// MARK: - UITableViewDataSource & UITableViewDelegate
-extension DailyLiturgyViewController: UITableViewDataSource, UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 8 // Número total de itens a serem exibidos (você pode ajustar isso com base na sua estrutura de dados)
+    // MARK: - Setup Constraints
+    func setupConstraints() {
+        NSLayoutConstraint.activate([
+            // Title label constraints
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            
+            // Text size button constraints
+            textSizeButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
+            textSizeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            
+            // Liturgy Card View constraints
+            liturgyCardView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
+            liturgyCardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            liturgyCardView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            liturgyCardView.heightAnchor.constraint(equalToConstant: 100),
+            
+            // Segment Control constraints
+            segmentedControl.topAnchor.constraint(equalTo: liturgyCardView.bottomAnchor, constant: 16),
+            segmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            segmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            
+            // Liturgy Text View constraints
+            liturgyTextView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 16),
+            liturgyTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            liturgyTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            liturgyTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
+            
+            // Settings button constraints
+            settingsButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            settingsButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16)
+        ])
     }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.numberOfLines = 0 // Permite múltiplas linhas
-        
-        // Configure o texto com base no índice
-        if let liturgia = liturgia {
-            switch indexPath.row {
-            case 0:
-                cell.textLabel?.text = "Liturgia de Hoje"
-            case 1:
-                cell.textLabel?.text = "Data: \(liturgia.data ?? "Data não disponível")"
-            case 2:
-                cell.textLabel?.text = "Cor: \(liturgia.cor ?? "Não disponível")"
-            case 3:
-                cell.textLabel?.text = "Dia: \(liturgia.dia ?? "Não disponível")"
-            case 4:
-                cell.textLabel?.text = "Oferendas: \(liturgia.oferendas ?? "Não disponível")"
-            case 5:
-                cell.textLabel?.text = "Comunhão: \(liturgia.comunhao ?? "Não disponível")"
-            case 6:
-                cell.textLabel?.text = "Primeira Leitura: \(liturgia.primeiraLeitura?.texto ?? "Não disponível")"
-            case 7:
-                cell.textLabel?.text = "Evangelho: \(liturgia.evangelho?.texto ?? "Não disponível")"
-            default:
-                break
+
+    // MARK: - Fetch Liturgy Data
+    func fetchLiturgyData() {
+        apiManager.fetchLiturgia { [weak self] result in
+            switch result {
+            case .success(let liturgia):
+                DispatchQueue.main.async {
+                    self?.currentLiturgia = liturgia
+                    self?.updateLiturgyText(for: self?.segmentedControl.selectedSegmentIndex ?? 0)
+                }
+            case .failure(let error):
+                print("Erro ao buscar a liturgia: \(error)")
             }
         }
+    }
+    
+    // MARK: - Update Liturgy Text
+    func updateLiturgyText(for segmentIndex: Int) {
+        guard let liturgia = currentLiturgia else { return }
         
-        return cell
+        switch segmentIndex {
+        case 0: // 1 Leitura
+            liturgyTextView.text = liturgia.primeiraLeitura?.texto ?? "Texto da primeira leitura não disponível."
+        case 1: // Salmos
+            liturgyTextView.text = liturgia.salmo?.texto ?? "Texto do salmo não disponível."
+        case 2: // Evangelho
+            liturgyTextView.text = liturgia.evangelho?.texto ?? "Texto do evangelho não disponível."
+        default:
+            break
+        }
+    }
+
+    // MARK: - Actions
+    @objc func didTapTextSizeButton() {
+        // Logic to change text size
+        print("Change text size")
+    }
+    
+    @objc func didChangeSegment() {
+        // Atualizar texto da liturgia de acordo com o segmento selecionado
+        updateLiturgyText(for: segmentedControl.selectedSegmentIndex)
+    }
+    
+    @objc func didTapSettingsButton() {
+        // Toggle modal view visibility
+        modalView.isHidden.toggle()
     }
 }
