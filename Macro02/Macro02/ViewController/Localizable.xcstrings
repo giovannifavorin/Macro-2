@@ -1,6 +1,12 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "⚙️" : {
+
+    },
+    "Aa" : {
+
+    },
     "ABOUT VIEW" : {
 
     },
@@ -22,6 +28,9 @@
 
     },
     "HOME VIEW" : {
+
+    },
+    "Liturgia Diária" : {
 
     }
   },

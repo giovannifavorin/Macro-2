@@ -3,12 +3,12 @@ import UIKit
 class DailyLiturgyViewController: UIViewController {
     
     // MARK: - UI Elements
-    let titleLabel = UILabel()
-    let textSizeButton = UIButton()
+    let titleLabel = TextComponent("Liturgia Diária")
+    let textSizeButton = ButtonComponent("Aa")
     let liturgyCardView = UIView()
     let segmentedControl = UISegmentedControl(items: ["1 Leitura", "Salmos", "Evangelho"])
     let liturgyTextView = UITextView()
-    let settingsButton = UIButton(type: .system)
+    let settingsButton = ButtonComponent("⚙️")
     
     let modalView = UIView()
     let viewModel: DailyLiturgyViewModel!
@@ -33,17 +33,14 @@ class DailyLiturgyViewController: UIViewController {
         view.backgroundColor = .white
         
         // Title Label Setup
-        titleLabel.text = "Liturgia Diária"
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 24)
+        titleLabel.font = UIFont.setCustomFont(.titulo1)
         titleLabel.textColor = .black
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(titleLabel)
         
         // Button for changing text size
-        textSizeButton.setTitle("Aa", for: .normal)
+        textSizeButton.setText("Aa", for: .normal)
         textSizeButton.setTitleColor(.black, for: .normal)
-        textSizeButton.addTarget(self, action: #selector(didTapTextSizeButton), for: .touchUpInside)
-        textSizeButton.translatesAutoresizingMaskIntoConstraints = false
+        textSizeButton.act = didTapTextSizeButton
         view.addSubview(textSizeButton)
         
         // Liturgy Card View
@@ -59,15 +56,12 @@ class DailyLiturgyViewController: UIViewController {
         view.addSubview(segmentedControl)
         
         // Liturgy Text View
-        liturgyTextView.font = UIFont.systemFont(ofSize: 16)
         liturgyTextView.isEditable = false
         liturgyTextView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(liturgyTextView)
         
         // Button to open settings modal
-        settingsButton.setTitle("⚙️", for: .normal)
-        settingsButton.addTarget(self, action: #selector(didTapSettingsButton), for: .touchUpInside)
-        settingsButton.translatesAutoresizingMaskIntoConstraints = false
+        settingsButton.act = didTapSettingsButton
         view.addSubview(settingsButton)
         
         // Set up Modal View (initially hidden)
