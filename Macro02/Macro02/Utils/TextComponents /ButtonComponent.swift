@@ -12,7 +12,7 @@ class ButtonComponent: UIButton {
     private var action: (() -> Void)?
     
     /// Init que torna texto do btn Localizable e action
-    init(_ text: String.LocalizationValue, action: @escaping () -> Void) {
+    init(_ text: String.LocalizationValue, action: @escaping () -> Void = {}) {
         super.init(frame: .zero)
         self.action = action
         addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
