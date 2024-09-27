@@ -1,6 +1,12 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "⚙️" : {
+
+    },
+    "Aa" : {
+
+    },
     "ABOUT VIEW" : {
 
     },
@@ -8,6 +14,7 @@
 
     },
     "Clique em mim e eu clicarei de volta" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -23,7 +30,7 @@
     "HOME VIEW" : {
 
     },
-    "OK TEXTO" : {
+    "Liturgia Diária" : {
 
     }
   },

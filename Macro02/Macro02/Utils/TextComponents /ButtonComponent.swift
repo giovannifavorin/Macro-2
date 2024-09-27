@@ -9,12 +9,12 @@ import UIKit
 
 class ButtonComponent: UIButton {
     
-    private var action: (() -> Void)?
+    var act: (() -> Void)?
     
     /// Init que torna texto do btn Localizable e action
-    init(_ text: String.LocalizationValue, action: @escaping () -> Void) {
+    init(_ text: String.LocalizationValue, action: @escaping () -> Void = {}) {
         super.init(frame: .zero)
-        self.action = action
+        self.act = action
         addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         configureButton()
         setText(text, for: .normal)
@@ -76,6 +76,6 @@ class ButtonComponent: UIButton {
 
     /// Ação executada quando o botão é pressionado
     @objc private func buttonTapped() {
-        action?()
+        act?()
     }
 }
