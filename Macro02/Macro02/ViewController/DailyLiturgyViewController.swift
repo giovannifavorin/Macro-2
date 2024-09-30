@@ -7,7 +7,7 @@ class DailyLiturgyViewController: UIViewController {
     let textSizeButton = ButtonComponent("Aa")
     let liturgyCardView = UIView()
     let segmentedControl = UISegmentedControl(items: ["1 Leitura", "Salmos", "Evangelho"])
-    let liturgyTextView = UITextView()
+    let liturgyTextView = TextComponent()
     let settingsButton = ButtonComponent("⚙️")
     
     let modalView = UIView()
@@ -56,8 +56,6 @@ class DailyLiturgyViewController: UIViewController {
         view.addSubview(segmentedControl)
         
         // Liturgy Text View
-        liturgyTextView.isEditable = false
-        liturgyTextView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(liturgyTextView)
         
         // Button to open settings modal
