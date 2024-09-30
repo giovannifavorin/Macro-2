@@ -60,11 +60,6 @@ class LiturgiaDiariaAPI {
                 print("Dados não recebidos")
                 return
             }
-
-            // Imprimir a resposta bruta
-            if let responseString = String(data: data, encoding: .utf8) {
-                print("Resposta da API: \(responseString)")
-            }
             
             // Verificar o código de resposta HTTP
             if let httpResponse = response as? HTTPURLResponse {
@@ -77,7 +72,7 @@ class LiturgiaDiariaAPI {
             // Tenta converter os dados recebidos para JSON e imprimir
             do {
                 if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-                    print("Resposta JSON da API: \(json)")
+//                    print("Resposta JSON da API: \(json)")
                 } else {
                     print("A resposta não é um dicionário JSON.")
                 }
