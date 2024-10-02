@@ -20,6 +20,9 @@ class MainTabBarCoordinator: Coordinator {
     var bibleViewModel = BibleViewModel()
     var aboutViewModel = AboutViewModel()
     
+    // ViewModel dos pecados
+    var sinViewModel = SinViewModel()
+    
     init() {
         self.rootViewController = UITabBarController()
         self.rootViewController.tabBar.isTranslucent = true
@@ -30,12 +33,12 @@ class MainTabBarCoordinator: Coordinator {
         
         // Instanciando e iniciando todos os Coordinators que irão compor a Tab Bar
         // HOME
-        let homeCoordinator = HomeCoordinator()
+        let homeCoordinator = HomeCoordinator(homeVM: homeViewModel, sinVM: sinViewModel)
         homeCoordinator.start()
         childCoordinators.append(homeCoordinator)
         
         // CONFESSION
-        let confessionCoordinator = ConfessionCoordinator()
+        let confessionCoordinator = ConfessionCoordinator(viewModel: sinViewModel)
         confessionCoordinator.start()
         childCoordinators.append(confessionCoordinator)
         
