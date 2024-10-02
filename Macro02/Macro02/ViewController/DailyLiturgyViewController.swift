@@ -8,11 +8,11 @@ class DailyLiturgyViewController: UIViewController {
     let liturgyCardView = LiturgyCardView() // Custom View for the liturgy card
     let segmentedControl = UISegmentedControl(items: ["1 Leitura", "Salmos", "Evangelho"])
     let liturgyTextView = TextComponent()
-    let scrollView = UIScrollView()
+    let scrollView = UIScrollView() // Adiciona a UIScrollView
     
     let modalView = LiturgyCardView()
     let viewModel: DailyLiturgyViewModel!
-    let apiManager = LiturgiaDiariaAPI()
+    let apiManager = APIManager()
 
     var currentLiturgia: Liturgia? // Armazena os dados atuais da liturgia
     
@@ -43,9 +43,9 @@ class DailyLiturgyViewController: UIViewController {
         textSizeButton.act = didTapTextSizeButton
         view.addSubview(textSizeButton)
         
-        // Liturgy Card View Setup
+        // Liturgy Card View
         liturgyCardView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(liturgyCardView) // Adiciona LiturgyCardView à hierarquia de views
+        view.addSubview(liturgyCardView)
         
         // Segment Control
         segmentedControl.selectedSegmentIndex = 0
@@ -58,7 +58,7 @@ class DailyLiturgyViewController: UIViewController {
         view.addSubview(scrollView)
         
         // Liturgy Text View Setup
-        liturgyTextView.textAlignment = .left
+        liturgyTextView.textAlignment = .left // Alinha o texto à esquerda
         liturgyTextView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(liturgyTextView)
         
@@ -102,7 +102,7 @@ class DailyLiturgyViewController: UIViewController {
             liturgyCardView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
             liturgyCardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             liturgyCardView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            liturgyCardView.heightAnchor.constraint(equalToConstant: 150), // Ajuste a altura do card como necessário
+            liturgyCardView.heightAnchor.constraint(equalToConstant: 100),
             
             // Segment Control constraints
             segmentedControl.topAnchor.constraint(equalTo: liturgyCardView.bottomAnchor, constant: 16),
@@ -113,7 +113,7 @@ class DailyLiturgyViewController: UIViewController {
             scrollView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 16),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100),
             
             // Liturgy Text View constraints
             liturgyTextView.topAnchor.constraint(equalTo: scrollView.topAnchor),
@@ -126,7 +126,7 @@ class DailyLiturgyViewController: UIViewController {
 
     // MARK: - Fetch Liturgy Data
     func fetchLiturgyData() {
-        apiManager.fetchLiturgia { [weak self] result in
+        apiManager.fetchData(from: "https://liturgiadiaria.site", responseType: Liturgia.self) { [weak self] result in
             switch result {
             case .success(let liturgia):
                 DispatchQueue.main.async {
@@ -155,20 +155,23 @@ class DailyLiturgyViewController: UIViewController {
             break
         }
     }
-
     // MARK: - Actions
     @objc func didTapTextSizeButton() {
+        // Logic to change text size
+        print("Change text size")
         modalView.isHidden.toggle()
+
     }
     
     @objc func didChangeSegment() {
+        // Atualizar texto da liturgia de acordo com o segmento selecionado
         updateLiturgyText(for: segmentedControl.selectedSegmentIndex)
     }
 }
 
 // MARK: - LiturgyCardView
 class LiturgyCardView: UIView {
-
+    
     private let weekLabel = UILabel()
     private let dayNameLabel = UILabel()
     private let dayNumberLabel = UILabel()
@@ -189,54 +192,18 @@ class LiturgyCardView: UIView {
         layer.borderWidth = 1
         layer.borderColor = UIColor.black.cgColor
         
-        weekLabel.translatesAutoresizingMaskIntoConstraints = false
-        dayNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        dayNumberLabel.translatesAutoresizingMaskIntoConstraints = false
-        monthYearLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         addSubview(weekLabel)
         addSubview(dayNameLabel)
         addSubview(dayNumberLabel)
         addSubview(monthYearLabel)
         
-        // Define constraints
-        NSLayoutConstraint.activate([
-            weekLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            weekLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            
-            dayNameLabel.topAnchor.constraint(equalTo: weekLabel.bottomAnchor, constant: 8),
-            dayNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            
-            dayNumberLabel.topAnchor.constraint(equalTo: dayNameLabel.bottomAnchor, constant: 8),
-            dayNumberLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            
-            monthYearLabel.topAnchor.constraint(equalTo: dayNumberLabel.bottomAnchor, constant: 8),
-            monthYearLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            monthYearLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
-        ])
+        // Set constraints and styles
     }
     
     func update(with liturgia: Liturgia) {
-        weekLabel.text = liturgia.data ?? "Sem dados"
-        dayNameLabel.text = liturgia.dia ?? "Dia não disponível"
-        
-        if let date = liturgia.data {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd"
-            
-            if let dateObject = dateFormatter.date(from: date) {
-                let dayFormatter = DateFormatter()
-                dayFormatter.dateFormat = "d"
-                
-                let monthYearFormatter = DateFormatter()
-                monthYearFormatter.dateFormat = "MMMM yyyy"
-                
-                dayNumberLabel.text = dayFormatter.string(from: dateObject)
-                monthYearLabel.text = monthYearFormatter.string(from: dateObject)
-            }
-        } else {
-            dayNumberLabel.text = "Dia não disponível"
-            monthYearLabel.text = "Mês/Ano não disponível"
-        }
+        weekLabel.text = liturgia.data ?? "no data week label"
+        dayNameLabel.text = liturgia.dia
+        dayNumberLabel.text = liturgia.data ?? "no dayNumberLabel"
+        monthYearLabel.text = "\(liturgia.data) / \(liturgia.data)" ?? "no monthYearLabel"
     }
 }
