@@ -5,16 +5,16 @@ class DailyLiturgyViewController: UIViewController {
     // MARK: - UI Elements
     let titleLabel = TextComponent("Liturgia Diária")
     let textSizeButton = ButtonComponent("Aa")
-    let liturgyCardView = LiturgyCardView() // Custom View for the liturgy card
+    let liturgyCardView = LiturgyCardView() /// cartão que conterá informações importantes como, semana da liturgia, data, dia, dia da semana
     let segmentedControl = UISegmentedControl(items: ["1 Leitura", "Salmos", "Evangelho"])
     let liturgyTextView = TextComponent()
-    let scrollView = UIScrollView() // Adiciona a UIScrollView
+    let scrollView = UIScrollView()
     
-    let modalView = LiturgyCardView()
+    let model = LiturgyCardView() /// Model com a configuração de dynamic types
     let viewModel: DailyLiturgyViewModel!
     let apiManager = APIManager()
 
-    var currentLiturgia: Liturgia? // Armazena os dados atuais da liturgia
+    var currentLiturgia: Liturgia?
     
     // MARK: - Initializer
     init(viewModel: DailyLiturgyViewModel) {
@@ -71,56 +71,19 @@ class DailyLiturgyViewController: UIViewController {
     
     // MARK: - Setup Modal View
     func setupModalView() {
-        modalView.backgroundColor = .lightGray
-        modalView.layer.cornerRadius = 16
-        modalView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(modalView)
+        model.backgroundColor = .lightGray
+        model.layer.cornerRadius = 16
+        model.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(model)
         
         // Initially hide modal
-        modalView.isHidden = true
+        model.isHidden = true
         
         NSLayoutConstraint.activate([
-            modalView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            modalView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            modalView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16),
-            modalView.heightAnchor.constraint(equalToConstant: 200)
-        ])
-    }
-    
-    // MARK: - Setup Constraints
-    func setupConstraints() {
-        NSLayoutConstraint.activate([
-            // Title label constraints
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            
-            // Text size button constraints
-            textSizeButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
-            textSizeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            
-            // Liturgy Card View constraints
-            liturgyCardView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
-            liturgyCardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            liturgyCardView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            liturgyCardView.heightAnchor.constraint(equalToConstant: 100),
-            
-            // Segment Control constraints
-            segmentedControl.topAnchor.constraint(equalTo: liturgyCardView.bottomAnchor, constant: 16),
-            segmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            segmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            
-            // ScrollView constraints
-            scrollView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 16),
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100),
-            
-            // Liturgy Text View constraints
-            liturgyTextView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            liturgyTextView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            liturgyTextView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            liturgyTextView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            liturgyTextView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            model.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            model.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            model.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -16),
+            model.heightAnchor.constraint(equalToConstant: 200)
         ])
     }
 
@@ -159,7 +122,7 @@ class DailyLiturgyViewController: UIViewController {
     @objc func didTapTextSizeButton() {
         // Logic to change text size
         print("Change text size")
-        modalView.isHidden.toggle()
+        model.isHidden.toggle()
 
     }
     
@@ -167,6 +130,47 @@ class DailyLiturgyViewController: UIViewController {
         // Atualizar texto da liturgia de acordo com o segmento selecionado
         updateLiturgyText(for: segmentedControl.selectedSegmentIndex)
     }
+}
+
+///Extenção com apenas as constrains
+extension DailyLiturgyViewController {
+    // MARK: - Setup Constraints
+    func setupConstraints() {
+        NSLayoutConstraint.activate([
+            // Title label constraints
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            
+            // Text size button constraints
+            textSizeButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
+            textSizeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            
+            // Liturgy Card View constraints
+            liturgyCardView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
+            liturgyCardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            liturgyCardView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            liturgyCardView.heightAnchor.constraint(equalToConstant: 100),
+            
+            // Segment Control constraints
+            segmentedControl.topAnchor.constraint(equalTo: liturgyCardView.bottomAnchor, constant: 16),
+            segmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            segmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            
+            // ScrollView constraints
+            scrollView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 16),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100),
+            
+            // Liturgy Text View constraints
+            liturgyTextView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            liturgyTextView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            liturgyTextView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            liturgyTextView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            liturgyTextView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+        ])
+    }
+
 }
 
 // MARK: - LiturgyCardView
@@ -204,6 +208,6 @@ class LiturgyCardView: UIView {
         weekLabel.text = liturgia.data ?? "no data week label"
         dayNameLabel.text = liturgia.dia
         dayNumberLabel.text = liturgia.data ?? "no dayNumberLabel"
-        monthYearLabel.text = "\(liturgia.data) / \(liturgia.data)" ?? "no monthYearLabel"
+        monthYearLabel.text = "\(liturgia.data) / \(liturgia.data)"
     }
 }
