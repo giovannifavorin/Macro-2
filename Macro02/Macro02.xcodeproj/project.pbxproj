@@ -12,6 +12,9 @@
 		AF9C0FDC2CA1E5F3008187EC /* setDynamicFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C0FD72CA1E5F3008187EC /* setDynamicFont.swift */; };
 		AF9C0FDD2CA1E5F3008187EC /* TextComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C0FD82CA1E5F3008187EC /* TextComponent.swift */; };
 		AFC862112CA32A7100167ECB /* ButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC862102CA32A7100167ECB /* ButtonComponent.swift */; };
+		B82FA2812CADBA2F00FF5269 /* PreparatoryPrayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82FA2802CADBA2E00FF5269 /* PreparatoryPrayerViewController.swift */; };
+		B82FA2832CADBA6200FF5269 /* ActOfContritionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82FA2822CADBA6200FF5269 /* ActOfContritionViewController.swift */; };
+		B82FA2852CADBDA000FF5269 /* SacramentOfConfessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82FA2842CADBDA000FF5269 /* SacramentOfConfessionViewController.swift */; };
 		B84DEA082CA48F900010CEBC /* SinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84DEA072CA48F900010CEBC /* SinViewModel.swift */; };
 		B8783F822C99F32E00661148 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8783F812C99F32E00661148 /* CoordinatorProtocol.swift */; };
 		B8783F842C99F43800661148 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8783F832C99F43300661148 /* ViewModel.swift */; };
@@ -78,6 +81,9 @@
 		AF9C0FD72CA1E5F3008187EC /* setDynamicFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = setDynamicFont.swift; sourceTree = "<group>"; };
 		AF9C0FD82CA1E5F3008187EC /* TextComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextComponent.swift; sourceTree = "<group>"; };
 		AFC862102CA32A7100167ECB /* ButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponent.swift; sourceTree = "<group>"; };
+		B82FA2802CADBA2E00FF5269 /* PreparatoryPrayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreparatoryPrayerViewController.swift; sourceTree = "<group>"; };
+		B82FA2822CADBA6200FF5269 /* ActOfContritionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActOfContritionViewController.swift; sourceTree = "<group>"; };
+		B82FA2842CADBDA000FF5269 /* SacramentOfConfessionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SacramentOfConfessionViewController.swift; sourceTree = "<group>"; };
 		B84DEA072CA48F900010CEBC /* SinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinViewModel.swift; sourceTree = "<group>"; };
 		B8783F812C99F32E00661148 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		B8783F832C99F43300661148 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
@@ -324,6 +330,9 @@
 			isa = PBXGroup;
 			children = (
 				F1EDE14D2C9CD0D2007A6403 /* ConsciousnessExamViewController.swift */,
+				B82FA2802CADBA2E00FF5269 /* PreparatoryPrayerViewController.swift */,
+				B82FA2822CADBA6200FF5269 /* ActOfContritionViewController.swift */,
+				B82FA2842CADBDA000FF5269 /* SacramentOfConfessionViewController.swift */,
 			);
 			path = CounsciousnessExam;
 			sourceTree = "<group>";
@@ -494,6 +503,7 @@
 				B8E9CC192CA1F1FE00B21598 /* SpiritualPreparation.swift in Sources */,
 				B8783F862C99F44200661148 /* DataManager.swift in Sources */,
 				F1EDE1522C9DFE9B007A6403 /* PrayersCoordinator.swift in Sources */,
+				B82FA2852CADBDA000FF5269 /* SacramentOfConfessionViewController.swift in Sources */,
 				B8783F822C99F32E00661148 /* CoordinatorProtocol.swift in Sources */,
 				B8F8DD012C8B8EB500D24769 /* AppDelegate.swift in Sources */,
 				AF9C0FDA2CA1E5F3008187EC /* FontStyle.swift in Sources */,
@@ -504,6 +514,7 @@
 				F1F6BE452C99FF2100F4C7FF /* MainTabBarCoordinator.swift in Sources */,
 				F1F6BE762C9B647700F4C7FF /* DailyLiturgyViewModel.swift in Sources */,
 				B84DEA082CA48F900010CEBC /* SinViewModel.swift in Sources */,
+				B82FA2812CADBA2F00FF5269 /* PreparatoryPrayerViewController.swift in Sources */,
 				F1EDE15E2C9E4105007A6403 /* PrayerOptionsModalViewController.swift in Sources */,
 				F1F6BE7A2C9B649C00F4C7FF /* AboutViewModel.swift in Sources */,
 				F1F6BE432C99FDD700F4C7FF /* ApplicationCoordinator.swift in Sources */,
@@ -517,6 +528,7 @@
 				B8783F8A2C99F58600661148 /* Model.swift in Sources */,
 				F1EDE1632CA20543007A6403 /* MyConfessionViewController.swift in Sources */,
 				F1EDE1582C9E0FCC007A6403 /* PrayersDetailViewController.swift in Sources */,
+				B82FA2832CADBA6200FF5269 /* ActOfContritionViewController.swift in Sources */,
 				F1F6BE6A2C9B60DD00F4C7FF /* HomeCoordinator.swift in Sources */,
 				F1F6BE612C9B5AC200F4C7FF /* ConfessionAuthViewController.swift in Sources */,
 				F1EDE15A2C9E156A007A6403 /* Prayer.swift in Sources */,
