@@ -5,12 +5,12 @@ class DailyLiturgyViewController: UIViewController {
     // MARK: - UI Elements
     let titleLabel = TextComponent("Liturgia Diária")
     let textSizeButton = ButtonComponent("Aa")
-    let liturgyCardView = UIView()
+    let liturgyCardView = LiturgyCardView() // Custom View for the liturgy card
     let segmentedControl = UISegmentedControl(items: ["1 Leitura", "Salmos", "Evangelho"])
     let liturgyTextView = TextComponent()
-    let settingsButton = ButtonComponent("⚙️")
+    let scrollView = UIScrollView()
     
-    let modalView = UIView()
+    let modalView = LiturgyCardView()
     let viewModel: DailyLiturgyViewModel!
     let apiManager = LiturgiaDiariaAPI()
 
@@ -43,11 +43,9 @@ class DailyLiturgyViewController: UIViewController {
         textSizeButton.act = didTapTextSizeButton
         view.addSubview(textSizeButton)
         
-        // Liturgy Card View
-        liturgyCardView.backgroundColor = UIColor(white: 0.95, alpha: 1)
-        liturgyCardView.layer.cornerRadius = 8
+        // Liturgy Card View Setup
         liturgyCardView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(liturgyCardView)
+        view.addSubview(liturgyCardView) // Adiciona LiturgyCardView à hierarquia de views
         
         // Segment Control
         segmentedControl.selectedSegmentIndex = 0
@@ -55,12 +53,14 @@ class DailyLiturgyViewController: UIViewController {
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(segmentedControl)
         
-        // Liturgy Text View
-        view.addSubview(liturgyTextView)
+        // Scroll View Setup
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(scrollView)
         
-        // Button to open settings modal
-        settingsButton.act = didTapSettingsButton
-        view.addSubview(settingsButton)
+        // Liturgy Text View Setup
+        liturgyTextView.textAlignment = .left
+        liturgyTextView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.addSubview(liturgyTextView)
         
         // Set up Modal View (initially hidden)
         setupModalView()
@@ -102,22 +102,25 @@ class DailyLiturgyViewController: UIViewController {
             liturgyCardView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
             liturgyCardView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             liturgyCardView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            liturgyCardView.heightAnchor.constraint(equalToConstant: 100),
+            liturgyCardView.heightAnchor.constraint(equalToConstant: 150), // Ajuste a altura do card como necessário
             
             // Segment Control constraints
             segmentedControl.topAnchor.constraint(equalTo: liturgyCardView.bottomAnchor, constant: 16),
             segmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             segmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             
-            // Liturgy Text View constraints
-            liturgyTextView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 16),
-            liturgyTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            liturgyTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            liturgyTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
+            // ScrollView constraints
+            scrollView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 16),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
             
-            // Settings button constraints
-            settingsButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            settingsButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16)
+            // Liturgy Text View constraints
+            liturgyTextView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            liturgyTextView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            liturgyTextView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            liturgyTextView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            liturgyTextView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
         ])
     }
 
@@ -129,6 +132,7 @@ class DailyLiturgyViewController: UIViewController {
                 DispatchQueue.main.async {
                     self?.currentLiturgia = liturgia
                     self?.updateLiturgyText(for: self?.segmentedControl.selectedSegmentIndex ?? 0)
+                    self?.liturgyCardView.update(with: liturgia) // Atualiza a LiturgyCardView com os dados da liturgia
                 }
             case .failure(let error):
                 print("Erro ao buscar a liturgia: \(error)")
@@ -154,17 +158,85 @@ class DailyLiturgyViewController: UIViewController {
 
     // MARK: - Actions
     @objc func didTapTextSizeButton() {
-        // Logic to change text size
-        print("Change text size")
+        modalView.isHidden.toggle()
     }
     
     @objc func didChangeSegment() {
-        // Atualizar texto da liturgia de acordo com o segmento selecionado
         updateLiturgyText(for: segmentedControl.selectedSegmentIndex)
     }
+}
+
+// MARK: - LiturgyCardView
+class LiturgyCardView: UIView {
+
+    private let weekLabel = UILabel()
+    private let dayNameLabel = UILabel()
+    private let dayNumberLabel = UILabel()
+    private let monthYearLabel = UILabel()
     
-    @objc func didTapSettingsButton() {
-        // Toggle modal view visibility
-        modalView.isHidden.toggle()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupView() {
+        backgroundColor = .white
+        layer.cornerRadius = 8
+        layer.borderWidth = 1
+        layer.borderColor = UIColor.black.cgColor
+        
+        weekLabel.translatesAutoresizingMaskIntoConstraints = false
+        dayNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        dayNumberLabel.translatesAutoresizingMaskIntoConstraints = false
+        monthYearLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        addSubview(weekLabel)
+        addSubview(dayNameLabel)
+        addSubview(dayNumberLabel)
+        addSubview(monthYearLabel)
+        
+        // Define constraints
+        NSLayoutConstraint.activate([
+            weekLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            weekLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            
+            dayNameLabel.topAnchor.constraint(equalTo: weekLabel.bottomAnchor, constant: 8),
+            dayNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            
+            dayNumberLabel.topAnchor.constraint(equalTo: dayNameLabel.bottomAnchor, constant: 8),
+            dayNumberLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            
+            monthYearLabel.topAnchor.constraint(equalTo: dayNumberLabel.bottomAnchor, constant: 8),
+            monthYearLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            monthYearLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8)
+        ])
+    }
+    
+    func update(with liturgia: Liturgia) {
+        weekLabel.text = liturgia.data ?? "Sem dados"
+        dayNameLabel.text = liturgia.dia ?? "Dia não disponível"
+        
+        if let date = liturgia.data {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            
+            if let dateObject = dateFormatter.date(from: date) {
+                let dayFormatter = DateFormatter()
+                dayFormatter.dateFormat = "d"
+                
+                let monthYearFormatter = DateFormatter()
+                monthYearFormatter.dateFormat = "MMMM yyyy"
+                
+                dayNumberLabel.text = dayFormatter.string(from: dateObject)
+                monthYearLabel.text = monthYearFormatter.string(from: dateObject)
+            }
+        } else {
+            dayNumberLabel.text = "Dia não disponível"
+            monthYearLabel.text = "Mês/Ano não disponível"
+        }
     }
 }
