@@ -200,8 +200,6 @@ class LiturgyCardView: UIView {
         addSubview(dayNameLabel)
         addSubview(dayNumberLabel)
         addSubview(monthYearLabel)
-        
-        // Set constraints and styles
     }
     
     func update(with liturgia: Liturgia) {
