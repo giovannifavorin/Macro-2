@@ -1,5 +1,5 @@
 //
-//  CounsciousnessExamCoordinator.swift
+//  ConsciousnessExamCoordinator.swift
 //  Macro02
 //
 //  Created by Victor Dantas on 19/09/24.
@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class CounsciousnessExamCoordinator: Coordinator {
+class ConsciousnessExamCoordinator: Coordinator {
     
     var viewModel = ConsciousnessExamViewModel()
     

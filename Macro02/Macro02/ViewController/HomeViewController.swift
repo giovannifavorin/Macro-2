@@ -68,7 +68,7 @@ class HomeViewController: UIViewController {
     
     // MARK: - Navigation #selector methods
     @objc private func navigateToCounsciousnessExam() {
-        self.viewModel.selectedNavigation = .counsciousnessExam
+        self.viewModel.selectedNavigation = .consciousnessExam
     }
     
     @objc private func navigateToPrayers() {

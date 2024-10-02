@@ -48,19 +48,14 @@ class PrayersViewModel: ObservableObject {
         // Posteriormente, popular puxando uma API
         self.prayerCategories = [PrayerCategory(id: UUID(),
                                                 name: "Category 1",
-                                                image: UIImage(systemName: "book")!,
+                                                image: UIImage(systemName: "book") ?? UIImage(named: "defaultImage")!,
                                                 prayers: self.prayers),
                                  
                                  PrayerCategory(id: UUID(),
                                                 name: "Category 2",
-                                                image: UIImage(systemName: "book.fill")!,
+                                                image: UIImage(systemName: "book") ?? UIImage(named: "defaultImage")!,
                                                 prayers: self.prayers2)
         
         ]
-        
-        
-        
     }
-    
 }
-
