@@ -12,7 +12,8 @@ class HomeCoordinator: Coordinator {
     
     // MARK: - VARIÁVEIS
     var rootViewController: UINavigationController
-    var viewModel = HomeViewModel()
+    var homeVM: HomeViewModel
+    var sinVM: SinViewModel
     
     var childCoordinators: [Coordinator] = []
     
@@ -21,13 +22,15 @@ class HomeCoordinator: Coordinator {
     
     // Primeira view a ser apresentada ao iniciar a Navegação
     lazy var homeViewController: HomeViewController = {
-        let vc = HomeViewController(viewModel: viewModel)
+        let vc = HomeViewController(viewModel: self.homeVM) // SEILA
         return vc
     }()
     
     // MARK: - INIT
-    init() {
+    init(homeVM: HomeViewModel, sinVM: SinViewModel) {
         self.rootViewController = UINavigationController()
+        self.homeVM = homeVM
+        self.sinVM = sinVM
     }
     
     // MARK: - START
@@ -36,7 +39,7 @@ class HomeCoordinator: Coordinator {
         rootViewController.setViewControllers([homeViewController], animated: false)
         
         // Observando mudanças na selectedNavigation
-        viewModel.$selectedNavigation
+        homeVM.$selectedNavigation
             .receive(on: RunLoop.main)
             .sink { [weak self] selectedNavigation in
                 self?.handleNavigation(selectedNavigation)

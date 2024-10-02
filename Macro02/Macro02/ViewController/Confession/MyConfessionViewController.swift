@@ -9,10 +9,10 @@ import UIKit
 
 class MyConfessionViewController: UIViewController {
 
-    var viewModel: ConfessionViewModel
+    var viewModel: SinViewModel
     var label: TextComponent!
     
-    init(viewModel: ConfessionViewModel) {
+    init(viewModel: SinViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }

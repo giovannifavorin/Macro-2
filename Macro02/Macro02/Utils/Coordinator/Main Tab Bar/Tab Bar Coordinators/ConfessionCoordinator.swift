@@ -10,25 +10,37 @@ import Combine
 
 class ConfessionCoordinator: Coordinator {
     
+    // RootViewController
     var rootViewController: UINavigationController
-    var viewModel = ConfessionViewModel()
     
+    // ViewModel para o FaceID
+    var faceidViewModel = ConfessionViewModel()
+    
+    // ViewModel dos pecados
+    var viewModel: SinViewModel
+    
+    // VC da view do FaceID
     lazy var confessionAuthViewController: ConfessionAuthViewController = {
-        let vc = ConfessionAuthViewController(viewModel: viewModel)
+        let vc = ConfessionAuthViewController(viewModel: self.faceidViewModel)
         return vc
     }()
     
+    
+    // Combine
     var cancellables = Set<AnyCancellable>()
     
-    init() {
+    init(viewModel: SinViewModel) {
         self.rootViewController = UINavigationController()
         self.rootViewController.navigationBar.isTranslucent = true
+        
+        self.viewModel = viewModel
     }
     
     func start() {
         rootViewController.setViewControllers([confessionAuthViewController], animated: false)
         
-        viewModel.$isSuccessfullyAuthorized
+        // Escutando alteração quando a permissão do FaceID
+        faceidViewModel.$isSuccessfullyAuthorized
             .receive(on: RunLoop.main)
             .sink { [weak self] success in
                 self?.handleNavigation(success)
@@ -38,7 +50,7 @@ class ConfessionCoordinator: Coordinator {
     
     private func handleNavigation(_ success: Bool) {
         if success {
-            rootViewController.pushViewController(MyConfessionViewController(viewModel: viewModel), animated: true)
+            rootViewController.pushViewController(MyConfessionViewController(viewModel: self.viewModel), animated: true)
         }
     }
 }
