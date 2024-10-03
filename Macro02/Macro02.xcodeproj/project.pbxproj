@@ -13,6 +13,7 @@
 		AF9C0FDD2CA1E5F3008187EC /* TextComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C0FD82CA1E5F3008187EC /* TextComponent.swift */; };
 		AFC683B72CA48B7900389DD8 /* LiturgiaDiariaAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC683B62CA48B7900389DD8 /* LiturgiaDiariaAPI.swift */; };
 		AFC862112CA32A7100167ECB /* ButtonComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC862102CA32A7100167ECB /* ButtonComponent.swift */; };
+		AFF9FA3D2CAF13D1004AB04F /* LiturgyCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF9FA3C2CAF13D1004AB04F /* LiturgyCardView.swift */; };
 		B84DEA082CA48F900010CEBC /* SinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84DEA072CA48F900010CEBC /* SinViewModel.swift */; };
 		B8783F822C99F32E00661148 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8783F812C99F32E00661148 /* CoordinatorProtocol.swift */; };
 		B8783F842C99F43800661148 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8783F832C99F43300661148 /* ViewModel.swift */; };
@@ -81,6 +82,7 @@
 		AF9C0FD82CA1E5F3008187EC /* TextComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextComponent.swift; sourceTree = "<group>"; };
 		AFC683B62CA48B7900389DD8 /* LiturgiaDiariaAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiturgiaDiariaAPI.swift; sourceTree = "<group>"; };
 		AFC862102CA32A7100167ECB /* ButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponent.swift; sourceTree = "<group>"; };
+		AFF9FA3C2CAF13D1004AB04F /* LiturgyCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiturgyCardView.swift; sourceTree = "<group>"; };
 		B84DEA072CA48F900010CEBC /* SinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinViewModel.swift; sourceTree = "<group>"; };
 		B8783F812C99F32E00661148 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		B8783F832C99F43300661148 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 		AF9C0FD92CA1E5F3008187EC /* TextComponents  */ = {
 			isa = PBXGroup;
 			children = (
+				AFF9FA3C2CAF13D1004AB04F /* LiturgyCardView.swift */,
 				AFC862102CA32A7100167ECB /* ButtonComponent.swift */,
 				AF9C0FD62CA1E5F3008187EC /* FontStyle.swift */,
 				AF9C0FD72CA1E5F3008187EC /* setDynamicFont.swift */,
@@ -508,6 +511,7 @@
 				F1F6BE432C99FDD700F4C7FF /* ApplicationCoordinator.swift in Sources */,
 				F1F6BE652C9B5DE600F4C7FF /* BibleViewController.swift in Sources */,
 				F1EDE14A2C9CD045007A6403 /* CounsciousnessExamCoordinator.swift in Sources */,
+				AFF9FA3D2CAF13D1004AB04F /* LiturgyCardView.swift in Sources */,
 				B8783F902C99F63A00661148 /* DataModel.xcdatamodeld in Sources */,
 				F1F6BE742C9B644C00F4C7FF /* ConfessionViewModel.swift in Sources */,
 				AFC683B72CA48B7900389DD8 /* LiturgiaDiariaAPI.swift in Sources */,
