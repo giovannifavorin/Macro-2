@@ -19,10 +19,10 @@ import UIKit
 
 class LiturgyCardView: UIView {
     
-    private let weekLabel = UILabel()
-    private let dayNameLabel = UILabel()
-    private let dayNumberLabel = UILabel()
-    private let monthYearLabel = UILabel()
+    private let weekLabel = TextComponent()
+    private let dayNameLabel = TextComponent()
+    private let dayNumberLabel = TextComponent()
+    private let monthYearLabel = TextComponent()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
