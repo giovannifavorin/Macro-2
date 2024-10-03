@@ -16,7 +16,7 @@ class ConsciousnessExamViewController: UIViewController, UITableViewDataSource, 
     //Text Input para adicionar Pecado
     private let sinTextField: UITextField = {
         let textInput = UITextField()
-        textInput.placeholder = "Escreva o pecado"
+        textInput.placeholder = "Anotate your sins here."
         textInput.borderStyle = .roundedRect
         return textInput
     }()
@@ -24,30 +24,25 @@ class ConsciousnessExamViewController: UIViewController, UITableViewDataSource, 
     //Botao para Submeter o Texto
     private let sinSubmitButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Adicionar", for: .normal)
+        button.setTitle("+", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .blue
         button.layer.cornerRadius = 10
         return button
     }()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        title = "Exame de Consciência"
+        title = "Conciousness Exam"
         
         setupTableView()
         setupTableFooterView()
         
-//        //add gesture to Hide keyboard when touch outside
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-//        view.addGestureRecognizer(tapGesture)
+        setupKeyboard()
+        setupTapGesture()
     }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
-    }
-    
     private func setupTableView() {
         tableView.dataSource = self
         tableView.delegate = self
@@ -63,6 +58,7 @@ class ConsciousnessExamViewController: UIViewController, UITableViewDataSource, 
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
+    
     
     // MARK: - UITableViewDataSource
     
@@ -122,6 +118,8 @@ class ConsciousnessExamViewController: UIViewController, UITableViewDataSource, 
         present(alert, animated: true, completion: nil)
     }
     
+    
+    //MARK: ADD sin texfield And Label
     private func setupTableFooterView() {
         //Create a ContainerView to textfield and button
         let footerView = UIView()
@@ -148,16 +146,16 @@ class ConsciousnessExamViewController: UIViewController, UITableViewDataSource, 
             sinSubmitButton.heightAnchor.constraint(equalToConstant: 40),
             sinSubmitButton.widthAnchor.constraint(equalToConstant: 100)
         ])
-        // Definir a view de rodapé da tableView
+        // Define the footer View of tableview
         tableView.tableFooterView = footerView
         
-        // Adicionar ação ao botão
+        // Add Action to Button
         sinSubmitButton.addTarget(self, action: #selector(addSin), for: .touchUpInside)
     }
     
     @objc private func addSin() {
         guard let newSin = sinTextField.text, !newSin.isEmpty else {
-            // Se o campo estiver vazio, não faz nada
+            // If empty, does Nothing
             return
         }
         viewModel.commandments[0].questions.append(newSin)
@@ -172,8 +170,58 @@ class ConsciousnessExamViewController: UIViewController, UITableViewDataSource, 
         let lastIndexPath = IndexPath(row: viewModel.commandments[0].questions.count - 1, section: 0)
         tableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
     }
+    
+    //MARK: Keyboard Functions
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            let keyboardHeight = keyboardSize.height
+            let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
+            tableView.contentInset = contentInsets
+            tableView.scrollIndicatorInsets = contentInsets
+            
+            // Se quiser que o TextField esteja visível ao aparecer o teclado
+            if let activeField = tableView.tableFooterView {
+                let visibleRect = self.view.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0))
+                if !visibleRect.contains(activeField.frame.origin) {
+                    tableView.scrollRectToVisible(activeField.frame, animated: true)
+                }
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        let contentInsets = UIEdgeInsets.zero
+        tableView.contentInset = contentInsets
+        tableView.scrollIndicatorInsets = contentInsets
+    }
+    
+    //Dissmiss the keyboard
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    //Observe keyboard notifications
+    private func setupKeyboard() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    //Remove the observers from Keyboard
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    //add gesture to Hide keyboard when touch outside
+    private func setupTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    //Hide Keyboard when return is pressed
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder() // Oculta o teclado ao pressionar "Return"
+        textField.resignFirstResponder()
         return true
     }
 }
