@@ -10,19 +10,24 @@ import UIKit
 /// Card que exibe informações da liturgia na `LiturgyView`.
 ///
 /// O card contém as seguintes informações:
-/// - Semana atual da liturgia exibida no `weekLabel`.
+/// - Semana atual da liturgia exibida no `weekNumberLabel`.
 /// - Dia da semana atual em formato de texto no `dayNameLabel`.
-/// - Dia do mês em formato numérico no `dayNumberLabel`.
-/// - Mês abreviado e ano completo no `monthYearLabel`.
+/// - Dia da liturggia em formado de número `dayNameLabel`
+/// - Dia da liturgia em formato de número `yearNumberLabel`
+/// - Mês em formato de texto no `monthNameLabel`.
+/// - Ano no formato de número em `yearNumberLabel`.
 ///
 /// Este componente é utilizado no protótipo de média na View de liturgia para exibir dados relacionados à data.
 
 class LiturgyCardView: UIView {
-    
-    private let weekLabel = TextComponent()
+        
+    private let weekNumberLabel = TextComponent()
     private let dayNameLabel = TextComponent()
+    
     private let dayNumberLabel = TextComponent()
-    private let monthYearLabel = TextComponent()
+    private let monthNameLabel = TextComponent()
+    private let yearNumberLabel = TextComponent()
+    private let colorLiturgy = UIColor()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,16 +44,20 @@ class LiturgyCardView: UIView {
         layer.borderWidth = 1
         layer.borderColor = UIColor.black.cgColor
         
-        addSubview(weekLabel)
+        addSubview(weekNumberLabel)
         addSubview(dayNameLabel)
         addSubview(dayNumberLabel)
-        addSubview(monthYearLabel)
+        addSubview(yearNumberLabel)
+    }
+    
+    private func constrains() {
+        
     }
     
     func update(with liturgia: Liturgia) {
-        weekLabel.text = liturgia.data ?? "no data week label"
+        weekNumberLabel.text = liturgia.data ?? "no data week label"
         dayNameLabel.text = liturgia.dia
         dayNumberLabel.text = liturgia.data ?? "no dayNumberLabel"
-        monthYearLabel.text = "\(liturgia.data) / \(liturgia.data)"
+        yearNumberLabel.text = "\(liturgia.data) / \(liturgia.data)"
     }
 }
