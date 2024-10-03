@@ -77,7 +77,7 @@ class APIManager {
             // Tenta converter os dados recebidos para JSON e imprimir
             do {
                 if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-                    print("Resposta JSON da API: \(json)")
+//                    print("Resposta JSON da API: \(json)")
                 } else {
                     print("A resposta não é um dicionário JSON.")
                 }

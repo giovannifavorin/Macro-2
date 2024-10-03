@@ -21,14 +21,14 @@ import UIKit
 class LiturgyCardView: UIView {
     
     private var dataLiturgia = String()
-        
+    
     private let weekNumberLabel = TextComponent()
     private let dayNameLabel = TextComponent()
     
     private let dayNumberLabel = TextComponent()
     private let monthNameLabel = TextComponent()
     private let yearNumberLabel = TextComponent()
-    private let colorLiturgy = UIColor()
+    private var colorLiturgy = UIColor()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -45,6 +45,8 @@ class LiturgyCardView: UIView {
         layer.borderWidth = 1
         layer.borderColor = UIColor.black.cgColor
         
+        self.weekNumberLabel.setDynamicFont(size: 14, weight: .bold)
+        self.dayNumberLabel.font = UIFont.setCustomFont(.titulo1)
         addSubview(weekNumberLabel)
         addSubview(dayNameLabel)
         addSubview(dayNumberLabel)
@@ -61,33 +63,128 @@ class LiturgyCardView: UIView {
         monthNameLabel.text = liturgia.data ?? "no monthNameLabel"
         yearNumberLabel.text = "\(liturgia.data) / \(liturgia.data)"
         self.dataLiturgia = liturgia.data ?? "no data"
-        print(self.dataLiturgia)
+        
+        // Atualiza com base na dataLiturgia
+        self.weekNumberLabel.text = "23º Semana do Tempo Comum"
+        self.dayNameLabel.text = getWeekdayName(from: dataLiturgia, length: 3)
+        self.dayNumberLabel.text = getDayNumber(from: dataLiturgia)
+        self.monthNameLabel.text = getMonthName(from: dataLiturgia)
+        self.yearNumberLabel.text = getYearNumber(from: dataLiturgia)
+        self.colorLiturgy = colorFromString(liturgia.cor ?? "😳")
+        self.weekNumberLabel.textColor = self.colorLiturgy
+
     }
+    
+    /// Retorna para obter o nome do dia da semana
+    private func getWeekdayName(from dateString: String, length: Int) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        guard let date = dateFormatter.date(from: dateString) else {
+            return "Invalid Date"
+        }
+        
+        dateFormatter.dateFormat = "EEEE" // Formato completo do dia da semana
+        let fullWeekday = dateFormatter.string(from: date)
+        
+        return String(fullWeekday.prefix(length)) // Retorna o nome com a quantidade de caracteres desejada
+    }
+    
+    /// Retorna o nome do mês, recebe data como parametro
+    private func getMonthName(from dateString: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        guard let date = dateFormatter.date(from: dateString) else {
+            return "Invalid Date"
+        }
+        
+        dateFormatter.dateFormat = "MMM" // Abreviação de 3 caracteres do mês
+        return dateFormatter.string(from: date)
+    }
+    
+    /// Função que retorna o número do mês, recebe uma data como parâmetro
+    private func getMonthNumber(from dateString: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        guard let date = dateFormatter.date(from: dateString) else {
+            return "Invalid Date"
+        }
+        
+        dateFormatter.dateFormat = "MM" // Número do mês
+        return dateFormatter.string(from: date)
+    }
+    
+    /// Recebe uma data no formato dd-MM-yyyy e retorna apenas o ano "yyyy"
+    private func getYearNumber(from dateString: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        guard let date = dateFormatter.date(from: dateString) else {
+            return "Invalid Date"
+        }
+        
+        dateFormatter.dateFormat = "yyyy" // Número do ano completo
+        return dateFormatter.string(from: date)
+    }
+    
+    /// Recebe uma data no formato dd-MM-yyyy e retorna apenas o dia "dd"
+    private func getDayNumber(from dateString: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy" // Formato esperado da data
+        guard let date = dateFormatter.date(from: dateString) else {
+            return "Invalid Date"
+        }
+        
+        dateFormatter.dateFormat = "dd" // Formato para obter apenas o dia
+        return dateFormatter.string(from: date)
+    }
+    
+    /// Converte o parametro Liturgia.cor  para uma UIcolor
+    private func colorFromString(_ colorName: String) -> UIColor {
+        switch colorName.lowercased() {
+        case "verde":
+            return UIColor.green
+        case "branco":
+            return UIColor.white
+        case "vermelho":
+            return UIColor.red
+        case "roxo":
+            return UIColor.purple
+        case "preto":
+            return UIColor.black
+        case "rosa":
+            return UIColor.systemPink
+        default:
+            return UIColor.white
+        }
+    }
+    
 }
 
 extension LiturgyCardView {
     private func setConstraints() {
-        weekNumberLabel.translatesAutoresizingMaskIntoConstraints = false
-        dayNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        dayNumberLabel.translatesAutoresizingMaskIntoConstraints = false
-        monthNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        yearNumberLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
+            // Alinha weekNumberLabel ao topo superior esquerdo
             weekNumberLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
             weekNumberLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
             
-            dayNameLabel.topAnchor.constraint(equalTo: weekNumberLabel.bottomAnchor, constant: 8),
-            dayNameLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            // Alinhando o dayNameLabel abaixo do weekNumberLabel
+            dayNameLabel.topAnchor.constraint(equalTo: weekNumberLabel.bottomAnchor),
+            dayNameLabel.leadingAnchor.constraint(equalTo: weekNumberLabel.leadingAnchor),
             
-            dayNumberLabel.topAnchor.constraint(equalTo: dayNameLabel.bottomAnchor, constant: 8),
-            dayNumberLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            // Posiciona o monthNameLabel ao topo superior direito
+            monthNameLabel.topAnchor.constraint(equalTo: self.topAnchor),
+            monthNameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 8),
             
-            monthNameLabel.topAnchor.constraint(equalTo: dayNumberLabel.bottomAnchor, constant: 8),
-            monthNameLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            // Posiciona o yearNumberLabel abaixo do monthNameLabel
+            yearNumberLabel.topAnchor.constraint(equalTo: monthNameLabel.bottomAnchor),
+            yearNumberLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 8),
             
-            yearNumberLabel.topAnchor.constraint(equalTo: monthNameLabel.bottomAnchor, constant: 8),
-            yearNumberLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            
+            // Posiciona o dayNumberLabel à esquerda do monthNameLabel
+            dayNumberLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            dayNumberLabel.trailingAnchor.constraint(equalTo: monthNameLabel.leadingAnchor, constant: 8),
+            
+            // Definindo a altura e a distância inferior
             yearNumberLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16)
         ])
     }
