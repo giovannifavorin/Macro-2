@@ -154,21 +154,102 @@ class ConsciousnessExamViewController: UIViewController, UITableViewDataSource, 
     }
     
     @objc private func addSin() {
+        //verify if the textfield is not Empty
         guard let newSin = sinTextField.text, !newSin.isEmpty else {
             // If empty, does Nothing
             return
         }
-        viewModel.commandments[0].questions.append(newSin)
+        
+        //Create a UIAlertController para escolher uma categoria
+        let alertController = UIAlertController(title: "Choose a category", message: "You can choose a category to add a sin or create a new one", preferredStyle: .alert)
+        
+        //botao pra escolher a Categoria Existente
+        alertController.addAction(UIAlertAction(title: "Existing Category", style: .default, handler: { _ in
+            self.chooseExistingCategory(for: newSin)
+        }))
+        
+        //Botao para criar uma nova categoria
+        alertController.addAction(UIAlertAction(title: "New Category", style: .default, handler: { _ in
+            self.addNewCategory(for: newSin)
+        }))
+        
+        //botao para cancelar
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        //Apresentar o UIAlertController
+        present(alertController, animated: true, completion: nil)
         
         //Clean Text Field
         sinTextField.text = ""
+    }
+    
+    private func chooseExistingCategory(for newSin: String) {
+        // Criar um UIAlertController com as opções de categorias
+        let cateforyAlertController = UIAlertController(title: "Choose a category", message: "You can choose a category to add a sin or create a new one", preferredStyle: .alert)
         
-        //reload table to show new Sin
-        tableView.reloadData()
+        //Adiciona uma opcao para cada categoria existente
+        for commandment in viewModel.commandments {
+            cateforyAlertController.addAction(UIAlertAction(title: commandment.title, style: .default, handler: { _ in
+                self.addSinToCategory(newSin, categoryTitle: commandment.title)
+            }))
+        }
+        // Apresentar o UIAlertController
+        present(cateforyAlertController, animated: true, completion: nil)
+    }
+    
+    
+    //Func to add sin to existing category
+    private func addSinToCategory(_ newSin: String, categoryTitle: String) {
+        //Encontrar a categoria correspondente para add o pecado
+        if let index = viewModel.commandments.firstIndex(where: {$0.title == categoryTitle}) {
+            viewModel.commandments[index].questions.append(newSin)
+            tableView.reloadData()
+            
+            //Scroll to the last line added
+            let lastIndexPath = IndexPath(row: viewModel.commandments[index].questions.count - 1, section: index)
+            tableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
+        }
+    }
+    
+    private func addNewCategory(for newSin: String) {
+        // Criar um UIAlertController para inserir o título e descrição da nova categoria
+        let newCategoryAlertController = UIAlertController(title: "New category", message: "Enter a title for the new category", preferredStyle: .alert)
         
-        //Scroll to the last line added
-        let lastIndexPath = IndexPath(row: viewModel.commandments[0].questions.count - 1, section: 0)
-        tableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
+        // Adicionar um campo de texto para o título da categoria
+        newCategoryAlertController.addTextField { textField in
+            textField.placeholder = "Category Title"
+        }
+        
+        // Adicionar um campo de texto para a descrição da categoria
+        newCategoryAlertController.addTextField { textField in
+            textField.placeholder = "Category Description"
+        }
+        
+        // Botão para criar a nova categoria
+        newCategoryAlertController.addAction(UIAlertAction(title: "Create", style: .default, handler: { [weak self] _ in
+            guard let title = newCategoryAlertController.textFields?.first?.text, !title.isEmpty,
+                  let description = newCategoryAlertController.textFields?[1].text, !description.isEmpty else {
+                return // Se os campos estiverem vazios, não faz nada
+            }
+            
+            //cria yma nova categoria com o pecado adicionado
+            let newCommandment = Commandment(title: title, description: description, questions: [newSin])
+            self?.viewModel.commandments.append(newCommandment)
+            
+            //reload table
+            self?.tableView.reloadData()
+            
+            //Scroll para a nova seção (última seção)
+            let lastSectionIndex = (self?.viewModel.commandments.count ?? 1) - 1
+            let lastIndexPath = IndexPath(row: 0, section: lastSectionIndex)
+            self?.tableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
+        }))
+        
+        //botao de cancelar
+        newCategoryAlertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        //apresentar o UIAlertController
+        present(newCategoryAlertController, animated: true, completion: nil)
     }
     
     //MARK: Keyboard Functions
