@@ -206,6 +206,6 @@ class LiturgyCardView: UIView {
         weekLabel.text = liturgia.data ?? "no data week label"
         dayNameLabel.text = liturgia.dia
         dayNumberLabel.text = liturgia.data ?? "no dayNumberLabel"
-        monthYearLabel.text = "\(liturgia.data) / \(liturgia.data)"
+        monthYearLabel.text = "\(liturgia.data ?? "Liturgi Data not available") / \(liturgia.data ?? "Literurgi Data not available") "
     }
 }
