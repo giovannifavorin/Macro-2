@@ -19,6 +19,7 @@
 		4AEF3AAD2CADBFE200BEB337 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEF3AA02CADBFE200BEB337 /* HomeViewController.swift */; };
 		4AEF3AAE2CADBFE200BEB337 /* MyConfessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEF3AA22CADBFE200BEB337 /* MyConfessionViewController.swift */; };
 		4AEF3AAF2CADBFE200BEB337 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4AEF3AA12CADBFE200BEB337 /* Localizable.xcstrings */; };
+		AF0A93D82CB7210B005B194F /* Prayers.JSON in Resources */ = {isa = PBXBuildFile; fileRef = AF0A93D72CB7210B005B194F /* Prayers.JSON */; };
 		AF9C0FDA2CA1E5F3008187EC /* FontStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C0FD62CA1E5F3008187EC /* FontStyle.swift */; };
 		AF9C0FDC2CA1E5F3008187EC /* setDynamicFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C0FD72CA1E5F3008187EC /* setDynamicFont.swift */; };
 		AF9C0FDD2CA1E5F3008187EC /* TextComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9C0FD82CA1E5F3008187EC /* TextComponent.swift */; };
@@ -88,6 +89,7 @@
 		4AEF3AA02CADBFE200BEB337 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		4AEF3AA12CADBFE200BEB337 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		4AEF3AA22CADBFE200BEB337 /* MyConfessionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyConfessionViewController.swift; sourceTree = "<group>"; };
+		AF0A93D72CB7210B005B194F /* Prayers.JSON */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Prayers.JSON; sourceTree = "<group>"; };
 		AF9C0FD62CA1E5F3008187EC /* FontStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontStyle.swift; sourceTree = "<group>"; };
 		AF9C0FD72CA1E5F3008187EC /* setDynamicFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = setDynamicFont.swift; sourceTree = "<group>"; };
 		AF9C0FD82CA1E5F3008187EC /* TextComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextComponent.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 				B8E9CC182CA1F1FE00B21598 /* SpiritualPreparation.swift */,
 				AFC683B62CA48B7900389DD8 /* LiturgiaDiariaAPI.swift */,
 				F1EDE1592C9E156A007A6403 /* Prayer.swift */,
+				AF0A93D72CB7210B005B194F /* Prayers.JSON */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -457,6 +460,7 @@
 			files = (
 				B8F8DD0A2C8B8EB600D24769 /* Assets.xcassets in Resources */,
 				B8F8DD0D2C8B8EB600D24769 /* Base in Resources */,
+				AF0A93D82CB7210B005B194F /* Prayers.JSON in Resources */,
 				4AEF3AAF2CADBFE200BEB337 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
