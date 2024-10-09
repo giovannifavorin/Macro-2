@@ -57,6 +57,8 @@ class LiturgyCardView: UIView {
     }
     
     func update(with liturgia: Liturgia) {
+        
+        //NOTE: NÃO SEI PORQUE MAS SE APAGAR ESTAS 6 LINHAS DE CÓDIGO O COMPONENTE PARA DE FUNCIONAR, NÃO APAGUE
         weekNumberLabel.text = liturgia.data ?? "no data week label"
         dayNameLabel.text = liturgia.dia
         dayNumberLabel.text = liturgia.data ?? "no dayNumberLabel"
@@ -75,7 +77,7 @@ class LiturgyCardView: UIView {
 
     }
     
-    /// Retorna para obter o nome do dia da semana
+    /// Retorna o dia da semana em String, permite escolher a quantidade de caracteres do dia da semana
     private func getWeekdayName(from dateString: String, length: Int) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy"
