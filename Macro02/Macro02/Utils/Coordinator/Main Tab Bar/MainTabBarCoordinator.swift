@@ -5,7 +5,6 @@
 //  Created by Victor Dantas on 17/09/24.
 //
 
-import SwiftUI
 import UIKit
 
 class MainTabBarCoordinator: Coordinator {
@@ -13,12 +12,12 @@ class MainTabBarCoordinator: Coordinator {
     var rootViewController: UITabBarController
     var childCoordinators = [Coordinator]()
     
-    // ViewModels
-    var homeViewModel = HomeViewModel()
-    var confessionViewModel = ConfessionViewModel()
-    var dailyLiturgyViewModel = DailyLiturgyViewModel()
-    var bibleViewModel = BibleViewModel()
-    var aboutViewModel = AboutViewModel()
+//    // ViewModels -  não
+    let homeViewModel = HomeViewModel()
+    let confessionViewModel = ConfessionViewModel()
+    let dailyLiturgyViewModel = DailyLiturgyViewModel()
+    let bibleViewModel = BibleViewModel()
+    let aboutViewModel = AboutViewModel()
     
     init() {
         self.rootViewController = UITabBarController()
@@ -30,27 +29,27 @@ class MainTabBarCoordinator: Coordinator {
         
         // Instanciando e iniciando todos os Coordinators que irão compor a Tab Bar
         // HOME
-        let homeCoordinator = HomeCoordinator()
+        let homeCoordinator = HomeCoordinator(viewModel: homeViewModel)
         homeCoordinator.start()
         childCoordinators.append(homeCoordinator)
         
         // CONFESSION
-        let confessionCoordinator = ConfessionCoordinator()
+        let confessionCoordinator = ConfessionCoordinator(viewModel: confessionViewModel)
         confessionCoordinator.start()
         childCoordinators.append(confessionCoordinator)
         
         // DAILY LITURGY
-        let dailyLiturgyCoordinator = DailyLiturgyCoordinator()
+        let dailyLiturgyCoordinator = DailyLiturgyCoordinator(viewModel: dailyLiturgyViewModel)
         dailyLiturgyCoordinator.start()
         childCoordinators.append(dailyLiturgyCoordinator)
         
         // BIBLE
-        let bibleCoordinator = BibleCoordinator()
+        let bibleCoordinator = BibleCoordinator(viewModel: bibleViewModel)
         bibleCoordinator.start()
         childCoordinators.append(bibleCoordinator)
         
         // ABOUT
-        let aboutCoordinator = AboutCoordinator()
+        let aboutCoordinator = AboutCoordinator(viewModel: aboutViewModel)
         aboutCoordinator.start()
         childCoordinators.append(aboutCoordinator)
         
@@ -92,6 +91,8 @@ class MainTabBarCoordinator: Coordinator {
         
         
         // Define as Views que popularão a Tab Bar
+        self.rootViewController.tabBar.tintColor = .systemBlue
+        self.rootViewController.tabBar.unselectedItemTintColor = .gray
         self.rootViewController.viewControllers = [dailyLiturgyViewController, confessionViewController, homeViewController, bibleViewController, aboutViewController]
     }
     
@@ -100,8 +101,8 @@ class MainTabBarCoordinator: Coordinator {
     
     // Função auxiliar para alterar a aparência dos itens Tab Bar
     func setupTabBarItems(vc: UIViewController, title: String, imageName: String, selectedImageName: String) {
-        let defaultImage = UIImage(systemName: imageName)
-        let selectedImage = UIImage(systemName: selectedImageName)
+        let defaultImage = UIImage(systemName: imageName) ?? UIImage()
+        let selectedImage = UIImage(systemName: selectedImageName) ?? UIImage()
         let tabBarItem = UITabBarItem(title: title, image: defaultImage, selectedImage: selectedImage)
         vc.tabBarItem = tabBarItem
     }

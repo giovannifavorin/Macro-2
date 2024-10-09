@@ -10,14 +10,15 @@ import UIKit
 class BibleCoordinator: Coordinator {
     
     var rootViewController: UINavigationController
-    var viewModel = BibleViewModel()
+    var viewModel: BibleViewModel
     
     lazy var bibleViewController: BibleViewController = {
         let vc = BibleViewController(viewModel: viewModel)
         return vc
     }()
     
-    init() {
+    init(viewModel: BibleViewModel) {
+        self.viewModel = viewModel
         self.rootViewController = UINavigationController()
         self.rootViewController.navigationBar.isTranslucent = true
     }

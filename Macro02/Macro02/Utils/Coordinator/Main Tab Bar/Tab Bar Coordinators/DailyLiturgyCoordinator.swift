@@ -10,14 +10,15 @@ import UIKit
 class DailyLiturgyCoordinator: Coordinator {
     
     var rootViewController: UINavigationController
-    var viewModel = DailyLiturgyViewModel()
+    var viewModel: DailyLiturgyViewModel
     
     lazy var dailyLiturgyViewController: DailyLiturgyViewController = {
         let vc = DailyLiturgyViewController(viewModel: viewModel)
         return vc
     }()
     
-    init() {
+    init(viewModel: DailyLiturgyViewModel) {
+        self.viewModel = viewModel
         self.rootViewController = UINavigationController()
         self.rootViewController.navigationBar.isTranslucent = true
     }

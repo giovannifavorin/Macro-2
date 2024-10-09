@@ -12,7 +12,7 @@ class HomeCoordinator: Coordinator {
     
     // MARK: - VARIÁVEIS
     var rootViewController: UINavigationController
-    var viewModel = HomeViewModel()
+    var viewModel: HomeViewModel
     
     var childCoordinators: [Coordinator] = []
     
@@ -26,7 +26,8 @@ class HomeCoordinator: Coordinator {
     }()
     
     // MARK: - INIT
-    init() {
+    init(viewModel: HomeViewModel) {
+        self.viewModel = viewModel
         self.rootViewController = UINavigationController()
     }
     
@@ -48,8 +49,8 @@ class HomeCoordinator: Coordinator {
     private func handleNavigation(_ navigation: NavigationCases) {
         // Inicia a navegação dependendo do botão selecionado na Home
         switch navigation {
-        case .counsciousnessExam:
-            startCounsciousnessExamCoordinator()
+        case .consciousnessExam:
+            startConsciousnessExamCoordinator()
             
         case .liturgicalCalendar:
             startLiturgicalCalendarCoordinator()
@@ -68,9 +69,9 @@ class HomeCoordinator: Coordinator {
         }
     }
     
-    private func startCounsciousnessExamCoordinator() {
-        let counsciousnessExamCoordinator = CounsciousnessExamCoordinator()
-        self.childCoordinators.append(counsciousnessExamCoordinator)
+    private func startConsciousnessExamCoordinator() {
+        let consciousnessExamCoordinator = ConsciousnessExamCoordinator()
+        self.childCoordinators.append(consciousnessExamCoordinator)
         
         let transition = CATransition()
         transition.duration = 0.3
@@ -82,10 +83,10 @@ class HomeCoordinator: Coordinator {
         
         self.rootViewController.view.layer.add(transition, forKey: kCATransition)
         
-        counsciousnessExamCoordinator.start()
+        consciousnessExamCoordinator.start()
         // Nesse caso, usamos o "pushViewController" pois a próxima rootViewController é uma UIViewController
         // Se fosse uma UINavigationController, usaríamos o "setViewControllers".
-        self.rootViewController.pushViewController(counsciousnessExamCoordinator.rootViewController, animated: false)
+        self.rootViewController.pushViewController(consciousnessExamCoordinator.rootViewController, animated: false)
     }
     
     private func startLiturgicalCalendarCoordinator() {

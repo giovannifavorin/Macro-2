@@ -11,7 +11,7 @@ import Combine
 class ConfessionCoordinator: Coordinator {
     
     var rootViewController: UINavigationController
-    var viewModel = ConfessionViewModel()
+    var viewModel: ConfessionViewModel
     
     lazy var confessionAuthViewController: ConfessionAuthViewController = {
         let vc = ConfessionAuthViewController(viewModel: viewModel)
@@ -20,7 +20,8 @@ class ConfessionCoordinator: Coordinator {
     
     var cancellables = Set<AnyCancellable>()
     
-    init() {
+    init(viewModel: ConfessionViewModel) {
+        self.viewModel = viewModel
         self.rootViewController = UINavigationController()
         self.rootViewController.navigationBar.isTranslucent = true
     }
