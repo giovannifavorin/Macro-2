@@ -16,7 +16,7 @@ class SinViewModel: ObservableObject {
     // Para exibir pecados salvos
     @Published var savedSins: [Sin] = []
     
-    private let sinDataManager = SinDataManager.shared
+    private let sinDataManager = DataManager.shared
     
     init() {
         loadCommandments()
@@ -91,7 +91,7 @@ class SinViewModel: ObservableObject {
     // Marca uma pergunta como pecado
     func markAsSin(question: String) {
         let sinDescription = question
-        if sinDataManager.createSin(isConfessed: false, sinDescription: sinDescription) != nil {
+        if sinDataManager.createSin(commandments: "primeiro", sinDescription: sinDescription) != nil {
             fetchSavedSins()
         }
     }
@@ -106,7 +106,7 @@ class SinViewModel: ObservableObject {
     
     // Busca os pecados já salvos
     func fetchSavedSins() {
-        savedSins = sinDataManager.fetchAllSins() ?? []
+//        savedSins = sinDataManager.fetchAllSins(for: ) ?? []
     }
 }
 

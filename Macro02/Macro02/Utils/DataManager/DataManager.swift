@@ -1,13 +1,13 @@
 import UIKit
 import CoreData
 
-class SinDataManager {
+class DataManager {
     
     // Singleton
-    static let shared = SinDataManager()
+    static let shared = DataManager()
     
     // Evitar a criação de múltiplas instâncias
-    private init() {}
+    private init() {}// MARK: - Validar se já foi preenchida a memoria base
 
     // MARK: - Persistent Container
     lazy var persistentContainer: NSPersistentContainer = {
@@ -20,8 +20,12 @@ class SinDataManager {
         return container
     }()
     
+    var context: NSManagedObjectContext {
+            return persistentContainer.viewContext
+    }
+    
     // Save context method
-    func saveContext() {
+    private func saveContext() {
         let context = persistentContainer.viewContext
         if context.hasChanges {
             do {
@@ -33,88 +37,105 @@ class SinDataManager {
         }
     }
     
-    var context: NSManagedObjectContext {
-        return persistentContainer.viewContext
+    // MARK: - CREATE
+    public func createConfession(date: Date, penance: String, exams: [ConscienceExam]) -> Confession? {
+        let newConfession = Confession(context: context)
+        newConfession.confessionDate = date
+        newConfession.penance = penance
+        newConfession.conscienceExams = NSSet(array: exams)
+        
+        saveContext()
+        return newConfession
     }
     
-    // MARK: - CREATE
-    func createSin(isConfessed: Bool, sinDescription: String) -> Sin? {
+    public func createConscienceExam(date: Date, sinsInExamination: [SinsInExamination]) -> ConscienceExam? {
+        let newExam = ConscienceExam(context: context)
+        newExam.examDate = date
+        newExam.sinsInExamination = NSSet(array: sinsInExamination)
+        
+        saveContext()
+        return newExam
+    }
+    
+    public func createSinsInExamination(isConfessed: Bool, recurrence: Int16, sins: [Sin]) -> SinsInExamination? {
+        let newSinsInExam = SinsInExamination(context: context)
+        newSinsInExam.isConfessed = isConfessed
+        newSinsInExam.recurrence = recurrence
+        newSinsInExam.sins = NSSet(array: sins)
+        
+        saveContext()
+        return newSinsInExam
+    }
+    
+    public func createSin(commandments: String, sinDescription: String) -> Sin? {
         let newSin = Sin(context: context)
-        newSin.isConfessed = isConfessed
+        newSin.commandments = commandments
         newSin.sinDescription = sinDescription
         
-        do {
-            try context.save()
-            return newSin
-        } catch {
-            print("Erro ao salvar novo pecado: \(error)")
-            return nil
-        }
+        saveContext()
+        return newSin
     }
     
     // MARK: - READ
-    func fetchAllSins() -> [Sin]? {
-        let request: NSFetchRequest<Sin> = Sin.fetchRequest()
+    public func fetchAllConfessions() -> [Confession]? {
+        let request: NSFetchRequest<Confession> = Confession.fetchRequest()
         
         do {
-            let sins = try context.fetch(request)
-            return sins
+            return try context.fetch(request)
         } catch {
-            print("Erro ao buscar pecados: \(error)")
+            print("Erro ao buscar confissões: \(error)")
             return nil
         }
     }
     
-    func fetchSinByDescription(_ description: String) -> Sin? {
-        let request: NSFetchRequest<Sin> = Sin.fetchRequest()
-        request.predicate = NSPredicate(format: "sinDescription == %@", description)
-        
-        do {
-            let result = try context.fetch(request)
-            return result.first
-        } catch {
-            print("Erro ao buscar pecado por descrição: \(error)")
-            return nil
-        }
+    public func fetchAllExams(for confession: Confession) -> [ConscienceExam]? {
+        return confession.conscienceExams?.allObjects as? [ConscienceExam]
+    }
+    
+    public func fetchAllSinsInExaminations(for exam: ConscienceExam) -> [SinsInExamination]? {
+        return exam.sinsInExamination?.allObjects as? [SinsInExamination]
+    }
+    
+    public func fetchAllSins(for sinsInExam: SinsInExamination) -> [Sin]? {
+        return sinsInExam.sins?.allObjects as? [Sin]
     }
     
     // MARK: - UPDATE
-    func updateSin(_ sin: Sin, isConfessed: Bool? = nil, sinDescription: String? = nil) {
-        if let isConfessed = isConfessed {
-            sin.isConfessed = isConfessed
-        }
+    public func updateConfession(_ confession: Confession, date: Date? = nil, penance: String? = nil) {
+        if let date = date { confession.confessionDate = date }
+        if let penance = penance { confession.penance = penance }
         
-        if let sinDescription = sinDescription {
-            sin.sinDescription = sinDescription
-        }
+        saveContext()
+    }
+    
+    public func updateSin(_ sin: Sin, commandments: String? = nil, sinDescription: String? = nil) {
+        if let commandments = commandments { sin.commandments = commandments }
+        if let sinDescription = sinDescription { sin.sinDescription = sinDescription }
         
-        do {
-            try context.save()
-        } catch {
-            print("Erro ao atualizar pecado: \(error)")
-        }
+        saveContext()
     }
     
     // MARK: - DELETE
-    func deleteSin(_ sin: Sin) {
+    public func deleteConfession(_ confession: Confession) {
+        context.delete(confession)
+        saveContext()
+    }
+    
+    public func deleteSin(_ sin: Sin) {
         context.delete(sin)
-        
-        do {
-            try context.save()
-        } catch {
-            print("Erro ao deletar pecado: \(error)")
-        }
+        saveContext()
     }
     
     // MARK: - DELETE ALL
-    func deleteAllSins() {
-        let request: NSFetchRequest<NSFetchRequestResult> = Sin.fetchRequest()
+    public func deleteAllConfessions() {
+        let request: NSFetchRequest<NSFetchRequestResult> = Confession.fetchRequest()
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: request)
         
         do {
             try context.execute(deleteRequest)
+            saveContext()
         } catch {
-            print("Erro ao deletar todos os pecados: \(error)")
+            print("Erro ao deletar todas as confissões: \(error)")// MARK: - Lapidar o tratamento de erros
         }
     }
 }
