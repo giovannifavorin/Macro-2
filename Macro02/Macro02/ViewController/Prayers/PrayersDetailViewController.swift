@@ -8,15 +8,20 @@
 import UIKit
 import SwiftUI
 
+// TODO: Ver o que fazer nessa viewController -- Navegação das orações -- entrar nas orações da categoria selecionada
 class PrayersDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    @ObservedObject var viewModel: PrayersViewModel
-    
+    var viewModel: PrayersViewModel
+    var category: PrayerCategory
     var tableView: UITableView!
-    var prayers: [Prayer]!
+    var prayers: [Prayer]
     
-    init(viewModel: PrayersViewModel) {
+    var coordinator: PrayersCoordinator?
+    
+    init(viewModel: PrayersViewModel, category: PrayerCategory) {
         self.viewModel = viewModel
+        self.category = category
+        self.prayers = category.prayers
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -27,9 +32,8 @@ class PrayersDetailViewController: UIViewController, UITableViewDelegate, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let selectedCategory = viewModel.selectedCategory {
-            self.prayers = selectedCategory.prayers
-        }
+        self.prayers = category.prayers
+        
         
 
         self.view.backgroundColor = .brown
@@ -43,31 +47,24 @@ class PrayersDetailViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if prayers != nil {
-            return prayers.count
-        } else {
-            return 1
-        }
+        return prayers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PrayersCell", for: indexPath)
         
-        if prayers != nil {
-            let prayer = prayers[indexPath.row]
-            
-            // Configura o texto e a imagem da célula
-            cell.textLabel?.text = prayer.title
-            
-            return cell
-        }
+        let prayer = prayers[indexPath.row]
+        
+        // Configura o texto e a imagem da célula
+        cell.textLabel?.text = prayer.title
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedPrayer = prayers[indexPath.row]
-        viewModel.selectedPrayer = selectedPrayer
+        if let coordinator = self.coordinator {
+            coordinator.navigateToFull(prayer: prayers[indexPath.row])
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

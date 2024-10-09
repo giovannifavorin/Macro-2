@@ -36,8 +36,8 @@ class HomeCoordinator: Coordinator {
     private func startConsciousnessExamCoordinator() {
         
         let consciousnessCoordinator = CounsciousnessExamCoordinator(viewModel: self.sinViewModel, navigationController: self.navigationController)
-        consciousnessCoordinator.start()
         
+        consciousnessCoordinator.start()
     }
     
     private func startLiturgicalCalendarCoordinator() {
@@ -54,10 +54,11 @@ class HomeCoordinator: Coordinator {
     
     private func startPrayersCoordinator() {
         
+        let prayersViewModel = PrayersViewModel()
+        let prayersCoordinator = PrayersCoordinator(viewModel: prayersViewModel, navigationController: self.navigationController)
         
-        
+        prayersCoordinator.start()
     }
-    
 }
 
 // Funções públicas -- Boa prática deixar separado na extension
