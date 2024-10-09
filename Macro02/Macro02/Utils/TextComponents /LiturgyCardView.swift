@@ -63,7 +63,7 @@ class LiturgyCardView: UIView {
         dayNameLabel.text = liturgia.dia
         dayNumberLabel.text = liturgia.data ?? "no dayNumberLabel"
         monthNameLabel.text = liturgia.data ?? "no monthNameLabel"
-        yearNumberLabel.text = "\(liturgia.data) / \(liturgia.data)"
+        yearNumberLabel.text = "\(liturgia.data ?? "liturgy data not found") / \(liturgia.data ?? "Litugy data not found")"
         self.dataLiturgia = liturgia.data ?? "no data"
         
         // Atualiza com base na dataLiturgia
