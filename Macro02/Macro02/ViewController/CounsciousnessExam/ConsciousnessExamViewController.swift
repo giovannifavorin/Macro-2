@@ -21,6 +21,7 @@ class ConsciousnessExamViewController: UIViewController, UITableViewDataSource, 
         title = "Exame de Consciência"
         
         setupTableView()
+        viewModel?.fetchSavedSins()
     }
     
     private func setupTableView() {
@@ -48,7 +49,7 @@ class ConsciousnessExamViewController: UIViewController, UITableViewDataSource, 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let viewModel = viewModel else { return 0 }
-        return viewModel.commandments[section].questions.count
+        return viewModel.commandments[section].sins.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -61,7 +62,7 @@ class ConsciousnessExamViewController: UIViewController, UITableViewDataSource, 
         if let viewModel = viewModel {
             let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionCell", for: indexPath)
             let commandment = viewModel.commandments[indexPath.section]
-            let question = commandment.questions[indexPath.row]
+            let question = commandment.sins[indexPath.row]
             
             // Verifica se a pergunta já está marcada como pecado para alterar a cor da célula
             if viewModel.isQuestionMarkedAsSin(question: question) {
@@ -84,7 +85,7 @@ class ConsciousnessExamViewController: UIViewController, UITableViewDataSource, 
         
         if let viewModel = viewModel {
             let commandment = viewModel.commandments[indexPath.section]
-            let question = commandment.questions[indexPath.row]
+            let question = commandment.sins[indexPath.row]
             
             // Verifica se a pergunta já está marcada como pecado
             if viewModel.isQuestionMarkedAsSin(question: question) {

@@ -51,7 +51,7 @@
 		F1F6BE6E2C9B62E900F4C7FF /* DailyLiturgyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F6BE6D2C9B62E900F4C7FF /* DailyLiturgyCoordinator.swift */; };
 		F1F6BE702C9B630200F4C7FF /* BibleCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F6BE6F2C9B62FE00F4C7FF /* BibleCoordinator.swift */; };
 		F1F6BE722C9B631C00F4C7FF /* AboutCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F6BE712C9B631600F4C7FF /* AboutCoordinator.swift */; };
-		F1F6BE742C9B644C00F4C7FF /* ConfessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F6BE732C9B644500F4C7FF /* ConfessionViewModel.swift */; };
+		F1F6BE742C9B644C00F4C7FF /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F6BE732C9B644500F4C7FF /* AuthManager.swift */; };
 		F1F6BE762C9B647700F4C7FF /* DailyLiturgyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F6BE752C9B646F00F4C7FF /* DailyLiturgyViewModel.swift */; };
 		F1F6BE782C9B648C00F4C7FF /* BibleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F6BE772C9B648700F4C7FF /* BibleViewModel.swift */; };
 		F1F6BE7A2C9B649C00F4C7FF /* AboutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F6BE792C9B649600F4C7FF /* AboutViewModel.swift */; };
@@ -123,7 +123,7 @@
 		F1F6BE6D2C9B62E900F4C7FF /* DailyLiturgyCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyLiturgyCoordinator.swift; sourceTree = "<group>"; };
 		F1F6BE6F2C9B62FE00F4C7FF /* BibleCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BibleCoordinator.swift; sourceTree = "<group>"; };
 		F1F6BE712C9B631600F4C7FF /* AboutCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutCoordinator.swift; sourceTree = "<group>"; };
-		F1F6BE732C9B644500F4C7FF /* ConfessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfessionViewModel.swift; sourceTree = "<group>"; };
+		F1F6BE732C9B644500F4C7FF /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		F1F6BE752C9B646F00F4C7FF /* DailyLiturgyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyLiturgyViewModel.swift; sourceTree = "<group>"; };
 		F1F6BE772C9B648700F4C7FF /* BibleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BibleViewModel.swift; sourceTree = "<group>"; };
 		F1F6BE792C9B649600F4C7FF /* AboutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewModel.swift; sourceTree = "<group>"; };
@@ -199,7 +199,7 @@
 				F1EDE14F2C9CD120007A6403 /* ConsciousnessExamViewModel.swift */,
 				B8783F832C99F43300661148 /* ViewModel.swift */,
 				F1F6BE5B2C9A0C4100F4C7FF /* HomeViewModel.swift */,
-				F1F6BE732C9B644500F4C7FF /* ConfessionViewModel.swift */,
+				F1F6BE732C9B644500F4C7FF /* AuthManager.swift */,
 				F1F6BE752C9B646F00F4C7FF /* DailyLiturgyViewModel.swift */,
 				F1F6BE772C9B648700F4C7FF /* BibleViewModel.swift */,
 				F1F6BE792C9B649600F4C7FF /* AboutViewModel.swift */,
@@ -500,7 +500,7 @@
 				F1F6BE652C9B5DE600F4C7FF /* BibleViewController.swift in Sources */,
 				F1EDE14A2C9CD045007A6403 /* CounsciousnessExamCoordinator.swift in Sources */,
 				B8783F902C99F63A00661148 /* DataModel.xcdatamodeld in Sources */,
-				F1F6BE742C9B644C00F4C7FF /* ConfessionViewModel.swift in Sources */,
+				F1F6BE742C9B644C00F4C7FF /* AuthManager.swift in Sources */,
 				AFC683B72CA48B7900389DD8 /* LiturgiaDiariaAPI.swift in Sources */,
 				B82FA28D2CAF254800FF5269 /* Prayers.JSON in Sources */,
 				F1F6BE782C9B648C00F4C7FF /* BibleViewModel.swift in Sources */,

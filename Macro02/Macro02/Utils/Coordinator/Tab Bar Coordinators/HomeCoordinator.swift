@@ -54,6 +54,7 @@ class HomeCoordinator: Coordinator {
     
     private func startPrayersCoordinator() {
         
+        // Instância única da ViewModel
         let prayersViewModel = PrayersViewModel()
         let prayersCoordinator = PrayersCoordinator(viewModel: prayersViewModel, navigationController: self.navigationController)
         

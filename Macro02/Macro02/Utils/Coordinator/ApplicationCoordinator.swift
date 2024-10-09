@@ -40,7 +40,7 @@ class ApplicationCoordinator: Coordinator {
         bibleCoordinator.start()
         
         // Confession Coordinator
-        let confessionCoordinator = ConfessionCoordinator()
+        let confessionCoordinator = ConfessionCoordinator(viewModel: sinViewModel)
         confessionCoordinator.start()
         
         // Daily Liturgy Coordinator

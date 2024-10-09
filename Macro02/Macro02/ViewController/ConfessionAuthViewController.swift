@@ -9,8 +9,19 @@ import UIKit
 
 class ConfessionAuthViewController: UIViewController {
     
-    var viewModel: ConfessionViewModel?
+    var authManager: AuthManager 
+    var viewModel: SinViewModel
     var coordinator: ConfessionCoordinator?
+    
+    init(authManager: AuthManager, viewModel: SinViewModel) {
+        self.authManager = authManager
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     var label: UILabel!
     var button: UIButton!
@@ -47,9 +58,7 @@ class ConfessionAuthViewController: UIViewController {
     }
     
     @objc private func didTapButton() {
-        if let viewModel = viewModel {
-            viewModel.authenticateWithFaceID()
-        }
+        authManager.authenticateWithFaceID()
     }
 
 }

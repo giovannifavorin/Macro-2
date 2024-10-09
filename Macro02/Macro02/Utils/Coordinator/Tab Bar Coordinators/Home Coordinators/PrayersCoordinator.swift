@@ -38,13 +38,20 @@ class PrayersCoordinator: Coordinator {
     
 }
 
+// MARK: -  Extensão para as funções públicas, além da "start()"
 extension PrayersCoordinator {
     
     // Navegação da Categoria para a Detalhes
     public func navigateToDetail(category: PrayerCategory) {
         
+        // DEBUG
+        print("Navegando para orações da categoria: \(category.name)")
+        
         let detailVC = PrayersDetailViewController(viewModel: viewModel, category: category)
         detailVC.coordinator = self
+        
+        // Alterando a view atual da viewModel para a que será navegada
+        viewModel.view = detailVC
         
         self.navigationController.pushViewController(detailVC, animated: true)
     }
@@ -52,23 +59,31 @@ extension PrayersCoordinator {
     // Navegação dos Detalhes para a Oração completa
     public func navigateToFull(prayer: Prayer) {
         
+        // DEBUG
+        print("Navegando para oração: \(prayer.title)")
+        
         let fullPrayerVC = FullPrayerViewController(viewModel: viewModel, prayer: prayer)
         fullPrayerVC.coordinator = self
+        
+        // Alterando a view atual da viewModel para a que será navegada
+        viewModel.view = fullPrayerVC
         
         self.navigationController.pushViewController(fullPrayerVC, animated: true)
     }
     
+    // Navegação para abertura da modal de opções na view da Oração completa
     public func navigateToModal(vc: FullPrayerViewController) {
+        
+        // DEBUG
+        print("Abrindo modal")
         
         let modalVC = PrayerOptionsModalViewController(viewModel: viewModel)
         modalVC.modalPresentationStyle = .pageSheet
+        
+        // Alterando a view atual da viewModel para a que será navegada
+        viewModel.view = modalVC
+        
         vc.present(modalVC, animated: true)
     }
     
-}
-
-enum PrayersNavCases {
-    case detail
-    case full
-    case modal
 }
