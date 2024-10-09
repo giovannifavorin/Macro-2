@@ -7,8 +7,11 @@
 
 import Foundation
 import Combine
+import UIKit
 
 class SinViewModel: ObservableObject {
+    
+    weak var view: UIViewController?
     
     // Lista de perguntas divididas por mandamento
     @Published var commandments: [Commandment] = []

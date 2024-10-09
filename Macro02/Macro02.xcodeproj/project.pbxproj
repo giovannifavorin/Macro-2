@@ -40,7 +40,6 @@
 		F1EDE15E2C9E4105007A6403 /* PrayerOptionsModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EDE15D2C9E4105007A6403 /* PrayerOptionsModalViewController.swift */; };
 		F1EDE1632CA20543007A6403 /* MyConfessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EDE1622CA20543007A6403 /* MyConfessionViewController.swift */; };
 		F1F6BE432C99FDD700F4C7FF /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F6BE422C99FDCC00F4C7FF /* ApplicationCoordinator.swift */; };
-		F1F6BE452C99FF2100F4C7FF /* MainTabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F6BE442C99FF2100F4C7FF /* MainTabBarCoordinator.swift */; };
 		F1F6BE572C9A078B00F4C7FF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F6BE562C9A078200F4C7FF /* HomeViewController.swift */; };
 		F1F6BE5C2C9A0C4100F4C7FF /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F6BE5B2C9A0C4100F4C7FF /* HomeViewModel.swift */; };
 		F1F6BE612C9B5AC200F4C7FF /* ConfessionAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F6BE602C9B5AC200F4C7FF /* ConfessionAuthViewController.swift */; };
@@ -113,7 +112,6 @@
 		F1EDE15D2C9E4105007A6403 /* PrayerOptionsModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerOptionsModalViewController.swift; sourceTree = "<group>"; };
 		F1EDE1622CA20543007A6403 /* MyConfessionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyConfessionViewController.swift; sourceTree = "<group>"; };
 		F1F6BE422C99FDCC00F4C7FF /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
-		F1F6BE442C99FF2100F4C7FF /* MainTabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarCoordinator.swift; sourceTree = "<group>"; };
 		F1F6BE562C9A078200F4C7FF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F1F6BE5B2C9A0C4100F4C7FF /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		F1F6BE602C9B5AC200F4C7FF /* ConfessionAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfessionAuthViewController.swift; sourceTree = "<group>"; };
@@ -236,7 +234,7 @@
 			children = (
 				B8783F812C99F32E00661148 /* CoordinatorProtocol.swift */,
 				F1F6BE422C99FDCC00F4C7FF /* ApplicationCoordinator.swift */,
-				F1F6BE462C99FFB100F4C7FF /* Main Tab Bar */,
+				F1F6BE682C9B60B700F4C7FF /* Tab Bar Coordinators */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -327,15 +325,6 @@
 				F1EDE14D2C9CD0D2007A6403 /* ConsciousnessExamViewController.swift */,
 			);
 			path = CounsciousnessExam;
-			sourceTree = "<group>";
-		};
-		F1F6BE462C99FFB100F4C7FF /* Main Tab Bar */ = {
-			isa = PBXGroup;
-			children = (
-				F1F6BE442C99FF2100F4C7FF /* MainTabBarCoordinator.swift */,
-				F1F6BE682C9B60B700F4C7FF /* Tab Bar Coordinators */,
-			);
-			path = "Main Tab Bar";
 			sourceTree = "<group>";
 		};
 		F1F6BE682C9B60B700F4C7FF /* Tab Bar Coordinators */ = {
@@ -502,7 +491,6 @@
 				AFC862112CA32A7100167ECB /* ButtonComponent.swift in Sources */,
 				AF9C0FDD2CA1E5F3008187EC /* TextComponent.swift in Sources */,
 				F1F6BE672C9B5E0500F4C7FF /* AboutViewController.swift in Sources */,
-				F1F6BE452C99FF2100F4C7FF /* MainTabBarCoordinator.swift in Sources */,
 				F1F6BE762C9B647700F4C7FF /* DailyLiturgyViewModel.swift in Sources */,
 				B84DEA082CA48F900010CEBC /* SinViewModel.swift in Sources */,
 				F1EDE15E2C9E4105007A6403 /* PrayerOptionsModalViewController.swift in Sources */,
@@ -700,7 +688,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = TLC9D54B8V;
+				DEVELOPMENT_TEAM = 99Z68J6579;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Macro02/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
@@ -734,7 +722,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = TLC9D54B8V;
+				DEVELOPMENT_TEAM = 99Z68J6579;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Macro02/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";

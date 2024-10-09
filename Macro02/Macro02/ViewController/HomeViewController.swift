@@ -10,19 +10,11 @@ import SwiftUI
 
 class HomeViewController: UIViewController {
     
-    @ObservedObject var viewModel: HomeViewModel
     var counsExamBt: UIButton!
     var prayersBt: UIButton!
     var label: TextComponent!
     
-    init(viewModel: HomeViewModel) {
-        self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    var coordinator: HomeCoordinator?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,11 +59,12 @@ class HomeViewController: UIViewController {
     }
     
     // MARK: - Navigation #selector methods
+    // Um método de navegação para cada caso na tela Home
     @objc private func navigateToCounsciousnessExam() {
-        self.viewModel.selectedNavigation = .counsciousnessExam
+        self.coordinator?.handleNavigation(.counsciousnessExam)
     }
     
     @objc private func navigateToPrayers() {
-        self.viewModel.selectedNavigation = .prayers
+        self.coordinator?.handleNavigation(.prayers)
     }
 }

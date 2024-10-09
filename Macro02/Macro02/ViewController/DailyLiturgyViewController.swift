@@ -11,14 +11,15 @@ class DailyLiturgyViewController: UIViewController {
     let scrollView = UIScrollView()
     
     let model = LiturgyCardView() /// Model com a configuração de dynamic types
-    let viewModel: DailyLiturgyViewModel!
+    var viewModel: DailyLiturgyViewModel?
     let apiManager = APIManager()
 
     var currentLiturgia: Liturgia?
     
+    var coordinator: DailyLiturgyCoordinator?
+    
     // MARK: - Initializer
-    init(viewModel: DailyLiturgyViewModel) {
-        self.viewModel = viewModel
+    init() {
         super.init(nibName: nil, bundle: nil)
         self.setupView()
         fetchLiturgyData()

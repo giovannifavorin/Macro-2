@@ -11,7 +11,9 @@ import SwiftUI
 class ConsciousnessExamViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     private let tableView = UITableView()
-    private let viewModel = SinViewModel()
+    
+    var viewModel: SinViewModel?
+    var coordinator: CounsciousnessExamCoordinator?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,48 +42,60 @@ class ConsciousnessExamViewController: UIViewController, UITableViewDataSource, 
     // MARK: - UITableViewDataSource
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        guard let viewModel = viewModel else { return 0 }
         return viewModel.commandments.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let viewModel = viewModel else { return 0 }
         return viewModel.commandments[section].questions.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard let viewModel = viewModel else { return "" }
         return viewModel.commandments[section].title
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionCell", for: indexPath)
-        let commandment = viewModel.commandments[indexPath.section]
-        let question = commandment.questions[indexPath.row]
         
-        // Verifica se a pergunta já está marcada como pecado para alterar a cor da célula
-        if viewModel.isQuestionMarkedAsSin(question: question) {
-            cell.textLabel?.textColor = .systemRed // Pergunta marcada como pecado
+        if let viewModel = viewModel {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionCell", for: indexPath)
+            let commandment = viewModel.commandments[indexPath.section]
+            let question = commandment.questions[indexPath.row]
+            
+            // Verifica se a pergunta já está marcada como pecado para alterar a cor da célula
+            if viewModel.isQuestionMarkedAsSin(question: question) {
+                cell.textLabel?.textColor = .systemRed // Pergunta marcada como pecado
+            } else {
+                cell.textLabel?.textColor = .systemGray // Pergunta normal
+            }
+            
+            cell.textLabel?.text = question
+            return cell
         } else {
-            cell.textLabel?.textColor = .systemGray // Pergunta normal
+            return UITableViewCell()
         }
         
-        cell.textLabel?.text = question
-        return cell
     }
     
     // MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let commandment = viewModel.commandments[indexPath.section]
-        let question = commandment.questions[indexPath.row]
         
-        // Verifica se a pergunta já está marcada como pecado
-        if viewModel.isQuestionMarkedAsSin(question: question) {
-            // Desmarcar como pecado
-            viewModel.unmarkAsSin(question: question)
-            showAlert(title: "Pecado Desmarcado", message: "Você desmarcou: \(question)")
-        } else {
-            // Marcar como pecado
-            viewModel.markAsSin(question: question)
-            showAlert(title: "Pecado Marcado", message: "Você marcou: \(question)")
+        if let viewModel = viewModel {
+            let commandment = viewModel.commandments[indexPath.section]
+            let question = commandment.questions[indexPath.row]
+            
+            // Verifica se a pergunta já está marcada como pecado
+            if viewModel.isQuestionMarkedAsSin(question: question) {
+                // Desmarcar como pecado
+                viewModel.unmarkAsSin(question: question)
+                showAlert(title: "Pecado Desmarcado", message: "Você desmarcou: \(question)")
+            } else {
+                // Marcar como pecado
+                viewModel.markAsSin(question: question)
+                showAlert(title: "Pecado Marcado", message: "Você marcou: \(question)")
+            }
         }
         
         // Atualiza a célula para refletir a mudança
