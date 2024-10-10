@@ -7,6 +7,7 @@
 
 import UIKit
 
+// Coordinator responsável pelo fluxo do Exame de Consciência
 class CounsciousnessExamCoordinator: Coordinator {
     
     var viewModel: SinViewModel
@@ -35,4 +36,12 @@ class CounsciousnessExamCoordinator: Coordinator {
         self.navigationController.pushViewController(self.rootViewController, animated: true)
         
     }
+}
+
+extension CounsciousnessExamCoordinator {
+    
+    public func handleNavigation() {
+        
+    }
+    
 }

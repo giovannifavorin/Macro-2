@@ -28,7 +28,11 @@ class ApplicationCoordinator: Coordinator {
         // Basicamente faz as coisas aparecerem, tem que ter
         self.window.makeKeyAndVisible()
         
+        
+        
         let sinViewModel = SinViewModel() // Instância única da SinViewModel
+        
+        
         
         // MARK: Instância dos Coordinators que irão compor a Tab Bar
         // Home Coordinator
@@ -85,6 +89,8 @@ class ApplicationCoordinator: Coordinator {
                          title: "About",
                          imageName: "line.3.horizontal.circle",
                          selectedImageName: "line.3.horizontal.circle.fill")
+        
+        
         
         // Define as navigations na Tab Bar
         self.rootViewController.viewControllers = [dailyLiturgyNavController, confessionNavController, homeNavController, bibleNavController, aboutNavController]

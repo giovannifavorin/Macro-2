@@ -43,6 +43,7 @@ class ConfessionCoordinator: Coordinator {
     }
     
     private func handleNavigation(_ bool: Bool) {
+        // Se foi autorizado com sucesso, navega para a tela da Minhas confissões
         if bool {
             
             let myConfessionVC = MyConfessionViewController(authManager: authManager, viewModel: viewModel)

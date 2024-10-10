@@ -8,6 +8,7 @@
 import UIKit
 import Combine
 
+// Coordinator responsável pela navegação a partir da Home View
 class HomeCoordinator: Coordinator {
     
     // MARK: - VARIÁVEIS
@@ -34,6 +35,9 @@ class HomeCoordinator: Coordinator {
     
     // MARK: - FUNÇÕES AUXILIARES
     private func startConsciousnessExamCoordinator() {
+        
+        // Aqui, inicia-se o Coordinator responsável pela navegação selecionada
+        // Por sua vez, o Coordinator navega para a primeira tela do fluxo no método "start()"
         
         let consciousnessCoordinator = CounsciousnessExamCoordinator(viewModel: self.sinViewModel, navigationController: self.navigationController)
         
@@ -65,6 +69,7 @@ class HomeCoordinator: Coordinator {
 // Funções públicas -- Boa prática deixar separado na extension
 extension HomeCoordinator {
     
+    // Função chamada na HomeViewController que lida com a navegação, dependendo do botão apertado
     public func handleNavigation(_ navigation: NavigationCases) {
         // Inicia a navegação dependendo do botão selecionado na Home
         switch navigation {
