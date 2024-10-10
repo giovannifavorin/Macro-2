@@ -11,7 +11,9 @@ import SwiftUI
 class ConsciousnessExamViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
     
     private let tableView = UITableView()
-    private let viewModel = SinViewModel()
+    
+    var viewModel: SinViewModel?
+    var coordinator: ConsciousnessExamCoordinator?
     
     //Text Input para adicionar Pecado
     private let sinTextField: UITextField = {
@@ -38,6 +40,7 @@ class ConsciousnessExamViewController: UIViewController, UITableViewDataSource, 
         title = "Conciousness Exam"
         
         setupTableView()
+        viewModel?.fetchSavedSins()
         setupTableFooterView()
         
         setupKeyboard()
@@ -63,48 +66,60 @@ class ConsciousnessExamViewController: UIViewController, UITableViewDataSource, 
     // MARK: - UITableViewDataSource
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        guard let viewModel = viewModel else { return 0 }
         return viewModel.commandments.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.commandments[section].questions.count
+        guard let viewModel = viewModel else { return 0 }
+        return viewModel.commandments[section].sins.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard let viewModel = viewModel else { return "" }
         return viewModel.commandments[section].title
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionCell", for: indexPath)
-        let commandment = viewModel.commandments[indexPath.section]
-        let question = commandment.questions[indexPath.row]
         
-        // Verifica se a pergunta já está marcada como pecado para alterar a cor da célula
-        if viewModel.isQuestionMarkedAsSin(question: question) {
-            cell.textLabel?.textColor = .systemRed // Pergunta marcada como pecado
+        if let viewModel = viewModel {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionCell", for: indexPath)
+            let commandment = viewModel.commandments[indexPath.section]
+            let question = commandment.sins[indexPath.row]
+            
+            // Verifica se a pergunta já está marcada como pecado para alterar a cor da célula
+            if viewModel.isQuestionMarkedAsSin(question: question) {
+                cell.textLabel?.textColor = .systemRed // Pergunta marcada como pecado
+            } else {
+                cell.textLabel?.textColor = .systemGray // Pergunta normal
+            }
+            
+            cell.textLabel?.text = question
+            return cell
         } else {
-            cell.textLabel?.textColor = .systemGray // Pergunta normal
+            return UITableViewCell()
         }
         
-        cell.textLabel?.text = question
-        return cell
     }
     
     // MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let commandment = viewModel.commandments[indexPath.section]
-        let question = commandment.questions[indexPath.row]
         
-        // Verifica se a pergunta já está marcada como pecado
-        if viewModel.isQuestionMarkedAsSin(question: question) {
-            // Desmarcar como pecado
-            viewModel.unmarkAsSin(question: question)
-            showAlert(title: "Pecado Desmarcado", message: "Você desmarcou: \(question)")
-        } else {
-            // Marcar como pecado
-            viewModel.markAsSin(question: question)
-            showAlert(title: "Pecado Marcado", message: "Você marcou: \(question)")
+        if let viewModel = viewModel {
+            let commandment = viewModel.commandments[indexPath.section]
+            let question = commandment.sins[indexPath.row]
+            
+            // Verifica se a pergunta já está marcada como pecado
+            if viewModel.isQuestionMarkedAsSin(question: question) {
+                // Desmarcar como pecado
+                viewModel.unmarkAsSin(question: question)
+                showAlert(title: "Pecado Desmarcado", message: "Você desmarcou: \(question)")
+            } else {
+                // Marcar como pecado
+                viewModel.markAsSin(question: question)
+                showAlert(title: "Pecado Marcado", message: "Você marcou: \(question)")
+            }
         }
         
         // Atualiza a célula para refletir a mudança
@@ -184,6 +199,9 @@ class ConsciousnessExamViewController: UIViewController, UITableViewDataSource, 
     }
     
     private func chooseExistingCategory(for newSin: String) {
+        
+        guard let viewModel = viewModel else { return }
+        
         // Criar um UIAlertController com as opções de categorias
         let cateforyAlertController = UIAlertController(title: "Choose a category", message: "You can choose a category to add a sin or create a new one", preferredStyle: .alert)
         
@@ -200,13 +218,16 @@ class ConsciousnessExamViewController: UIViewController, UITableViewDataSource, 
     
     //Func to add sin to existing category
     private func addSinToCategory(_ newSin: String, categoryTitle: String) {
+        
+        guard let viewModel = viewModel else { return }
+        
         //Encontrar a categoria correspondente para add o pecado
         if let index = viewModel.commandments.firstIndex(where: {$0.title == categoryTitle}) {
-            viewModel.commandments[index].questions.append(newSin)
+            viewModel.commandments[index].sins.append(newSin)
             tableView.reloadData()
             
             //Scroll to the last line added
-            let lastIndexPath = IndexPath(row: viewModel.commandments[index].questions.count - 1, section: index)
+            let lastIndexPath = IndexPath(row: viewModel.commandments[index].sins.count - 1, section: index)
             tableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
         }
     }
@@ -232,15 +253,17 @@ class ConsciousnessExamViewController: UIViewController, UITableViewDataSource, 
                 return // Se os campos estiverem vazios, não faz nada
             }
             
+            guard let viewModel = self?.viewModel else { return }
+            
             //cria yma nova categoria com o pecado adicionado
-            let newCommandment = Commandment(title: title, description: description, questions: [newSin])
-            self?.viewModel.commandments.append(newCommandment)
+            let newCommandment = Commandment(title: title, description: description, sins: [newSin])
+            viewModel.commandments.append(newCommandment)
             
             //reload table
             self?.tableView.reloadData()
             
             //Scroll para a nova seção (última seção)
-            let lastSectionIndex = (self?.viewModel.commandments.count ?? 1) - 1
+            let lastSectionIndex = (viewModel.commandments.count) - 1
             let lastIndexPath = IndexPath(row: 0, section: lastSectionIndex)
             self?.tableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
         }))

@@ -40,20 +40,19 @@
 		B8F8DD182C8B8EB600D24769 /* Macro02Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F8DD172C8B8EB600D24769 /* Macro02Tests.swift */; };
 		B8F8DD222C8B8EB600D24769 /* Macro02UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F8DD212C8B8EB600D24769 /* Macro02UITests.swift */; };
 		B8F8DD242C8B8EB600D24769 /* Macro02UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F8DD232C8B8EB600D24769 /* Macro02UITestsLaunchTests.swift */; };
-		F1EDE14A2C9CD045007A6403 /* CounsciousnessExamCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EDE1492C9CD043007A6403 /* CounsciousnessExamCoordinator.swift */; };
+		F1EDE14A2C9CD045007A6403 /* ConsciousnessExamCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EDE1492C9CD043007A6403 /* ConsciousnessExamCoordinator.swift */; };
 		F1EDE1502C9CD126007A6403 /* ConsciousnessExamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EDE14F2C9CD120007A6403 /* ConsciousnessExamViewModel.swift */; };
 		F1EDE1522C9DFE9B007A6403 /* PrayersCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EDE1512C9DFE95007A6403 /* PrayersCoordinator.swift */; };
 		F1EDE1562C9E04CB007A6403 /* PrayersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EDE1552C9E04CB007A6403 /* PrayersViewModel.swift */; };
 		F1EDE15A2C9E156A007A6403 /* Prayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EDE1592C9E156A007A6403 /* Prayer.swift */; };
 		F1F6BE432C99FDD700F4C7FF /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F6BE422C99FDCC00F4C7FF /* ApplicationCoordinator.swift */; };
-		F1F6BE452C99FF2100F4C7FF /* MainTabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F6BE442C99FF2100F4C7FF /* MainTabBarCoordinator.swift */; };
 		F1F6BE5C2C9A0C4100F4C7FF /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F6BE5B2C9A0C4100F4C7FF /* HomeViewModel.swift */; };
 		F1F6BE6A2C9B60DD00F4C7FF /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F6BE692C9B60D500F4C7FF /* HomeCoordinator.swift */; };
 		F1F6BE6C2C9B62B200F4C7FF /* ConfessionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F6BE6B2C9B627B00F4C7FF /* ConfessionCoordinator.swift */; };
 		F1F6BE6E2C9B62E900F4C7FF /* DailyLiturgyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F6BE6D2C9B62E900F4C7FF /* DailyLiturgyCoordinator.swift */; };
 		F1F6BE702C9B630200F4C7FF /* BibleCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F6BE6F2C9B62FE00F4C7FF /* BibleCoordinator.swift */; };
 		F1F6BE722C9B631C00F4C7FF /* AboutCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F6BE712C9B631600F4C7FF /* AboutCoordinator.swift */; };
-		F1F6BE742C9B644C00F4C7FF /* ConfessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F6BE732C9B644500F4C7FF /* ConfessionViewModel.swift */; };
+		F1F6BE742C9B644C00F4C7FF /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F6BE732C9B644500F4C7FF /* AuthManager.swift */; };
 		F1F6BE762C9B647700F4C7FF /* DailyLiturgyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F6BE752C9B646F00F4C7FF /* DailyLiturgyViewModel.swift */; };
 		F1F6BE782C9B648C00F4C7FF /* BibleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F6BE772C9B648700F4C7FF /* BibleViewModel.swift */; };
 		F1F6BE7A2C9B649C00F4C7FF /* AboutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F6BE792C9B649600F4C7FF /* AboutViewModel.swift */; };
@@ -114,20 +113,19 @@
 		B8F8DD1D2C8B8EB600D24769 /* Macro02UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Macro02UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8F8DD212C8B8EB600D24769 /* Macro02UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macro02UITests.swift; sourceTree = "<group>"; };
 		B8F8DD232C8B8EB600D24769 /* Macro02UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macro02UITestsLaunchTests.swift; sourceTree = "<group>"; };
-		F1EDE1492C9CD043007A6403 /* CounsciousnessExamCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounsciousnessExamCoordinator.swift; sourceTree = "<group>"; };
+		F1EDE1492C9CD043007A6403 /* ConsciousnessExamCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousnessExamCoordinator.swift; sourceTree = "<group>"; };
 		F1EDE14F2C9CD120007A6403 /* ConsciousnessExamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousnessExamViewModel.swift; sourceTree = "<group>"; };
 		F1EDE1512C9DFE95007A6403 /* PrayersCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayersCoordinator.swift; sourceTree = "<group>"; };
 		F1EDE1552C9E04CB007A6403 /* PrayersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayersViewModel.swift; sourceTree = "<group>"; };
 		F1EDE1592C9E156A007A6403 /* Prayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prayer.swift; sourceTree = "<group>"; };
 		F1F6BE422C99FDCC00F4C7FF /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
-		F1F6BE442C99FF2100F4C7FF /* MainTabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarCoordinator.swift; sourceTree = "<group>"; };
 		F1F6BE5B2C9A0C4100F4C7FF /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		F1F6BE692C9B60D500F4C7FF /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		F1F6BE6B2C9B627B00F4C7FF /* ConfessionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfessionCoordinator.swift; sourceTree = "<group>"; };
 		F1F6BE6D2C9B62E900F4C7FF /* DailyLiturgyCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyLiturgyCoordinator.swift; sourceTree = "<group>"; };
 		F1F6BE6F2C9B62FE00F4C7FF /* BibleCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BibleCoordinator.swift; sourceTree = "<group>"; };
 		F1F6BE712C9B631600F4C7FF /* AboutCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutCoordinator.swift; sourceTree = "<group>"; };
-		F1F6BE732C9B644500F4C7FF /* ConfessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfessionViewModel.swift; sourceTree = "<group>"; };
+		F1F6BE732C9B644500F4C7FF /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		F1F6BE752C9B646F00F4C7FF /* DailyLiturgyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyLiturgyViewModel.swift; sourceTree = "<group>"; };
 		F1F6BE772C9B648700F4C7FF /* BibleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BibleViewModel.swift; sourceTree = "<group>"; };
 		F1F6BE792C9B649600F4C7FF /* AboutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewModel.swift; sourceTree = "<group>"; };
@@ -223,7 +221,7 @@
 				F1EDE14F2C9CD120007A6403 /* ConsciousnessExamViewModel.swift */,
 				B8783F832C99F43300661148 /* ViewModel.swift */,
 				F1F6BE5B2C9A0C4100F4C7FF /* HomeViewModel.swift */,
-				F1F6BE732C9B644500F4C7FF /* ConfessionViewModel.swift */,
+				F1F6BE732C9B644500F4C7FF /* AuthManager.swift */,
 				F1F6BE752C9B646F00F4C7FF /* DailyLiturgyViewModel.swift */,
 				F1F6BE772C9B648700F4C7FF /* BibleViewModel.swift */,
 				F1F6BE792C9B649600F4C7FF /* AboutViewModel.swift */,
@@ -258,7 +256,7 @@
 			children = (
 				B8783F812C99F32E00661148 /* CoordinatorProtocol.swift */,
 				F1F6BE422C99FDCC00F4C7FF /* ApplicationCoordinator.swift */,
-				F1F6BE462C99FFB100F4C7FF /* Main Tab Bar */,
+				F1F6BE682C9B60B700F4C7FF /* Tab Bar Coordinators */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -327,18 +325,9 @@
 			isa = PBXGroup;
 			children = (
 				F1EDE1512C9DFE95007A6403 /* PrayersCoordinator.swift */,
-				F1EDE1492C9CD043007A6403 /* CounsciousnessExamCoordinator.swift */,
+				F1EDE1492C9CD043007A6403 /* ConsciousnessExamCoordinator.swift */,
 			);
 			path = "Home Coordinators";
-			sourceTree = "<group>";
-		};
-		F1F6BE462C99FFB100F4C7FF /* Main Tab Bar */ = {
-			isa = PBXGroup;
-			children = (
-				F1F6BE442C99FF2100F4C7FF /* MainTabBarCoordinator.swift */,
-				F1F6BE682C9B60B700F4C7FF /* Tab Bar Coordinators */,
-			);
-			path = "Main Tab Bar";
 			sourceTree = "<group>";
 		};
 		F1F6BE682C9B60B700F4C7FF /* Tab Bar Coordinators */ = {
@@ -501,16 +490,15 @@
 				AF9C0FDC2CA1E5F3008187EC /* setDynamicFont.swift in Sources */,
 				AFC862112CA32A7100167ECB /* ButtonComponent.swift in Sources */,
 				AF9C0FDD2CA1E5F3008187EC /* TextComponent.swift in Sources */,
-				F1F6BE452C99FF2100F4C7FF /* MainTabBarCoordinator.swift in Sources */,
 				F1F6BE762C9B647700F4C7FF /* DailyLiturgyViewModel.swift in Sources */,
 				B84DEA082CA48F900010CEBC /* SinViewModel.swift in Sources */,
 				F1EDE1502C9CD126007A6403 /* ConsciousnessExamViewModel.swift in Sources */,
 				F1F6BE7A2C9B649C00F4C7FF /* AboutViewModel.swift in Sources */,
 				F1F6BE432C99FDD700F4C7FF /* ApplicationCoordinator.swift in Sources */,
-				F1EDE14A2C9CD045007A6403 /* CounsciousnessExamCoordinator.swift in Sources */,
+				F1EDE14A2C9CD045007A6403 /* ConsciousnessExamCoordinator.swift in Sources */,
 				AFF9FA3D2CAF13D1004AB04F /* LiturgyCardView.swift in Sources */,
 				B8783F902C99F63A00661148 /* DataModel.xcdatamodeld in Sources */,
-				F1F6BE742C9B644C00F4C7FF /* ConfessionViewModel.swift in Sources */,
+				F1F6BE742C9B644C00F4C7FF /* AuthManager.swift in Sources */,
 				AFC683B72CA48B7900389DD8 /* LiturgiaDiariaAPI.swift in Sources */,
 				F1F6BE782C9B648C00F4C7FF /* BibleViewModel.swift in Sources */,
 				B8F8DD032C8B8EB500D24769 /* SceneDelegate.swift in Sources */,
@@ -704,7 +692,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5Y55P884H9;
+				DEVELOPMENT_TEAM = 99Z68J6579;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Macro02/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
@@ -738,7 +726,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5Y55P884H9;
+				DEVELOPMENT_TEAM = 99Z68J6579;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Macro02/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";

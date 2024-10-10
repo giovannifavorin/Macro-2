@@ -10,19 +10,11 @@ import SwiftUI
 
 class HomeViewController: UIViewController {
     
-    @ObservedObject var viewModel: HomeViewModel
     var counsExamBt: UIButton!
     var prayersBt: UIButton!
     var label: TextComponent!
     
-    init(viewModel: HomeViewModel) {
-        self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    var coordinator: HomeCoordinator?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,9 +31,9 @@ class HomeViewController: UIViewController {
     
     private func setupBts() {
         counsExamBt = UIButton()
-        counsExamBt.setTitle("Counsciousness Exam", for: .normal)
+        counsExamBt.setTitle("Consciousness Exam", for: .normal)
         counsExamBt.setTitleColor(.systemBlue, for: .normal)
-        counsExamBt.addTarget(self, action: #selector(navigateToCounsciousnessExam), for: .touchUpInside)
+        counsExamBt.addTarget(self, action: #selector(navigateToConsciousnessExam), for: .touchUpInside)
         counsExamBt.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(counsExamBt)
         
@@ -67,11 +59,12 @@ class HomeViewController: UIViewController {
     }
     
     // MARK: - Navigation #selector methods
-    @objc private func navigateToCounsciousnessExam() {
-        self.viewModel.selectedNavigation = .consciousnessExam
+    // Um método de navegação para cada caso na tela Home
+    @objc private func navigateToConsciousnessExam() {
+        self.coordinator?.handleNavigation(.consciousnessExam)
     }
     
     @objc private func navigateToPrayers() {
-        self.viewModel.selectedNavigation = .prayers
+        self.coordinator?.handleNavigation(.prayers)
     }
 }

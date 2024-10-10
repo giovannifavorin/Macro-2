@@ -16,6 +16,8 @@ class PrayersViewModel: ObservableObject {
     @Published var selectedPrayer: Prayer?
     @Published var fontSize: CGFloat = 17.0
     
+    weak var view: UIViewController?
+    
     // TO-DO: Popular arrays com chamadas de API
     private let prayers = [Prayer(id: UUID(),
                       title: "Prayer 1 - Category 1 Title",
