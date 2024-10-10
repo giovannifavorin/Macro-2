@@ -1,5 +1,5 @@
 //
-//  CounsciousnessExamCoordinator.swift
+//  ConsciousnessExamCoordinator.swift
 //  Macro02
 //
 //  Created by Victor Dantas on 19/09/24.
@@ -8,7 +8,7 @@
 import UIKit
 
 // Coordinator responsável pelo fluxo do Exame de Consciência
-class CounsciousnessExamCoordinator: Coordinator {
+class ConsciousnessExamCoordinator: Coordinator {
     
     var viewModel: SinViewModel
     var rootViewController: ConsciousnessExamViewController
@@ -38,7 +38,7 @@ class CounsciousnessExamCoordinator: Coordinator {
     }
 }
 
-extension CounsciousnessExamCoordinator {
+extension ConsciousnessExamCoordinator {
     
     public func handleNavigation() {
         

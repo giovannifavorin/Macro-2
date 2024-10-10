@@ -39,7 +39,7 @@ class HomeCoordinator: Coordinator {
         // Aqui, inicia-se o Coordinator responsável pela navegação selecionada
         // Por sua vez, o Coordinator navega para a primeira tela do fluxo no método "start()"
         
-        let consciousnessCoordinator = CounsciousnessExamCoordinator(viewModel: self.sinViewModel, navigationController: self.navigationController)
+        let consciousnessCoordinator = ConsciousnessExamCoordinator(viewModel: self.sinViewModel, navigationController: self.navigationController)
         
         consciousnessCoordinator.start()
     }
@@ -73,7 +73,7 @@ extension HomeCoordinator {
     public func handleNavigation(_ navigation: NavigationCases) {
         // Inicia a navegação dependendo do botão selecionado na Home
         switch navigation {
-        case .counsciousnessExam:
+        case .consciousnessExam:
             startConsciousnessExamCoordinator()
             
         case .liturgicalCalendar:

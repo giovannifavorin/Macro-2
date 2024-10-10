@@ -13,7 +13,7 @@ class ConsciousnessExamViewController: UIViewController, UITableViewDataSource, 
     private let tableView = UITableView()
     
     var viewModel: SinViewModel?
-    var coordinator: CounsciousnessExamCoordinator?
+    var coordinator: ConsciousnessExamCoordinator?
     
     //Text Input para adicionar Pecado
     private let sinTextField: UITextField = {
@@ -199,6 +199,9 @@ class ConsciousnessExamViewController: UIViewController, UITableViewDataSource, 
     }
     
     private func chooseExistingCategory(for newSin: String) {
+        
+        guard let viewModel = viewModel else { return }
+        
         // Criar um UIAlertController com as opções de categorias
         let cateforyAlertController = UIAlertController(title: "Choose a category", message: "You can choose a category to add a sin or create a new one", preferredStyle: .alert)
         
@@ -215,13 +218,16 @@ class ConsciousnessExamViewController: UIViewController, UITableViewDataSource, 
     
     //Func to add sin to existing category
     private func addSinToCategory(_ newSin: String, categoryTitle: String) {
+        
+        guard let viewModel = viewModel else { return }
+        
         //Encontrar a categoria correspondente para add o pecado
         if let index = viewModel.commandments.firstIndex(where: {$0.title == categoryTitle}) {
-            viewModel.commandments[index].questions.append(newSin)
+            viewModel.commandments[index].sins.append(newSin)
             tableView.reloadData()
             
             //Scroll to the last line added
-            let lastIndexPath = IndexPath(row: viewModel.commandments[index].questions.count - 1, section: index)
+            let lastIndexPath = IndexPath(row: viewModel.commandments[index].sins.count - 1, section: index)
             tableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
         }
     }
@@ -247,15 +253,17 @@ class ConsciousnessExamViewController: UIViewController, UITableViewDataSource, 
                 return // Se os campos estiverem vazios, não faz nada
             }
             
+            guard let viewModel = self?.viewModel else { return }
+            
             //cria yma nova categoria com o pecado adicionado
-            let newCommandment = Commandment(title: title, description: description, questions: [newSin])
-            self?.viewModel.commandments.append(newCommandment)
+            let newCommandment = Commandment(title: title, description: description, sins: [newSin])
+            viewModel.commandments.append(newCommandment)
             
             //reload table
             self?.tableView.reloadData()
             
             //Scroll para a nova seção (última seção)
-            let lastSectionIndex = (self?.viewModel.commandments.count ?? 1) - 1
+            let lastSectionIndex = (viewModel.commandments.count) - 1
             let lastIndexPath = IndexPath(row: 0, section: lastSectionIndex)
             self?.tableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
         }))

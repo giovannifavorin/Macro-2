@@ -31,9 +31,9 @@ class HomeViewController: UIViewController {
     
     private func setupBts() {
         counsExamBt = UIButton()
-        counsExamBt.setTitle("Counsciousness Exam", for: .normal)
+        counsExamBt.setTitle("Consciousness Exam", for: .normal)
         counsExamBt.setTitleColor(.systemBlue, for: .normal)
-        counsExamBt.addTarget(self, action: #selector(navigateToCounsciousnessExam), for: .touchUpInside)
+        counsExamBt.addTarget(self, action: #selector(navigateToConsciousnessExam), for: .touchUpInside)
         counsExamBt.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(counsExamBt)
         
@@ -60,8 +60,8 @@ class HomeViewController: UIViewController {
     
     // MARK: - Navigation #selector methods
     // Um método de navegação para cada caso na tela Home
-    @objc private func navigateToCounsciousnessExam() {
-        self.coordinator?.handleNavigation(.counsciousnessExam)
+    @objc private func navigateToConsciousnessExam() {
+        self.coordinator?.handleNavigation(.consciousnessExam)
     }
     
     @objc private func navigateToPrayers() {
