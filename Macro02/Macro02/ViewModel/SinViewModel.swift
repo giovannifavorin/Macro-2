@@ -91,7 +91,7 @@ class SinViewModel: ObservableObject {
     // Marca uma pergunta como pecado
     func markAsSin(question: String) {
         let sinDescription = question
-        if sinDataManager.createSin(commandments: "primeiro", sinDescription: sinDescription) != nil {
+        if sinDataManager.createSin(commandments: "primeiro", commandmentDescription: "pecado", sinDescription: sinDescription) != nil {
             fetchSavedSins()
         }
     }

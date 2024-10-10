@@ -15,16 +15,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
+            
+            //MARK: Fluxo normal
             //            let applicationCoordinator = ApplicationCoordinator(window: window)
             //
             //            self.applicationCoordinator = applicationCoordinator
             //            self.applicationCoordinator?.start()
-            let testViewController = TestViewController()
             
+            //MARK: Fluxo para testar o DataManager
+            let testViewController = TestViewController()
             // Defina o rootViewController da janela
             window.rootViewController = testViewController
             window.makeKeyAndVisible()
-            
             self.window = window
         }
     }

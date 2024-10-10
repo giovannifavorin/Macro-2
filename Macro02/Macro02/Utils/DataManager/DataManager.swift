@@ -1,4 +1,3 @@
-import UIKit
 import CoreData
 
 class DataManager {
@@ -7,8 +6,10 @@ class DataManager {
     static let shared = DataManager()
     
     // Evitar a criação de múltiplas instâncias
-    private init() {}// MARK: - Validar se já foi preenchida a memoria base
-
+    private init() {
+        preloadDataIfNeeded()
+    }
+    
     // MARK: - Persistent Container
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "DataModel")
@@ -21,7 +22,83 @@ class DataManager {
     }()
     
     var context: NSManagedObjectContext {
-            return persistentContainer.viewContext
+        return persistentContainer.viewContext
+    }
+    
+    private func preloadDataIfNeeded() {
+        if fetchAllSins()?.isEmpty ?? true {
+            insertMockSins()
+        }
+    }
+    
+    private func insertMockSins() {
+        let commandments = [
+            ("Décimo Mandamento", "Não cobiçar as coisas alheias", [
+                "Fui invejoso?",
+                "Fui orgulhoso ou egoísta em meus pensamentos e ações?",
+                "Cedi à preguiça?",
+                "Preferi a comodidade ao invés de servir aos demais?",
+                "Trabalhei de forma desordenada, ocupando tempo e energias que deveria dedicar à minha família e amigos?"
+            ]),
+            ("Nono Mandamento", "Não desejar a mulher do próximo", [
+                "Desejei ou tive pensamentos impuros com pessoas que não são meu cônjuge (implícito nas questões de pureza e castidade)?"
+            ]),
+            ("Oitavo Mandamento", "Não levantar falso testemunho", [
+                "Falei mal dos outros, transformando o assunto em fofoca?",
+                "Disse mentiras?",
+                "Não fui honesto ou diligente no meu trabalho?"
+            ]),
+            ("Sétimo Mandamento", "Não furtar", [
+                "Roubei ou enganei alguém no trabalho?",
+                "Gastei dinheiro com o meu conforto e luxo pessoal, esquecendo minhas responsabilidades para com os outros e para com a Igreja?"
+            ]),
+            ("Sexto Mandamento", "Não pecar contra a castidade", [
+                "Assisti vídeos ou acessei sites pornográficos?",
+                "Cometi atos impuros, sozinho ou com outras pessoas?",
+                "Estou morando com alguém como se fosse casado, sem que o seja?",
+                "Se sou casado, não procuro amar o meu cônjuge mais do que a qualquer outra pessoa?",
+                "Não coloco meu casamento em primeiro lugar?",
+                "Não tenho uma atitude aberta para novos filhos?"
+            ]),
+            ("Quinto Mandamento", "Não matar", [
+                "Fui violento nas palavras ou ações com outros?",
+                "Tive ódio ou juízos críticos, em pensamentos ou ações?",
+                "Olhei os outros com desprezo?",
+                "Colaborei ou encorajei alguém a fazer um aborto, destruir embriões humanos, praticar a eutanásia ou outro meio de acabar com a vida?",
+                "Abusei de bebidas alcoólicas?",
+                "Usei drogas?"
+            ]),
+            ("Quarto Mandamento", "Honrar pai e mãe", [
+                "Não honrei os meus pais ou figuras de autoridade?"
+            ]),
+            ("Terceiro Mandamento", "Guardar domingos e festas de guarda", [
+                "Faltei voluntariamente à Missa nos domingos ou dias de preceito?",
+                "Recebi a Comunhão sem agradecimento ou sem a devida reverência?"
+            ]),
+            ("Segundo Mandamento", "Não tomar o nome de Deus em vão", [
+                "Disse o nome de Deus em vão?"
+            ]),
+            ("Primeiro Mandamento", "Amar a Deus sobre todas as coisas", [
+                "Neguei ou abandonei a minha fé?",
+                "Tenho a preocupação de conhecê-la melhor?",
+                "Recusei-me a defender a minha fé ou fiquei envergonhado dela?",
+                "Existe algum aspecto da minha fé que eu ainda não aceito?",
+                "Pratiquei o espiritismo ou coloquei a minha confiança em adivinhos ou horóscopos?",
+                "Manifestei falta de respeito pelas pessoas, lugares ou coisas santas?",
+                "Descuidei da minha responsabilidade de aproximar os outros de Deus, com o meu exemplo e a minha palavra?"
+            ])
+        ]
+        
+        for (title, description, questions) in commandments {
+            for question in questions {
+                let sin = Sin(context: context)
+                sin.commandments = title
+                sin.commandmentDescription = description
+                sin.sinDescription = question
+            }
+        }
+        
+        saveContext()
     }
     
     // Save context method
@@ -67,9 +144,10 @@ class DataManager {
         return newSinsInExam
     }
     
-    public func createSin(commandments: String, sinDescription: String) -> Sin? {
+    public func createSin(commandments: String, commandmentDescription: String, sinDescription: String) -> Sin? {
         let newSin = Sin(context: context)
         newSin.commandments = commandments
+        newSin.commandmentDescription = commandmentDescription
         newSin.sinDescription = sinDescription
         
         saveContext()
@@ -96,9 +174,17 @@ class DataManager {
         return exam.sinsInExamination?.allObjects as? [SinsInExamination]
     }
     
-    public func fetchAllSins(for sinsInExam: SinsInExamination) -> [Sin]? {
-        return sinsInExam.sins?.allObjects as? [Sin]
+    func fetchAllSins() -> [Sin]? {
+        let fetchRequest: NSFetchRequest<Sin> = Sin.fetchRequest()
+        
+        do {
+            return try context.fetch(fetchRequest)
+        } catch {
+            print("Failed to fetch sins: \(error)")
+            return nil
+        }
     }
+    
     
     // MARK: - UPDATE
     public func updateConfession(_ confession: Confession, date: Date? = nil, penance: String? = nil) {
@@ -108,8 +194,9 @@ class DataManager {
         saveContext()
     }
     
-    public func updateSin(_ sin: Sin, commandments: String? = nil, sinDescription: String? = nil) {
+    public func updateSin(_ sin: Sin, commandments: String? = nil, commandmentDescription: String? = nil, sinDescription: String? = nil) {
         if let commandments = commandments { sin.commandments = commandments }
+        if let commandmentDescription = commandmentDescription { sin.commandmentDescription = commandmentDescription }
         if let sinDescription = sinDescription { sin.sinDescription = sinDescription }
         
         saveContext()

@@ -11,6 +11,7 @@
         <relationship name="sinsInExamination" toMany="YES" deletionRule="Nullify" destinationEntity="SinsInExamination" inverseName="conscienceExam" inverseEntity="SinsInExamination"/>
     </entity>
     <entity name="Sin" representedClassName="Sin" syncable="YES" codeGenerationType="class">
+        <attribute name="commandmentDescription" optional="YES" attributeType="String"/>
         <attribute name="commandments" optional="YES" attributeType="String"/>
         <attribute name="sinDescription" optional="YES" attributeType="String"/>
         <relationship name="sinsInexamination" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SinsInExamination" inverseName="sins" inverseEntity="SinsInExamination"/>
