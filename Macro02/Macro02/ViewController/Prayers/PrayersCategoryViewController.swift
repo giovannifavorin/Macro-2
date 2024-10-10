@@ -5,29 +5,23 @@
 //  Created by Victor Dantas on 20/09/24.
 //
 
-import UIKit
+//import UIKit
 import SwiftUI
 
 class PrayersCategoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    @ObservedObject var viewModel: PrayersViewModel
+    var viewModel: PrayersViewModel?
+    var coordinator: PrayersCoordinator?
     
     var tableView: UITableView!
     var prayerCategories: [PrayerCategory]!
     
-    init(viewModel: PrayersViewModel) {
-        self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.prayerCategories = viewModel.prayerCategories
+        if let viewModel = viewModel {
+            self.prayerCategories = viewModel.prayerCategories
+        }
 
         self.view.backgroundColor = .red
         
@@ -54,11 +48,14 @@ class PrayersCategoryViewController: UIViewController, UITableViewDelegate, UITa
         return cell
     }
     
+    // Chamada quando uma Row é selecionada
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedCategory = prayerCategories[indexPath.row]
-        viewModel.selectedCategory = selectedCategory
+        
+        self.coordinator?.navigateToDetail(category: prayerCategories[indexPath.row])
+        
     }
     
+    // Altura da linha
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
     }

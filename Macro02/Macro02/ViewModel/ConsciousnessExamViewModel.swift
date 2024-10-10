@@ -1,5 +1,5 @@
 //
-//  CounsciousnessExamViewModel.swift
+//  ConsciousnessExamViewModel.swift
 //  Macro02
 //
 //  Created by Victor Dantas on 19/09/24.

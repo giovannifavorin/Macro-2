@@ -8,7 +8,7 @@
 import SwiftUI
 import LocalAuthentication
 
-class ConfessionViewModel: ObservableObject {
+class AuthManager: ObservableObject {
     
     @Published var isSuccessfullyAuthorized: Bool = false
     

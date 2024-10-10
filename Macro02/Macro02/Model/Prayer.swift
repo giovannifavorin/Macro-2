@@ -7,13 +7,13 @@
 
 import UIKit
 
-struct Prayer {
+struct Prayer: Identifiable {
     var id: UUID
     var title: String
     var content: String
 }
 
-struct PrayerCategory {
+struct PrayerCategory: Identifiable {
     var id: UUID
     var name: String
     var image: UIImage

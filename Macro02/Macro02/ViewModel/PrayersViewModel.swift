@@ -16,6 +16,8 @@ class PrayersViewModel: ObservableObject {
     @Published var selectedPrayer: Prayer?
     @Published var fontSize: CGFloat = 17.0
     
+    weak var view: UIViewController?
+    
     // TO-DO: Popular arrays com chamadas de API
     private let prayers = [Prayer(id: UUID(),
                       title: "Prayer 1 - Category 1 Title",
@@ -48,19 +50,14 @@ class PrayersViewModel: ObservableObject {
         // Posteriormente, popular puxando uma API
         self.prayerCategories = [PrayerCategory(id: UUID(),
                                                 name: "Category 1",
-                                                image: UIImage(systemName: "book")!,
+                                                image: UIImage(systemName: "book") ?? UIImage(named: "defaultImage")!,
                                                 prayers: self.prayers),
                                  
                                  PrayerCategory(id: UUID(),
                                                 name: "Category 2",
-                                                image: UIImage(systemName: "book.fill")!,
+                                                image: UIImage(systemName: "book") ?? UIImage(named: "defaultImage")!,
                                                 prayers: self.prayers2)
         
         ]
-        
-        
-        
     }
-    
 }
-
