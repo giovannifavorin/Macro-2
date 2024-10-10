@@ -17,17 +17,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let window = UIWindow(windowScene: windowScene)
             
             //MARK: Fluxo normal
-            //            let applicationCoordinator = ApplicationCoordinator(window: window)
-            //
-            //            self.applicationCoordinator = applicationCoordinator
-            //            self.applicationCoordinator?.start()
+            let applicationCoordinator = ApplicationCoordinator(window: window)
+            
+            self.applicationCoordinator = applicationCoordinator
+            self.applicationCoordinator?.start()
             
             //MARK: Fluxo para testar o DataManager
-            let testViewController = TestViewController()
-            // Defina o rootViewController da janela
-            window.rootViewController = testViewController
-            window.makeKeyAndVisible()
-            self.window = window
+            //            let testViewController = TestViewController()
+            //            // Defina o rootViewController da janela
+            //            window.rootViewController = testViewController
+            //            window.makeKeyAndVisible()
+            //            self.window = window
         }
     }
     
