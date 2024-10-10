@@ -5,7 +5,7 @@
 //  Created by Victor Dantas on 20/09/24.
 //
 
-import UIKit
+//import UIKit
 import SwiftUI
 
 class PrayersCategoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
