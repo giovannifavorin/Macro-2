@@ -9,62 +9,83 @@ import UIKit
 import SwiftUI
 
 class HomeViewController: UIViewController {
-    
-    var counsExamBt: UIButton!
-    var prayersBt: UIButton!
-    var label: TextComponent!
-    
+
+    var homeView: HomeView!
     var coordinator: HomeCoordinator?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = .white
-        label = TextComponent("HOME VIEW")
-        label.font = UIFont.setCustomFont(.titulo1)
         
-        view.addSubview(label)
+        homeView = HomeView(frame: self.view.bounds)
+        homeView.configureButtonTargets(self, consciousnessSelector: #selector(navigateToConsciousnessExam), prayersSelector: #selector(navigateToPrayers))
         
-        setupBts()
-        constraints()
+        self.view.addSubview(homeView)
     }
     
-    private func setupBts() {
-        counsExamBt = UIButton()
-        counsExamBt.setTitle("Consciousness Exam", for: .normal)
-        counsExamBt.setTitleColor(.systemBlue, for: .normal)
-        counsExamBt.addTarget(self, action: #selector(navigateToConsciousnessExam), for: .touchUpInside)
-        counsExamBt.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(counsExamBt)
-        
-        prayersBt = UIButton()
-        prayersBt.setTitle("Prayers", for: .normal)
-        prayersBt.setTitleColor(.systemBlue, for: .normal)
-        prayersBt.addTarget(self, action: #selector(navigateToPrayers), for: .touchUpInside)
-        prayersBt.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(prayersBt)
-    }
-    
-    private func constraints() {
-        NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            
-            counsExamBt.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            counsExamBt.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 16),
-            
-            prayersBt.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            prayersBt.topAnchor.constraint(equalTo: counsExamBt.bottomAnchor, constant: 8)
-        ])
-    }
-    
-    // MARK: - Navigation #selector methods
-    // Um método de navegação para cada caso na tela Home
     @objc private func navigateToConsciousnessExam() {
         self.coordinator?.handleNavigation(.consciousnessExam)
     }
     
     @objc private func navigateToPrayers() {
         self.coordinator?.handleNavigation(.prayers)
+    }
+}
+
+class HomeView: UIView {
+    
+    var counsExamBt: UIButton!
+    var prayersBt: UIButton!
+    var label: TextComponent!
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.backgroundColor = .white
+        
+        setupLabel()
+        setupBts()
+        setupConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupLabel() {
+        label = TextComponent("HOME VIEW")
+        label.font = UIFont.setCustomFont(.titulo1)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(label)
+    }
+    
+    private func setupBts() {
+        counsExamBt = UIButton()
+        counsExamBt.setTitle("Consciousness Exam", for: .normal)
+        counsExamBt.setTitleColor(.systemBlue, for: .normal)
+        counsExamBt.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(counsExamBt)
+        
+        prayersBt = UIButton()
+        prayersBt.setTitle("Prayers", for: .normal)
+        prayersBt.setTitleColor(.systemBlue, for: .normal)
+        prayersBt.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(prayersBt)
+    }
+    
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            label.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            
+            counsExamBt.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            counsExamBt.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 16),
+            
+            prayersBt.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            prayersBt.topAnchor.constraint(equalTo: counsExamBt.bottomAnchor, constant: 8)
+        ])
+    }
+    
+    func configureButtonTargets(_ target: Any, consciousnessSelector: Selector, prayersSelector: Selector) {
+        counsExamBt.addTarget(target, action: consciousnessSelector, for: .touchUpInside)
+        prayersBt.addTarget(target, action: prayersSelector, for: .touchUpInside)
     }
 }
