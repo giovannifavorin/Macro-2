@@ -16,22 +16,9 @@ class ConsciousnessExamViewController: UIViewController, UITableViewDataSource, 
     var coordinator: ConsciousnessExamCoordinator?
     
     //Text Input para adicionar Pecado
-    private let sinTextField: UITextField = {
-        let textInput = UITextField()
-        textInput.placeholder = "Anotate your sins here."
-        textInput.borderStyle = .roundedRect
-        return textInput
-    }()
     
     //Botao para Submeter o Texto
-    private let sinSubmitButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("+", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .blue
-        button.layer.cornerRadius = 10
-        return button
-    }()
+    
     
     
     override func viewDidLoad() {
