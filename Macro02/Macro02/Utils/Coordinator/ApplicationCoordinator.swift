@@ -22,15 +22,14 @@ class ApplicationCoordinator: Coordinator {
         // DEBUG
         print("Application Coordinator --- STARTED")
         
+        // UserDefaults para monitorar se o usuário já viu ou não o Onboarding
         let hasSeenOnboarding = UserDefaults.standard.bool(forKey: "hasSeenOnboarding")
         
+        
         if hasSeenOnboarding {
-            
-            startMainTabFlow()
-            
+            self.startMainTabFlow()
         } else {
-            
-            startOnboardingFlow()
+            self.startOnboardingFlow()
         }
         
         
