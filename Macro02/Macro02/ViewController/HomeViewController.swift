@@ -33,8 +33,8 @@ class HomeViewController: UIViewController {
 
 class HomeView: UIView {
     
-    var counsExamBt: UIButton!
-    var prayersBt: UIButton!
+    var counsExamBt: ButtonComponent!
+    var prayersBt: ButtonComponent!
     var label: TextComponent!
     
     override init(frame: CGRect) {
@@ -58,16 +58,12 @@ class HomeView: UIView {
     }
     
     private func setupBts() {
-        counsExamBt = UIButton()
-        counsExamBt.setTitle("Consciousness Exam", for: .normal)
+        counsExamBt = ButtonComponent("Counsciousness Exam")
         counsExamBt.setTitleColor(.systemBlue, for: .normal)
-        counsExamBt.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(counsExamBt)
         
-        prayersBt = UIButton()
-        prayersBt.setTitle("Prayers", for: .normal)
+        prayersBt = ButtonComponent("Prayers")
         prayersBt.setTitleColor(.systemBlue, for: .normal)
-        prayersBt.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(prayersBt)
     }
     
