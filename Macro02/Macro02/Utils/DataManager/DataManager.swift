@@ -26,7 +26,7 @@ class DataManager {
     }
     
     private func preloadDataIfNeeded() {
-        if fetchAllSins()?.isEmpty ?? true {
+        if fetchAllSins().isEmpty {
             insertMockSins()
         }
     }
@@ -155,35 +155,36 @@ class DataManager {
     }
     
     // MARK: - READ
-    public func fetchAllConfessions() -> [Confession]? {
+    public func fetchAllConfessions() -> [Confession] {
         let request: NSFetchRequest<Confession> = Confession.fetchRequest()
         
         do {
             return try context.fetch(request)
         } catch {
             print("Erro ao buscar confissões: \(error)")
-            return nil
+            return []
         }
     }
-    
-    public func fetchAllExams(for confession: Confession) -> [ConscienceExam]? {
-        return confession.conscienceExams?.allObjects as? [ConscienceExam]
+
+    public func fetchAllExams(for confession: Confession) -> [ConscienceExam] {
+        return confession.conscienceExams?.allObjects as? [ConscienceExam] ?? []
     }
-    
-    public func fetchAllSinsInExaminations(for exam: ConscienceExam) -> [SinsInExamination]? {
-        return exam.sinsInExamination?.allObjects as? [SinsInExamination]
+
+    public func fetchAllSinsInExaminations(for exam: ConscienceExam) -> [SinsInExamination] {
+        return exam.sinsInExamination?.allObjects as? [SinsInExamination] ?? []
     }
-    
-    func fetchAllSins() -> [Sin]? {
+
+    public func fetchAllSins() -> [Sin] {
         let fetchRequest: NSFetchRequest<Sin> = Sin.fetchRequest()
         
         do {
             return try context.fetch(fetchRequest)
         } catch {
             print("Failed to fetch sins: \(error)")
-            return nil
+            return []
         }
     }
+
     
     
     // MARK: - UPDATE

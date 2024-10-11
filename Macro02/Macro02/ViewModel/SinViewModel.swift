@@ -1,120 +1,92 @@
-//
-//  SinViewModel.swift
-//  Macro02
-//
-//  Created by Giovanni Favorin de Melo on 25/09/24.
-//
-
-import Foundation
-import Combine
 import UIKit
 
 class SinViewModel: ObservableObject {
     
     weak var view: UIViewController?
     
-    // Lista de perguntas divididas por mandamento
-    @Published var commandments: [Commandment] = []
-    
-    // Para exibir pecados salvos
     @Published var savedSins: [Sin] = []
+    @Published var committedSins: [SinsInExamination] = []
     
     private let sinDataManager = DataManager.shared
     
     init() {
-        loadCommandments()
         fetchSavedSins()
+        fetchCommittedSins()
     }
     
-    // Carrega os mandamentos e as perguntas relacionadas
-    func loadCommandments() {
-        commandments = [
-            Commandment(title: "Décimo Mandamento", description: "Não cobiçar as coisas alheias", sins: [
-                "Fui invejoso.",
-                "Fui orgulhoso ou egoísta em meus pensamentos e ações.",
-                "Cedi à preguiça.",
-                "Preferi a comodidade ao invés de servir aos demais.",
-                "Trabalhei de forma desordenada, ocupando tempo e energias que deveria dedicar à minha família e amigos."
-            ]),
-            Commandment(title: "Nono Mandamento", description: "Não desejar a mulher do próximo", sins: [
-                "Desejei ou tive pensamentos impuros com pessoas que não são meu cônjuge (implícito nas questões de pureza e castidade)."
-            ]),
-            Commandment(title: "Oitavo Mandamento", description: "Não levantar falso testemunho", sins: [
-                "Falei mal dos outros, transformando o assunto em fofoca.",
-                "Disse mentiras.",
-                "Não fui honesto ou diligente no meu trabalho."
-            ]),
-            Commandment(title: "Sétimo Mandamento", description: "Não furtar", sins: [
-                "Roubei ou enganei alguém no trabalho.",
-                "Gastei dinheiro com o meu conforto e luxo pessoal, esquecendo minhas responsabilidades para com os outros e para com a Igreja."
-            ]),
-            Commandment(title: "Sexto Mandamento", description: "Não pecar contra a castidade", sins: [
-                "Assisti vídeos ou acessei sites pornográficos.",
-                "Cometi atos impuros, sozinho ou com outras pessoas.",
-                "Estou morando com alguém como se fosse casado, sem que o seja.",
-                "Se sou casado, não procuro amar o meu cônjuge mais do que a qualquer outra pessoa.",
-                "Não coloco meu casamento em primeiro lugar.",
-                "Não tenho uma atitude aberta para novos filhos."
-            ]),
-            Commandment(title: "Quinto Mandamento", description: "Não matar", sins: [
-                "Fui violento nas palavras ou ações com outros.",
-                "Tive ódio ou juízos críticos, em pensamentos ou ações.",
-                "Olhei os outros com desprezo.",
-                "Colaborei ou encorajei alguém a fazer um aborto, destruir embriões humanos, praticar a eutanásia ou outro meio de acabar com a vida.",
-                "Abusei de bebidas alcoólicas.",
-                "Usei drogas."
-            ]),
-            Commandment(title: "Quarto Mandamento", description: "Honrar pai e mãe", sins: [
-                "Não honrei os meus pais ou figuras de autoridade."
-            ]),
-            Commandment(title: "Terceiro Mandamento", description: "Guardar domingos e festas de guarda", sins: [
-                "Faltei voluntariamente à Missa nos domingos ou dias de preceito.",
-                "Recebi a Comunhão sem agradecimento ou sem a devida reverência."
-            ]),
-            Commandment(title: "Segundo Mandamento", description: "Não tomar o nome de Deus em vão", sins: [
-                "Disse o nome de Deus em vão."
-            ]),
-            Commandment(title: "Primeiro Mandamento", description: "Amar a Deus sobre todas as coisas", sins: [
-                "Neguei ou abandonei a minha fé.",
-                "Tenho a preocupação de conhecê-la melhor.",
-                "Recusei-me a defender a minha fé ou fiquei envergonhado dela.",
-                "Existe algum aspecto da minha fé que eu ainda não aceito.",
-                "Pratiquei o espiritismo ou coloquei a minha confiança em adivinhos ou horóscopos.",
-                "Manifestei falta de respeito pelas pessoas, lugares ou coisas santas.",
-                "Descuidei da minha responsabilidade de aproximar os outros de Deus, com o meu exemplo e a minha palavra.",
-            ])
-        ]
-    }
-    
-    // Verifica se uma pergunta já foi marcada como pecado
     func isQuestionMarkedAsSin(question: String) -> Bool {
-        return savedSins.contains { $0.sinDescription == question }
+        return committedSins.contains { $0.sins?.contains { ($0 as? Sin)?.sinDescription == question } ?? false }
     }
     
-    // Marca uma pergunta como pecado
-    func markAsSin(question: String) {
-        let sinDescription = question
-        if sinDataManager.createSin(commandments: "primeiro", commandmentDescription: "pecado", sinDescription: sinDescription) != nil {
-            fetchSavedSins()
+    func markAsSin(commandments: String, commandmentDescription: String, question: String, for exam: ConscienceExam) {
+        if let sin = sinDataManager.createSin(commandments: commandments, commandmentDescription: commandmentDescription, sinDescription: question) {
+            if let sinsInExamination = sinDataManager.createSinsInExamination(isConfessed: false, recurrence: 1, sins: [sin]) {
+                exam.addToSinsInExamination(sinsInExamination)
+                // saveContext será chamado internamente
+            }
+            fetchCommittedSins() // Atualiza a lista de pecados cometidos
         }
     }
     
-    // Desmarca uma pergunta como pecado
-    func unmarkAsSin(question: String) {
-        if let sin = savedSins.first(where: { $0.sinDescription == question }) {
-            sinDataManager.deleteSin(sin)
-            fetchSavedSins()
+    func unmarkAsSin(question: String, for exam: ConscienceExam) {
+        // Usamos guard para evitar unwraps inseguros
+        guard let sin = committedSins.flatMap({ $0.sins?.allObjects as? [Sin] ?? [] }).first(where: { $0.sinDescription == question }) else {
+            return // Se não encontrar o pecado, não faz nada
+        }
+        
+        // Remove a entidade SinsInExamination associada ao pecado
+        for sinsInExamination in committedSins {
+            if let sins = sinsInExamination.sins as? Set<Sin>, sins.contains(sin) {
+                exam.removeFromSinsInExamination(sinsInExamination)
+                sinDataManager.deleteSin(sin) // A exclusão do pecado chama saveContext internamente
+                fetchCommittedSins() // Atualiza a lista de pecados cometidos
+                break // Não precisamos continuar a busca após encontrar e remover
+            }
         }
     }
     
-    // Busca os pecados já salvos
     func fetchSavedSins() {
-//        savedSins = sinDataManager.fetchAllSins(for: ) ?? []
+        savedSins = sinDataManager.fetchAllSins()
     }
-}
-
-struct Commandment {
-    let title: String
-    let description: String
-    var sins: [String]
+    
+    
+    /// Busca todos os pecados cometidos associados às confissões do usuário.
+    ///
+    /// Esta função recupera todas as confissões do `sinDataManager`, em seguida, mapeia cada confissão
+    /// para obter todos os exames de consciência associados. Para cada exame, ela busca os pecados
+    /// sendo examinados e filtra para incluir apenas aqueles que foram marcados como confessados.
+    ///
+    /// O resultado é um array achatado de `SinsInExamination` que foram confessados em todas as
+    /// confissões e seus respectivos exames. Esse array é armazenado na propriedade `committedSins`.
+    ///
+    func fetchCommittedSins() {
+        // Busca todas as confissões
+        let confessions = sinDataManager.fetchAllConfessions()
+        
+        // Mapeia as confissões para obter todos os SinsInExamination
+        committedSins = confessions.flatMap { confession in
+            // Para cada confissão, busca os exames de consciência
+            let exams = sinDataManager.fetchAllExams(for: confession)
+            
+            // Para cada exame, busca os pecados em exame e filtra os que foram confessados
+            return exams.flatMap { exam in
+                return sinDataManager.fetchAllSinsInExaminations(for: exam).filter { $0.isConfessed }
+            }
+        }
+        
+        /*
+         Retorno:
+         A função retorna um array de SinsInExamination que contém todos os pecados que foram
+         confessados em cada exame de consciência, filtrando apenas aqueles com isConfessed = true.
+         Por exemplo, se houver duas confissões, e cada uma tiver exames com pecados
+         confessados, o retorno será um array contendo os pecados confessados dessas confissões.
+         
+         Exemplo de retorno:
+         [
+         SinsInExamination(id: 1, isConfessed: true, sins: [Sin(id: 201, sinDescription: "Pecado A")]), // Confissão 1, Exame 1
+         SinsInExamination(id: 2, isConfessed: true, sins: [Sin(id: 203, sinDescription: "Pecado C")]), // Confissão 1, Exame 2
+         SinsInExamination(id: 3, isConfessed: true, sins: [Sin(id: 204, sinDescription: "Pecado D"), Sin(id: 205, sinDescription: "Pecado E")]) // Confissão 2, Exame 1
+         ]
+         */
+    }
 }

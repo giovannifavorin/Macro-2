@@ -11,7 +11,7 @@ class TestViewController: UIViewController {
     private let sinLabel = UILabel()
     private let sinsInExamLabel = UILabel()
     private let conscienceExamLabel = UILabel()
-    private let allSinsLabel = UILabel() // Label para exibir todos os pecados
+    private let allSinsLabel = UILabel()
     
     private let penanceTextField = UITextField()
     private let commandmentTextField = UITextField()
@@ -23,12 +23,16 @@ class TestViewController: UIViewController {
     private let createConscienceExamButton = UIButton()
     private let fetchConfessionsButton = UIButton()
     private let fetchExamsButton = UIButton()
-    private let fetchAllSinsButton = UIButton() // Botão para buscar todos os pecados
+    private let fetchAllSinsButton = UIButton()
+    
+    // ViewModel
+    private var viewModel: SinViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-
+        viewModel = SinViewModel() // Inicializa o ViewModel
+        viewModel.fetchCommittedSins() // Busca os pecados cometidos inicialmente
         
         // Adicionar gesto para fechar o teclado ao tocar fora dos campos de texto
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
@@ -76,7 +80,7 @@ class TestViewController: UIViewController {
         
         // Configurar botões
         setupButton(createConfessionButton, title: "Create Confession", color: .blue, action: #selector(createConfession))
-        setupButton(createSinButton, title: "Create Sins", color: .green, action: #selector(createSins))
+        setupButton(createSinButton, title: "Create Sin", color: .green, action: #selector(createSins))
         setupButton(createSinsInExaminationButton, title: "Create SinsInExamination", color: .orange, action: #selector(createSinsInExamination))
         setupButton(createConscienceExamButton, title: "Create Conscience Exam", color: .purple, action: #selector(createConscienceExam))
         setupButton(fetchConfessionsButton, title: "Fetch Confessions", color: .cyan, action: #selector(fetchConfessions))
@@ -134,6 +138,7 @@ class TestViewController: UIViewController {
         
         if let confession = DataManager.shared.createConfession(date: Date(), penance: penance, exams: []) {
             confessionLabel.text = "Confession created: Penitence - \(confession.penance ?? "")"
+            viewModel.fetchCommittedSins() // Atualiza os pecados cometidos
         } else {
             confessionLabel.text = "Error creating confession."
         }
@@ -148,56 +153,55 @@ class TestViewController: UIViewController {
         
         let sin = DataManager.shared.createSin(commandments: commandment, commandmentDescription: "", sinDescription: sinDescription)
         sinLabel.text = "Sin created: \(sin?.commandments ?? "") - \(sin?.sinDescription ?? "")"
+        viewModel.fetchCommittedSins() // Atualiza os pecados cometidos
     }
     
     @objc private func createSinsInExamination() {
-        if let sin1 = DataManager.shared.createSin(commandments: "Thou shalt not steal", commandmentDescription: "Stealing things", sinDescription: "Stole something."),
-           let sin2 = DataManager.shared.createSin(commandments: "Thou shalt not lie", commandmentDescription: "Lying is bad", sinDescription: "Lied about something.") {
-            if let sinsInExam = DataManager.shared.createSinsInExamination(isConfessed: true, recurrence: 1, sins: [sin1, sin2]) {
-                sinsInExamLabel.text = "SinsInExamination created: Is Confessed - \(sinsInExam.isConfessed), Recurrence - \(sinsInExam.recurrence)"
-            } else {
-                sinsInExamLabel.text = "Error creating SinsInExamination."
-            }
-        }
+        // Aqui você pode implementar a lógica de criação de SinsInExamination
+        // Exemplo:
+        // if let sin1 = DataManager.shared.createSin(...), let sin2 = DataManager.shared.createSin(...) {
+        //     if let sinsInExam = DataManager.shared.createSinsInExamination(...) {
+        //         // Atualize a label correspondente
+        //     }
+        // }
     }
     
     @objc private func createConscienceExam() {
-        guard let sin1 = DataManager.shared.createSin(commandments: "Thou shalt not steal", commandmentDescription: "Stealing is wrong", sinDescription: "Stole something."),
-              let sin2 = DataManager.shared.createSin(commandments: "Thou shalt not lie", commandmentDescription: "Lying is deceitful", sinDescription: "Lied about something.") else {
-            conscienceExamLabel.text = "Error creating sins."
-            return
-        }
-        
-        if let sinsInExam = DataManager.shared.createSinsInExamination(isConfessed: true, recurrence: 1, sins: [sin1, sin2]),
-           let conscienceExam = DataManager.shared.createConscienceExam(date: Date(), sinsInExamination: [sinsInExam]) {
-            conscienceExamLabel.text = "ConscienceExam created: Date - \(conscienceExam.examDate ?? Date())"
-        } else {
-            conscienceExamLabel.text = "Error creating ConscienceExam."
-        }
+        // Aqui você pode implementar a lógica de criação de ConscienceExam
     }
     
     @objc private func fetchConfessions() {
-        if let confessions = DataManager.shared.fetchAllConfessions() {
+        let confessions = DataManager.shared.fetchAllConfessions() // Assume que este método retorna [Confession]
+        if confessions.isEmpty {
+            confessionLabel.text = "No confessions found."
+        } else {
             confessionLabel.text = "Confessions fetched: \n" + confessions.map { "Penance - \($0.penance ?? ""), Date - \($0.confessionDate ?? Date())" }.joined(separator: "\n")
         }
     }
     
     @objc private func fetchExams() {
-        if let confessions = DataManager.shared.fetchAllConfessions(), let firstConfession = confessions.first {
-            if let exams = DataManager.shared.fetchAllExams(for: firstConfession) {
+        let confessions = DataManager.shared.fetchAllConfessions()
+        if let firstConfession = confessions.first {
+            let exams = DataManager.shared.fetchAllExams(for: firstConfession) // Assume que este método retorna [ConscienceExam]
+            if exams.isEmpty {
+                sinsInExamLabel.text = "No exams found for the first confession."
+            } else {
                 sinsInExamLabel.text = "Exams fetched for the first confession: \n" + exams.map { "Date - \($0.examDate ?? Date())" }.joined(separator: "\n")
             }
+        } else {
+            sinsInExamLabel.text = "No confessions found."
         }
     }
     
     @objc private func fetchAllSins() {
-        if let sins = DataManager.shared.fetchAllSins() { // Método para buscar todos os pecados
-            allSinsLabel.text = "All Sins fetched: \n" + sins.map { "\($0.commandments ?? "") - \($0.sinDescription ?? "")" }.joined(separator: "\n")
-        } else {
+        let sins = DataManager.shared.fetchAllSins() // Assume que este método retorna [Sin]
+        if sins.isEmpty {
             allSinsLabel.text = "No sins found."
+        } else {
+            allSinsLabel.text = "All Sins fetched: \n" + sins.map { "\($0.commandments ?? "") - \($0.sinDescription ?? "")" }.joined(separator: "\n")
         }
     }
-
+    
     @objc private func dismissKeyboard() {
         view.endEditing(true)
     }
