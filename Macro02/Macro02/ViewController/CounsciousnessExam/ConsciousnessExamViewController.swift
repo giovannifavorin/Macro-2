@@ -15,6 +15,9 @@ class ConsciousnessExamViewController: UIViewController, UITableViewDataSource, 
     var viewModel: SinViewModel?
     var coordinator: ConsciousnessExamCoordinator?
     
+    private let consciousnessExamView = ConsciousnessExamView()
+
+    
     //Text Input para adicionar Pecado
     
     //Botao para Submeter o Texto
@@ -127,37 +130,37 @@ class ConsciousnessExamViewController: UIViewController, UITableViewDataSource, 
         let footerView = UIView()
         footerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 100)
         
-        footerView.addSubview(sinTextField)
-        footerView.addSubview(sinSubmitButton)
+        footerView.addSubview(consciousnessExamView.sinTextField)
+        footerView.addSubview(consciousnessExamView.sinSubmitButton)
         
         //delegate to dismiss
-        sinTextField.delegate = self
+        consciousnessExamView.sinTextField.delegate = self
         
         //autolayout to the textfield insede the foorterView
-        sinTextField.translatesAutoresizingMaskIntoConstraints = false
-        sinSubmitButton.translatesAutoresizingMaskIntoConstraints = false
+        consciousnessExamView.sinTextField.translatesAutoresizingMaskIntoConstraints = false
+        consciousnessExamView.sinSubmitButton.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            sinTextField.leadingAnchor.constraint(equalTo: footerView.leadingAnchor, constant: 16),
-            sinTextField.trailingAnchor.constraint(equalTo: footerView.trailingAnchor, constant: -16),
-            sinTextField.topAnchor.constraint(equalTo: footerView.topAnchor, constant: 8),
-            sinTextField.heightAnchor.constraint(equalToConstant: 40),
+            consciousnessExamView.sinTextField.leadingAnchor.constraint(equalTo: footerView.leadingAnchor, constant: 16),
+            consciousnessExamView.sinTextField.trailingAnchor.constraint(equalTo: footerView.trailingAnchor, constant: -16),
+            consciousnessExamView.sinTextField.topAnchor.constraint(equalTo: footerView.topAnchor, constant: 8),
+            consciousnessExamView.sinTextField.heightAnchor.constraint(equalToConstant: 40),
             
-            sinSubmitButton.topAnchor.constraint(equalTo: sinTextField.bottomAnchor, constant: 8),
-            sinSubmitButton.centerXAnchor.constraint(equalTo: footerView.centerXAnchor),
-            sinSubmitButton.heightAnchor.constraint(equalToConstant: 40),
-            sinSubmitButton.widthAnchor.constraint(equalToConstant: 100)
+            consciousnessExamView.sinSubmitButton.topAnchor.constraint(equalTo: consciousnessExamView.sinTextField.bottomAnchor, constant: 8),
+            consciousnessExamView.sinSubmitButton.centerXAnchor.constraint(equalTo: footerView.centerXAnchor),
+            consciousnessExamView.sinSubmitButton.heightAnchor.constraint(equalToConstant: 40),
+            consciousnessExamView.sinSubmitButton.widthAnchor.constraint(equalToConstant: 100)
         ])
         // Define the footer View of tableview
         tableView.tableFooterView = footerView
         
         // Add Action to Button
-        sinSubmitButton.addTarget(self, action: #selector(addSin), for: .touchUpInside)
+        consciousnessExamView.sinSubmitButton.addTarget(self, action: #selector(addSin), for: .touchUpInside)
     }
     
     @objc private func addSin() {
         //verify if the textfield is not Empty
-        guard let newSin = sinTextField.text, !newSin.isEmpty else {
+        guard let newSin = consciousnessExamView.sinTextField.text, !newSin.isEmpty else {
             // If empty, does Nothing
             return
         }
@@ -182,7 +185,7 @@ class ConsciousnessExamViewController: UIViewController, UITableViewDataSource, 
         present(alertController, animated: true, completion: nil)
         
         //Clean Text Field
-        sinTextField.text = ""
+        consciousnessExamView.sinTextField.text = ""
     }
     
     private func chooseExistingCategory(for newSin: String) {
