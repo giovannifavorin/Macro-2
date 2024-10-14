@@ -42,7 +42,7 @@ class ButtonComponent: UIButton {
         translatesAutoresizingMaskIntoConstraints = false
         
         // Utilizando UIButtonConfiguration para customizar o botão
-        var config = UIButton.Configuration.filled() // Configuração preenchida (com fundo)
+        var config = UIButton.Configuration.plain() // Configuração preenchida (com fundo)
         config.baseBackgroundColor = .systemBlue
         config.baseForegroundColor = .white
         config.cornerStyle = .medium
