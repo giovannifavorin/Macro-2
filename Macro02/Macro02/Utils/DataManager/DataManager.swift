@@ -185,7 +185,18 @@ class DataManager {
         }
     }
 
-    
+    public func fetchLatestConfession() -> Confession? {
+        let request: NSFetchRequest<Confession> = Confession.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "confessionDate", ascending: false)]
+        request.fetchLimit = 1
+        
+        do {
+            return try context.fetch(request).first
+        } catch {
+            print("Erro ao buscar a última confissão: \(error)")
+            return nil
+        }
+    }
     
     // MARK: - UPDATE
     public func updateConfession(_ confession: Confession, date: Date? = nil, penance: String? = nil) {
@@ -201,6 +212,13 @@ class DataManager {
         if let sinDescription = sinDescription { sin.sinDescription = sinDescription }
         
         saveContext()
+    }
+    
+    public func addExamToConfession(confession: Confession, exam: ConscienceExam) {
+        let exams = confession.mutableSetValue(forKey: "conscienceExams") // Altere o nome do relacionamento conforme necessário
+        exams.add(exam)
+        exam.confession = confession // Assumindo que você tenha uma propriedade de relacionamento `confession` no exame
+        saveContext() // Salva as alterações
     }
     
     // MARK: - DELETE

@@ -2,9 +2,12 @@ import UIKit
 
 class ConsciousnessExamViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    
     private let tableView = UITableView()
+    private let saveButton = UIButton(type: .system)
     
     var viewModel: SinViewModel?
+    private var currentExam: ConscienceExam?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -12,63 +15,77 @@ class ConsciousnessExamViewController: UIViewController, UITableViewDataSource, 
         title = "Exame de Consciência"
         
         setupTableView()
+        setupSaveButton()
         
-        viewModel?.fetchSavedSins() // Busca os pecados salvos
-        viewModel?.fetchAllExams() // Busca todos os exames
+        createNewExam()
+        viewModel?.fetchSavedSins()
     }
-
+    
     private func setupTableView() {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "QuestionCell")
         view.addSubview(tableView)
         
-        // Configurar constraints (auto layout)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tableView.bottomAnchor.constraint(equalTo: saveButton.topAnchor, constant: -10),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
-
-    // MARK: - UITableViewDataSource
+    
+    private func setupSaveButton() {
+        saveButton.setTitle("Salvar Exame", for: .normal)
+        saveButton.addTarget(self, action: #selector(saveExam), for: .touchUpInside)
+        view.addSubview(saveButton)
+        
+        saveButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            saveButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+    }
+    
+    private func createNewExam() {
+        currentExam = viewModel?.createNewConscienceExam() // Método para criar e atribuir um novo exame
+    }
+    
+    @objc private func saveExam() {
+        guard let exam = currentExam else { return }
+        viewModel?.saveExamToConfession(exam: exam)
+        showAlert(title: "Sucesso", message: "Exame de Consciência salvo com sucesso!")
+        createNewExam() // Cria um novo exame após salvar o atual
+        tableView.reloadData() // Atualiza a interface
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1 // Apenas uma seção para todos os pecados
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel?.savedSins.count ?? 0 // Conta os pecados salvos
+        return viewModel?.savedSins.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionCell", for: indexPath)
-        let sin = viewModel?.savedSins[indexPath.row] // Obtém o pecado
+        let sin = viewModel?.savedSins[indexPath.row]
         
-        cell.textLabel?.text = sin?.sinDescription // Define a descrição do pecado
+        cell.textLabel?.text = sin?.sinDescription
         return cell
     }
     
-    // MARK: - UITableViewDelegate
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let sin = viewModel?.savedSins[indexPath.row] // Obtém o pecado selecionado
+        guard let sin = viewModel?.savedSins[indexPath.row],
+              let exam = currentExam else { return }
         
-        // Você pode iterar por todos os exames e aplicar a lógica desejada
-        for exam in viewModel?.exams ?? [] {
-            // Alterna o estado do pecado para cada exame
-            if viewModel?.isQuestionMarkedAsSin(question: sin?.sinDescription ?? "") == true {
-                viewModel?.unmarkAsSin(question: sin?.sinDescription ?? "", for: exam) // Passa cada exame
-                showAlert(title: "Pecado Desmarcado", message: "Você desmarcou: \(sin?.sinDescription ?? "") em um exame.")
-            } else {
-                viewModel?.markAsSin(commandments: "", commandmentDescription: "", question: sin?.sinDescription ?? "", for: exam) // Passa cada exame
-                showAlert(title: "Pecado Marcado", message: "Você marcou: \(sin?.sinDescription ?? "") em um exame.")
-            }
+        if viewModel?.isQuestionMarkedAsSin(question: sin.sinDescription ?? "") == true {
+            viewModel?.unmarkAsSin(question: sin.sinDescription ?? "", for: exam)
+        } else {
+            viewModel?.markAsSin(commandments: sin.commandments, commandmentDescription: sin.commandmentDescription, question: sin.sinDescription ?? "", for: exam)
         }
         
-        // Atualiza a célula para refletir a mudança
         tableView.reloadRows(at: [indexPath], with: .automatic)
     }
     
