@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -42,7 +42,6 @@
 		B8F8DD222C8B8EB600D24769 /* Macro02UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F8DD212C8B8EB600D24769 /* Macro02UITests.swift */; };
 		B8F8DD242C8B8EB600D24769 /* Macro02UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F8DD232C8B8EB600D24769 /* Macro02UITestsLaunchTests.swift */; };
 		F1BE73FB2CB86CD000989E80 /* MainTabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BE73FA2CB86CC800989E80 /* MainTabBarCoordinator.swift */; };
-		F1BE73FE2CB872BE00989E80 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BE73FD2CB872BE00989E80 /* OnboardingViewController.swift */; };
 		F1BE74022CB873EF00989E80 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BE74012CB873ED00989E80 /* OnboardingCoordinator.swift */; };
 		F1EDE14A2C9CD045007A6403 /* ConsciousnessExamCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EDE1492C9CD043007A6403 /* ConsciousnessExamCoordinator.swift */; };
 		F1EDE1502C9CD126007A6403 /* ConsciousnessExamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EDE14F2C9CD120007A6403 /* ConsciousnessExamViewModel.swift */; };
@@ -119,7 +118,6 @@
 		B8F8DD212C8B8EB600D24769 /* Macro02UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macro02UITests.swift; sourceTree = "<group>"; };
 		B8F8DD232C8B8EB600D24769 /* Macro02UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macro02UITestsLaunchTests.swift; sourceTree = "<group>"; };
 		F1BE73FA2CB86CC800989E80 /* MainTabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarCoordinator.swift; sourceTree = "<group>"; };
-		F1BE73FD2CB872BE00989E80 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		F1BE74012CB873ED00989E80 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		F1EDE1492C9CD043007A6403 /* ConsciousnessExamCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousnessExamCoordinator.swift; sourceTree = "<group>"; };
 		F1EDE14F2C9CD120007A6403 /* ConsciousnessExamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousnessExamViewModel.swift; sourceTree = "<group>"; };
@@ -138,6 +136,10 @@
 		F1F6BE772C9B648700F4C7FF /* BibleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BibleViewModel.swift; sourceTree = "<group>"; };
 		F1F6BE792C9B649600F4C7FF /* AboutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		F1BE740D2CB9A33B00989E80 /* Onboarding */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Onboarding; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		B8F8DCFA2C8B8EB500D24769 /* Frameworks */ = {
@@ -186,6 +188,7 @@
 		4AEF3AA32CADBFE200BEB337 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				F1BE740D2CB9A33B00989E80 /* Onboarding */,
 				4AEF3A962CADBFE200BEB337 /* CounsciousnessExam */,
 				4AEF3A9B2CADBFE200BEB337 /* Prayers */,
 				4AEF3A9C2CADBFE200BEB337 /* AboutViewController.swift */,
@@ -194,7 +197,6 @@
 				4AEF3A9F2CADBFE200BEB337 /* DailyLiturgyViewController.swift */,
 				4AEF3AA02CADBFE200BEB337 /* HomeViewController.swift */,
 				4AEF3AA22CADBFE200BEB337 /* MyConfessionViewController.swift */,
-				F1BE73FD2CB872BE00989E80 /* OnboardingViewController.swift */,
 				4AEF3AA12CADBFE200BEB337 /* Localizable.xcstrings */,
 				B8363E132CB854240083D1D3 /* DataTests */,
 			);
@@ -378,6 +380,9 @@
 			);
 			dependencies = (
 			);
+			fileSystemSynchronizedGroups = (
+				F1BE740D2CB9A33B00989E80 /* Onboarding */,
+			);
 			name = Macro02;
 			productName = Macro02;
 			productReference = B8F8DCFD2C8B8EB500D24769 /* Macro02.app */;
@@ -502,7 +507,6 @@
 				F1F6BE702C9B630200F4C7FF /* BibleCoordinator.swift in Sources */,
 				F1F6BE6C2C9B62B200F4C7FF /* ConfessionCoordinator.swift in Sources */,
 				B8E9CC192CA1F1FE00B21598 /* SpiritualPreparation.swift in Sources */,
-				F1BE73FE2CB872BE00989E80 /* OnboardingViewController.swift in Sources */,
 				B8783F862C99F44200661148 /* DataManager.swift in Sources */,
 				F1EDE1522C9DFE9B007A6403 /* PrayersCoordinator.swift in Sources */,
 				B8783F822C99F32E00661148 /* CoordinatorProtocol.swift in Sources */,
