@@ -1,13 +1,27 @@
 import UIKit
-import Combine
 
-class SinViewModel: ObservableObject {
+protocol SinViewModelDelegate: AnyObject {
+    func didUpdateSavedSins(_ savedSins: [Sin])
+    func didUpdateCommittedSins(_ committedSins: [SinsInExamination])
+    func didFailToAddSin(with message: String)
+}
+
+class SinViewModel {
     
-    @Published var savedSins: [Sin] = []
-    @Published var committedSins: [SinsInExamination] = []
+    private var _savedSins: [Sin] = []
+    private var _committedSins: [SinsInExamination] = []
+    
+    var savedSins: [Sin] {
+        return _savedSins
+    }
+    
+    var committedSins: [SinsInExamination] {
+        return _committedSins
+    }
     
     private var pendingSinsInExamination: [SinsInExamination] = [] // Pecados temporários que serão salvos no final do exame
     private let sinDataManager = DataManager.shared
+    weak var delegate: SinViewModelDelegate?
     
     init() {
         fetchAllSins()
@@ -15,8 +29,8 @@ class SinViewModel: ObservableObject {
     
     // Busca todos os pecados salvos no Core Data
     func fetchAllSins() {
-        // Supondo que você tenha uma instância do DataManager
-        savedSins = DataManager.shared.fetchAllSins()
+        _savedSins = DataManager.shared.fetchAllSins()
+        delegate?.didUpdateSavedSins(savedSins) // Notifica a delegate sobre a atualização
         print("Sins fetched: \(savedSins)")
     }
     
@@ -29,6 +43,8 @@ class SinViewModel: ObservableObject {
     func markSin(_ sin: Sin) {
         if let sinsInExamination = sinDataManager.createSinsInExamination(isConfessed: false, recurrence: 1, sins: [sin]) {
             pendingSinsInExamination.append(sinsInExamination)
+            fetchCommittedSins() // Atualiza os pecados confessados
+            delegate?.didUpdateCommittedSins(committedSins) // Notifica a delegate
         }
     }
     
@@ -36,6 +52,8 @@ class SinViewModel: ObservableObject {
     func unmarkSin(_ sin: Sin) {
         if let index = pendingSinsInExamination.firstIndex(where: { $0.sins?.contains(sin) ?? false }) {
             pendingSinsInExamination.remove(at: index)
+            fetchCommittedSins() // Atualiza os pecados confessados
+            delegate?.didUpdateCommittedSins(committedSins) // Notifica a delegate
         }
     }
     
@@ -51,7 +69,10 @@ class SinViewModel: ObservableObject {
                 sinDataManager.addExamToConfession(confession: confession, exam: exam)
             } else {
                 // Cria uma nova confissão e adiciona o exame a ela
-                sinDataManager.createConfession(date: Date(), penance: "", exams: [exam])
+                guard sinDataManager.createConfession(date: Date(), penance: "", exams: [exam]) != nil else {
+                    print("Falha ao criar nova confissão.")
+                    return
+                }
             }
             
             fetchCommittedSins()
@@ -61,11 +82,12 @@ class SinViewModel: ObservableObject {
     // Busca os pecados já confessados
     func fetchCommittedSins() {
         let confessions = sinDataManager.fetchAllConfessions()
-        committedSins = confessions.flatMap { confession in
+        _committedSins = confessions.flatMap { confession in
             sinDataManager.fetchAllExams(for: confession).flatMap { exam in
                 sinDataManager.fetchAllSinsInExaminations(for: exam).filter { $0.isConfessed }
             }
         }
+        delegate?.didUpdateCommittedSins(committedSins) // Notifica a delegate sobre a atualização
     }
     
     // Busca a última confissão
@@ -75,20 +97,26 @@ class SinViewModel: ObservableObject {
     
     // Adiciona um novo pecado
     func addSin(with sinDescription: String) {
-        // Exemplo de valores para os mandamentos e descrição, você pode modificar isso conforme necessário
+        // Verifica se o pecado já existe
+        guard !_savedSins.contains(where: { $0.sinDescription == sinDescription }) else {
+            delegate?.didFailToAddSin(with: "Pecado já existe.")
+            return
+        }
+
+        // Exemplo de valores para os mandamentos e descrição
         let commandments = "Mandamento relacionado ao pecado" // Aqui você pode determinar qual mandamento é apropriado
         let commandmentDescription = "Descrição do mandamento" // Descrição que deve ser correspondente ao mandamento
         
         // Cria um novo pecado usando o DataManager
         if let newSin = sinDataManager.createSin(commandments: commandments, commandmentDescription: commandmentDescription, sinDescription: sinDescription) {
             // Adiciona o novo pecado ao array de pecados salvos
-            savedSins.append(newSin)
+            _savedSins.append(newSin)
             print("Novo pecado adicionado: \(newSin.sinDescription ?? "")")
+            delegate?.didUpdateSavedSins(savedSins) // Notifica a delegate sobre a atualização
         } else {
-            print("Falha ao adicionar novo pecado.")
+            delegate?.didFailToAddSin(with: "Falha ao adicionar novo pecado.")
         }
     }
-
     
     // Retorna todos os pecados marcados
     func getMarkedSins() -> [SinsInExamination] {
