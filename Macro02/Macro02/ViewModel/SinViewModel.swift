@@ -31,7 +31,6 @@ class SinViewModel {
     func fetchAllSins() {
         _savedSins = DataManager.shared.fetchAllSins()
         delegate?.didUpdateSavedSins(savedSins) // Notifica a delegate sobre a atualização
-        print("Sins fetched: \(savedSins)")
     }
     
     // Verifica se uma questão está marcada como pecado
@@ -95,6 +94,18 @@ class SinViewModel {
         return sinDataManager.fetchLatestConfession()
     }
     
+    func countUniqueCommandments() -> Int {
+        var uniqueCommandments = Set<String>() // Usamos um Set para garantir que os mandamentos sejam únicos
+        
+        for sin in _savedSins {
+            if let commandments = sin.commandments { // Verifique se o atributo commandments não é nulo
+                uniqueCommandments.insert(commandments) // Adiciona o mandamento ao Set
+            }
+        }
+        
+        return uniqueCommandments.count // Retorna a contagem de mandamentos únicos
+    }
+    
     // Adiciona um novo pecado
     func addSin(with sinDescription: String) {
         // Verifica se o pecado já existe
@@ -102,7 +113,7 @@ class SinViewModel {
             delegate?.didFailToAddSin(with: "Pecado já existe.")
             return
         }
-
+        
         // Exemplo de valores para os mandamentos e descrição
         let commandments = "Mandamento relacionado ao pecado" // Aqui você pode determinar qual mandamento é apropriado
         let commandmentDescription = "Descrição do mandamento" // Descrição que deve ser correspondente ao mandamento
