@@ -123,7 +123,23 @@ class ConsciousnessExamViewController: UIViewController, SinViewModelDelegate {
     func didUpdateSavedSins(_ savedSins: [Sin]) {
         // Agrupar os pecados por mandamento
         groupedSins = Dictionary(grouping: savedSins, by: { $0.commandments ?? "" }) // Substitua `commandments` pelo nome correto do atributo no modelo `Sin`
-        mandaments = Array(groupedSins.keys).sorted() // Obter os mandamentos em ordem
+        
+        // Lista dos mandamentos em ordem específica
+        let orderedMandaments = [
+            "Primeiro Mandamento",
+            "Segundo Mandamento",
+            "Terceiro Mandamento",
+            "Quarto Mandamento",
+            "Quinto Mandamento",
+            "Sexto Mandamento",
+            "Sétimo Mandamento",
+            "Oitavo Mandamento",
+            "Nono Mandamento",
+            "Décimo Mandamento"
+        ]
+        
+        // Ordena os mandamentos de acordo com a lista acima
+        mandaments = orderedMandaments.filter { groupedSins.keys.contains($0) } // Filtra apenas os mandamentos que existem
         savedSinsTableView.reloadData() // Atualiza a tabela de pecados salvos
     }
     
@@ -179,6 +195,37 @@ extension ConsciousnessExamViewController: UITableViewDataSource, UITableViewDel
         return tableView == savedSinsTableView ? mandaments.count : 1 // Apenas uma seção para pecados confessados
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Desmarca a célula após a seleção para remover a marcação visual
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        if tableView == savedSinsTableView {
+            let mandament = mandaments[indexPath.section]
+            if let sin = groupedSins[mandament]?[indexPath.row] {
+                if viewModel.isSinMarked(sin) {
+                    // Se o pecado já está marcado, desmarque-o
+                    viewModel.unmarkSin(sin)
+                    print("\(sin.sinDescription ?? "") foi desmarcado.")
+                } else {
+                    // Se o pecado não está marcado, marque-o
+                    viewModel.markSin(sin)
+                    print("\(sin.sinDescription ?? "") foi marcado.")
+                }
+            }
+        } else {
+            let committedSin = viewModel.committedSins[indexPath.row]
+            if let sinsArray = committedSin.sins?.allObjects as? [Sin], let firstSin = sinsArray.first {
+                if viewModel.isSinMarked(firstSin) {
+                    viewModel.unmarkSin(firstSin)
+                    print("\(firstSin.sinDescription ?? "") foi desmarcado.")
+                } else {
+                    viewModel.markSin(firstSin)
+                    print("\(firstSin.sinDescription ?? "") foi marcado.")
+                }
+            }
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == savedSinsTableView {
             let mandament = mandaments[section]
@@ -190,12 +237,19 @@ extension ConsciousnessExamViewController: UITableViewDataSource, UITableViewDel
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SinCell", for: indexPath)
-        
+
         if tableView == savedSinsTableView {
             let mandament = mandaments[indexPath.section]
             if let sin = groupedSins[mandament]?[indexPath.row] {
                 cell.textLabel?.text = sin.sinDescription // Acesso à descrição do pecado
                 
+                // Verifica se o pecado está marcado
+                if viewModel.isSinMarked(sin) {
+                    cell.textLabel?.textColor = .red // Se o pecado estiver marcado, mude a cor para vermelho
+                } else {
+                    cell.textLabel?.textColor = .label // Caso contrário, use a cor padrão
+                }
+
                 // Adiciona botão de marcar
                 let markButton = UIButton(type: .system)
                 markButton.setTitle("Marcar", for: .normal)
@@ -207,8 +261,9 @@ extension ConsciousnessExamViewController: UITableViewDataSource, UITableViewDel
             let committedSin = viewModel.committedSins[indexPath.row]
             if let sinsArray = committedSin.sins?.allObjects as? [Sin], let firstSin = sinsArray.first {
                 cell.textLabel?.text = firstSin.sinDescription // Exibe a descrição do pecado confessado
+                cell.textLabel?.textColor = .label // Cor padrão para pecados confessados
             }
-            
+
             // Adiciona botão de desmarcar
             let unmarkButton = UIButton(type: .system)
             unmarkButton.setTitle("Desmarcar", for: .normal)
@@ -216,9 +271,10 @@ extension ConsciousnessExamViewController: UITableViewDataSource, UITableViewDel
             unmarkButton.addTarget(self, action: #selector(unmarkSin(_:)), for: .touchUpInside)
             cell.accessoryView = unmarkButton
         }
-        
+
         return cell
     }
+
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if tableView == savedSinsTableView {
