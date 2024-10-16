@@ -9,61 +9,73 @@ import Foundation
 import SwiftUI
 
 struct DailyLiturgyView: View {
-    var title: String
-    @Binding var selectedSegment: Int
-    @Binding var liturgyText: String
-    var onTextSizeTap: () -> Void
+    @ObservedObject var viewModel: DailyLiturgyViewModel
     
     var body: some View {
         VStack {
             HStack{
-                Text(title)
-                    .font(.title)
-                    .foregroundStyle(.black)
-                    .fontWeight(.bold)
+                Text("Liturgia Diária")
+                    .font(.largeTitle)
                     .padding(.leading, 16)
                 
                 Spacer()
-                
-                Button ("Aa") {
-                    
+                Button(action: {
+                    viewModel.selectedSegmentIndex = (viewModel.selectedSegmentIndex + 1) % 3
+                    viewModel.updateLiturgyText()
+                }) {
+                    Text("Aa")
+                        .font(.title2)
+                        .padding(.trailing, 16)
                 }
-                .padding(.trailing, 16)
-                .foregroundStyle(.black)
-                
-                
             }
-            .padding(.top, 16)
             
-//            LiturgyCardView() // Placeholder para o cartão de liturgia
+            // Sempre exibe o LiturgyCardViewWrapper com fallback se os dados forem nil
+            LiturgyCardViewWrapper(
+                liturgia: viewModel.currentLiturgia ?? Liturgia(
+                    data: "N/A",
+                    liturgia: nil,
+                    cor: nil,
+                    dia: "Dia não encontrado",
+                    oferendas: nil,
+                    comunhao: nil,
+                    primeiraLeitura: nil,
+                    segundaLeitura: nil,
+                    salmo: nil,
+                    evangelho: nil,
+                    antifonas: nil
+                )
+            )
+            .frame(height: UIScreen.main.bounds.height * 0.1)
+            .padding()
             
-            Picker("", selection: $selectedSegment) {
+            
+            Picker("Segmento", selection: $viewModel.selectedSegmentIndex) {
                 Text("1 Leitura").tag(0)
                 Text("Salmos").tag(1)
                 Text("Evangelho").tag(2)
             }
             .pickerStyle(SegmentedPickerStyle())
             .padding(.horizontal, 16)
-            .onChange(of: selectedSegment) { _ in
-                // Lógica do Picker tratada na ViewController
+            .onChange(of: viewModel.selectedSegmentIndex) { _ in
+                viewModel.updateLiturgyText()
             }
             
             ScrollView {
-                Text(liturgyText)
-                    .padding()
+                Text(viewModel.liturgyText)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
             }
+            Spacer()
+            
+        }
+        .onAppear {
+            viewModel.fetchLiturgyData()
         }
         
     }
 }
 
 #Preview {
-    DailyLiturgyView(
-        title: "Dayli Liturgy",
-        selectedSegment: .constant(0),
-        liturgyText: .constant("Litugy text"),
-        onTextSizeTap: {}
-    )
+    DailyLiturgyView(viewModel: DailyLiturgyViewModel())
 }
 

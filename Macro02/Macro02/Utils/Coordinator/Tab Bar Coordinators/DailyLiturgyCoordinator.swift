@@ -18,6 +18,7 @@ class DailyLiturgyCoordinator: Coordinator {
     init() {
         self.rootViewController = DailyLiturgyViewController()
         self.navigationController = UINavigationController(rootViewController: rootViewController)
+        self.rootViewController.coordinator = self  // Configurando o coordinator
     }
     
     func start() {

@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "1 Leitura" : {
+
+    },
     "Aa" : {
 
     },
@@ -24,6 +27,9 @@
     "Counsciousness Exam" : {
 
     },
+    "Evangelho" : {
+
+    },
     "HOME VIEW" : {
 
     },
@@ -31,6 +37,12 @@
 
     },
     "Prayers" : {
+
+    },
+    "Salmos" : {
+
+    },
+    "Segmento" : {
 
     }
   },

@@ -97,4 +97,3 @@ class APIManager {
         task.resume()
     }
 }
-
