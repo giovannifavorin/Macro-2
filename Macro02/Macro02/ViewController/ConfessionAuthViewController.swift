@@ -38,9 +38,6 @@ class ConfessionAuthViewController: UIViewController {
     }
 }
 
-
-import UIKit
-
 class ConfessionAuthView: UIView {
     
     var label: UILabel!
@@ -74,6 +71,13 @@ class ConfessionAuthView: UIView {
         self.addSubview(button)
     }
     
+    func configureButtonTarget(_ target: Any, action: Selector) {
+        button.addTarget(target, action: action, for: .touchUpInside)
+    }
+}
+
+/// Extensions com constraints
+extension ConfessionAuthView {
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             label.centerXAnchor.constraint(equalTo: self.centerXAnchor),
@@ -85,9 +89,4 @@ class ConfessionAuthView: UIView {
             button.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
-    
-    func configureButtonTarget(_ target: Any, action: Selector) {
-        button.addTarget(target, action: action, for: .touchUpInside)
-    }
 }
-
