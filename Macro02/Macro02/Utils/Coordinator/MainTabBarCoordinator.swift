@@ -81,6 +81,9 @@ class MainTabBarCoordinator: Coordinator {
         // Define as navigations na Tab Bar
         self.tabBarController.viewControllers = [dailyLiturgyNavController, confessionNavController, homeNavController, bibleNavController, aboutNavController]
         
+        self.tabBarController.selectedIndex = 2 // Define a Home como primera View a ser apresentada
+
+        
     }
     
     // Função auxiliar para alterar a aparência dos itens Tab Bar
