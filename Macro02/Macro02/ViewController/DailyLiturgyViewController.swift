@@ -171,6 +171,5 @@ extension DailyLiturgyViewController {
             liturgyTextView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
         ])
     }
-
 }
 

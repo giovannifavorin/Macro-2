@@ -89,7 +89,6 @@ class ConsciousnessExamViewController: UIViewController, UITableViewDataSource, 
         } else {
             return UITableViewCell()
         }
-        
     }
     
     // MARK: - UITableViewDelegate

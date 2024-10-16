@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A166D172CC032360033B9A2 /* DailyLiturgyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A166D162CC032360033B9A2 /* DailyLiturgyView.swift */; };
 		4A630E922CB87704005A4A1F /* ConsciousnessExamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A630E912CB87704005A4A1F /* ConsciousnessExamView.swift */; };
 		4AEF3AA42CADBFE200BEB337 /* ConsciousnessExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEF3A952CADBFE200BEB337 /* ConsciousnessExamViewController.swift */; };
 		4AEF3AA52CADBFE200BEB337 /* FullPrayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEF3A972CADBFE200BEB337 /* FullPrayerViewController.swift */; };
@@ -78,6 +79,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4A166D162CC032360033B9A2 /* DailyLiturgyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyLiturgyView.swift; sourceTree = "<group>"; };
 		4A630E912CB87704005A4A1F /* ConsciousnessExamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousnessExamView.swift; sourceTree = "<group>"; };
 		4AEF3A952CADBFE200BEB337 /* ConsciousnessExamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousnessExamViewController.swift; sourceTree = "<group>"; };
 		4AEF3A972CADBFE200BEB337 /* FullPrayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullPrayerViewController.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				4AEF3A9D2CADBFE200BEB337 /* BibleViewController.swift */,
 				4AEF3A9E2CADBFE200BEB337 /* ConfessionAuthViewController.swift */,
 				4AEF3A9F2CADBFE200BEB337 /* DailyLiturgyViewController.swift */,
+				4A166D162CC032360033B9A2 /* DailyLiturgyView.swift */,
 				4AEF3AA02CADBFE200BEB337 /* HomeViewController.swift */,
 				4AEF3AA12CADBFE200BEB337 /* Localizable.xcstrings */,
 				4AEF3AA22CADBFE200BEB337 /* MyConfessionViewController.swift */,
@@ -504,6 +507,7 @@
 				AF9C0FDC2CA1E5F3008187EC /* setDynamicFont.swift in Sources */,
 				AFC862112CA32A7100167ECB /* ButtonComponent.swift in Sources */,
 				AF9C0FDD2CA1E5F3008187EC /* TextComponent.swift in Sources */,
+				4A166D172CC032360033B9A2 /* DailyLiturgyView.swift in Sources */,
 				B8363E122CB717C20083D1D3 /* DataManagerTestView.swift in Sources */,
 				F1F6BE762C9B647700F4C7FF /* DailyLiturgyViewModel.swift in Sources */,
 				B84DEA082CA48F900010CEBC /* SinViewModel.swift in Sources */,
