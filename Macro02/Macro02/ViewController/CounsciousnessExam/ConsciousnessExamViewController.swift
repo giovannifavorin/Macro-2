@@ -1,15 +1,25 @@
 import UIKit
 
 class ConsciousnessExamViewController: UIViewController, SinViewModelDelegate {
-    private var viewModel: SinViewModel = SinViewModel()
+    var viewModel: SinViewModel
     
     // Tabelas para exibir os pecados
+    var coordinator: ConsciousnessExamCoordinator?
     private let savedSinsTableView = UITableView()
     private let committedSinsTableView = UITableView()
     private let sinDescriptionTextField = UITextField()
     
     private var groupedSins: [String: [Sin]] = [:] // Dicionário para agrupar pecados por mandamento
     private var mandaments: [String] = [] // Array para armazenar os mandamentos
+    
+    init(viewModel: SinViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
