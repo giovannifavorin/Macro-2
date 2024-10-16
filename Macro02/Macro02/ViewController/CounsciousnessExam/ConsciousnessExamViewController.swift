@@ -234,6 +234,7 @@ extension ConsciousnessExamViewController: UITableViewDataSource, UITableViewDel
                 }
             }
         }
+        tableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
