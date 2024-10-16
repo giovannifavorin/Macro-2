@@ -23,11 +23,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.applicationCoordinator?.start()
             
             //MARK: Fluxo para testar o DataManager
-            //            let testViewController = TestViewController()
-            //            // Defina o rootViewController da janela
-            //            window.rootViewController = testViewController
-            //            window.makeKeyAndVisible()
-            //            self.window = window
+//            let testViewController = ConsciousnessExamViewController(viewModel: SinViewModel())
+//                        // Defina o rootViewController da janela
+//                        window.rootViewController = testViewController
+//                        window.makeKeyAndVisible()
+//                        self.window = window
         }
     }
     

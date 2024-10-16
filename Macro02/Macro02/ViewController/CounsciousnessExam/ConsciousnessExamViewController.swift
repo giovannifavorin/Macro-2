@@ -1,331 +1,296 @@
-//
-//  ConsciousnessExamViewController.swift
-//  Macro02
-//
-//  Created by Victor Dantas on 19/09/24.
-//
-
 import UIKit
-import SwiftUI
 
-class ConsciousnessExamViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
+class ConsciousnessExamViewController: UIViewController, SinViewModelDelegate {
+    var viewModel: SinViewModel
     
-    private let tableView = UITableView()
-    
-    var viewModel: SinViewModel?
+    // Tabelas para exibir os pecados
     var coordinator: ConsciousnessExamCoordinator?
+    private let savedSinsTableView = UITableView()
+    private let committedSinsTableView = UITableView()
+    private let sinDescriptionTextField = UITextField()
     
-    //Text Input para adicionar Pecado
-    private let sinTextField: UITextField = {
-        let textInput = UITextField()
-        textInput.placeholder = "Anotate your sins here."
-        textInput.borderStyle = .roundedRect
-        return textInput
-    }()
+    private var groupedSins: [String: [Sin]] = [:] // Dicionário para agrupar pecados por mandamento
+    private var mandaments: [String] = [] // Array para armazenar os mandamentos
     
-    //Botao para Submeter o Texto
-    private let sinSubmitButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("+", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .blue
-        button.layer.cornerRadius = 10
-        return button
-    }()
+    init(viewModel: SinViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        title = "Conciousness Exam"
         
-        setupTableView()
-        viewModel?.fetchSavedSins()
-        setupTableFooterView()
+        // Configura o delegate
+        viewModel.delegate = self
         
-        setupKeyboard()
-        setupTapGesture()
+        // Carrega os dados iniciais
+        viewModel.fetchAllSins()
+        
+        // Configura a interface
+        setupUI()
     }
-    private func setupTableView() {
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "QuestionCell")
-        view.addSubview(tableView)
+    
+    private func setupUI() {
+        view.backgroundColor = .systemBackground // Usar a cor de fundo do sistema para modo claro/escuro
         
-        // Configurar constraints (auto layout)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+        // Configurar o título
+        setupTitleLabel()
+        
+        // Configura o campo de texto para entrada da descrição do pecado
+        setupSinDescriptionTextField()
+        
+        // Configura as tabelas
+        setupTableView(savedSinsTableView)
+        setupTableView(committedSinsTableView)
+        
+        // Altera a cor de fundo das tabelas
+        savedSinsTableView.backgroundColor = .systemBackground
+        committedSinsTableView.backgroundColor = .systemPink
+        
+        // Adiciona as tabelas à view
+        view.addSubview(savedSinsTableView)
+        view.addSubview(committedSinsTableView)
+        
+        // Configura Auto Layout
+        setupConstraints()
+    }
+    
+    private func setupTitleLabel() {
+        let titleLabel = UILabel()
+        titleLabel.text = "Exame de Consciência"
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 24) // Tamanho maior e negrito
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.textColor = .label // Cor que se adapta ao modo claro/escuro
+        titleLabel.textAlignment = .center // Centralizar o texto
+        view.addSubview(titleLabel)
+        
+        // Configura a posição do título
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         ])
     }
     
-    
-    // MARK: - UITableViewDataSource
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        guard let viewModel = viewModel else { return 0 }
-        return viewModel.commandments.count
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let viewModel = viewModel else { return 0 }
-        return viewModel.commandments[section].sins.count
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard let viewModel = viewModel else { return "" }
-        return viewModel.commandments[section].title
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    private func setupSinDescriptionTextField() {
+        sinDescriptionTextField.placeholder = "Digite a descrição do pecado"
+        sinDescriptionTextField.borderStyle = .roundedRect
+        sinDescriptionTextField.translatesAutoresizingMaskIntoConstraints = false
+        sinDescriptionTextField.textColor = .label // Cor do texto que se adapta ao modo claro/escuro
+        sinDescriptionTextField.backgroundColor = .secondarySystemBackground // Fundo que se adapta ao modo claro/escuro
+        view.addSubview(sinDescriptionTextField)
         
-        if let viewModel = viewModel {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionCell", for: indexPath)
-            let commandment = viewModel.commandments[indexPath.section]
-            let question = commandment.sins[indexPath.row]
+        // Configura a posição do campo de texto
+        NSLayoutConstraint.activate([
+            sinDescriptionTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 80),
+            sinDescriptionTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            sinDescriptionTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+        ])
+        
+        // Botão para adicionar pecado
+        let addButton = UIButton(type: .system)
+        addButton.setTitle("Adicionar Pecado", for: .normal)
+        addButton.addTarget(self, action: #selector(addSin(_:)), for: .touchUpInside)
+        addButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(addButton)
+        
+        // Configura a posição do botão
+        NSLayoutConstraint.activate([
+            addButton.topAnchor.constraint(equalTo: sinDescriptionTextField.bottomAnchor, constant: 10),
+            addButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+    }
+    
+    private func setupTableView(_ tableView: UITableView) {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "SinCell")
+    }
+    
+    private func setupConstraints() {
+        savedSinsTableView.translatesAutoresizingMaskIntoConstraints = false
+        committedSinsTableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            savedSinsTableView.topAnchor.constraint(equalTo: sinDescriptionTextField.bottomAnchor, constant: 40),
+            savedSinsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            savedSinsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            savedSinsTableView.heightAnchor.constraint(greaterThanOrEqualToConstant: 200), // Altura mínima
             
-            // Verifica se a pergunta já está marcada como pecado para alterar a cor da célula
-            if viewModel.isQuestionMarkedAsSin(question: question) {
-                cell.textLabel?.textColor = .systemRed // Pergunta marcada como pecado
-            } else {
-                cell.textLabel?.textColor = .systemGray // Pergunta normal
-            }
-            
-            cell.textLabel?.text = question
-            return cell
-        } else {
-            return UITableViewCell()
-        }
-        
+            committedSinsTableView.topAnchor.constraint(equalTo: savedSinsTableView.bottomAnchor, constant: 20),
+            committedSinsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            committedSinsTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            committedSinsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor) // Preenche o restante da tela
+        ])
     }
     
-    // MARK: - UITableViewDelegate
+    // MARK: - SinViewModelDelegate
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func didUpdateSavedSins(_ savedSins: [Sin]) {
+        // Agrupar os pecados por mandamento
+        groupedSins = Dictionary(grouping: savedSins, by: { $0.commandments ?? "" }) // Substitua `commandments` pelo nome correto do atributo no modelo `Sin`
         
-        if let viewModel = viewModel {
-            let commandment = viewModel.commandments[indexPath.section]
-            let question = commandment.sins[indexPath.row]
-            
-            // Verifica se a pergunta já está marcada como pecado
-            if viewModel.isQuestionMarkedAsSin(question: question) {
-                // Desmarcar como pecado
-                viewModel.unmarkAsSin(question: question)
-                showAlert(title: "Pecado Desmarcado", message: "Você desmarcou: \(question)")
-            } else {
-                // Marcar como pecado
-                viewModel.markAsSin(question: question)
-                showAlert(title: "Pecado Marcado", message: "Você marcou: \(question)")
-            }
-        }
+        // Lista dos mandamentos em ordem específica
+        let orderedMandaments = [
+            "Primeiro Mandamento",
+            "Segundo Mandamento",
+            "Terceiro Mandamento",
+            "Quarto Mandamento",
+            "Quinto Mandamento",
+            "Sexto Mandamento",
+            "Sétimo Mandamento",
+            "Oitavo Mandamento",
+            "Nono Mandamento",
+            "Décimo Mandamento"
+        ]
         
-        // Atualiza a célula para refletir a mudança
-        tableView.reloadRows(at: [indexPath], with: .automatic)
+        // Ordena os mandamentos de acordo com a lista acima
+        mandaments = orderedMandaments.filter { groupedSins.keys.contains($0) } // Filtra apenas os mandamentos que existem
+        savedSinsTableView.reloadData() // Atualiza a tabela de pecados salvos
     }
     
-    // Função para exibir alertas
-    private func showAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+    func didUpdateCommittedSins(_ committedSins: [SinsInExamination]) {
+        // Atualiza a tabela de pecados confessados
+        committedSinsTableView.reloadData()
+    }
+    
+    func didFailToAddSin(with message: String) {
+        // Exibe uma mensagem de erro
+        showAlert(with: message)
+    }
+    
+    // Exibe um alerta com uma mensagem
+    private func showAlert(with message: String) {
+        let alert = UIAlertController(title: "Erro", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true, completion: nil)
     }
     
+    // MARK: - Ações
     
-    //MARK: ADD sin texfield And Label
-    private func setupTableFooterView() {
-        //Create a ContainerView to textfield and button
-        let footerView = UIView()
-        footerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 100)
-        
-        footerView.addSubview(sinTextField)
-        footerView.addSubview(sinSubmitButton)
-        
-        //delegate to dismiss
-        sinTextField.delegate = self
-        
-        //autolayout to the textfield insede the foorterView
-        sinTextField.translatesAutoresizingMaskIntoConstraints = false
-        sinSubmitButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            sinTextField.leadingAnchor.constraint(equalTo: footerView.leadingAnchor, constant: 16),
-            sinTextField.trailingAnchor.constraint(equalTo: footerView.trailingAnchor, constant: -16),
-            sinTextField.topAnchor.constraint(equalTo: footerView.topAnchor, constant: 8),
-            sinTextField.heightAnchor.constraint(equalToConstant: 40),
-            
-            sinSubmitButton.topAnchor.constraint(equalTo: sinTextField.bottomAnchor, constant: 8),
-            sinSubmitButton.centerXAnchor.constraint(equalTo: footerView.centerXAnchor),
-            sinSubmitButton.heightAnchor.constraint(equalToConstant: 40),
-            sinSubmitButton.widthAnchor.constraint(equalToConstant: 100)
-        ])
-        // Define the footer View of tableview
-        tableView.tableFooterView = footerView
-        
-        // Add Action to Button
-        sinSubmitButton.addTarget(self, action: #selector(addSin), for: .touchUpInside)
+    @objc func markSin(_ sender: UIButton) {
+        let sinIndex = sender.tag
+        let sin = viewModel.savedSins[sinIndex] // Obtém o pecado correspondente ao índice do botão
+        viewModel.markSin(sin)
     }
     
-    @objc private func addSin() {
-        //verify if the textfield is not Empty
-        guard let newSin = sinTextField.text, !newSin.isEmpty else {
-            // If empty, does Nothing
+    @objc func unmarkSin(_ sender: UIButton) {
+        let sinIndex = sender.tag
+        let committedSin = viewModel.committedSins[sinIndex] // Obtém o SinsInExamination correspondente ao índice do botão
+        
+        // Acessa o pecado a partir do SinsInExamination
+        if let sinsArray = committedSin.sins?.allObjects as? [Sin], let firstSin = sinsArray.first {
+            viewModel.unmarkSin(firstSin) // Passa o primeiro pecado para o método unmarkSin
+        }
+    }
+    
+    @objc func addSin(_ sender: UIButton) {
+        guard let sinDescription = sinDescriptionTextField.text, !sinDescription.isEmpty else {
+            showAlert(with: "Por favor, digite uma descrição.")
             return
         }
-        
-        //Create a UIAlertController para escolher uma categoria
-        let alertController = UIAlertController(title: "Choose a category", message: "You can choose a category to add a sin or create a new one", preferredStyle: .alert)
-        
-        //botao pra escolher a Categoria Existente
-        alertController.addAction(UIAlertAction(title: "Existing Category", style: .default, handler: { _ in
-            self.chooseExistingCategory(for: newSin)
-        }))
-        
-        //Botao para criar uma nova categoria
-        alertController.addAction(UIAlertAction(title: "New Category", style: .default, handler: { _ in
-            self.addNewCategory(for: newSin)
-        }))
-        
-        //botao para cancelar
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        //Apresentar o UIAlertController
-        present(alertController, animated: true, completion: nil)
-        
-        //Clean Text Field
-        sinTextField.text = ""
+        viewModel.addSin(with: sinDescription)
+        sinDescriptionTextField.text = "" // Limpa o campo de texto
+    }
+}
+
+// MARK: - UITableViewDataSource e UITableViewDelegate
+
+extension ConsciousnessExamViewController: UITableViewDataSource, UITableViewDelegate {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return tableView == savedSinsTableView ? mandaments.count : 1 // Apenas uma seção para pecados confessados
     }
     
-    private func chooseExistingCategory(for newSin: String) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Desmarca a célula após a seleção para remover a marcação visual
+        tableView.deselectRow(at: indexPath, animated: true)
         
-        guard let viewModel = viewModel else { return }
-        
-        // Criar um UIAlertController com as opções de categorias
-        let cateforyAlertController = UIAlertController(title: "Choose a category", message: "You can choose a category to add a sin or create a new one", preferredStyle: .alert)
-        
-        //Adiciona uma opcao para cada categoria existente
-        for commandment in viewModel.commandments {
-            cateforyAlertController.addAction(UIAlertAction(title: commandment.title, style: .default, handler: { _ in
-                self.addSinToCategory(newSin, categoryTitle: commandment.title)
-            }))
-        }
-        // Apresentar o UIAlertController
-        present(cateforyAlertController, animated: true, completion: nil)
-    }
-    
-    
-    //Func to add sin to existing category
-    private func addSinToCategory(_ newSin: String, categoryTitle: String) {
-        
-        guard let viewModel = viewModel else { return }
-        
-        //Encontrar a categoria correspondente para add o pecado
-        if let index = viewModel.commandments.firstIndex(where: {$0.title == categoryTitle}) {
-            viewModel.commandments[index].sins.append(newSin)
-            tableView.reloadData()
-            
-            //Scroll to the last line added
-            let lastIndexPath = IndexPath(row: viewModel.commandments[index].sins.count - 1, section: index)
-            tableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
-        }
-    }
-    
-    private func addNewCategory(for newSin: String) {
-        // Criar um UIAlertController para inserir o título e descrição da nova categoria
-        let newCategoryAlertController = UIAlertController(title: "New category", message: "Enter a title for the new category", preferredStyle: .alert)
-        
-        // Adicionar um campo de texto para o título da categoria
-        newCategoryAlertController.addTextField { textField in
-            textField.placeholder = "Category Title"
-        }
-        
-        // Adicionar um campo de texto para a descrição da categoria
-        newCategoryAlertController.addTextField { textField in
-            textField.placeholder = "Category Description"
-        }
-        
-        // Botão para criar a nova categoria
-        newCategoryAlertController.addAction(UIAlertAction(title: "Create", style: .default, handler: { [weak self] _ in
-            guard let title = newCategoryAlertController.textFields?.first?.text, !title.isEmpty,
-                  let description = newCategoryAlertController.textFields?[1].text, !description.isEmpty else {
-                return // Se os campos estiverem vazios, não faz nada
+        if tableView == savedSinsTableView {
+            let mandament = mandaments[indexPath.section]
+            if let sin = groupedSins[mandament]?[indexPath.row] {
+                if viewModel.isSinMarked(sin) {
+                    // Se o pecado já está marcado, desmarque-o
+                    viewModel.unmarkSin(sin)
+                    print("\(sin.sinDescription ?? "") foi desmarcado.")
+                } else {
+                    // Se o pecado não está marcado, marque-o
+                    viewModel.markSin(sin)
+                    print("\(sin.sinDescription ?? "") foi marcado.")
+                }
             }
-            
-            guard let viewModel = self?.viewModel else { return }
-            
-            //cria yma nova categoria com o pecado adicionado
-            let newCommandment = Commandment(title: title, description: description, sins: [newSin])
-            viewModel.commandments.append(newCommandment)
-            
-            //reload table
-            self?.tableView.reloadData()
-            
-            //Scroll para a nova seção (última seção)
-            let lastSectionIndex = (viewModel.commandments.count) - 1
-            let lastIndexPath = IndexPath(row: 0, section: lastSectionIndex)
-            self?.tableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
-        }))
-        
-        //botao de cancelar
-        newCategoryAlertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        //apresentar o UIAlertController
-        present(newCategoryAlertController, animated: true, completion: nil)
-    }
-    
-    //MARK: Keyboard Functions
-    @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            let keyboardHeight = keyboardSize.height
-            let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
-            tableView.contentInset = contentInsets
-            tableView.scrollIndicatorInsets = contentInsets
-            
-            // Se quiser que o TextField esteja visível ao aparecer o teclado
-            if let activeField = tableView.tableFooterView {
-                let visibleRect = self.view.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0))
-                if !visibleRect.contains(activeField.frame.origin) {
-                    tableView.scrollRectToVisible(activeField.frame, animated: true)
+        } else {
+            let committedSin = viewModel.committedSins[indexPath.row]
+            if let sinsArray = committedSin.sins?.allObjects as? [Sin], let firstSin = sinsArray.first {
+                if viewModel.isSinMarked(firstSin) {
+                    viewModel.unmarkSin(firstSin)
+                    print("\(firstSin.sinDescription ?? "") foi desmarcado.")
+                } else {
+                    viewModel.markSin(firstSin)
+                    print("\(firstSin.sinDescription ?? "") foi marcado.")
                 }
             }
         }
     }
     
-    @objc func keyboardWillHide(notification: NSNotification) {
-        let contentInsets = UIEdgeInsets.zero
-        tableView.contentInset = contentInsets
-        tableView.scrollIndicatorInsets = contentInsets
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableView == savedSinsTableView {
+            let mandament = mandaments[section]
+            return groupedSins[mandament]?.count ?? 0 // Número de pecados para o mandamento específico
+        } else {
+            return viewModel.committedSins.count // Acesso à propriedade pública
+        }
     }
     
-    //Dissmiss the keyboard
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SinCell", for: indexPath)
+
+        if tableView == savedSinsTableView {
+            let mandament = mandaments[indexPath.section]
+            if let sin = groupedSins[mandament]?[indexPath.row] {
+                cell.textLabel?.text = sin.sinDescription // Acesso à descrição do pecado
+                
+                // Verifica se o pecado está marcado
+                if viewModel.isSinMarked(sin) {
+                    cell.textLabel?.textColor = .red // Se o pecado estiver marcado, mude a cor para vermelho
+                } else {
+                    cell.textLabel?.textColor = .label // Caso contrário, use a cor padrão
+                }
+
+                // Adiciona botão de marcar
+                let markButton = UIButton(type: .system)
+                markButton.setTitle("Marcar", for: .normal)
+                markButton.tag = indexPath.row
+                markButton.addTarget(self, action: #selector(markSin(_:)), for: .touchUpInside)
+                cell.accessoryView = markButton
+            }
+        } else {
+            let committedSin = viewModel.committedSins[indexPath.row]
+            if let sinsArray = committedSin.sins?.allObjects as? [Sin], let firstSin = sinsArray.first {
+                cell.textLabel?.text = firstSin.sinDescription // Exibe a descrição do pecado confessado
+                cell.textLabel?.textColor = .label // Cor padrão para pecados confessados
+            }
+
+            // Adiciona botão de desmarcar
+            let unmarkButton = UIButton(type: .system)
+            unmarkButton.setTitle("Desmarcar", for: .normal)
+            unmarkButton.tag = indexPath.row
+            unmarkButton.addTarget(self, action: #selector(unmarkSin(_:)), for: .touchUpInside)
+            cell.accessoryView = unmarkButton
+        }
+
+        return cell
     }
+
     
-    //Observe keyboard notifications
-    private func setupKeyboard() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    //Remove the observers from Keyboard
-    deinit {
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    //add gesture to Hide keyboard when touch outside
-    private func setupTapGesture() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        tapGesture.cancelsTouchesInView = false
-        view.addGestureRecognizer(tapGesture)
-    }
-    
-    //Hide Keyboard when return is pressed
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if tableView == savedSinsTableView {
+            return mandaments[section] // Retorna o mandamento como título da seção
+        } else {
+            return "Pecados Confessados"
+        }
     }
 }
