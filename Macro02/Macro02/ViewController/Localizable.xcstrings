@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "Aa" : {
+
+    },
     "ABOUT VIEW" : {
 
     },
@@ -8,6 +11,7 @@
 
     },
     "Clique em mim e eu clicarei de volta" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -17,13 +21,16 @@
         }
       }
     },
-    "CONFESSION VIEW" : {
+    "Counsciousness Exam" : {
 
     },
     "HOME VIEW" : {
 
     },
-    "OK TEXTO" : {
+    "Liturgia Diária" : {
+
+    },
+    "Prayers" : {
 
     }
   },

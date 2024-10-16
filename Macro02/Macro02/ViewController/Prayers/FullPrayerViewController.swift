@@ -12,15 +12,19 @@ import Combine
 class FullPrayerViewController: UIViewController {
     
     @ObservedObject var viewModel: PrayersViewModel
+    var coordinator: PrayersCoordinator?
     
     var prayerTitle: UILabel!
     var prayerText: UILabel!
     var optionsBt: UIBarButtonItem!
     
+    var prayer: Prayer
+    
     var cancellables = Set<AnyCancellable>()
     
-    init(viewModel: PrayersViewModel) {
+    init(viewModel: PrayersViewModel, prayer: Prayer) {
         self.viewModel = viewModel
+        self.prayer = prayer
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -37,12 +41,13 @@ class FullPrayerViewController: UIViewController {
         setupOptionsButton()
         constraints()
         
-        // Observando as mudanças no tamanho da fonte
-        viewModel.$fontSize
+        self.viewModel.$fontSize
+            .receive(on: RunLoop.main)
             .sink { [weak self] newSize in
                 self?.updateFontSize(newSize)
             }
             .store(in: &cancellables)
+        
     }
     
     private func setupLabels() {
@@ -50,8 +55,8 @@ class FullPrayerViewController: UIViewController {
         self.prayerTitle = UILabel()
         self.prayerText = UILabel()
         
-        prayerTitle.text = viewModel.selectedPrayer?.title
-        prayerText.text = viewModel.selectedPrayer?.content
+        prayerTitle.text = prayer.title
+        prayerText.text = prayer.content
         
         prayerTitle.textColor = .black
         prayerText.textColor = .black
@@ -94,9 +99,7 @@ class FullPrayerViewController: UIViewController {
     
     
     @objc private func openOptionsModal() {
-        let modalVC = PrayerOptionsModalViewController(viewModel: viewModel)
-        modalVC.modalPresentationStyle = .pageSheet
-        present(modalVC, animated: true)
+        self.coordinator?.navigateToModal(vc: self)
     }
     
 }

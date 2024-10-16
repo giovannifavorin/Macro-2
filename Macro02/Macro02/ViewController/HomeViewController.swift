@@ -9,69 +9,79 @@ import UIKit
 import SwiftUI
 
 class HomeViewController: UIViewController {
+
+    var homeView: HomeView!
+    var coordinator: HomeCoordinator?
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        homeView = HomeView(frame: self.view.bounds)
+        homeView.configureButtonTargets(self, consciousnessSelector: #selector(navigateToConsciousnessExam), prayersSelector: #selector(navigateToPrayers))
+        
+        self.view.addSubview(homeView)
+    }
     
-    @ObservedObject var viewModel: HomeViewModel
-    var counsExamBt: UIButton!
-    var prayersBt: UIButton!
+    @objc private func navigateToConsciousnessExam() {
+        self.coordinator?.handleNavigation(.consciousnessExam)
+    }
+    
+    @objc private func navigateToPrayers() {
+        self.coordinator?.handleNavigation(.prayers)
+    }
+}
+
+class HomeView: UIView {
+    
+    var counsExamBt: ButtonComponent!
+    var prayersBt: ButtonComponent!
     var label: TextComponent!
     
-    init(viewModel: HomeViewModel) {
-        self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.backgroundColor = .white
+        
+        setupLabel()
+        setupBts()
+        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        view.backgroundColor = .white
+    private func setupLabel() {
         label = TextComponent("HOME VIEW")
         label.font = UIFont.setCustomFont(.titulo1)
-        
-        view.addSubview(label)
-        
-        setupBts()
-        constraints()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(label)
     }
     
     private func setupBts() {
-        counsExamBt = UIButton()
-        counsExamBt.setTitle("Counsciousness Exam", for: .normal)
+        counsExamBt = ButtonComponent("Counsciousness Exam")
         counsExamBt.setTitleColor(.systemBlue, for: .normal)
-        counsExamBt.addTarget(self, action: #selector(navigateToCounsciousnessExam), for: .touchUpInside)
-        counsExamBt.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(counsExamBt)
+        self.addSubview(counsExamBt)
         
-        prayersBt = UIButton()
-        prayersBt.setTitle("Prayers", for: .normal)
+        prayersBt = ButtonComponent("Prayers")
         prayersBt.setTitleColor(.systemBlue, for: .normal)
-        prayersBt.addTarget(self, action: #selector(navigateToPrayers), for: .touchUpInside)
-        prayersBt.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(prayersBt)
+        self.addSubview(prayersBt)
     }
     
-    private func constraints() {
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            label.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             
-            counsExamBt.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            counsExamBt.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             counsExamBt.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 16),
             
-            prayersBt.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            prayersBt.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             prayersBt.topAnchor.constraint(equalTo: counsExamBt.bottomAnchor, constant: 8)
         ])
     }
     
-    // MARK: - Navigation #selector methods
-    @objc private func navigateToCounsciousnessExam() {
-        self.viewModel.selectedNavigation = .counsciousnessExam
-    }
-    
-    @objc private func navigateToPrayers() {
-        self.viewModel.selectedNavigation = .prayers
+    func configureButtonTargets(_ target: Any, consciousnessSelector: Selector, prayersSelector: Selector) {
+        counsExamBt.addTarget(target, action: consciousnessSelector, for: .touchUpInside)
+        prayersBt.addTarget(target, action: prayersSelector, for: .touchUpInside)
     }
 }

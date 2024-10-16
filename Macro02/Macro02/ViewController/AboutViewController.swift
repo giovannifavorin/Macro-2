@@ -9,17 +9,10 @@ import UIKit
 
 class AboutViewController: UIViewController {
 
-    var viewModel: AboutViewModel
+    var viewModel: AboutViewModel?
     var label: TextComponent!
     
-    init(viewModel: AboutViewModel) {
-        self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    var coordinator: AboutCoordinator?
     
     override func viewDidLoad() {
         super.viewDidLoad()
