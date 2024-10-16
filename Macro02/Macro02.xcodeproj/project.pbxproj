@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -43,6 +43,8 @@
 		B8F8DD182C8B8EB600D24769 /* Macro02Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F8DD172C8B8EB600D24769 /* Macro02Tests.swift */; };
 		B8F8DD222C8B8EB600D24769 /* Macro02UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F8DD212C8B8EB600D24769 /* Macro02UITests.swift */; };
 		B8F8DD242C8B8EB600D24769 /* Macro02UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F8DD232C8B8EB600D24769 /* Macro02UITestsLaunchTests.swift */; };
+		F1BE73FB2CB86CD000989E80 /* MainTabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BE73FA2CB86CC800989E80 /* MainTabBarCoordinator.swift */; };
+		F1BE74022CB873EF00989E80 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BE74012CB873ED00989E80 /* OnboardingCoordinator.swift */; };
 		F1EDE14A2C9CD045007A6403 /* ConsciousnessExamCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EDE1492C9CD043007A6403 /* ConsciousnessExamCoordinator.swift */; };
 		F1EDE1502C9CD126007A6403 /* ConsciousnessExamViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EDE14F2C9CD120007A6403 /* ConsciousnessExamViewModel.swift */; };
 		F1EDE1522C9DFE9B007A6403 /* PrayersCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EDE1512C9DFE95007A6403 /* PrayersCoordinator.swift */; };
@@ -119,6 +121,8 @@
 		B8F8DD1D2C8B8EB600D24769 /* Macro02UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Macro02UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8F8DD212C8B8EB600D24769 /* Macro02UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macro02UITests.swift; sourceTree = "<group>"; };
 		B8F8DD232C8B8EB600D24769 /* Macro02UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macro02UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		F1BE73FA2CB86CC800989E80 /* MainTabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarCoordinator.swift; sourceTree = "<group>"; };
+		F1BE74012CB873ED00989E80 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		F1EDE1492C9CD043007A6403 /* ConsciousnessExamCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousnessExamCoordinator.swift; sourceTree = "<group>"; };
 		F1EDE14F2C9CD120007A6403 /* ConsciousnessExamViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousnessExamViewModel.swift; sourceTree = "<group>"; };
 		F1EDE1512C9DFE95007A6403 /* PrayersCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayersCoordinator.swift; sourceTree = "<group>"; };
@@ -136,6 +140,10 @@
 		F1F6BE772C9B648700F4C7FF /* BibleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BibleViewModel.swift; sourceTree = "<group>"; };
 		F1F6BE792C9B649600F4C7FF /* AboutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		F1BE740D2CB9A33B00989E80 /* Onboarding */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Onboarding; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		B8F8DCFA2C8B8EB500D24769 /* Frameworks */ = {
@@ -185,6 +193,7 @@
 		4AEF3AA32CADBFE200BEB337 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				F1BE740D2CB9A33B00989E80 /* Onboarding */,
 				4AEF3A962CADBFE200BEB337 /* CounsciousnessExam */,
 				4AEF3A9B2CADBFE200BEB337 /* Prayers */,
 				4AEF3A9C2CADBFE200BEB337 /* AboutViewController.swift */,
@@ -193,8 +202,8 @@
 				4AEF3A9F2CADBFE200BEB337 /* DailyLiturgyViewController.swift */,
 				4A166D162CC032360033B9A2 /* DailyLiturgyView.swift */,
 				4AEF3AA02CADBFE200BEB337 /* HomeViewController.swift */,
-				4AEF3AA12CADBFE200BEB337 /* Localizable.xcstrings */,
 				4AEF3AA22CADBFE200BEB337 /* MyConfessionViewController.swift */,
+				4AEF3AA12CADBFE200BEB337 /* Localizable.xcstrings */,
 				B8363E132CB854240083D1D3 /* DataTests */,
 			);
 			path = ViewController;
@@ -271,6 +280,8 @@
 		B8783F7F2C99F2C600661148 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
+				F1BE74012CB873ED00989E80 /* OnboardingCoordinator.swift */,
+				F1BE73FA2CB86CC800989E80 /* MainTabBarCoordinator.swift */,
 				B8783F812C99F32E00661148 /* CoordinatorProtocol.swift */,
 				F1F6BE422C99FDCC00F4C7FF /* ApplicationCoordinator.swift */,
 				F1F6BE682C9B60B700F4C7FF /* Tab Bar Coordinators */,
@@ -374,6 +385,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				F1BE740D2CB9A33B00989E80 /* Onboarding */,
 			);
 			name = Macro02;
 			productName = Macro02;
@@ -502,6 +516,7 @@
 				B8783F862C99F44200661148 /* DataManager.swift in Sources */,
 				F1EDE1522C9DFE9B007A6403 /* PrayersCoordinator.swift in Sources */,
 				B8783F822C99F32E00661148 /* CoordinatorProtocol.swift in Sources */,
+				F1BE74022CB873EF00989E80 /* OnboardingCoordinator.swift in Sources */,
 				B8F8DD012C8B8EB500D24769 /* AppDelegate.swift in Sources */,
 				AF9C0FDA2CA1E5F3008187EC /* FontStyle.swift in Sources */,
 				AF9C0FDC2CA1E5F3008187EC /* setDynamicFont.swift in Sources */,
@@ -533,6 +548,7 @@
 				4AEF3AA82CADBFE200BEB337 /* PrayersDetailViewController.swift in Sources */,
 				4AEF3AA92CADBFE200BEB337 /* AboutViewController.swift in Sources */,
 				4AEF3AAA2CADBFE200BEB337 /* BibleViewController.swift in Sources */,
+				F1BE73FB2CB86CD000989E80 /* MainTabBarCoordinator.swift in Sources */,
 				4AEF3AAB2CADBFE200BEB337 /* ConfessionAuthViewController.swift in Sources */,
 				4AEF3AAC2CADBFE200BEB337 /* DailyLiturgyViewController.swift in Sources */,
 				4AEF3AAD2CADBFE200BEB337 /* HomeViewController.swift in Sources */,

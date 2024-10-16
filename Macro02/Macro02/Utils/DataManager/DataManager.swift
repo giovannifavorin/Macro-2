@@ -26,7 +26,7 @@ class DataManager {
     }
     
     private func preloadDataIfNeeded() {
-        if fetchAllSins()?.isEmpty ?? true {
+        if fetchAllSins().isEmpty {
             insertMockSins()
         }
     }
@@ -155,36 +155,48 @@ class DataManager {
     }
     
     // MARK: - READ
-    public func fetchAllConfessions() -> [Confession]? {
+    public func fetchAllConfessions() -> [Confession] {
         let request: NSFetchRequest<Confession> = Confession.fetchRequest()
         
         do {
             return try context.fetch(request)
         } catch {
             print("Erro ao buscar confissões: \(error)")
-            return nil
+            return []
         }
     }
-    
-    public func fetchAllExams(for confession: Confession) -> [ConscienceExam]? {
-        return confession.conscienceExams?.allObjects as? [ConscienceExam]
+
+    public func fetchAllExams(for confession: Confession) -> [ConscienceExam] {
+        return confession.conscienceExams?.allObjects as? [ConscienceExam] ?? []
     }
-    
-    public func fetchAllSinsInExaminations(for exam: ConscienceExam) -> [SinsInExamination]? {
-        return exam.sinsInExamination?.allObjects as? [SinsInExamination]
+
+    public func fetchAllSinsInExaminations(for exam: ConscienceExam) -> [SinsInExamination] {
+        return exam.sinsInExamination?.allObjects as? [SinsInExamination] ?? []
     }
-    
-    func fetchAllSins() -> [Sin]? {
+
+    public func fetchAllSins() -> [Sin] {
         let fetchRequest: NSFetchRequest<Sin> = Sin.fetchRequest()
         
         do {
             return try context.fetch(fetchRequest)
         } catch {
             print("Failed to fetch sins: \(error)")
+            return []
+        }
+    }
+
+    public func fetchLatestConfession() -> Confession? {
+        let request: NSFetchRequest<Confession> = Confession.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "confessionDate", ascending: false)]
+        request.fetchLimit = 1
+        
+        do {
+            return try context.fetch(request).first
+        } catch {
+            print("Erro ao buscar a última confissão: \(error)")
             return nil
         }
     }
-    
     
     // MARK: - UPDATE
     public func updateConfession(_ confession: Confession, date: Date? = nil, penance: String? = nil) {
@@ -200,6 +212,13 @@ class DataManager {
         if let sinDescription = sinDescription { sin.sinDescription = sinDescription }
         
         saveContext()
+    }
+    
+    public func addExamToConfession(confession: Confession, exam: ConscienceExam) {
+        let exams = confession.mutableSetValue(forKey: "conscienceExams") // Altere o nome do relacionamento conforme necessário
+        exams.add(exam)
+        exam.confession = confession // Assumindo que você tenha uma propriedade de relacionamento `confession` no exame
+        saveContext() // Salva as alterações
     }
     
     // MARK: - DELETE

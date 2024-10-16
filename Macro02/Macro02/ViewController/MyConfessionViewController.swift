@@ -25,9 +25,6 @@ class MyConfessionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Carrega os pecados salvos
-        self.viewModel.fetchSavedSins()
 
         view.backgroundColor = .white
         

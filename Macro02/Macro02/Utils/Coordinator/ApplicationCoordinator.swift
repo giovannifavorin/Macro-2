@@ -1,107 +1,53 @@
-//
-//  ApplicationCoordinator.swift
-//  Macro02
-//
-//  Created by Victor Dantas on 17/09/24.
-//
-
 import UIKit
 
-// Coordinator principal, o ponto inicial do app -- TAB BAR
+// Coordinator principal do aplicativo, responsável por decidir qual fluxo iniciar (onboarding ou main)
 class ApplicationCoordinator: Coordinator {
     
-    // "window" passada pelo SceneDelegate
-    let window: UIWindow
-    var rootViewController: UITabBarController
+    // Referência à janela principal do app (passada pelo SceneDelegate)
+    private let window: UIWindow
+    private let onboardingService: OnboardingServiceProtocol // Serviço de onboarding para verificar o estado
     
+    // Inicializador que recebe a janela e o serviço de onboarding
     init(window: UIWindow) {
-        self.window = window // pede a window como parâmetro para o SceneDelegate
-        self.rootViewController = UITabBarController() // Inicializa uma Tab Bar Controller como rootViewController
+        self.window = window
+        self.onboardingService = OnboardingService()
     }
     
+    // Método principal que inicia o fluxo do aplicativo
     func start() {
-        // DEBUG
         print("Application Coordinator --- STARTED")
         
-        // Define a rootViewController da window como a própria rootViewController (que é a Tab Bar)
-        self.window.rootViewController = self.rootViewController
-        // Basicamente faz as coisas aparecerem, tem que ter
+        // Verifica se o usuário já viu o onboarding usando o serviço de onboarding
+        if onboardingService.hasSeenOnboarding() {
+            self.startMainTabFlow() // Se já viu, inicia o fluxo principal
+        } else {
+            self.startOnboardingFlow() // Se não viu, inicia o onboarding
+        }
+        
+        // Faz a janela ser visível
         self.window.makeKeyAndVisible()
-        
-        
-        
-        let sinViewModel = SinViewModel() // Instância única da SinViewModel
-        
-        
-        
-        // MARK: Instância dos Coordinators que irão compor a Tab Bar
-        // Home Coordinator
-        let homeCoordinator = HomeCoordinator(sinViewModel: sinViewModel)
-        homeCoordinator.start()
-        
-        // Bible Coordinator
-        let bibleCoordinator = BibleCoordinator()
-        bibleCoordinator.start()
-        
-        // Confession Coordinator
-        let confessionCoordinator = ConfessionCoordinator(viewModel: sinViewModel)
-        confessionCoordinator.start()
-        
-        // Daily Liturgy Coordinator
-        let dailyLiturgyCoordinator = DailyLiturgyCoordinator()
-        dailyLiturgyCoordinator.start()
-        
-        // About Coordinator
-        let aboutCoordinator = AboutCoordinator()
-        aboutCoordinator.start()
-        
-        
-        
-        // navigationControllers de cada Coordinator
-        let homeNavController = homeCoordinator.navigationController
-        let bibleNavController = bibleCoordinator.navigationController
-        let confessionNavController = confessionCoordinator.navigationController
-        let dailyLiturgyNavController = dailyLiturgyCoordinator.navigationController
-        let aboutNavController = aboutCoordinator.navigationController
-        
-        // Configurando a aparência dos Tab Bar Itens
-        setupTabBarItems(vc: homeNavController,
-                         title: "Home",
-                         imageName: "house",
-                         selectedImageName: "house.fill")
-        
-        setupTabBarItems(vc: confessionNavController,
-                         title: "Confession",
-                         imageName: "book.pages",
-                         selectedImageName: "book.pages.fill")
-        
-        setupTabBarItems(vc: dailyLiturgyNavController,
-                         title: "Liturgy",
-                         imageName: "sun.max",
-                         selectedImageName: "sun.max.fill")
-        
-        setupTabBarItems(vc: bibleNavController,
-                         title: "Bible",
-                         imageName: "book",
-                         selectedImageName: "book.fill")
-        
-        setupTabBarItems(vc: aboutNavController,
-                         title: "About",
-                         imageName: "line.3.horizontal.circle",
-                         selectedImageName: "line.3.horizontal.circle.fill")
-        
-        
-        
-        // Define as navigations na Tab Bar
-        self.rootViewController.viewControllers = [dailyLiturgyNavController, confessionNavController, homeNavController, bibleNavController, aboutNavController]
-        
     }
     
-    // Função auxiliar para alterar a aparência dos itens Tab Bar
-    private func setupTabBarItems(vc: UIViewController, title: String, imageName: String, selectedImageName: String) {
-        let defaultImage = UIImage(systemName: imageName) ?? UIImage()
-        let selectedImage = UIImage(systemName: selectedImageName) ?? UIImage()
-        let tabBarItem = UITabBarItem(title: title, image: defaultImage, selectedImage: selectedImage)
-        vc.tabBarItem = tabBarItem
+    // Método que inicia o fluxo principal (Tab Bar)
+    private func startMainTabFlow() {
+        let mainTabCoordinator = MainTabBarCoordinator() // Inicializa o Coordinator da Tab Bar
+        mainTabCoordinator.start() // Inicia o Coordinator da Tab Bar
+        
+        // Define o rootViewController da janela como a Tab Bar Controller
+        self.window.rootViewController = mainTabCoordinator.tabBarController
+    }
+    
+    // Método que inicia o fluxo de onboarding
+    private func startOnboardingFlow() {
+        let onboardingCoordinator = OnboardingCoordinator(onboardingService: onboardingService) // Passa o serviço para o Coordinator de onboarding
+        onboardingCoordinator.start() // Inicia o Onboarding Coordinator
+        
+        // Define o rootViewController da janela como o OnboardingPageViewController
+        self.window.rootViewController = onboardingCoordinator.rootViewController
+        
+        // Quando o onboarding for concluído, inicia o fluxo principal
+        onboardingCoordinator.onboardingDidFinish = { [weak self] in
+            self?.startMainTabFlow()
+        }
     }
 }
