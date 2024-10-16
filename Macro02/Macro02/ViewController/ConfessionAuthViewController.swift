@@ -78,6 +78,7 @@ class ConfessionAuthView: UIView {
 
 /// Extensions com constraints
 extension ConfessionAuthView {
+    /// func com constraints
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             label.centerXAnchor.constraint(equalTo: self.centerXAnchor),
