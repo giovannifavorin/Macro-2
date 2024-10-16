@@ -34,6 +34,11 @@ class MyConfessionViewController: UIViewController {
         loadSins()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadSins()  // Atualiza os dados sempre que a tela aparecer
+    }
+    
     private func setupTableView() {
         tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
