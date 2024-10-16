@@ -195,6 +195,7 @@ class ConsciousnessExamViewController: UIViewController, SinViewModelDelegate {
         }
         viewModel.addSin(with: sinDescription)
         sinDescriptionTextField.text = "" // Limpa o campo de texto
+        viewModel.saveExamToConfession()
     }
 }
 

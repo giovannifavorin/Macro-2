@@ -165,6 +165,33 @@ class DataManager {
             return []
         }
     }
+    
+    public func fetchAllCommittedSins() -> [Sin] {
+        var committedSins: [Sin] = []
+        
+        // Fetch all confessions
+        let confessions = fetchAllConfessions()
+        
+        // Loop through each confession
+        for confession in confessions {
+            // Fetch all conscience exams related to the confession
+            let exams = fetchAllExams(for: confession)
+            
+            for exam in exams {
+                // Fetch all sins in examination related to the exam
+                let sinsInExaminations = fetchAllSinsInExaminations(for: exam)
+                
+                for sinInExamination in sinsInExaminations {
+                    // Access the sins related to the specific examination of sins
+                    if let sins = sinInExamination.sins?.allObjects as? [Sin] {
+                        committedSins.append(contentsOf: sins)
+                    }
+                }
+            }
+        }
+        
+        return committedSins
+    }
 
     public func fetchAllExams(for confession: Confession) -> [ConscienceExam] {
         return confession.conscienceExams?.allObjects as? [ConscienceExam] ?? []
