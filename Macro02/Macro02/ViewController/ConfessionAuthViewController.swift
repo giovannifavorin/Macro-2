@@ -9,9 +9,10 @@ import UIKit
 
 class ConfessionAuthViewController: UIViewController {
     
-    var authManager: AuthManager 
+    var authManager: AuthManager
     var viewModel: SinViewModel
     var coordinator: ConfessionCoordinator?
+    var confessionAuthView: ConfessionAuthView!
     
     init(authManager: AuthManager, viewModel: SinViewModel) {
         self.authManager = authManager
@@ -23,42 +24,70 @@ class ConfessionAuthViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var label: UILabel!
-    var button: UIButton!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = .white
-        label = UILabel()
-        label.text = "CONFESSION VIEW"
-        label.textColor = .black
-        label.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(label)
         
-        setupBt()
-        constraints()
-    }
-    
-    private func setupBt() {
-        self.button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
-        button.center = view.center
-        button.setTitle("Authorize", for: .normal)
-        button.backgroundColor = .darkGray
-        button.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+        confessionAuthView = ConfessionAuthView(frame: self.view.bounds)
+        confessionAuthView.configureButtonTarget(self, action: #selector(didTapButton))
         
-        view.addSubview(button)
-    }
-    
-    private func constraints() {
-        NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        ])
+        self.view.addSubview(confessionAuthView)
     }
     
     @objc private func didTapButton() {
         authManager.authenticateWithFaceID()
     }
-
 }
+
+
+import UIKit
+
+class ConfessionAuthView: UIView {
+    
+    var label: UILabel!
+    var button: UIButton!
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.backgroundColor = .white
+        setupLabel()
+        setupButton()
+        setupConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupLabel() {
+        label = UILabel()
+        label.text = "CONFESSION VIEW"
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(label)
+    }
+    
+    private func setupButton() {
+        button = UIButton()
+        button.setTitle("Authorize", for: .normal)
+        button.backgroundColor = .darkGray
+        button.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(button)
+    }
+    
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            label.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            label.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            
+            button.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            button.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 16),
+            button.widthAnchor.constraint(equalToConstant: 200),
+            button.heightAnchor.constraint(equalToConstant: 50)
+        ])
+    }
+    
+    func configureButtonTarget(_ target: Any, action: Selector) {
+        button.addTarget(target, action: action, for: .touchUpInside)
+    }
+}
+
