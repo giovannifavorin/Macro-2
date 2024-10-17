@@ -25,3 +25,4 @@ class DailyLiturgyCoordinator: Coordinator {
         self.rootViewController.coordinator = self
     }
 }
+

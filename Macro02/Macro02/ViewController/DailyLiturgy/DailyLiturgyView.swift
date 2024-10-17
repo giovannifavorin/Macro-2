@@ -10,8 +10,8 @@ import SwiftUI
 
 struct DailyLiturgyView: View {
     @ObservedObject var viewModel: DailyLiturgyViewModel
-    @State private var isModalVisible: Bool = false
-    
+    @State private var isTextOptionsVisible = false // Controla a visibilidade do modal
+
     var body: some View {
         VStack {
             HStack{
@@ -20,17 +20,16 @@ struct DailyLiturgyView: View {
                     .padding(.leading, 16)
                 
                 Spacer()
-                
                 Button(action: {
-                    isModalVisible.toggle() // Abre o modal
+                    isTextOptionsVisible.toggle() // Abre o modal de opções de texto
                 }) {
                     Text("Aa")
                         .font(.title2)
                         .padding(.trailing, 16)
                 }
-                .sheet(isPresented: $isModalVisible) {
-                    TextOptionsModalWrapper(viewModel: PrayersViewModel()) // Exibe o modal
-                }
+//                .sheet(isPresented: $isTextOptionsVisible) {
+//                    TextOptionsView(viewModel: viewModel) // Modal com as opções de texto
+//                }
             }
             
             // Sempre exibe o LiturgyCardViewWrapper com fallback se os dados forem nil
@@ -58,7 +57,7 @@ struct DailyLiturgyView: View {
                 Text("Salmos").tag(1)
                 Text("Evangelho").tag(2)
             }
-            .pickerStyle(.segmented)
+            .pickerStyle(SegmentedPickerStyle())
             .padding(.horizontal, 16)
             .onChange(of: viewModel.selectedSegmentIndex) { _ in
                 viewModel.updateLiturgyText()

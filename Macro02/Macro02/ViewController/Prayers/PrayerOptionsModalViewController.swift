@@ -90,3 +90,17 @@ class PrayerOptionsModalViewController: UIViewController {
     }
     
 }
+
+import SwiftUI
+
+struct TextOptionsModalWrapper: UIViewControllerRepresentable {
+    @ObservedObject var viewModel: PrayersViewModel
+
+    func makeUIViewController(context: Context) -> PrayerOptionsModalViewController {
+        return PrayerOptionsModalViewController(viewModel: viewModel)
+    }
+
+    func updateUIViewController(_ uiViewController: PrayerOptionsModalViewController, context: Context) {
+        // Deixe vazio, pois não há necessidade de atualizações dinâmicas.
+    }
+}

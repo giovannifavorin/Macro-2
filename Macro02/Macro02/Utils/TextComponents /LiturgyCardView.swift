@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 /// Card que exibe informações da liturgia na `LiturgyView`.
 ///
@@ -21,6 +22,15 @@ import UIKit
 class LiturgyCardView: UIView {
     
     private var dataLiturgia = String()
+        
+    private let leadingImageView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .systemBlue // Temporário, pode ser alterado para uma imagem depois
+        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner] // Apenas canto superior e inferior esquerdo
+        view.layer.cornerRadius = 8 // Arredondamento do lado leading
+        return view
+    }()
     
     private let weekNumberLabel = TextComponent()
     private let dayNameLabel = TextComponent()
@@ -45,8 +55,11 @@ class LiturgyCardView: UIView {
         layer.borderWidth = 1
         layer.borderColor = UIColor.black.cgColor
         
-        self.weekNumberLabel.setDynamicFont(size: 14, weight: .bold)
-        self.dayNumberLabel.font = UIFont.setCustomFont(.titulo1)
+        self.weekNumberLabel.setDynamicFont(size: 12, weight: .bold)
+        self.dayNumberLabel.setDynamicFont(size: 40, weight: .bold)
+//        self.dayNumberLabel.font = UIFont.setCustomFont(.titulo1)
+
+        addSubview(leadingImageView)
         addSubview(weekNumberLabel)
         addSubview(dayNameLabel)
         addSubview(dayNumberLabel)
@@ -165,29 +178,39 @@ extension LiturgyCardView {
     private func setConstraints() {
         
         NSLayoutConstraint.activate([
-            // Alinha weekNumberLabel ao topo superior esquerdo
+            // Constraints para o quadrado leadingImageView
+            leadingImageView.widthAnchor.constraint(equalToConstant: 60),
+            leadingImageView.heightAnchor.constraint(equalTo: heightAnchor), // Altura igual à da view
+            leadingImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            leadingImageView.topAnchor.constraint(equalTo: topAnchor),
+                    
+            // Alinhando o weekNumberLabel ao lado direito do quadrado
             weekNumberLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
-            weekNumberLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            weekNumberLabel.leadingAnchor.constraint(equalTo: leadingImageView.trailingAnchor, constant: 8),
             
             // Alinhando o dayNameLabel abaixo do weekNumberLabel
-            dayNameLabel.topAnchor.constraint(equalTo: weekNumberLabel.bottomAnchor),
+            dayNameLabel.topAnchor.constraint(equalTo: weekNumberLabel.bottomAnchor, constant: 8),
             dayNameLabel.leadingAnchor.constraint(equalTo: weekNumberLabel.leadingAnchor),
             
             // Posiciona o monthNameLabel ao topo superior direito
-            monthNameLabel.topAnchor.constraint(equalTo: self.topAnchor),
-            monthNameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 8),
+            monthNameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 12),
+            monthNameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -24),
             
             // Posiciona o yearNumberLabel abaixo do monthNameLabel
-            yearNumberLabel.topAnchor.constraint(equalTo: monthNameLabel.bottomAnchor),
-            yearNumberLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 8),
-            
+            yearNumberLabel.topAnchor.constraint(equalTo: monthNameLabel.bottomAnchor, constant: -8),
+            yearNumberLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             
             // Posiciona o dayNumberLabel à esquerda do monthNameLabel
             dayNumberLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            dayNumberLabel.trailingAnchor.constraint(equalTo: monthNameLabel.leadingAnchor, constant: 8),
+            dayNumberLabel.trailingAnchor.constraint(equalTo: monthNameLabel.leadingAnchor, constant: -16),
             
             // Definindo a altura e a distância inferior
-            yearNumberLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16)
+            yearNumberLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -24)
         ])
     }
+
+}
+
+#Preview {
+    DailyLiturgyView(viewModel: DailyLiturgyViewModel())
 }
