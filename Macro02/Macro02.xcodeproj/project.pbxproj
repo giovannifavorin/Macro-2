@@ -11,6 +11,9 @@
 		4A630E922CB87704005A4A1F /* ConsciousnessExamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A630E912CB87704005A4A1F /* ConsciousnessExamView.swift */; };
 		4A87C3542CC6B3D700257127 /* ChaptersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A87C3532CC6B3CF00257127 /* ChaptersViewController.swift */; };
 		4A87C3562CC6B3ED00257127 /* ChaptersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A87C3552CC6B3E400257127 /* ChaptersViewModel.swift */; };
+		4A87C3582CC6E33100257127 /* VersesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A87C3572CC6E32F00257127 /* VersesViewController.swift */; };
+		4A87C35A2CC6E98100257127 /* VersesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A87C3592CC6E97C00257127 /* VersesViewModel.swift */; };
+		4A87C35C2CC6EEA100257127 /* VerseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A87C35B2CC6EE9B00257127 /* VerseViewController.swift */; };
 		4AEB1E0C2CC6AF900093F630 /* bibliaAveMaria.json in Resources */ = {isa = PBXBuildFile; fileRef = 4AEB1E0B2CC6AF900093F630 /* bibliaAveMaria.json */; };
 		4AEB1E0E2CC6B0360093F630 /* BibleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEB1E0D2CC6B0200093F630 /* BibleModel.swift */; };
 		4AEB1E122CC6B0E80093F630 /* BibleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEB1E112CC6B0E50093F630 /* BibleView.swift */; };
@@ -90,6 +93,9 @@
 		4A630E912CB87704005A4A1F /* ConsciousnessExamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousnessExamView.swift; sourceTree = "<group>"; };
 		4A87C3532CC6B3CF00257127 /* ChaptersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChaptersViewController.swift; sourceTree = "<group>"; };
 		4A87C3552CC6B3E400257127 /* ChaptersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChaptersViewModel.swift; sourceTree = "<group>"; };
+		4A87C3572CC6E32F00257127 /* VersesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersesViewController.swift; sourceTree = "<group>"; };
+		4A87C3592CC6E97C00257127 /* VersesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersesViewModel.swift; sourceTree = "<group>"; };
+		4A87C35B2CC6EE9B00257127 /* VerseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerseViewController.swift; sourceTree = "<group>"; };
 		4AEB1E0B2CC6AF900093F630 /* bibliaAveMaria.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = bibliaAveMaria.json; sourceTree = "<group>"; };
 		4AEB1E0D2CC6B0200093F630 /* BibleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BibleModel.swift; sourceTree = "<group>"; };
 		4AEB1E112CC6B0E50093F630 /* BibleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BibleView.swift; sourceTree = "<group>"; };
@@ -187,6 +193,9 @@
 				4AEB1E0D2CC6B0200093F630 /* BibleModel.swift */,
 				4A87C3532CC6B3CF00257127 /* ChaptersViewController.swift */,
 				4A87C3552CC6B3E400257127 /* ChaptersViewModel.swift */,
+				4A87C3572CC6E32F00257127 /* VersesViewController.swift */,
+				4A87C3592CC6E97C00257127 /* VersesViewModel.swift */,
+				4A87C35B2CC6EE9B00257127 /* VerseViewController.swift */,
 			);
 			path = HailMaryBibleJson;
 			sourceTree = "<group>";
@@ -536,6 +545,7 @@
 				F1EDE1562C9E04CB007A6403 /* PrayersViewModel.swift in Sources */,
 				F1F6BE702C9B630200F4C7FF /* BibleCoordinator.swift in Sources */,
 				F1F6BE6C2C9B62B200F4C7FF /* ConfessionCoordinator.swift in Sources */,
+				4A87C3582CC6E33100257127 /* VersesViewController.swift in Sources */,
 				B8E9CC192CA1F1FE00B21598 /* SpiritualPreparation.swift in Sources */,
 				B8783F862C99F44200661148 /* DataManager.swift in Sources */,
 				F1EDE1522C9DFE9B007A6403 /* PrayersCoordinator.swift in Sources */,
@@ -543,6 +553,7 @@
 				F1BE74022CB873EF00989E80 /* OnboardingCoordinator.swift in Sources */,
 				B8F8DD012C8B8EB500D24769 /* AppDelegate.swift in Sources */,
 				AF9C0FDA2CA1E5F3008187EC /* FontStyle.swift in Sources */,
+				4A87C35C2CC6EEA100257127 /* VerseViewController.swift in Sources */,
 				AF9C0FDC2CA1E5F3008187EC /* setDynamicFont.swift in Sources */,
 				AFC862112CA32A7100167ECB /* ButtonComponent.swift in Sources */,
 				AF9C0FDD2CA1E5F3008187EC /* TextComponent.swift in Sources */,
@@ -564,6 +575,7 @@
 				B8F8DD032C8B8EB500D24769 /* SceneDelegate.swift in Sources */,
 				F1F6BE6E2C9B62E900F4C7FF /* DailyLiturgyCoordinator.swift in Sources */,
 				4A87C3562CC6B3ED00257127 /* ChaptersViewModel.swift in Sources */,
+				4A87C35A2CC6E98100257127 /* VersesViewModel.swift in Sources */,
 				B8783F8A2C99F58600661148 /* Model.swift in Sources */,
 				F1F6BE6A2C9B60DD00F4C7FF /* HomeCoordinator.swift in Sources */,
 				F1EDE15A2C9E156A007A6403 /* Prayer.swift in Sources */,

@@ -43,8 +43,6 @@ class BibleView: UIView {
             tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
-            //            titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            //            titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
 }

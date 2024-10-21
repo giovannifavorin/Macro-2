@@ -8,28 +8,50 @@
 import SwiftUI
 
 class BibleViewModel: ObservableObject {
-    @Published var books: [Book] = [] // Updated variable name to English
+    @Published var books: [Book] = []
+    @Published var oldTestament: [Book] = []
+    @Published var newTestament: [Book] = []
     
+//    loadBooks() loads the entire Bible from the JSON file.
     func loadBooks() {
-        // Decode the JSON and load the books
         if let bible = loadBible() {
-            books = bible.oldTestament + bible.newTestament
+            self.oldTestament = bible.oldTestament
+            self.newTestament = bible.newTestament
+            self.books = oldTestament + newTestament
+        } else {
+            print("Failed to load Bible data")
         }
     }
     
-    func load
+//    Get all chapters from a specific book.
+    func getChapters(for book: Book) -> [Chapter] {
+        return book.chapters
+    }
+    
+//    From the selected book, the user picks a chapter, and you list the verses using getVerses(for:).
+    func getVerses(for chapter: Chapter) -> [Verse] {
+        return chapter.verses
+    }
+    
+    /// Get a specific verse by number from a chapter.
+    func getVerse(from chapter: Chapter, number: Int) -> Verse? {
+        return chapter.verses.first { $0.number == number }
+    }
 
+    
+    /// Private method to decode the Bible JSON.
     private func loadBible() -> Bible? {
         guard let url = Bundle.main.url(forResource: "bibliaAveMaria", withExtension: "json") else {
-            print("Failed to locate bibliaAveMaria.json in bundle.")
+            print("JSON file not found")
             return nil
         }
+        
         do {
             let data = try Data(contentsOf: url)
             let decoder = JSONDecoder()
             return try decoder.decode(Bible.self, from: data)
         } catch {
-            print("Failed to load Bible: \(error)")
+            print("Error decoding JSON: \(error)")
             return nil
         }
     }
