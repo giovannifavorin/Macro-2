@@ -8,10 +8,11 @@
 import UIKit
 
 class MyConfessionViewController: UIViewController {
-
+    
     var authManager: AuthManager
     var viewModel: SinViewModel
     var tableView: UITableView!
+    var sins: [Sin] = []
     
     init(authManager: AuthManager, viewModel: SinViewModel) {
         self.authManager = authManager
@@ -25,11 +26,17 @@ class MyConfessionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = .white
         
         setupTableView()
         constraints()
+        loadSins()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadSins()  // Atualiza os dados sempre que a tela aparecer
     }
     
     private func setupTableView() {
@@ -50,27 +57,42 @@ class MyConfessionViewController: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
-
+    
+    private func loadSins() {
+        sins = DataManager.shared.fetchAllCommittedSins()
+        tableView.reloadData()
+    }
 }
 
 extension MyConfessionViewController: UITableViewDataSource, UITableViewDelegate {
     
-    // Retorna o número de pecados salvos
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.savedSins.count
+        return sins.count
     }
     
-    // Configura a célula com a descrição do pecado
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SinCell", for: indexPath)
-        let sin = viewModel.savedSins[indexPath.row]
+        let sin = sins[indexPath.row]
         cell.textLabel?.text = sin.sinDescription
         return cell
     }
     
-    // Se você quiser implementar alguma ação ao selecionar uma célula
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         // Implementar ação de seleção, se necessário
+    }
+}
+
+
+
+public func printAllCommittedSins() {
+    let committedSins = DataManager.shared.fetchAllCommittedSins()
+    
+    for (index, sin) in committedSins.enumerated() {
+        print("Pecado \(index + 1):")
+        print("  Mandamento: \(sin.commandments ?? "N/A")")
+        print("  Descrição do Mandamento: \(sin.commandmentDescription ?? "N/A")")
+        print("  Descrição do Pecado: \(sin.sinDescription ?? "N/A")")
+        print("–––––––––––––––––––––––")
     }
 }
