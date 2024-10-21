@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 struct DailyLiturgyView: View {
+    
     @ObservedObject var viewModel: DailyLiturgyViewModel
     @State private var isModalVisible: Bool = false
     
