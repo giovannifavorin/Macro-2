@@ -40,8 +40,6 @@ struct Liturgia: Decodable {
     }
 }
 
-import Foundation
-
 // Manager genérico para fazer chamadas de API e decodificar qualquer tipo de objeto Decodable
 class APIManager {
     
@@ -76,7 +74,7 @@ class APIManager {
 
             // Tenta converter os dados recebidos para JSON e imprimir
             do {
-                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                if try JSONSerialization.jsonObject(with: data, options: []) is [String: Any] {
 //                    print("Resposta JSON da API: \(json)")
                 } else {
                     print("A resposta não é um dicionário JSON.")
@@ -99,4 +97,3 @@ class APIManager {
         task.resume()
     }
 }
-

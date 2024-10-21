@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A166D172CC032360033B9A2 /* DailyLiturgyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A166D162CC032360033B9A2 /* DailyLiturgyView.swift */; };
+		4A630E922CB87704005A4A1F /* ConsciousnessExamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A630E912CB87704005A4A1F /* ConsciousnessExamView.swift */; };
 		4AEF3AA42CADBFE200BEB337 /* ConsciousnessExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEF3A952CADBFE200BEB337 /* ConsciousnessExamViewController.swift */; };
 		4AEF3AA52CADBFE200BEB337 /* FullPrayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEF3A972CADBFE200BEB337 /* FullPrayerViewController.swift */; };
 		4AEF3AA62CADBFE200BEB337 /* PrayerOptionsModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEF3A982CADBFE200BEB337 /* PrayerOptionsModalViewController.swift */; };
@@ -88,6 +90,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4A166D162CC032360033B9A2 /* DailyLiturgyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyLiturgyView.swift; sourceTree = "<group>"; };
+		4A630E912CB87704005A4A1F /* ConsciousnessExamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousnessExamView.swift; sourceTree = "<group>"; };
 		4AEF3A952CADBFE200BEB337 /* ConsciousnessExamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousnessExamViewController.swift; sourceTree = "<group>"; };
 		4AEF3A972CADBFE200BEB337 /* FullPrayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullPrayerViewController.swift; sourceTree = "<group>"; };
 		4AEF3A982CADBFE200BEB337 /* PrayerOptionsModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerOptionsModalViewController.swift; sourceTree = "<group>"; };
@@ -115,7 +119,7 @@
 		B8783F892C99F58600661148 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		B8783F8F2C99F63A00661148 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		B8E9CC182CA1F1FE00B21598 /* SpiritualPreparation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpiritualPreparation.swift; sourceTree = "<group>"; };
-		B8F8DCFD2C8B8EB500D24769 /* Macro02.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Macro02.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B8F8DCFD2C8B8EB500D24769 /* Peregrinus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peregrinus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8F8DD002C8B8EB500D24769 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B8F8DD022C8B8EB500D24769 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B8F8DD092C8B8EB600D24769 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -197,6 +201,7 @@
 				F127E8142CC6D9B700D10B53 /* ActOfContritionFirstViewController.swift */,
 				F127E8162CC6E8DC00D10B53 /* ActOfContritionSecondViewController.swift */,
 				F127E8182CC6EB2F00D10B53 /* ReadyToConfessModalViewController.swift */,
+				4A630E912CB87704005A4A1F /* ConsciousnessExamView.swift */,
 			);
 			path = CounsciousnessExam;
 			sourceTree = "<group>";
@@ -222,6 +227,7 @@
 				4AEF3A9D2CADBFE200BEB337 /* BibleViewController.swift */,
 				4AEF3A9E2CADBFE200BEB337 /* ConfessionAuthViewController.swift */,
 				4AEF3A9F2CADBFE200BEB337 /* DailyLiturgyViewController.swift */,
+				4A166D162CC032360033B9A2 /* DailyLiturgyView.swift */,
 				4AEF3AA02CADBFE200BEB337 /* HomeViewController.swift */,
 				4AEF3AA22CADBFE200BEB337 /* MyConfessionViewController.swift */,
 				4AEF3AA12CADBFE200BEB337 /* Localizable.xcstrings */,
@@ -332,7 +338,7 @@
 		B8F8DCFE2C8B8EB500D24769 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B8F8DCFD2C8B8EB500D24769 /* Macro02.app */,
+				B8F8DCFD2C8B8EB500D24769 /* Peregrinus.app */,
 				B8F8DD132C8B8EB600D24769 /* Macro02Tests.xctest */,
 				B8F8DD1D2C8B8EB600D24769 /* Macro02UITests.xctest */,
 			);
@@ -412,7 +418,7 @@
 			);
 			name = Macro02;
 			productName = Macro02;
-			productReference = B8F8DCFD2C8B8EB500D24769 /* Macro02.app */;
+			productReference = B8F8DCFD2C8B8EB500D24769 /* Peregrinus.app */;
 			productType = "com.apple.product-type.application";
 		};
 		B8F8DD122C8B8EB600D24769 /* Macro02Tests */ = {
@@ -544,6 +550,7 @@
 				AF9C0FDC2CA1E5F3008187EC /* setDynamicFont.swift in Sources */,
 				AFC862112CA32A7100167ECB /* ButtonComponent.swift in Sources */,
 				AF9C0FDD2CA1E5F3008187EC /* TextComponent.swift in Sources */,
+				4A166D172CC032360033B9A2 /* DailyLiturgyView.swift in Sources */,
 				B8363E122CB717C20083D1D3 /* DataManagerTestView.swift in Sources */,
 				F1F6BE762C9B647700F4C7FF /* DailyLiturgyViewModel.swift in Sources */,
 				B84DEA082CA48F900010CEBC /* SinViewModel.swift in Sources */,
@@ -569,6 +576,7 @@
 				4AEF3AA42CADBFE200BEB337 /* ConsciousnessExamViewController.swift in Sources */,
 				4AEF3AA52CADBFE200BEB337 /* FullPrayerViewController.swift in Sources */,
 				4AEF3AA62CADBFE200BEB337 /* PrayerOptionsModalViewController.swift in Sources */,
+				4A630E922CB87704005A4A1F /* ConsciousnessExamView.swift in Sources */,
 				4AEF3AA72CADBFE200BEB337 /* PrayersCategoryViewController.swift in Sources */,
 				F1773CDA2CC05CE500DBDE2E /* ConsciousnessExamFirstViewController.swift in Sources */,
 				F1773CD82CC040DE00DBDE2E /* SacramentOfConfessionView.swift in Sources */,
@@ -756,9 +764,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 99Z68J6579;
+				DEVELOPMENT_TEAM = TLC9D54B8V;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Macro02/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Macro02;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Please allow to continue with Face ID";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -772,7 +781,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.gabusiness.peregrinus;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Peregrinus;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -790,9 +799,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 99Z68J6579;
+				DEVELOPMENT_TEAM = TLC9D54B8V;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Macro02/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Macro02;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Please allow to continue with Face ID";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -806,7 +816,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.gabusiness.peregrinus;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Peregrinus;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

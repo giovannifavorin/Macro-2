@@ -51,7 +51,3 @@ struct LiturgyCardViewWrapper: UIViewRepresentable {
     }
 }
 
-#Preview {
-    DailyLiturgyView(viewModel: DailyLiturgyViewModel())
-}
-

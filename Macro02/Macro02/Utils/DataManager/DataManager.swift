@@ -26,7 +26,7 @@ class DataManager {
     }
     
     private func preloadDataIfNeeded() {
-        if fetchAllSins()?.isEmpty ?? true {
+        if fetchAllSins().isEmpty {
             insertMockSins()
         }
     }
@@ -155,36 +155,75 @@ class DataManager {
     }
     
     // MARK: - READ
-    public func fetchAllConfessions() -> [Confession]? {
+    public func fetchAllConfessions() -> [Confession] {
         let request: NSFetchRequest<Confession> = Confession.fetchRequest()
         
         do {
             return try context.fetch(request)
         } catch {
             print("Erro ao buscar confissões: \(error)")
-            return nil
+            return []
         }
     }
     
-    public func fetchAllExams(for confession: Confession) -> [ConscienceExam]? {
-        return confession.conscienceExams?.allObjects as? [ConscienceExam]
+    public func fetchAllCommittedSins() -> [Sin] {
+        var committedSins: [Sin] = []
+        
+        // Fetch all confessions
+        let confessions = fetchAllConfessions()
+        
+        // Loop through each confession
+        for confession in confessions {
+            // Fetch all conscience exams related to the confession
+            let exams = fetchAllExams(for: confession)
+            
+            for exam in exams {
+                // Fetch all sins in examination related to the exam
+                let sinsInExaminations = fetchAllSinsInExaminations(for: exam)
+                
+                for sinInExamination in sinsInExaminations {
+                    // Access the sins related to the specific examination of sins
+                    if let sins = sinInExamination.sins?.allObjects as? [Sin] {
+                        committedSins.append(contentsOf: sins)
+                    }
+                }
+            }
+        }
+        
+        return committedSins
     }
-    
-    public func fetchAllSinsInExaminations(for exam: ConscienceExam) -> [SinsInExamination]? {
-        return exam.sinsInExamination?.allObjects as? [SinsInExamination]
+
+    public func fetchAllExams(for confession: Confession) -> [ConscienceExam] {
+        return confession.conscienceExams?.allObjects as? [ConscienceExam] ?? []
     }
-    
-    func fetchAllSins() -> [Sin]? {
+
+    public func fetchAllSinsInExaminations(for exam: ConscienceExam) -> [SinsInExamination] {
+        return exam.sinsInExamination?.allObjects as? [SinsInExamination] ?? []
+    }
+
+    public func fetchAllSins() -> [Sin] {
         let fetchRequest: NSFetchRequest<Sin> = Sin.fetchRequest()
         
         do {
             return try context.fetch(fetchRequest)
         } catch {
             print("Failed to fetch sins: \(error)")
+            return []
+        }
+    }
+
+    public func fetchLatestConfession() -> Confession? {
+        let request: NSFetchRequest<Confession> = Confession.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "confessionDate", ascending: false)]
+        request.fetchLimit = 1
+        
+        do {
+            return try context.fetch(request).first
+        } catch {
+            print("Erro ao buscar a última confissão: \(error)")
             return nil
         }
     }
-    
     
     // MARK: - UPDATE
     public func updateConfession(_ confession: Confession, date: Date? = nil, penance: String? = nil) {
@@ -200,6 +239,13 @@ class DataManager {
         if let sinDescription = sinDescription { sin.sinDescription = sinDescription }
         
         saveContext()
+    }
+    
+    public func addExamToConfession(confession: Confession, exam: ConscienceExam) {
+        let exams = confession.mutableSetValue(forKey: "conscienceExams") // Altere o nome do relacionamento conforme necessário
+        exams.add(exam)
+        exam.confession = confession // Assumindo que você tenha uma propriedade de relacionamento `confession` no exame
+        saveContext() // Salva as alterações
     }
     
     // MARK: - DELETE
