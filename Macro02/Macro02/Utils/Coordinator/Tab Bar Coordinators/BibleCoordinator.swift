@@ -23,4 +23,10 @@ class BibleCoordinator: Coordinator {
     func start() {
         self.rootViewController.coordinator = self
     }
+    
+    func showChapters(do book: Book) {
+        let chaptersVC = ChaptersViewController()
+        chaptersVC.viewModel = ChaptersViewModel(book: book)
+        navigationController.pushViewController(chaptersVC, animated: true)
+    }
 }
