@@ -79,7 +79,6 @@ class PrayerCategoryCell: UICollectionViewCell {
     // Elementos da célula
     let categoryImageView = UIImageView()
     let categoryLabel1 = UILabel()
-    let categoryLabel2 = UILabel()
     let stackView = UIStackView()
     
     override init(frame: CGRect) {
@@ -99,10 +98,9 @@ class PrayerCategoryCell: UICollectionViewCell {
         
         // Configuração dos títulos
         categoryLabel1.textAlignment = .center
-        categoryLabel2.textAlignment = .center
         
         // Configuração do stack view para as colunas
-        let labelStack = UIStackView(arrangedSubviews: [categoryLabel1, categoryLabel2])
+        let labelStack = UIStackView(arrangedSubviews: [categoryLabel1])
         labelStack.axis = .horizontal
         labelStack.distribution = .fillEqually
         labelStack.spacing = 8
@@ -142,7 +140,6 @@ class PrayerCategoryCell: UICollectionViewCell {
     func configure(with category: PrayerCategory) {
         categoryImageView.image = category.image
         categoryLabel1.text = category.name
-        categoryLabel2.text = category.name // Exemplo de segunda coluna
         
     }
 }
