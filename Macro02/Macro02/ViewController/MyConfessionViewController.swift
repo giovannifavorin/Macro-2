@@ -9,6 +9,7 @@ import UIKit
 
 class MyConfessionViewController: UIViewController {
     
+    
     var authManager: AuthManager
     var viewModel: SinViewModel
     var tableView: UITableView!
