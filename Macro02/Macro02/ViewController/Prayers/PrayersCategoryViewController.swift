@@ -72,14 +72,11 @@ class PrayersCategoryViewController: UIViewController, UICollectionViewDelegate,
     }
 }
 
-
-
 class PrayerCategoryCell: UICollectionViewCell {
     
     // Elementos da célula
     let categoryImageView = UIImageView()
     let categoryLabel1 = UILabel()
-    let stackView = UIStackView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -95,28 +92,17 @@ class PrayerCategoryCell: UICollectionViewCell {
         // Configuração da imagem
         categoryImageView.contentMode = .scaleAspectFit
         categoryImageView.clipsToBounds = true
+        categoryImageView.translatesAutoresizingMaskIntoConstraints = false
         
-        // Configuração dos títulos
-        categoryLabel1.textAlignment = .center
+        // Configuração do label da categoria
+        categoryLabel1.textAlignment = .left
+        categoryLabel1.textColor = .black
+        categoryLabel1.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        categoryLabel1.translatesAutoresizingMaskIntoConstraints = false
         
-        // Configuração do stack view para as colunas
-        let labelStack = UIStackView(arrangedSubviews: [categoryLabel1])
-        labelStack.axis = .horizontal
-        labelStack.distribution = .fillEqually
-        labelStack.spacing = 8
-        
-        // Organize a imagem e o stack de labels verticalmente
-        stackView.axis = .vertical
-        stackView.spacing = 8
-        stackView.alignment = .center
-        stackView.distribution = .fill
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        stackView.addArrangedSubview(categoryImageView)
-        stackView.addArrangedSubview(labelStack)
-        
-        // Adicione o stack view à célula
-        contentView.addSubview(stackView)
+        // Adicione a imagem e o label diretamente ao contentView
+        contentView.addSubview(categoryImageView)
+        contentView.addSubview(categoryLabel1)
         
         // Configuração visual da célula
         contentView.backgroundColor = .lightGray
@@ -125,14 +111,19 @@ class PrayerCategoryCell: UICollectionViewCell {
     }
     
     private func setupConstraints() {
-        // Constraints para o stackView dentro da célula
+        // Constraints para centralizar a imagem no contentView
         NSLayoutConstraint.activate([
-            stackView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
-            categoryImageView.heightAnchor.constraint(equalToConstant: 50), // Ajuste a altura da imagem
-            categoryImageView.widthAnchor.constraint(equalToConstant: 50)  // Ajuste a largura da imagem
+            categoryImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            categoryImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            categoryImageView.heightAnchor.constraint(equalToConstant: 50), // Altura da imagem
+            categoryImageView.widthAnchor.constraint(equalToConstant: 50)  // Largura da imagem
+        ])
+        
+        // Constraints para posicionar o label no canto inferior esquerdo
+        NSLayoutConstraint.activate([
+            categoryLabel1.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
+            categoryLabel1.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            categoryLabel1.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -8) // Caso o texto seja maior
         ])
     }
     
@@ -140,6 +131,6 @@ class PrayerCategoryCell: UICollectionViewCell {
     func configure(with category: PrayerCategory) {
         categoryImageView.image = category.image
         categoryLabel1.text = category.name
-        
     }
 }
+
