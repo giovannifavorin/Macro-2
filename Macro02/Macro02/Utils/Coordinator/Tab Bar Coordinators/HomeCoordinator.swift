@@ -70,7 +70,7 @@ class HomeCoordinator: Coordinator {
 extension HomeCoordinator {
     
     // Função chamada na HomeViewController que lida com a navegação, dependendo do botão apertado
-    public func handleNavigation(_ navigation: NavigationCases) {
+    public func handleNavigation(_ navigation: HomeNavigationCases) {
         // Inicia a navegação dependendo do botão selecionado na Home
         switch navigation {
         case .consciousnessExam:
