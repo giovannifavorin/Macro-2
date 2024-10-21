@@ -40,8 +40,6 @@ struct Liturgia: Decodable {
     }
 }
 
-import Foundation
-
 // Manager genérico para fazer chamadas de API e decodificar qualquer tipo de objeto Decodable
 class APIManager {
     
@@ -99,4 +97,3 @@ class APIManager {
         task.resume()
     }
 }
-
