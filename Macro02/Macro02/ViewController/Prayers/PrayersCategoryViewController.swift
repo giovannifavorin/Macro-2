@@ -27,9 +27,10 @@ class PrayersCategoryViewController: UIViewController, UICollectionViewDelegate,
         self.view.backgroundColor = .white
         
         let layout = UICollectionViewFlowLayout()
-        layout.minimumInteritemSpacing = 16
-        layout.minimumLineSpacing = 16
-        
+        layout.minimumInteritemSpacing = 16 // Espaçamento entre os itens
+        layout.minimumLineSpacing = 16 // Espaçamento entre as linhas
+        layout.sectionInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16) // Padding nas bordas
+
         collectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: layout)
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -58,7 +59,7 @@ class PrayersCategoryViewController: UIViewController, UICollectionViewDelegate,
     // Tamanho da célula (quadrado)
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let padding: CGFloat = 16
-        let availableWidth = collectionView.frame.width - padding * 3
+        let availableWidth = collectionView.frame.width - padding * 3 // Considerando o padding nas bordas
         let itemWidth = availableWidth / 2
         return CGSize(width: itemWidth, height: itemWidth)
     }
@@ -71,6 +72,7 @@ class PrayersCategoryViewController: UIViewController, UICollectionViewDelegate,
         coordinator?.navigateToDetail(category: selectedCategory)
     }
 }
+
 
 class PrayerCategoryCell: UICollectionViewCell {
     

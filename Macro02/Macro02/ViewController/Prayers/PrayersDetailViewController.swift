@@ -34,8 +34,6 @@ class PrayersDetailViewController: UIViewController, UITableViewDelegate, UITabl
         
         self.prayers = category.prayers
         
-        
-
         self.view.backgroundColor = .brown
         
         tableView = UITableView(frame: view.bounds)
