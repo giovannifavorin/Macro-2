@@ -18,6 +18,6 @@ default_platform(:ios)
 platform :ios do
   desc "Run Unit and UI tests"
   lane :tests do
-    run_tests(scheme: "Macro02")
+    run_tests(scheme: "Peregrinus")
   end
 end
