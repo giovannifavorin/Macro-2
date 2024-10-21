@@ -31,11 +31,11 @@ class DailyLiturgyViewController: UIViewController {
 
     // MARK: - Setup Views
     func setupView() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         
         // Title Label Setup
         titleLabel.font = UIFont.setCustomFont(.titulo1)
-        titleLabel.textColor = .black
+        titleLabel.textColor = .label
         view.addSubview(titleLabel)
         
         // Button for changing text size
@@ -62,6 +62,8 @@ class DailyLiturgyViewController: UIViewController {
         liturgyTextView.textAlignment = .left // Alinha o texto à esquerda
         liturgyTextView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(liturgyTextView)
+        
+        scrollView.contentSize = CGSize(width: scrollView.frame.width, height: liturgyTextView.frame.height)
         
         // Set up Modal View (initially hidden)
         setupModalView()

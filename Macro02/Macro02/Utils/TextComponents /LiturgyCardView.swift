@@ -40,11 +40,15 @@ class LiturgyCardView: UIView {
     }
     
     private func setupView() {
-        backgroundColor = .white
+        backgroundColor = .systemBackground // Adapta o background para modo claro e escuro
         layer.cornerRadius = 8
         layer.borderWidth = 1
-        layer.borderColor = UIColor.black.cgColor
-        
+
+        // Define a cor da borda para ser dinâmica
+        layer.borderColor = UIColor { traitCollection in
+            return traitCollection.userInterfaceStyle == .dark ? UIColor.white : UIColor.black
+        }.cgColor
+
         self.weekNumberLabel.setDynamicFont(size: 14, weight: .bold)
         self.dayNumberLabel.font = UIFont.setCustomFont(.titulo1)
         addSubview(weekNumberLabel)
@@ -52,7 +56,7 @@ class LiturgyCardView: UIView {
         addSubview(dayNumberLabel)
         addSubview(monthNameLabel)
         addSubview(yearNumberLabel)
-        
+
         setConstraints()
     }
     
@@ -75,6 +79,18 @@ class LiturgyCardView: UIView {
         self.colorLiturgy = colorFromString(liturgia.cor ?? "😳")
         self.weekNumberLabel.textColor = self.colorLiturgy
 
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        // Verifica se o estilo de interface mudou
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            // Atualiza a cor da borda conforme o modo de interface (claro ou escuro)
+            layer.borderColor = UIColor { traitCollection in
+                return traitCollection.userInterfaceStyle == .dark ? UIColor.white : UIColor.black
+            }.cgColor
+        }
     }
     
     /// Retorna o dia da semana em String, permite escolher a quantidade de caracteres do dia da semana
@@ -165,29 +181,29 @@ extension LiturgyCardView {
     private func setConstraints() {
         
         NSLayoutConstraint.activate([
-            // Alinha weekNumberLabel ao topo superior esquerdo
+            // weekNumberLabel
             weekNumberLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
             weekNumberLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
             
-            // Alinhando o dayNameLabel abaixo do weekNumberLabel
-            dayNameLabel.topAnchor.constraint(equalTo: weekNumberLabel.bottomAnchor),
+            // dayNameLabel
+            dayNameLabel.topAnchor.constraint(equalTo: weekNumberLabel.bottomAnchor, constant: 8),
             dayNameLabel.leadingAnchor.constraint(equalTo: weekNumberLabel.leadingAnchor),
             
-            // Posiciona o monthNameLabel ao topo superior direito
-            monthNameLabel.topAnchor.constraint(equalTo: self.topAnchor),
-            monthNameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 8),
+            // monthNameLabel
+            monthNameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
+            monthNameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             
-            // Posiciona o yearNumberLabel abaixo do monthNameLabel
-            yearNumberLabel.topAnchor.constraint(equalTo: monthNameLabel.bottomAnchor),
-            yearNumberLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 8),
+            // yearNumberLabel
+            yearNumberLabel.topAnchor.constraint(equalTo: monthNameLabel.bottomAnchor, constant: 8),
+            yearNumberLabel.trailingAnchor.constraint(equalTo: monthNameLabel.trailingAnchor),
             
-            
-            // Posiciona o dayNumberLabel à esquerda do monthNameLabel
+            // dayNumberLabel
             dayNumberLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            dayNumberLabel.trailingAnchor.constraint(equalTo: monthNameLabel.leadingAnchor, constant: 8),
+            dayNumberLabel.trailingAnchor.constraint(equalTo: monthNameLabel.leadingAnchor, constant: -16),
             
-            // Definindo a altura e a distância inferior
-            yearNumberLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16)
+            // Bottom padding for the yearNumberLabel
+            yearNumberLabel.bottomAnchor.constraint(lessThanOrEqualTo: self.bottomAnchor, constant: -16)
         ])
+
     }
 }

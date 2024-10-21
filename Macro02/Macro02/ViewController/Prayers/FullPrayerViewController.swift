@@ -58,8 +58,8 @@ class FullPrayerViewController: UIViewController {
         prayerTitle.text = prayer.title
         prayerText.text = prayer.content
         
-        prayerTitle.textColor = .black
-        prayerText.textColor = .black
+        prayerTitle.textColor = .label
+        prayerText.textColor = .label
         
         prayerTitle.font = UIFont.systemFont(ofSize: 28, weight: .bold)
         

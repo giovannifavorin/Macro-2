@@ -58,7 +58,7 @@ class ConfessionAuthView: UIView {
     private func setupLabel() {
         label = UILabel()
         label.text = "CONFESSION VIEW"
-        label.textColor = .black
+        label.textColor = .label
         label.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(label)
     }
