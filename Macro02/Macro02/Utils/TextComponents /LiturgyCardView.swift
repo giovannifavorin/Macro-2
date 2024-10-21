@@ -26,10 +26,17 @@ class LiturgyCardView: UIView {
     private let leadingImageView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .systemBlue // Temporário, pode ser alterado para uma imagem depois
+        view.backgroundColor = .gray // Temporário, pode ser alterado para uma imagem depois
         view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner] // Apenas canto superior e inferior esquerdo
         view.layer.cornerRadius = 8 // Arredondamento do lado leading
         return view
+    }()
+    private var weekDescription: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0 // Permitir múltiplas linhas
+        label.lineBreakMode = .byWordWrapping // Quebra de linha por palavra
+        return label
     }()
     
     private let weekNumberLabel = TextComponent()
@@ -55,12 +62,13 @@ class LiturgyCardView: UIView {
         layer.borderWidth = 1
         layer.borderColor = UIColor.black.cgColor
         
-        self.weekNumberLabel.setDynamicFont(size: 12, weight: .bold)
-        self.dayNumberLabel.setDynamicFont(size: 40, weight: .bold)
-//        self.dayNumberLabel.font = UIFont.setCustomFont(.titulo1)
+//        self.weekNumberLabel.setDynamicFont(size: 12, weight: .bold)
+        self.weekDescription.setDynamicFont(size: 12, weight: .bold)
+        self.dayNumberLabel.setDynamicFont(size: 36, weight: .bold)
 
         addSubview(leadingImageView)
-        addSubview(weekNumberLabel)
+//        addSubview(weekNumberLabel)
+        addSubview(weekDescription)
         addSubview(dayNameLabel)
         addSubview(dayNumberLabel)
         addSubview(monthNameLabel)
@@ -72,7 +80,8 @@ class LiturgyCardView: UIView {
     func update(with liturgia: Liturgia) {
         
         //NOTE: NÃO SEI PORQUE MAS SE APAGAR ESTAS 6 LINHAS DE CÓDIGO O COMPONENTE PARA DE FUNCIONAR, NÃO APAGUE
-        weekNumberLabel.text = liturgia.data ?? "no data week label"
+//        weekNumberLabel.text = liturgia.data ?? "no data week label"
+        weekDescription.text = liturgia.liturgia ?? "no liturgia week description"
         dayNameLabel.text = liturgia.dia
         dayNumberLabel.text = liturgia.data ?? "no dayNumberLabel"
         monthNameLabel.text = liturgia.data ?? "no monthNameLabel"
@@ -80,13 +89,15 @@ class LiturgyCardView: UIView {
         self.dataLiturgia = liturgia.data ?? "no data"
         
         // Atualiza com base na dataLiturgia
-        self.weekNumberLabel.text = "23º Semana do Tempo Comum"
+//        self.weekNumberLabel.text = "23º Semana do Tempo Comum"
+//        self.weekNumberLabel.textColor = UIColor.black
+        self.weekDescription.textColor = UIColor.black
         self.dayNameLabel.text = getWeekdayName(from: dataLiturgia, length: 3)
         self.dayNumberLabel.text = getDayNumber(from: dataLiturgia)
         self.monthNameLabel.text = getMonthName(from: dataLiturgia)
         self.yearNumberLabel.text = getYearNumber(from: dataLiturgia)
         self.colorLiturgy = colorFromString(liturgia.cor ?? "😳")
-        self.weekNumberLabel.textColor = self.colorLiturgy
+        self.leadingImageView.backgroundColor = self.colorLiturgy
 
     }
     
@@ -185,12 +196,17 @@ extension LiturgyCardView {
             leadingImageView.topAnchor.constraint(equalTo: topAnchor),
                     
             // Alinhando o weekNumberLabel ao lado direito do quadrado
-            weekNumberLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
-            weekNumberLabel.leadingAnchor.constraint(equalTo: leadingImageView.trailingAnchor, constant: 8),
+//            weekNumberLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
+//            weekNumberLabel.leadingAnchor.constraint(equalTo: leadingImageView.trailingAnchor, constant: 8),
             
-            // Alinhando o dayNameLabel abaixo do weekNumberLabel
-            dayNameLabel.topAnchor.constraint(equalTo: weekNumberLabel.bottomAnchor, constant: 8),
-            dayNameLabel.leadingAnchor.constraint(equalTo: weekNumberLabel.leadingAnchor),
+            // Alinhando o weekDescription ao lado direito do quadrado
+            weekDescription.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
+            weekDescription.leadingAnchor.constraint(equalTo: leadingImageView.trailingAnchor, constant: 8),
+            weekDescription.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -108),
+            
+            // Alinhando o dayNameLabel abaixo do weekdescription
+            dayNameLabel.topAnchor.constraint(equalTo: weekDescription.bottomAnchor, constant: 8),
+            dayNameLabel.leadingAnchor.constraint(equalTo: weekDescription.leadingAnchor),
             
             // Posiciona o monthNameLabel ao topo superior direito
             monthNameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 12),
