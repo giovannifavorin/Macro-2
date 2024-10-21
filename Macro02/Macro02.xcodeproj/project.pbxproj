@@ -41,6 +41,15 @@
 		B8F8DD182C8B8EB600D24769 /* Macro02Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F8DD172C8B8EB600D24769 /* Macro02Tests.swift */; };
 		B8F8DD222C8B8EB600D24769 /* Macro02UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F8DD212C8B8EB600D24769 /* Macro02UITests.swift */; };
 		B8F8DD242C8B8EB600D24769 /* Macro02UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F8DD232C8B8EB600D24769 /* Macro02UITestsLaunchTests.swift */; };
+		F127E8112CC6C50A00D10B53 /* ConsciousnessExamThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F127E8102CC6C4FD00D10B53 /* ConsciousnessExamThirdViewController.swift */; };
+		F127E8132CC6D6F900D10B53 /* ConsciousnessExamFourthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F127E8122CC6D6E000D10B53 /* ConsciousnessExamFourthViewController.swift */; };
+		F127E8152CC6D9C800D10B53 /* ActOfContritionFirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F127E8142CC6D9B700D10B53 /* ActOfContritionFirstViewController.swift */; };
+		F127E8172CC6E8F000D10B53 /* ActOfContritionSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F127E8162CC6E8DC00D10B53 /* ActOfContritionSecondViewController.swift */; };
+		F127E8192CC6EB4400D10B53 /* ReadyToConfessModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F127E8182CC6EB2F00D10B53 /* ReadyToConfessModalViewController.swift */; };
+		F1773CB42CC02F7900DBDE2E /* PreparatoryPrayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1773CB32CC02F7900DBDE2E /* PreparatoryPrayerView.swift */; };
+		F1773CD82CC040DE00DBDE2E /* SacramentOfConfessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1773CD72CC040DE00DBDE2E /* SacramentOfConfessionView.swift */; };
+		F1773CDA2CC05CE500DBDE2E /* ConsciousnessExamFirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1773CD92CC05CE500DBDE2E /* ConsciousnessExamFirstViewController.swift */; };
+		F1773CDC2CC06A4200DBDE2E /* ConsciousnessExamSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1773CDB2CC06A4200DBDE2E /* ConsciousnessExamSecondViewController.swift */; };
 		F1BE73FB2CB86CD000989E80 /* MainTabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BE73FA2CB86CC800989E80 /* MainTabBarCoordinator.swift */; };
 		F1BE74022CB873EF00989E80 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BE74012CB873ED00989E80 /* OnboardingCoordinator.swift */; };
 		F1EDE14A2C9CD045007A6403 /* ConsciousnessExamCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EDE1492C9CD043007A6403 /* ConsciousnessExamCoordinator.swift */; };
@@ -117,6 +126,15 @@
 		B8F8DD1D2C8B8EB600D24769 /* Macro02UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Macro02UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8F8DD212C8B8EB600D24769 /* Macro02UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macro02UITests.swift; sourceTree = "<group>"; };
 		B8F8DD232C8B8EB600D24769 /* Macro02UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macro02UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		F127E8102CC6C4FD00D10B53 /* ConsciousnessExamThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousnessExamThirdViewController.swift; sourceTree = "<group>"; };
+		F127E8122CC6D6E000D10B53 /* ConsciousnessExamFourthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousnessExamFourthViewController.swift; sourceTree = "<group>"; };
+		F127E8142CC6D9B700D10B53 /* ActOfContritionFirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActOfContritionFirstViewController.swift; sourceTree = "<group>"; };
+		F127E8162CC6E8DC00D10B53 /* ActOfContritionSecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActOfContritionSecondViewController.swift; sourceTree = "<group>"; };
+		F127E8182CC6EB2F00D10B53 /* ReadyToConfessModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadyToConfessModalViewController.swift; sourceTree = "<group>"; };
+		F1773CB32CC02F7900DBDE2E /* PreparatoryPrayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreparatoryPrayerView.swift; sourceTree = "<group>"; };
+		F1773CD72CC040DE00DBDE2E /* SacramentOfConfessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SacramentOfConfessionView.swift; sourceTree = "<group>"; };
+		F1773CD92CC05CE500DBDE2E /* ConsciousnessExamFirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousnessExamFirstViewController.swift; sourceTree = "<group>"; };
+		F1773CDB2CC06A4200DBDE2E /* ConsciousnessExamSecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousnessExamSecondViewController.swift; sourceTree = "<group>"; };
 		F1BE73FA2CB86CC800989E80 /* MainTabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarCoordinator.swift; sourceTree = "<group>"; };
 		F1BE74012CB873ED00989E80 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		F1EDE1492C9CD043007A6403 /* ConsciousnessExamCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousnessExamCoordinator.swift; sourceTree = "<group>"; };
@@ -170,6 +188,15 @@
 			isa = PBXGroup;
 			children = (
 				4AEF3A952CADBFE200BEB337 /* ConsciousnessExamViewController.swift */,
+				F1773CD72CC040DE00DBDE2E /* SacramentOfConfessionView.swift */,
+				F1773CB32CC02F7900DBDE2E /* PreparatoryPrayerView.swift */,
+				F1773CD92CC05CE500DBDE2E /* ConsciousnessExamFirstViewController.swift */,
+				F1773CDB2CC06A4200DBDE2E /* ConsciousnessExamSecondViewController.swift */,
+				F127E8102CC6C4FD00D10B53 /* ConsciousnessExamThirdViewController.swift */,
+				F127E8122CC6D6E000D10B53 /* ConsciousnessExamFourthViewController.swift */,
+				F127E8142CC6D9B700D10B53 /* ActOfContritionFirstViewController.swift */,
+				F127E8162CC6E8DC00D10B53 /* ActOfContritionSecondViewController.swift */,
+				F127E8182CC6EB2F00D10B53 /* ReadyToConfessModalViewController.swift */,
 			);
 			path = CounsciousnessExam;
 			sourceTree = "<group>";
@@ -508,6 +535,7 @@
 				F1F6BE6C2C9B62B200F4C7FF /* ConfessionCoordinator.swift in Sources */,
 				B8E9CC192CA1F1FE00B21598 /* SpiritualPreparation.swift in Sources */,
 				B8783F862C99F44200661148 /* DataManager.swift in Sources */,
+				F127E8152CC6D9C800D10B53 /* ActOfContritionFirstViewController.swift in Sources */,
 				F1EDE1522C9DFE9B007A6403 /* PrayersCoordinator.swift in Sources */,
 				B8783F822C99F32E00661148 /* CoordinatorProtocol.swift in Sources */,
 				F1BE74022CB873EF00989E80 /* OnboardingCoordinator.swift in Sources */,
@@ -523,12 +551,17 @@
 				F1F6BE7A2C9B649C00F4C7FF /* AboutViewModel.swift in Sources */,
 				F1F6BE432C99FDD700F4C7FF /* ApplicationCoordinator.swift in Sources */,
 				F1EDE14A2C9CD045007A6403 /* ConsciousnessExamCoordinator.swift in Sources */,
+				F1773CB42CC02F7900DBDE2E /* PreparatoryPrayerView.swift in Sources */,
+				F127E8132CC6D6F900D10B53 /* ConsciousnessExamFourthViewController.swift in Sources */,
 				AFF9FA3D2CAF13D1004AB04F /* LiturgyCardView.swift in Sources */,
 				B8783F902C99F63A00661148 /* DataModel.xcdatamodeld in Sources */,
 				F1F6BE742C9B644C00F4C7FF /* AuthManager.swift in Sources */,
+				F127E8192CC6EB4400D10B53 /* ReadyToConfessModalViewController.swift in Sources */,
 				AFC683B72CA48B7900389DD8 /* LiturgiaDiariaAPI.swift in Sources */,
 				F1F6BE782C9B648C00F4C7FF /* BibleViewModel.swift in Sources */,
+				F127E8112CC6C50A00D10B53 /* ConsciousnessExamThirdViewController.swift in Sources */,
 				B8F8DD032C8B8EB500D24769 /* SceneDelegate.swift in Sources */,
+				F1773CDC2CC06A4200DBDE2E /* ConsciousnessExamSecondViewController.swift in Sources */,
 				F1F6BE6E2C9B62E900F4C7FF /* DailyLiturgyCoordinator.swift in Sources */,
 				B8783F8A2C99F58600661148 /* Model.swift in Sources */,
 				F1F6BE6A2C9B60DD00F4C7FF /* HomeCoordinator.swift in Sources */,
@@ -537,7 +570,10 @@
 				4AEF3AA52CADBFE200BEB337 /* FullPrayerViewController.swift in Sources */,
 				4AEF3AA62CADBFE200BEB337 /* PrayerOptionsModalViewController.swift in Sources */,
 				4AEF3AA72CADBFE200BEB337 /* PrayersCategoryViewController.swift in Sources */,
+				F1773CDA2CC05CE500DBDE2E /* ConsciousnessExamFirstViewController.swift in Sources */,
+				F1773CD82CC040DE00DBDE2E /* SacramentOfConfessionView.swift in Sources */,
 				4AEF3AA82CADBFE200BEB337 /* PrayersDetailViewController.swift in Sources */,
+				F127E8172CC6E8F000D10B53 /* ActOfContritionSecondViewController.swift in Sources */,
 				4AEF3AA92CADBFE200BEB337 /* AboutViewController.swift in Sources */,
 				4AEF3AAA2CADBFE200BEB337 /* BibleViewController.swift in Sources */,
 				F1BE73FB2CB86CD000989E80 /* MainTabBarCoordinator.swift in Sources */,
