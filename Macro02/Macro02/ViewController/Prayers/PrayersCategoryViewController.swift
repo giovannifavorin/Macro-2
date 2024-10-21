@@ -7,13 +7,14 @@
 
 //import UIKit
 import SwiftUI
+import UIKit
 
-class PrayersCategoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class PrayersCategoryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     var viewModel: PrayersViewModel?
     var coordinator: PrayersCoordinator?
     
-    var tableView: UITableView!
+    var collectionView: UICollectionView!
     var prayerCategories: [PrayerCategory]!
     
     override func viewDidLoad() {
@@ -23,41 +24,125 @@ class PrayersCategoryViewController: UIViewController, UITableViewDelegate, UITa
             self.prayerCategories = viewModel.prayerCategories
         }
 
-        self.view.backgroundColor = .red
+        self.view.backgroundColor = .white
         
-        tableView = UITableView(frame: view.bounds)
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "PrayerCategoryCell")
-        view.addSubview(tableView)
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumInteritemSpacing = 16
+        layout.minimumLineSpacing = 16
         
+        collectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: layout)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(PrayerCategoryCell.self, forCellWithReuseIdentifier: "PrayerCategoryCell")
+        collectionView.backgroundColor = .white
+        
+        self.view.addSubview(collectionView)
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    // Número de itens na seção
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return prayerCategories.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PrayerCategoryCell", for: indexPath)
+    // Configuração da célula
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PrayerCategoryCell", for: indexPath) as! PrayerCategoryCell
         let category = prayerCategories[indexPath.row]
         
-        // Configura o texto e a imagem da célula
-        cell.textLabel?.text = category.name
-        cell.imageView?.image = category.image
+        // Configure a célula
+        cell.configure(with: category)
         
         return cell
     }
     
-    // Chamada quando uma Row é selecionada
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        self.coordinator?.navigateToDetail(category: prayerCategories[indexPath.row])
-        
+    // Tamanho da célula (quadrado)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let padding: CGFloat = 16
+        let availableWidth = collectionView.frame.width - padding * 3
+        let itemWidth = availableWidth / 2
+        return CGSize(width: itemWidth, height: itemWidth)
     }
     
-    // Altura da linha
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
+    // Método para detectar a seleção do item
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedCategory = prayerCategories[indexPath.row]
+        
+        // Navegação para a view de orações usando o coordinator
+        coordinator?.navigateToDetail(category: selectedCategory)
+    }
+}
+
+
+
+class PrayerCategoryCell: UICollectionViewCell {
+    
+    // Elementos da célula
+    let categoryImageView = UIImageView()
+    let categoryLabel1 = UILabel()
+    let categoryLabel2 = UILabel()
+    let stackView = UIStackView()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupViews()
+        setupConstraints()
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupViews() {
+        // Configuração da imagem
+        categoryImageView.contentMode = .scaleAspectFit
+        categoryImageView.clipsToBounds = true
+        
+        // Configuração dos títulos
+        categoryLabel1.textAlignment = .center
+        categoryLabel2.textAlignment = .center
+        
+        // Configuração do stack view para as colunas
+        let labelStack = UIStackView(arrangedSubviews: [categoryLabel1, categoryLabel2])
+        labelStack.axis = .horizontal
+        labelStack.distribution = .fillEqually
+        labelStack.spacing = 8
+        
+        // Organize a imagem e o stack de labels verticalmente
+        stackView.axis = .vertical
+        stackView.spacing = 8
+        stackView.alignment = .center
+        stackView.distribution = .fill
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        stackView.addArrangedSubview(categoryImageView)
+        stackView.addArrangedSubview(labelStack)
+        
+        // Adicione o stack view à célula
+        contentView.addSubview(stackView)
+        
+        // Configuração visual da célula
+        contentView.backgroundColor = .lightGray
+        contentView.layer.cornerRadius = 10
+        contentView.clipsToBounds = true
+    }
+    
+    private func setupConstraints() {
+        // Constraints para o stackView dentro da célula
+        NSLayoutConstraint.activate([
+            stackView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+            categoryImageView.heightAnchor.constraint(equalToConstant: 50), // Ajuste a altura da imagem
+            categoryImageView.widthAnchor.constraint(equalToConstant: 50)  // Ajuste a largura da imagem
+        ])
+    }
+    
+    // Função para configurar a célula com os dados da categoria
+    func configure(with category: PrayerCategory) {
+        categoryImageView.image = category.image
+        categoryLabel1.text = category.name
+        categoryLabel2.text = category.name // Exemplo de segunda coluna
+        
+    }
 }
