@@ -113,7 +113,6 @@ class PrayerCategoryCell: UICollectionViewCell {
     }
     
     private func setupConstraints() {
-        // Constraints para centralizar a imagem no contentView
         NSLayoutConstraint.activate([
             categoryImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             categoryImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
