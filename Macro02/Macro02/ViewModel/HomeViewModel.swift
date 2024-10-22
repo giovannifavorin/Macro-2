@@ -9,11 +9,11 @@ import SwiftUI
 import UIKit
 
 class HomeViewModel: ObservableObject {
-    @Published var selectedNavigation: HomeNavigationCases = .none
+    @Published var selectedNavigation: NavigationCases = .none
 }
 
-// Todos os casos de navegação possíveis a partir da Home
-enum HomeNavigationCases {
+// Todos os casos de navegacão possíveis a partir da Home
+enum NavigationCases {
     
     case liturgicalCalendar
     case penance
