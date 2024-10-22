@@ -22,34 +22,30 @@ class BibleViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Bible"
-        setupTableView()
         viewModel.loadBooks()
         print("BibleViewController Loaded Successfully")
+        
+        // Add a button to open the modal
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            title: "Select Verse",
+            style: .plain,
+            target: self,
+            action: #selector(openSelectionModal)
+        )
     }
     
-    private func setupTableView() {
-        bibleView.tableView.delegate = self
-        bibleView.tableView.dataSource = self
-        bibleView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        print("BibleViewController Setup TableView Successfully")
+    @objc private func openSelectionModal() {
+        coordinator?.showSelectionModal(from: self)
     }
 }
 
-// MARK: - UITableViewDelegate and UITableViewDataSource
-extension BibleViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.books.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        let book = viewModel.books[indexPath.row]
-        cell.textLabel?.text = book.name
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let book = viewModel.books[indexPath.row]
-        coordinator?.showChapters(for: book) //Delegate navigation to Coordinator
+extension BibleViewController: SelectionModalDelegate {
+    func didSelectVerse(_ verse: Verse) {
+        // Update the view with the selected verse
+        bibleView.titleLabel.text = "\(verse.number): \(verse.text)"
+        
+        // Force the UI to update
+        bibleView.setNeedsLayout()
+        bibleView.layoutIfNeeded()
     }
 }

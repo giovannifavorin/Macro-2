@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4A166D172CC032360033B9A2 /* DailyLiturgyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A166D162CC032360033B9A2 /* DailyLiturgyView.swift */; };
+		4A198AE82CC8405B00F03351 /* SelectionModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A198AE72CC8405300F03351 /* SelectionModalViewController.swift */; };
 		4A630E922CB87704005A4A1F /* ConsciousnessExamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A630E912CB87704005A4A1F /* ConsciousnessExamView.swift */; };
 		4A87C3542CC6B3D700257127 /* ChaptersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A87C3532CC6B3CF00257127 /* ChaptersViewController.swift */; };
 		4A87C3562CC6B3ED00257127 /* ChaptersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A87C3552CC6B3E400257127 /* ChaptersViewModel.swift */; };
@@ -87,6 +88,7 @@
 
 /* Begin PBXFileReference section */
 		4A166D162CC032360033B9A2 /* DailyLiturgyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyLiturgyView.swift; sourceTree = "<group>"; };
+		4A198AE72CC8405300F03351 /* SelectionModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionModalViewController.swift; sourceTree = "<group>"; };
 		4A630E912CB87704005A4A1F /* ConsciousnessExamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousnessExamView.swift; sourceTree = "<group>"; };
 		4A87C3532CC6B3CF00257127 /* ChaptersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChaptersViewController.swift; sourceTree = "<group>"; };
 		4A87C3552CC6B3E400257127 /* ChaptersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChaptersViewModel.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				4A87C3572CC6E32F00257127 /* VersesViewController.swift */,
 				4A87C3592CC6E97C00257127 /* VersesViewModel.swift */,
 				4A87C35B2CC6EE9B00257127 /* VerseViewController.swift */,
+				4A198AE72CC8405300F03351 /* SelectionModalViewController.swift */,
 			);
 			path = HailMaryBibleJson;
 			sourceTree = "<group>";
@@ -557,6 +560,7 @@
 				B8F8DD012C8B8EB500D24769 /* AppDelegate.swift in Sources */,
 				AF9C0FDA2CA1E5F3008187EC /* FontStyle.swift in Sources */,
 				4A87C35C2CC6EEA100257127 /* VerseViewController.swift in Sources */,
+				4A198AE82CC8405B00F03351 /* SelectionModalViewController.swift in Sources */,
 				AF9C0FDC2CA1E5F3008187EC /* setDynamicFont.swift in Sources */,
 				AFC862112CA32A7100167ECB /* ButtonComponent.swift in Sources */,
 				AF9C0FDD2CA1E5F3008187EC /* TextComponent.swift in Sources */,
@@ -844,7 +848,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = TLC9D54B8V;
+				DEVELOPMENT_TEAM = 2GNPFRN684;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Peregrinus/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Peregrinus;
@@ -879,7 +883,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = TLC9D54B8V;
+				DEVELOPMENT_TEAM = 2GNPFRN684;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Peregrinus/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Peregrinus;

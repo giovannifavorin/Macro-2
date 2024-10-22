@@ -10,9 +10,6 @@
     "ABOUT VIEW" : {
 
     },
-    "BIBLE VIEW" : {
-
-    },
     "Clique em mim e eu clicarei de volta" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -34,6 +31,9 @@
 
     },
     "Liturgia Diária" : {
+
+    },
+    "No Verse Selected" : {
 
     },
     "Prayers" : {

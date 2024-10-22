@@ -10,16 +10,12 @@ import UIKit
 class BibleView: UIView {
     
     let titleLabel: TextComponent = {
-        let label = TextComponent("BIBLE VIEW")
+        let label = TextComponent("No Verse Selected")
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.setCustomFont(.titulo1) // Using English naming
+        label.font = UIFont.setCustomFont(.textoNormal) // Using English naming
+        label.numberOfLines = 0 // Suporta várias linhas
+        label.textAlignment = .center
         return label
-    }()
-    
-    let tableView: UITableView = {
-        let tableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        return tableView
     }()
     
     override init(frame: CGRect) {
@@ -33,16 +29,17 @@ class BibleView: UIView {
     
     private func setupView() {
         backgroundColor = .white
-        addSubview(tableView)
+        addSubview(titleLabel)
         setupConstraints()
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            // Usando o safeAreaLayoutGuide para evitar a navigation bar
+            titleLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
     }
 }

@@ -14,7 +14,7 @@ class BibleCoordinator: Coordinator {
     
     // Navigation Controller deste fluxo
     var navigationController: UINavigationController
-   
+    
     init() {
         self.rootViewController = BibleViewController()
         self.navigationController = UINavigationController(rootViewController: rootViewController)
@@ -24,26 +24,32 @@ class BibleCoordinator: Coordinator {
         self.rootViewController.coordinator = self
     }
     
+    func showSelectionModal(from viewController: BibleViewController) {
+        let modal = SelectionModalViewController()
+        modal.delegate = viewController // BibleViewController will act as the delegate
+        modal.modalPresentationStyle = .pageSheet
+        viewController.present(modal, animated: true, completion: nil)
+    }
+    
     func showChapters(for book: Book) {
         let chaptersVC = ChaptersViewController()
         chaptersVC.viewModel = ChaptersViewModel(book: book)
         chaptersVC.coordinator = self // Pass the coordinator
         navigationController.pushViewController(chaptersVC, animated: true)
     }
-
+    
     
     func showVerses(for chapter: Chapter) {
         let versesVC = VersesViewController()
         versesVC.viewModel = VersesViewModel(chapter: chapter)
-        versesVC.coordinator = self 
+        versesVC.coordinator = self
         navigationController.pushViewController(versesVC, animated: true)
     }
     
     func showSpecificVerse(for verse: Verse) {
         let verseVC = VerseViewController()
         verseVC.viewModel = VerseViewModel(verse: verse)
-        verseVC.coordinator = self 
+        verseVC.coordinator = self
         navigationController.pushViewController(verseVC, animated: true)
     }
-
 }
