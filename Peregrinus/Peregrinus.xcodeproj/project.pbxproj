@@ -48,9 +48,6 @@
 		B8F8DD032C8B8EB500D24769 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F8DD022C8B8EB500D24769 /* SceneDelegate.swift */; };
 		B8F8DD0A2C8B8EB600D24769 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8F8DD092C8B8EB600D24769 /* Assets.xcassets */; };
 		B8F8DD0D2C8B8EB600D24769 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = B8F8DD0C2C8B8EB600D24769 /* Base */; };
-		B8F8DD182C8B8EB600D24769 /* Macro02Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F8DD172C8B8EB600D24769 /* Macro02Tests.swift */; };
-		B8F8DD222C8B8EB600D24769 /* Macro02UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F8DD212C8B8EB600D24769 /* Macro02UITests.swift */; };
-		B8F8DD242C8B8EB600D24769 /* Macro02UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F8DD232C8B8EB600D24769 /* Macro02UITestsLaunchTests.swift */; };
 		F1BE73FB2CB86CD000989E80 /* MainTabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BE73FA2CB86CC800989E80 /* MainTabBarCoordinator.swift */; };
 		F1BE74022CB873EF00989E80 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BE74012CB873ED00989E80 /* OnboardingCoordinator.swift */; };
 		F1EDE14A2C9CD045007A6403 /* ConsciousnessExamCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1EDE1492C9CD043007A6403 /* ConsciousnessExamCoordinator.swift */; };
@@ -72,19 +69,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		B8F8DD142C8B8EB600D24769 /* PBXContainerItemProxy */ = {
+		B84D82E22CC834D50026A9FA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B8F8DCF52C8B8EB500D24769 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = B8F8DCFC2C8B8EB500D24769;
-			remoteInfo = Macro02;
+			remoteInfo = Peregrinus;
 		};
-		B8F8DD1E2C8B8EB600D24769 /* PBXContainerItemProxy */ = {
+		B84D82F12CC834EC0026A9FA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B8F8DCF52C8B8EB500D24769 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = B8F8DCFC2C8B8EB500D24769;
-			remoteInfo = Macro02;
+			remoteInfo = Peregrinus;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -119,6 +116,8 @@
 		AFC862102CA32A7100167ECB /* ButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponent.swift; sourceTree = "<group>"; };
 		AFF9FA3C2CAF13D1004AB04F /* LiturgyCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiturgyCardView.swift; sourceTree = "<group>"; };
 		B8363E112CB717C20083D1D3 /* DataManagerTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerTestView.swift; sourceTree = "<group>"; };
+		B84D82DE2CC834D50026A9FA /* PeregrinusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeregrinusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B84D82EB2CC834EC0026A9FA /* PeregrinusUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeregrinusUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B84DEA072CA48F900010CEBC /* SinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinViewModel.swift; sourceTree = "<group>"; };
 		B8783F812C99F32E00661148 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		B8783F832C99F43300661148 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
@@ -132,11 +131,6 @@
 		B8F8DD092C8B8EB600D24769 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B8F8DD0C2C8B8EB600D24769 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B8F8DD0E2C8B8EB600D24769 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B8F8DD132C8B8EB600D24769 /* PeregrinusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeregrinusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B8F8DD172C8B8EB600D24769 /* Macro02Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macro02Tests.swift; sourceTree = "<group>"; };
-		B8F8DD1D2C8B8EB600D24769 /* PeregrinusUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeregrinusUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B8F8DD212C8B8EB600D24769 /* Macro02UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macro02UITests.swift; sourceTree = "<group>"; };
-		B8F8DD232C8B8EB600D24769 /* Macro02UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macro02UITestsLaunchTests.swift; sourceTree = "<group>"; };
 		F1BE73FA2CB86CC800989E80 /* MainTabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarCoordinator.swift; sourceTree = "<group>"; };
 		F1BE74012CB873ED00989E80 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		F1EDE1492C9CD043007A6403 /* ConsciousnessExamCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsciousnessExamCoordinator.swift; sourceTree = "<group>"; };
@@ -158,25 +152,27 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		B84D82DF2CC834D50026A9FA /* PeregrinusTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PeregrinusTests; sourceTree = "<group>"; };
+		B84D82EC2CC834EC0026A9FA /* PeregrinusUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PeregrinusUITests; sourceTree = "<group>"; };
 		F1BE740D2CB9A33B00989E80 /* Onboarding */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Onboarding; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B84D82DB2CC834D50026A9FA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B84D82E82CC834EC0026A9FA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B8F8DCFA2C8B8EB500D24769 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B8F8DD102C8B8EB600D24769 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B8F8DD1A2C8B8EB600D24769 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -334,8 +330,8 @@
 			isa = PBXGroup;
 			children = (
 				B8F8DCFF2C8B8EB500D24769 /* Peregrinus */,
-				B8F8DD162C8B8EB600D24769 /* PeregrinusTests */,
-				B8F8DD202C8B8EB600D24769 /* PeregrinusUITests */,
+				B84D82DF2CC834D50026A9FA /* PeregrinusTests */,
+				B84D82EC2CC834EC0026A9FA /* PeregrinusUITests */,
 				B8F8DCFE2C8B8EB500D24769 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -344,8 +340,8 @@
 			isa = PBXGroup;
 			children = (
 				B8F8DCFD2C8B8EB500D24769 /* Peregrinus.app */,
-				B8F8DD132C8B8EB600D24769 /* PeregrinusTests.xctest */,
-				B8F8DD1D2C8B8EB600D24769 /* PeregrinusUITests.xctest */,
+				B84D82DE2CC834D50026A9FA /* PeregrinusTests.xctest */,
+				B84D82EB2CC834EC0026A9FA /* PeregrinusUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -362,23 +358,6 @@
 				B8F8DD0E2C8B8EB600D24769 /* Info.plist */,
 			);
 			path = Peregrinus;
-			sourceTree = "<group>";
-		};
-		B8F8DD162C8B8EB600D24769 /* PeregrinusTests */ = {
-			isa = PBXGroup;
-			children = (
-				B8F8DD172C8B8EB600D24769 /* Macro02Tests.swift */,
-			);
-			path = PeregrinusTests;
-			sourceTree = "<group>";
-		};
-		B8F8DD202C8B8EB600D24769 /* PeregrinusUITests */ = {
-			isa = PBXGroup;
-			children = (
-				B8F8DD212C8B8EB600D24769 /* Macro02UITests.swift */,
-				B8F8DD232C8B8EB600D24769 /* Macro02UITestsLaunchTests.swift */,
-			);
-			path = PeregrinusUITests;
 			sourceTree = "<group>";
 		};
 		F1EDE1482C9CD022007A6403 /* Home Coordinators */ = {
@@ -406,6 +385,52 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		B84D82DD2CC834D50026A9FA /* PeregrinusTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B84D82E42CC834D50026A9FA /* Build configuration list for PBXNativeTarget "PeregrinusTests" */;
+			buildPhases = (
+				B84D82DA2CC834D50026A9FA /* Sources */,
+				B84D82DB2CC834D50026A9FA /* Frameworks */,
+				B84D82DC2CC834D50026A9FA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B84D82E32CC834D50026A9FA /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				B84D82DF2CC834D50026A9FA /* PeregrinusTests */,
+			);
+			name = PeregrinusTests;
+			packageProductDependencies = (
+			);
+			productName = PeregrinusTests;
+			productReference = B84D82DE2CC834D50026A9FA /* PeregrinusTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B84D82EA2CC834EC0026A9FA /* PeregrinusUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B84D82F32CC834EC0026A9FA /* Build configuration list for PBXNativeTarget "PeregrinusUITests" */;
+			buildPhases = (
+				B84D82E72CC834EC0026A9FA /* Sources */,
+				B84D82E82CC834EC0026A9FA /* Frameworks */,
+				B84D82E92CC834EC0026A9FA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B84D82F22CC834EC0026A9FA /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				B84D82EC2CC834EC0026A9FA /* PeregrinusUITests */,
+			);
+			name = PeregrinusUITests;
+			packageProductDependencies = (
+			);
+			productName = PeregrinusUITests;
+			productReference = B84D82EB2CC834EC0026A9FA /* PeregrinusUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		B8F8DCFC2C8B8EB500D24769 /* Peregrinus */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B8F8DD272C8B8EB600D24769 /* Build configuration list for PBXNativeTarget "Peregrinus" */;
@@ -426,42 +451,6 @@
 			productReference = B8F8DCFD2C8B8EB500D24769 /* Peregrinus.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B8F8DD122C8B8EB600D24769 /* PeregrinusTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B8F8DD2A2C8B8EB600D24769 /* Build configuration list for PBXNativeTarget "PeregrinusTests" */;
-			buildPhases = (
-				B8F8DD0F2C8B8EB600D24769 /* Sources */,
-				B8F8DD102C8B8EB600D24769 /* Frameworks */,
-				B8F8DD112C8B8EB600D24769 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B8F8DD152C8B8EB600D24769 /* PBXTargetDependency */,
-			);
-			name = PeregrinusTests;
-			productName = Macro02Tests;
-			productReference = B8F8DD132C8B8EB600D24769 /* PeregrinusTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		B8F8DD1C2C8B8EB600D24769 /* PeregrinusUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B8F8DD2D2C8B8EB600D24769 /* Build configuration list for PBXNativeTarget "PeregrinusUITests" */;
-			buildPhases = (
-				B8F8DD192C8B8EB600D24769 /* Sources */,
-				B8F8DD1A2C8B8EB600D24769 /* Frameworks */,
-				B8F8DD1B2C8B8EB600D24769 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B8F8DD1F2C8B8EB600D24769 /* PBXTargetDependency */,
-			);
-			name = PeregrinusUITests;
-			productName = Macro02UITests;
-			productReference = B8F8DD1D2C8B8EB600D24769 /* PeregrinusUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -469,19 +458,19 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1540;
+				LastSwiftUpdateCheck = 1600;
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
+					B84D82DD2CC834D50026A9FA = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = B8F8DCFC2C8B8EB500D24769;
+					};
+					B84D82EA2CC834EC0026A9FA = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = B8F8DCFC2C8B8EB500D24769;
+					};
 					B8F8DCFC2C8B8EB500D24769 = {
 						CreatedOnToolsVersion = 15.4;
-					};
-					B8F8DD122C8B8EB600D24769 = {
-						CreatedOnToolsVersion = 15.4;
-						TestTargetID = B8F8DCFC2C8B8EB500D24769;
-					};
-					B8F8DD1C2C8B8EB600D24769 = {
-						CreatedOnToolsVersion = 15.4;
-						TestTargetID = B8F8DCFC2C8B8EB500D24769;
 					};
 				};
 			};
@@ -499,13 +488,27 @@
 			projectRoot = "";
 			targets = (
 				B8F8DCFC2C8B8EB500D24769 /* Peregrinus */,
-				B8F8DD122C8B8EB600D24769 /* PeregrinusTests */,
-				B8F8DD1C2C8B8EB600D24769 /* PeregrinusUITests */,
+				B84D82DD2CC834D50026A9FA /* PeregrinusTests */,
+				B84D82EA2CC834EC0026A9FA /* PeregrinusUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		B84D82DC2CC834D50026A9FA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B84D82E92CC834EC0026A9FA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B8F8DCFB2C8B8EB500D24769 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -518,23 +521,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B8F8DD112C8B8EB600D24769 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B8F8DD1B2C8B8EB600D24769 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B84D82DA2CC834D50026A9FA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B84D82E72CC834EC0026A9FA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B8F8DCF92C8B8EB500D24769 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -596,35 +599,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B8F8DD0F2C8B8EB600D24769 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B8F8DD182C8B8EB600D24769 /* Macro02Tests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B8F8DD192C8B8EB600D24769 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B8F8DD222C8B8EB600D24769 /* Macro02UITests.swift in Sources */,
-				B8F8DD242C8B8EB600D24769 /* Macro02UITestsLaunchTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		B8F8DD152C8B8EB600D24769 /* PBXTargetDependency */ = {
+		B84D82E32CC834D50026A9FA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B8F8DCFC2C8B8EB500D24769 /* Peregrinus */;
-			targetProxy = B8F8DD142C8B8EB600D24769 /* PBXContainerItemProxy */;
+			targetProxy = B84D82E22CC834D50026A9FA /* PBXContainerItemProxy */;
 		};
-		B8F8DD1F2C8B8EB600D24769 /* PBXTargetDependency */ = {
+		B84D82F22CC834EC0026A9FA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B8F8DCFC2C8B8EB500D24769 /* Peregrinus */;
-			targetProxy = B8F8DD1E2C8B8EB600D24769 /* PBXContainerItemProxy */;
+			targetProxy = B84D82F12CC834EC0026A9FA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -640,6 +626,80 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		B84D82E52CC834D50026A9FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TLC9D54B8V;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Giovanni.PeregrinusTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Peregrinus.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Peregrinus";
+			};
+			name = Debug;
+		};
+		B84D82E62CC834D50026A9FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TLC9D54B8V;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Giovanni.PeregrinusTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Peregrinus.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Peregrinus";
+			};
+			name = Release;
+		};
+		B84D82F42CC834EC0026A9FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TLC9D54B8V;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Giovanni.PeregrinusUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Peregrinus;
+			};
+			name = Debug;
+		};
+		B84D82F52CC834EC0026A9FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TLC9D54B8V;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Giovanni.PeregrinusUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Peregrinus;
+			};
+			name = Release;
+		};
 		B8F8DD252C8B8EB600D24769 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -768,7 +828,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2GNPFRN684;
+				DEVELOPMENT_TEAM = TLC9D54B8V;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Peregrinus/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Peregrinus;
@@ -803,7 +863,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2GNPFRN684;
+				DEVELOPMENT_TEAM = TLC9D54B8V;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Peregrinus/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Peregrinus;
@@ -831,97 +891,27 @@
 			};
 			name = Release;
 		};
-		B8F8DD2B2C8B8EB600D24769 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2GNPFRN684;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = br.com.gabusiness.peregrinusTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Peregrinus.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Peregrinus";
-			};
-			name = Debug;
-		};
-		B8F8DD2C2C8B8EB600D24769 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2GNPFRN684;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = br.com.gabusiness.peregrinusTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Peregrinus.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Peregrinus";
-			};
-			name = Release;
-		};
-		B8F8DD2E2C8B8EB600D24769 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2GNPFRN684;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = br.com.gabusiness.peregrinusUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-				TEST_TARGET_NAME = Macro02;
-			};
-			name = Debug;
-		};
-		B8F8DD2F2C8B8EB600D24769 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2GNPFRN684;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = br.com.gabusiness.peregrinusUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-				TEST_TARGET_NAME = Macro02;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		B84D82E42CC834D50026A9FA /* Build configuration list for PBXNativeTarget "PeregrinusTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B84D82E52CC834D50026A9FA /* Debug */,
+				B84D82E62CC834D50026A9FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B84D82F32CC834EC0026A9FA /* Build configuration list for PBXNativeTarget "PeregrinusUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B84D82F42CC834EC0026A9FA /* Debug */,
+				B84D82F52CC834EC0026A9FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B8F8DCF82C8B8EB500D24769 /* Build configuration list for PBXProject "Peregrinus" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -936,24 +926,6 @@
 			buildConfigurations = (
 				B8F8DD282C8B8EB600D24769 /* Debug */,
 				B8F8DD292C8B8EB600D24769 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B8F8DD2A2C8B8EB600D24769 /* Build configuration list for PBXNativeTarget "PeregrinusTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B8F8DD2B2C8B8EB600D24769 /* Debug */,
-				B8F8DD2C2C8B8EB600D24769 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B8F8DD2D2C8B8EB600D24769 /* Build configuration list for PBXNativeTarget "PeregrinusUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B8F8DD2E2C8B8EB600D24769 /* Debug */,
-				B8F8DD2F2C8B8EB600D24769 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
