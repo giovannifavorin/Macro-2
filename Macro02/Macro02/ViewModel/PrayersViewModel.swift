@@ -51,12 +51,12 @@ class PrayersViewModel: ObservableObject {
         self.prayerCategories = [PrayerCategory(id: UUID(),
                                                 name: "Category 1",
                                                 image: UIImage(systemName: "book") ?? UIImage(named: "defaultImage")!,
-                                                prayers: self.prayers),
+                                                prayers: self.prayers, category: "categoria1"),
                                  
                                  PrayerCategory(id: UUID(),
                                                 name: "Category 2",
                                                 image: UIImage(systemName: "book") ?? UIImage(named: "defaultImage")!,
-                                                prayers: self.prayers2)
+                                                prayers: self.prayers2, category: "categoria2")
         
         ]
     }

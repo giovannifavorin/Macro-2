@@ -18,4 +18,5 @@ struct PrayerCategory: Identifiable {
     var name: String
     var image: UIImage
     var prayers: [Prayer]
+    var category: String
 }
