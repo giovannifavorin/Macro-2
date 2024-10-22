@@ -770,8 +770,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TLC9D54B8V;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Macro02/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Macro02;
+				INFOPLIST_FILE = Peregrinus/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Peregrinus;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Please allow to continue with Face ID";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -805,8 +805,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TLC9D54B8V;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Macro02/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Macro02;
+				INFOPLIST_FILE = Peregrinus/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Peregrinus;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Please allow to continue with Face ID";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
