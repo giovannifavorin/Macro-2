@@ -17,8 +17,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B8F8DCFC2C8B8EB500D24769"
                BuildableName = "Peregrinus.app"
-               BlueprintName = "Macro02"
-               ReferencedContainer = "container:Macro02.xcodeproj">
+               BlueprintName = "Peregrinus"
+               ReferencedContainer = "container:Peregrinus.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -36,9 +36,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B8F8DD122C8B8EB600D24769"
-               BuildableName = "Macro02Tests.xctest"
-               BlueprintName = "Macro02Tests"
-               ReferencedContainer = "container:Macro02.xcodeproj">
+               BuildableName = "PeregrinusTests.xctest"
+               BlueprintName = "PeregrinusTests"
+               ReferencedContainer = "container:Peregrinus.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B8F8DD1C2C8B8EB600D24769"
-               BuildableName = "Macro02UITests.xctest"
-               BlueprintName = "Macro02UITests"
-               ReferencedContainer = "container:Macro02.xcodeproj">
+               BuildableName = "PeregrinusUITests.xctest"
+               BlueprintName = "PeregrinusUITests"
+               ReferencedContainer = "container:Peregrinus.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -70,8 +70,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B8F8DCFC2C8B8EB500D24769"
             BuildableName = "Peregrinus.app"
-            BlueprintName = "Macro02"
-            ReferencedContainer = "container:Macro02.xcodeproj">
+            BlueprintName = "Peregrinus"
+            ReferencedContainer = "container:Peregrinus.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -87,8 +87,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B8F8DCFC2C8B8EB500D24769"
             BuildableName = "Peregrinus.app"
-            BlueprintName = "Macro02"
-            ReferencedContainer = "container:Macro02.xcodeproj">
+            BlueprintName = "Peregrinus"
+            ReferencedContainer = "container:Peregrinus.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

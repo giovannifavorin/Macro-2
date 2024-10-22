@@ -132,9 +132,9 @@
 		B8F8DD092C8B8EB600D24769 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B8F8DD0C2C8B8EB600D24769 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B8F8DD0E2C8B8EB600D24769 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B8F8DD132C8B8EB600D24769 /* Macro02Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Macro02Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B8F8DD132C8B8EB600D24769 /* PeregrinusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeregrinusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8F8DD172C8B8EB600D24769 /* Macro02Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macro02Tests.swift; sourceTree = "<group>"; };
-		B8F8DD1D2C8B8EB600D24769 /* Macro02UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Macro02UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B8F8DD1D2C8B8EB600D24769 /* PeregrinusUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeregrinusUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8F8DD212C8B8EB600D24769 /* Macro02UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macro02UITests.swift; sourceTree = "<group>"; };
 		B8F8DD232C8B8EB600D24769 /* Macro02UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Macro02UITestsLaunchTests.swift; sourceTree = "<group>"; };
 		F1BE73FA2CB86CC800989E80 /* MainTabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarCoordinator.swift; sourceTree = "<group>"; };
@@ -344,8 +344,8 @@
 			isa = PBXGroup;
 			children = (
 				B8F8DCFD2C8B8EB500D24769 /* Peregrinus.app */,
-				B8F8DD132C8B8EB600D24769 /* Macro02Tests.xctest */,
-				B8F8DD1D2C8B8EB600D24769 /* Macro02UITests.xctest */,
+				B8F8DD132C8B8EB600D24769 /* PeregrinusTests.xctest */,
+				B8F8DD1D2C8B8EB600D24769 /* PeregrinusUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -406,9 +406,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B8F8DCFC2C8B8EB500D24769 /* Macro02 */ = {
+		B8F8DCFC2C8B8EB500D24769 /* Peregrinus */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B8F8DD272C8B8EB600D24769 /* Build configuration list for PBXNativeTarget "Macro02" */;
+			buildConfigurationList = B8F8DD272C8B8EB600D24769 /* Build configuration list for PBXNativeTarget "Peregrinus" */;
 			buildPhases = (
 				B8F8DCF92C8B8EB500D24769 /* Sources */,
 				B8F8DCFA2C8B8EB500D24769 /* Frameworks */,
@@ -421,14 +421,14 @@
 			fileSystemSynchronizedGroups = (
 				F1BE740D2CB9A33B00989E80 /* Onboarding */,
 			);
-			name = Macro02;
+			name = Peregrinus;
 			productName = Macro02;
 			productReference = B8F8DCFD2C8B8EB500D24769 /* Peregrinus.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B8F8DD122C8B8EB600D24769 /* Macro02Tests */ = {
+		B8F8DD122C8B8EB600D24769 /* PeregrinusTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B8F8DD2A2C8B8EB600D24769 /* Build configuration list for PBXNativeTarget "Macro02Tests" */;
+			buildConfigurationList = B8F8DD2A2C8B8EB600D24769 /* Build configuration list for PBXNativeTarget "PeregrinusTests" */;
 			buildPhases = (
 				B8F8DD0F2C8B8EB600D24769 /* Sources */,
 				B8F8DD102C8B8EB600D24769 /* Frameworks */,
@@ -439,14 +439,14 @@
 			dependencies = (
 				B8F8DD152C8B8EB600D24769 /* PBXTargetDependency */,
 			);
-			name = Macro02Tests;
+			name = PeregrinusTests;
 			productName = Macro02Tests;
-			productReference = B8F8DD132C8B8EB600D24769 /* Macro02Tests.xctest */;
+			productReference = B8F8DD132C8B8EB600D24769 /* PeregrinusTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		B8F8DD1C2C8B8EB600D24769 /* Macro02UITests */ = {
+		B8F8DD1C2C8B8EB600D24769 /* PeregrinusUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B8F8DD2D2C8B8EB600D24769 /* Build configuration list for PBXNativeTarget "Macro02UITests" */;
+			buildConfigurationList = B8F8DD2D2C8B8EB600D24769 /* Build configuration list for PBXNativeTarget "PeregrinusUITests" */;
 			buildPhases = (
 				B8F8DD192C8B8EB600D24769 /* Sources */,
 				B8F8DD1A2C8B8EB600D24769 /* Frameworks */,
@@ -457,9 +457,9 @@
 			dependencies = (
 				B8F8DD1F2C8B8EB600D24769 /* PBXTargetDependency */,
 			);
-			name = Macro02UITests;
+			name = PeregrinusUITests;
 			productName = Macro02UITests;
-			productReference = B8F8DD1D2C8B8EB600D24769 /* Macro02UITests.xctest */;
+			productReference = B8F8DD1D2C8B8EB600D24769 /* PeregrinusUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -485,7 +485,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B8F8DCF82C8B8EB500D24769 /* Build configuration list for PBXProject "Macro02" */;
+			buildConfigurationList = B8F8DCF82C8B8EB500D24769 /* Build configuration list for PBXProject "Peregrinus" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -498,9 +498,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B8F8DCFC2C8B8EB500D24769 /* Macro02 */,
-				B8F8DD122C8B8EB600D24769 /* Macro02Tests */,
-				B8F8DD1C2C8B8EB600D24769 /* Macro02UITests */,
+				B8F8DCFC2C8B8EB500D24769 /* Peregrinus */,
+				B8F8DD122C8B8EB600D24769 /* PeregrinusTests */,
+				B8F8DD1C2C8B8EB600D24769 /* PeregrinusUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -618,12 +618,12 @@
 /* Begin PBXTargetDependency section */
 		B8F8DD152C8B8EB600D24769 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B8F8DCFC2C8B8EB500D24769 /* Macro02 */;
+			target = B8F8DCFC2C8B8EB500D24769 /* Peregrinus */;
 			targetProxy = B8F8DD142C8B8EB600D24769 /* PBXContainerItemProxy */;
 		};
 		B8F8DD1F2C8B8EB600D24769 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B8F8DCFC2C8B8EB500D24769 /* Macro02 */;
+			target = B8F8DCFC2C8B8EB500D24769 /* Peregrinus */;
 			targetProxy = B8F8DD1E2C8B8EB600D24769 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -850,7 +850,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Macro02.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Macro02";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Peregrinus.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Peregrinus";
 			};
 			name = Debug;
 		};
@@ -873,7 +873,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Macro02.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Macro02";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Peregrinus.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Peregrinus";
 			};
 			name = Release;
 		};
@@ -922,7 +922,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B8F8DCF82C8B8EB500D24769 /* Build configuration list for PBXProject "Macro02" */ = {
+		B8F8DCF82C8B8EB500D24769 /* Build configuration list for PBXProject "Peregrinus" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B8F8DD252C8B8EB600D24769 /* Debug */,
@@ -931,7 +931,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B8F8DD272C8B8EB600D24769 /* Build configuration list for PBXNativeTarget "Macro02" */ = {
+		B8F8DD272C8B8EB600D24769 /* Build configuration list for PBXNativeTarget "Peregrinus" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B8F8DD282C8B8EB600D24769 /* Debug */,
@@ -940,7 +940,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B8F8DD2A2C8B8EB600D24769 /* Build configuration list for PBXNativeTarget "Macro02Tests" */ = {
+		B8F8DD2A2C8B8EB600D24769 /* Build configuration list for PBXNativeTarget "PeregrinusTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B8F8DD2B2C8B8EB600D24769 /* Debug */,
@@ -949,7 +949,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B8F8DD2D2C8B8EB600D24769 /* Build configuration list for PBXNativeTarget "Macro02UITests" */ = {
+		B8F8DD2D2C8B8EB600D24769 /* Build configuration list for PBXNativeTarget "PeregrinusUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B8F8DD2E2C8B8EB600D24769 /* Debug */,
