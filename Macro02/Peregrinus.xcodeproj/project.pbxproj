@@ -333,9 +333,9 @@
 		B8F8DCF42C8B8EB500D24769 = {
 			isa = PBXGroup;
 			children = (
-				B8F8DCFF2C8B8EB500D24769 /* Macro02 */,
-				B8F8DD162C8B8EB600D24769 /* Macro02Tests */,
-				B8F8DD202C8B8EB600D24769 /* Macro02UITests */,
+				B8F8DCFF2C8B8EB500D24769 /* Peregrinus */,
+				B8F8DD162C8B8EB600D24769 /* PeregrinusTests */,
+				B8F8DD202C8B8EB600D24769 /* PeregrinusUITests */,
 				B8F8DCFE2C8B8EB500D24769 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -350,7 +350,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B8F8DCFF2C8B8EB500D24769 /* Macro02 */ = {
+		B8F8DCFF2C8B8EB500D24769 /* Peregrinus */ = {
 			isa = PBXGroup;
 			children = (
 				B8783F912C99F68100661148 /* Delegate */,
@@ -361,24 +361,24 @@
 				B8F8DD0B2C8B8EB600D24769 /* LaunchScreen.storyboard */,
 				B8F8DD0E2C8B8EB600D24769 /* Info.plist */,
 			);
-			path = Macro02;
+			path = Peregrinus;
 			sourceTree = "<group>";
 		};
-		B8F8DD162C8B8EB600D24769 /* Macro02Tests */ = {
+		B8F8DD162C8B8EB600D24769 /* PeregrinusTests */ = {
 			isa = PBXGroup;
 			children = (
 				B8F8DD172C8B8EB600D24769 /* Macro02Tests.swift */,
 			);
-			path = Macro02Tests;
+			path = PeregrinusTests;
 			sourceTree = "<group>";
 		};
-		B8F8DD202C8B8EB600D24769 /* Macro02UITests */ = {
+		B8F8DD202C8B8EB600D24769 /* PeregrinusUITests */ = {
 			isa = PBXGroup;
 			children = (
 				B8F8DD212C8B8EB600D24769 /* Macro02UITests.swift */,
 				B8F8DD232C8B8EB600D24769 /* Macro02UITestsLaunchTests.swift */,
 			);
-			path = Macro02UITests;
+			path = PeregrinusUITests;
 			sourceTree = "<group>";
 		};
 		F1EDE1482C9CD022007A6403 /* Home Coordinators */ = {
