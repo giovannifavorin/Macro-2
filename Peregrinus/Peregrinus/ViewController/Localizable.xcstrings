@@ -1,0 +1,50 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "1 Leitura" : {
+
+    },
+    "Aa" : {
+
+    },
+    "ABOUT VIEW" : {
+
+    },
+    "BIBLE VIEW" : {
+
+    },
+    "Clique em mim e eu clicarei de volta" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "touth in me and i will touch again"
+          }
+        }
+      }
+    },
+    "Counsciousness Exam" : {
+
+    },
+    "Evangelho" : {
+
+    },
+    "HOME VIEW" : {
+
+    },
+    "Liturgia Diária" : {
+
+    },
+    "Prayers" : {
+
+    },
+    "Salmos" : {
+
+    },
+    "Segmento" : {
+
+    }
+  },
+  "version" : "1.0"
+}
