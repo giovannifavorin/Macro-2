@@ -26,9 +26,6 @@ class ConsciousnessExamCoordinator: Coordinator {
         // DEBUG
         print("Navegando para Exame de Consciência")
         
-        // Define a View atual da viewModel como a primeira do fluxo (que será navegada)
-        viewModel.view = self.rootViewController
-        
         // Navega para a primeira View do fluxo
         self.rootViewController = SacramentOfConfessionViewController()
         
@@ -64,17 +61,17 @@ class ConsciousnessExamCoordinator: Coordinator {
     }
     
     private func navigateToConsciousnessExamThird() {
-        let view = ConsciousnessExamThirdViewController(viewModel: self.viewModel)
-        view.coordinator = self
-        view.navigationItem.hidesBackButton = true
-        self.navigationController.pushViewController(view, animated: false)
+//        let view = ConsciousnessExamThirdViewController(viewModel: self.viewModel)
+//        view.coordinator = self
+//        view.navigationItem.hidesBackButton = true
+//        self.navigationController.pushViewController(view, animated: false)
     }
     
     private func navigateToConsciousnessExamFourth() {
-        let view = ConsciousnessExamFourthViewController(viewModel: self.viewModel)
-        view.coordinator = self
-        view.navigationItem.hidesBackButton = true
-        self.navigationController.pushViewController(view, animated: false)
+//        let view = ConsciousnessExamFourthViewController(viewModel: self.viewModel)
+//        view.coordinator = self
+//        view.navigationItem.hidesBackButton = true
+//        self.navigationController.pushViewController(view, animated: false)
     }
     
     private func navigateToActOfContritionFirst() {

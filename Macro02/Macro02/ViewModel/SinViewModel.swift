@@ -24,93 +24,13 @@ class SinViewModel {
     weak var delegate: SinViewModelDelegate?
     
     init() {
-        fetchSavedSins()
+        fetchAllSins()
     }
     
-    // Carrega os mandamentos e as perguntas relacionadas
-    func loadCommandments(_ int: Int) -> [Commandment] {
-        
-        switch int {
-        case 1:
-            return [Commandment(title: "Primeiro Mandamento", description: "Amar a Deus sobre todas as coisas", sins: [
-                "Neguei ou abandonei a minha fé.",
-                "Tenho a preocupação de conhecê-la melhor.",
-                "Recusei-me a defender a minha fé ou fiquei envergonhado dela.",
-                "Existe algum aspecto da minha fé que eu ainda não aceito.",
-                "Pratiquei o espiritismo ou coloquei a minha confiança em adivinhos ou horóscopos.",
-                "Manifestei falta de respeito pelas pessoas, lugares ou coisas santas.",
-                "Descuidei da minha responsabilidade de aproximar os outros de Deus, com o meu exemplo e a minha palavra.",
-            ]),
-                    
-                    Commandment(title: "Segundo Mandamento", description: "Não tomar o nome de Deus em vão", sins: [
-                        "Disse o nome de Deus em vão."
-                    ]),
-                    
-                    Commandment(title: "Terceiro Mandamento", description: "Guardar domingos e festas de guarda", sins: [
-                        "Faltei voluntariamente à Missa nos domingos ou dias de preceito.",
-                        "Recebi a Comunhão sem agradecimento ou sem a devida reverência."
-                    ]),
-                    
-            ]
-            
-        case 2:
-            return [
-                Commandment(title: "Quarto Mandamento", description: "Honrar pai e mãe", sins: [
-                "Não honrei os meus pais ou figuras de autoridade."
-                ]),
-                    
-                    Commandment(title: "Quinto Mandamento", description: "Não matar", sins: [
-                        "Fui violento nas palavras ou ações com outros.",
-                        "Tive ódio ou juízos críticos, em pensamentos ou ações.",
-                        "Olhei os outros com desprezo.",
-                        "Colaborei ou encorajei alguém a fazer um aborto, destruir embriões humanos, praticar a eutanásia ou outro meio de acabar com a vida.",
-                        "Abusei de bebidas alcoólicas.",
-                        "Usei drogas."
-                    ]),
-                    
-                    Commandment(title: "Sexto Mandamento", description: "Não pecar contra a castidade", sins: [
-                        "Assisti vídeos ou acessei sites pornográficos.",
-                        "Cometi atos impuros, sozinho ou com outras pessoas.",
-                        "Estou morando com alguém como se fosse casado, sem que o seja.",
-                        "Se sou casado, não procuro amar o meu cônjuge mais do que a qualquer outra pessoa.",
-                        "Não coloco meu casamento em primeiro lugar.",
-                        "Não tenho uma atitude aberta para novos filhos."
-                    ]),
-                    
-                    
-                    Commandment(title: "Sétimo Mandamento", description: "Não furtar", sins: [
-                        "Roubei ou enganei alguém no trabalho.",
-                        "Gastei dinheiro com o meu conforto e luxo pessoal, esquecendo minhas responsabilidades para com os outros e para com a Igreja."
-                    ]),
-                    
-            ]
-            
-        case 3:
-            return [
-                
-                Commandment(title: "Oitavo Mandamento", description: "Não levantar falso testemunho", sins: [
-                    "Falei mal dos outros, transformando o assunto em fofoca.",
-                    "Disse mentiras.",
-                    "Não fui honesto ou diligente no meu trabalho."
-                ]),
-                
-                Commandment(title: "Nono Mandamento", description: "Não desejar a mulher do próximo", sins: [
-                        "Desejei ou tive pensamentos impuros com pessoas que não são meu cônjuge (implícito nas questões de pureza e castidade)."
-                ]),
-                
-                Commandment(title: "Décimo Mandamento", description: "Não cobiçar as coisas alheias", sins: [
-                "Fui invejoso.",
-                "Fui orgulhoso ou egoísta em meus pensamentos e ações.",
-                "Cedi à preguiça.",
-                "Preferi a comodidade ao invés de servir aos demais.",
-                "Trabalhei de forma desordenada, ocupando tempo e energias que deveria dedicar à minha família e amigos."
-                ])
-                   
-            ]
-            
-        default:
-            return []
-        }
+    // Busca todos os pecados salvos no Core Data
+    func fetchAllSins() {
+        _savedSins = DataManager.shared.fetchAllSins()
+        delegate?.didUpdateSavedSins(savedSins) // Notifica a delegate sobre a atualização
     }
     
     // Verifica se uma questão está marcada como pecado
@@ -187,19 +107,15 @@ class SinViewModel {
     }
     
     // Adiciona um novo pecado
-    func addSin(with sinDescription: String) {
+    func addSin(with sinDescription: String, commandment: String, comDescription: String) {
         // Verifica se o pecado já existe
         guard !_savedSins.contains(where: { $0.sinDescription == sinDescription }) else {
             delegate?.didFailToAddSin(with: "Pecado já existe.")
             return
         }
         
-        // Exemplo de valores para os mandamentos e descrição
-        let commandments = "Mandamento relacionado ao pecado" // Aqui você pode determinar qual mandamento é apropriado
-        let commandmentDescription = "Descrição do mandamento" // Descrição que deve ser correspondente ao mandamento
-        
         // Cria um novo pecado usando o DataManager
-        if let newSin = sinDataManager.createSin(commandments: commandments, commandmentDescription: commandmentDescription, sinDescription: sinDescription) {
+        if let newSin = sinDataManager.createSin(commandments: commandment, commandmentDescription: comDescription, sinDescription: sinDescription) {
             // Adiciona o novo pecado ao array de pecados salvos
             _savedSins.append(newSin)
             print("Novo pecado adicionado: \(newSin.sinDescription ?? "")")
@@ -213,4 +129,51 @@ class SinViewModel {
     func getMarkedSins() -> [SinsInExamination] {
         return pendingSinsInExamination
     }
+    
+    // Filtra e agrupa pecados pelos primeiros três mandamentos em ordem correta
+    func getGroupedSinsByCommandment(limit: Int) -> [(commandment: String, sins: [Sin])] {
+        var groupedSins: [(commandment: String, sins: [Sin])] = []
+
+        // Ordena os mandamentos com base nos números que eles contêm (palavras ou números)
+        let uniqueCommandments = Array(Set(_savedSins.compactMap { $0.commandments }).sorted { first, second in
+            return extractCommandmentNumber(from: first) < extractCommandmentNumber(from: second)
+        }).prefix(limit)
+        
+        // Agrupa os pecados por mandamento
+        for commandment in uniqueCommandments {
+            var sinsForCommandment = _savedSins.filter { $0.commandments == commandment }
+            sinsForCommandment = Array(Set(sinsForCommandment)) // Remove duplicatas
+            groupedSins.append((commandment: commandment, sins: sinsForCommandment))
+        }
+
+        return groupedSins
+    }
+
+    // Função para mapear palavras como "Primeiro", "Segundo" para números e ordenar corretamente
+    private func extractCommandmentNumber(from commandment: String) -> Int {
+        let mapping: [String: Int] = [
+            "Primeiro": 1,
+            "Segundo": 2,
+            "Terceiro": 3,
+            "Quarto": 4,
+            "Quinto": 5,
+            "Sexto": 6,
+            "Sétimo": 7,
+            "Oitavo": 8,
+            "Nono": 9,
+            "Décimo": 10
+        ]
+        
+        // Verifica cada palavra do mapeamento para encontrar o número correspondente
+        for (word, number) in mapping {
+            if commandment.contains(word) {
+                return number
+            }
+        }
+        
+        // Se não for um mandamento numerado explicitamente, retornar um número alto
+        return 999
+    }
+
+
 }

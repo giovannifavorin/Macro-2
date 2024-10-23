@@ -10,7 +10,6 @@ import UIKit
 class ConsciousnessExamSecondViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Propriedades
-    
     weak var coordinator: ConsciousnessExamCoordinator?
     var viewModel: SinViewModel
     
@@ -22,7 +21,7 @@ class ConsciousnessExamSecondViewController: UIViewController, UITextFieldDelega
     private var progressBar: UIView!
     private let closeButton = UIButton()
     
-    //Text Input para adicionar Pecado
+    // Text Input para adicionar Pecado
     private let sinTextField: UITextField = {
         let textInput = UITextField()
         textInput.placeholder = "Anote seus pecados aqui."
@@ -30,7 +29,7 @@ class ConsciousnessExamSecondViewController: UIViewController, UITextFieldDelega
         return textInput
     }()
     
-    //Botão para Submeter o Texto
+    // Botão para Submeter o Texto
     private let sinSubmitButton: UIButton = {
         let button = UIButton()
         button.setTitle("+", for: .normal)
@@ -44,11 +43,10 @@ class ConsciousnessExamSecondViewController: UIViewController, UITextFieldDelega
     private let tableView = UITableView()
     
     // Array de mandamentos e um array para controlar o estado expandido de cada mandamento
-    private var commandments: [Commandment] = []
+    private var commandments: [(commandment: String, sins: [Sin])] = []
     private var expandedStates: [Bool] = []
     
     // MARK: - Inicializador
-    
     init(viewModel: SinViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -58,40 +56,29 @@ class ConsciousnessExamSecondViewController: UIViewController, UITextFieldDelega
         fatalError("init(coder:) has not been implemented")
     }
     
-    //Remove the observers from Keyboard
     deinit {
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: - Ciclo de Vida
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
         setupUIComponents()
-        loadCommandmentsAndStates()
         setupKeyboard()
         setupConstraints()
+        
+        viewModel.delegate = self
+        viewModel.fetchAllSins()
     }
     
     // MARK: - Configurações
-    
-    // Configura a View
     private func configureView() {
         self.view.backgroundColor = .white
         self.navigationItem.hidesBackButton = true
     }
     
-    // Carrega mandamentos e define os estados de expansão
-    private func loadCommandmentsAndStates() {
-        commandments = viewModel.loadCommandments(1)  // Carrega os mandamentos
-        expandedStates = Array(repeating: false, count: commandments.count)  // Inicializa como "não-expandidos"
-    }
-    
-    // MARK: - Configurações de UI
-    
-    // Configura os componentes da interface
+    // Configurações de UI
     private func setupUIComponents() {
         setupProgressBar()
         setupTitleLabel()
@@ -102,14 +89,12 @@ class ConsciousnessExamSecondViewController: UIViewController, UITextFieldDelega
         setupTableFooterView()
     }
     
-    // Configura a barra de progresso
     private func setupProgressBar() {
         self.progressBar = ProgressBarUI(index: 2)
         progressBar.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(progressBar)
     }
     
-    // Configura o título
     private func setupTitleLabel() {
         titleLabel.text = "Exame de Consciência"
         titleLabel.font = UIFont.boldSystemFont(ofSize: 32)
@@ -118,7 +103,6 @@ class ConsciousnessExamSecondViewController: UIViewController, UITextFieldDelega
         view.addSubview(titleLabel)
     }
     
-    // Configura o botão de fechar (X)
     private func setupCloseButton() {
         let largeConfig = UIImage.SymbolConfiguration(pointSize: 24, weight: .bold, scale: .large)
         let largeImage = UIImage(systemName: "xmark", withConfiguration: largeConfig)
@@ -129,7 +113,6 @@ class ConsciousnessExamSecondViewController: UIViewController, UITextFieldDelega
         view.addSubview(closeButton)
     }
     
-    // Configura o texto descritivo
     private func setupDescriptionLabel() {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 10
@@ -147,7 +130,6 @@ class ConsciousnessExamSecondViewController: UIViewController, UITextFieldDelega
         view.addSubview(descriptionLabel)
     }
     
-    // Configura a TableView
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -158,13 +140,11 @@ class ConsciousnessExamSecondViewController: UIViewController, UITextFieldDelega
         view.addSubview(tableView)
     }
     
-    // Configura os botões "Back" e "Next"
     private func setupButtons() {
         setupBackButton()
         setupNextButton()
     }
     
-    // Configura o botão "Back"
     private func setupBackButton() {
         backBt.setImage(UIImage(systemName: "arrow.left"), for: .normal)
         backBt.backgroundColor = .black
@@ -175,7 +155,6 @@ class ConsciousnessExamSecondViewController: UIViewController, UITextFieldDelega
         view.addSubview(backBt)
     }
     
-    // Configura o botão "Next"
     private func setupNextButton() {
         nextBt.setImage(UIImage(systemName: "arrow.right"), for: .normal)
         nextBt.backgroundColor = .black
@@ -186,57 +165,49 @@ class ConsciousnessExamSecondViewController: UIViewController, UITextFieldDelega
         view.addSubview(nextBt)
     }
     
-    // Configura o rodapé da tabela com o TextField e o botão de adicionar pecado
     private func setupTableFooterView() {
-        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.bounds.height * 0.05))
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.bounds.height * 0.1))
         
         sinTextField.translatesAutoresizingMaskIntoConstraints = false
         sinTextField.delegate = self
         
-        sinSubmitButton.backgroundColor = .black
         sinSubmitButton.translatesAutoresizingMaskIntoConstraints = false
+        sinSubmitButton.tintColor = .black
         
         footerView.addSubview(sinTextField)
         footerView.addSubview(sinSubmitButton)
         
-        // Configurações de layout
         NSLayoutConstraint.activate([
+            sinTextField.widthAnchor.constraint(equalTo: footerView.widthAnchor, multiplier: 0.75),
+            sinTextField.heightAnchor.constraint(equalTo: footerView.heightAnchor, multiplier: 0.5),
             sinTextField.leadingAnchor.constraint(equalTo: footerView.leadingAnchor),
-            sinTextField.trailingAnchor.constraint(equalTo: footerView.trailingAnchor, constant: view.bounds.width * -0.2),
-            sinTextField.centerYAnchor.constraint(equalTo: footerView.bottomAnchor),
-            sinTextField.heightAnchor.constraint(equalTo: footerView.heightAnchor, multiplier: 0.75),
+            sinTextField.centerYAnchor.constraint(equalTo: footerView.centerYAnchor),
             
-            sinSubmitButton.leadingAnchor.constraint(equalTo: sinTextField.trailingAnchor, constant: view.bounds.width * 0.05), // Espaço entre o TextField e o botão
+            sinSubmitButton.heightAnchor.constraint(equalTo: footerView.heightAnchor, multiplier: 0.5),
             sinSubmitButton.trailingAnchor.constraint(equalTo: footerView.trailingAnchor),
-            sinSubmitButton.centerYAnchor.constraint(equalTo: footerView.bottomAnchor),
-            sinSubmitButton.heightAnchor.constraint(equalTo: footerView.heightAnchor, multiplier: 0.75)
+            sinSubmitButton.centerYAnchor.constraint(equalTo: footerView.centerYAnchor),
+            sinSubmitButton.leadingAnchor.constraint(equalTo: sinTextField.trailingAnchor, constant: view.bounds.width * 0.05),
         ])
         
-        // Adiciona rodapé à TableView
         tableView.tableFooterView = footerView
-        
-        // Adiciona ação ao botão
         sinSubmitButton.addTarget(self, action: #selector(addSin), for: .touchUpInside)
     }
+
     
-    // MARK: - Ações dos botões Next, Back e X
+    // MARK: - Ações
     
-    // Ação para fechar a view (X)
     @objc private func closeButtonTapped() {
         coordinator?.handleNavigation(.popToRoot)
     }
     
-    // Ação para voltar
     @objc private func goBack() {
         coordinator?.handleNavigation(.back)
     }
     
-    // Ação para avançar
     @objc private func goForward() {
         coordinator?.handleNavigation(.consciousnessExamThird)
     }
     
-    // Ação para adicionar pecado
     @objc private func addSin() {
         guard let newSin = sinTextField.text, !newSin.isEmpty else { return }
         
@@ -254,37 +225,27 @@ class ConsciousnessExamSecondViewController: UIViewController, UITextFieldDelega
         
         present(alertController, animated: true, completion: nil)
         
-        // Limpar o campo de texto
         sinTextField.text = ""
     }
     
-    // MARK: - Métodos Auxiliares para Adicionar Pecado
-    
-    // Método para adicionar pecado a uma categoria existente
     private func chooseExistingCategory(for newSin: String) {
         let alert = UIAlertController(title: "Escolha uma categoria", message: "Escolha uma categoria", preferredStyle: .alert)
         
-        for commandment in viewModel.commandments {
-            alert.addAction(UIAlertAction(title: commandment.title, style: .default, handler: { _ in
-                self.addSinToCategory(newSin, categoryTitle: commandment.title)
+        for commandment in commandments {
+            alert.addAction(UIAlertAction(title: commandment.commandment, style: .default, handler: { _ in
+                self.addSinToCategory(newSin, categoryTitle: commandment.commandment)
             }))
         }
         
         present(alert, animated: true, completion: nil)
     }
     
-    // Adiciona pecado à categoria existente
     private func addSinToCategory(_ newSin: String, categoryTitle: String) {
-        guard let index = viewModel.commandments.firstIndex(where: { $0.title == categoryTitle }) else { return }
-        
-        viewModel.commandments[index].sins.append(newSin)
+        // Adiciona o pecado à categoria correspondente via ViewModel
+        viewModel.addSin(with: newSin, commandment: categoryTitle, comDescription: "")
         tableView.reloadData()
-        
-        let lastIndexPath = IndexPath(row: viewModel.commandments[index].sins.count - 1, section: index)
-        tableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
     }
     
-    // Método para adicionar nova categoria
     private func addNewCategory(for newSin: String) {
         let alert = UIAlertController(title: "Nova Categoria", message: "Insira o título da nova categoria", preferredStyle: .alert)
         
@@ -300,13 +261,8 @@ class ConsciousnessExamSecondViewController: UIViewController, UITextFieldDelega
             guard let title = alert.textFields?.first?.text,
                   let description = alert.textFields?[1].text, !title.isEmpty, !description.isEmpty else { return }
             
-            let newCommandment = Commandment(title: title, description: description, sins: [newSin])
-            self?.viewModel.commandments.append(newCommandment)
+            self?.viewModel.addSin(with: newSin, commandment: title, comDescription: description)
             self?.tableView.reloadData()
-            
-            let lastSectionIndex = (self?.viewModel.commandments.count ?? 1) - 1
-            let lastIndexPath = IndexPath(row: 0, section: lastSectionIndex)
-            self?.tableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
         }))
         
         alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
@@ -314,44 +270,37 @@ class ConsciousnessExamSecondViewController: UIViewController, UITextFieldDelega
     }
     
     // MARK: - Configurações de Layout
-        
+    
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            // Barra de progresso no topo (altura proporcional à altura da tela)
             progressBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             progressBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: view.bounds.width * 0.05),
             progressBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: view.bounds.width * -0.05),
-            progressBar.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.01),  // Altura proporcional
+            progressBar.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.01),
             
-            // Título (distância vertical proporcional ao tamanho da tela)
             titleLabel.topAnchor.constraint(equalTo: progressBar.bottomAnchor, constant: view.bounds.height * 0.05),
             titleLabel.leadingAnchor.constraint(equalTo: progressBar.leadingAnchor),
-            titleLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6),  // Largura proporcional à tela
+            titleLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6),
             
-            // Botão de fechar (X) (tamanho baseado na largura da tela)
             closeButton.trailingAnchor.constraint(equalTo: progressBar.trailingAnchor),
             closeButton.topAnchor.constraint(equalTo: titleLabel.topAnchor),
-            closeButton.widthAnchor.constraint(equalToConstant: view.bounds.width * 0.05),  // Largura proporcional
-            closeButton.heightAnchor.constraint(equalToConstant: view.bounds.width * 0.05),  // Altura proporcional
+            closeButton.widthAnchor.constraint(equalToConstant: view.bounds.width * 0.05),
+            closeButton.heightAnchor.constraint(equalToConstant: view.bounds.width * 0.05),
             
-            // Descrição (distância vertical proporcional ao tamanho da tela)
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: view.bounds.height * 0.035),
             descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
             descriptionLabel.trailingAnchor.constraint(equalTo: closeButton.trailingAnchor),
             
-            // TableView (preenche o espaço restante entre a descrição e o botão de voltar)
             tableView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: view.bounds.height * 0.03),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: view.bounds.width * 0.05),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: view.bounds.width * -0.05),
             tableView.bottomAnchor.constraint(equalTo: backBt.topAnchor, constant: view.bounds.height * -0.02),
             
-            // Botão "Back" (tamanho proporcional à largura da tela)
             backBt.widthAnchor.constraint(equalToConstant: view.bounds.width * 0.15),
             backBt.heightAnchor.constraint(equalToConstant: view.bounds.width * 0.15),
             backBt.leadingAnchor.constraint(equalTo: progressBar.leadingAnchor),
             backBt.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: view.bounds.height * -0.01),
             
-            // Botão "Next" (tamanho proporcional à largura da tela)
             nextBt.widthAnchor.constraint(equalToConstant: view.bounds.width * 0.15),
             nextBt.heightAnchor.constraint(equalToConstant: view.bounds.width * 0.15),
             nextBt.trailingAnchor.constraint(equalTo: tableView.trailingAnchor),
@@ -359,6 +308,311 @@ class ConsciousnessExamSecondViewController: UIViewController, UITextFieldDelega
         ])
     }
 }
+
+// MARK: - ViewModel Delegate
+
+extension ConsciousnessExamSecondViewController: SinViewModelDelegate {
+    
+    func didUpdateSavedSins(_ savedSins: [Sin]) {
+        commandments = viewModel.getGroupedSinsByCommandment(limit: 3)
+        expandedStates = Array(repeating: false, count: commandments.count)  // Define todos os mandamentos como "não expandidos"
+        
+        // Debugging: Verifique se os mandamentos estão sendo carregados corretamente
+        print("Número de mandamentos carregados: \(commandments.count)")
+        
+        tableView.reloadData()
+    }
+    
+    func didUpdateCommittedSins(_ committedSins: [SinsInExamination]) {
+        // Aqui você pode atualizar a interface para refletir os pecados confessados
+    }
+    
+    func didFailToAddSin(with message: String) {
+        let alert = UIAlertController(title: "Erro", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+}
+
+// MARK: - Extensão para TableView
+
+extension ConsciousnessExamSecondViewController: UITableViewDelegate, UITableViewDataSource {
+
+    // Número de linhas, considerando mandamentos e pecados expandidos
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        var count = 0
+        for (index, commandment) in commandments.enumerated() {
+            count += 1 // Conta o mandamento
+            if expandedStates[index] {
+                count += commandment.sins.count // Conta os pecados se expandido
+            }
+        }
+        return count
+    }
+
+    // Configuração de células
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var currentIndex = 0
+        
+        for (index, commandment) in commandments.enumerated() {
+            if currentIndex == indexPath.row {
+                // Aqui configuramos a célula para o mandamento
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: CommandmentCell.reuseIdentifier, for: indexPath) as? CommandmentCell else {
+                    return UITableViewCell()
+                }
+                // Configure a célula com o título do mandamento, não os pecados
+                cell.configure(withTitle: commandment.commandment, description: commandment.sins.first?.commandmentDescription ?? "")
+                
+                let chevronImageName = expandedStates[index] ? "chevron.down" : "chevron.right"
+                cell.accessoryView = UIImageView(image: UIImage(systemName: chevronImageName))
+                cell.selectionStyle = .none
+                
+                return cell
+            }
+            
+            currentIndex += 1
+            
+            if expandedStates[index] {
+                for sin in commandment.sins {
+                    if currentIndex == indexPath.row {
+                        // Aqui configuramos a célula para os pecados
+                        guard let cell = tableView.dequeueReusableCell(withIdentifier: SinCell.reuseIdentifier, for: indexPath) as? SinCell else {
+                            return UITableViewCell()
+                        }
+                        cell.configure(with: sin.sinDescription ?? "", isSelected: sin.isSelected)
+                        cell.isSinSelected = sin.isSelected  // Define a aparência com base no estado do pecado
+                        cell.selectionStyle = .none
+                        return cell
+                    }
+                    currentIndex += 1
+                }
+            }
+        }
+        
+        return UITableViewCell()
+    }
+
+
+    // Expande ou contrai o mandamento ao tocar ou altera a aparência do pecado ao clicar nele
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var currentIndex = 0
+
+        // Loop através dos mandamentos
+        for (index, commandment) in commandments.enumerated() {
+            
+            // Se o índice atual for o índice do mandamento, expande ou contrai
+            if currentIndex == indexPath.row {
+                expandedStates[index].toggle()
+                
+                // Começa a animação de atualização da tabela
+                tableView.beginUpdates()
+                
+                // Inserir ou deletar linhas de pecados associados ao mandamento
+                let indexPaths = (1...commandment.sins.count).map { IndexPath(row: currentIndex + $0, section: 0) }
+                if expandedStates[index] {
+                    tableView.insertRows(at: indexPaths, with: .fade)
+                } else {
+                    tableView.deleteRows(at: indexPaths, with: .fade)
+                }
+                
+                tableView.endUpdates()
+                
+                // Recarrega a célula de mandamento para garantir que o chevron seja atualizado
+                if let commandmentCell = tableView.cellForRow(at: indexPath) as? CommandmentCell {
+                    animateChevronRotation(for: commandmentCell, expanded: expandedStates[index])
+                }
+                
+                return // Termina aqui se foi um mandamento que foi tocado
+            }
+            
+            // Avança para as células de pecados associadas ao mandamento
+            currentIndex += 1
+            
+            // Se o mandamento estiver expandido, verifique se a célula clicada é um pecado
+            if expandedStates[index] {
+                for (sinIndex, sin) in commandment.sins.enumerated() {
+                    if currentIndex == indexPath.row {
+                        // Se for um pecado, alterna o estado de seleção e aparência
+                        sin.isSelected.toggle()  // Alterna o estado do pecado
+
+                        // Atualiza a aparência da célula com base no estado de seleção
+                        if let sinCell = tableView.cellForRow(at: indexPath) as? SinCell {
+                            sinCell.isSinSelected = sin.isSelected  // Atualiza a aparência da célula
+                        }
+                        
+                        // Atualiza a célula para refletir a mudança
+                        tableView.reloadRows(at: [indexPath], with: .none)
+                        
+                        return // Termina após processar o pecado clicado
+                    }
+                    currentIndex += 1 // Avança para o próximo pecado
+                }
+            }
+        }
+    }
+
+    // Função para animar a rotação do chevron
+    func animateChevronRotation(for cell: CommandmentCell, expanded: Bool) {
+        guard let chevronView = cell.accessoryView as? UIImageView else { return }
+        
+        // Manter o tamanho do chevron fixo
+        let originalFrame = chevronView.frame
+        
+        let rotationAngle: CGFloat = expanded ? .pi / 2 : 0  // Rotaciona 90 graus se expandido, volta a 0 se colapsado
+        
+        UIView.animate(withDuration: 0.15, animations: {
+            chevronView.transform = CGAffineTransform(rotationAngle: rotationAngle)
+        }) { _ in
+            // Restaurar o frame original após a animação para manter o tamanho
+            chevronView.frame = originalFrame
+        }
+    }
+
+
+    // Define a altura das células
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension + view.bounds.height * 0.1
+    }
+
+    // Define uma altura estimada para melhor desempenho
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return view.bounds.height * 0.2
+    }
+}
+
+
+// MARK: - CommandmentCell
+class CommandmentCell: UITableViewCell {
+    
+    static let reuseIdentifier = "CommandmentCell"
+    
+    // Título do Mandamento
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    // Descrição do Mandamento
+    private let descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .gray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    // Método de configuração que recebe o título e a descrição
+    func configure(withTitle title: String, description: String) {
+        titleLabel.text = title
+        descriptionLabel.text = description
+        setupLayout()
+    }
+    
+    // Configura o layout da célula
+    private func setupLayout() {
+        addSubview(titleLabel)
+        addSubview(descriptionLabel)
+        
+        NSLayoutConstraint.activate([
+            titleLabel.bottomAnchor.constraint(equalTo: centerYAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            titleLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.6),
+            
+            descriptionLabel.topAnchor.constraint(equalTo: centerYAnchor),
+            descriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            descriptionLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.75)
+        ])
+    }
+}
+
+
+// MARK: - SinCell
+class SinCell: UITableViewCell {
+    
+    static let reuseIdentifier = "SinCell"
+    
+    // Label para o texto do pecado
+    let sinLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    // UIView que será usada para adicionar margens internas
+    let backgroundCardView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 10
+        view.layer.masksToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    // Propriedade customizada isSelected para controlar a aparência
+    var isSinSelected: Bool = false {
+        didSet {
+            updateAppearance()
+        }
+    }
+
+    // Método de configuração da célula
+    func configure(with sin: String, isSelected: Bool) {
+        sinLabel.text = sin
+        self.isSinSelected = isSelected
+        setupLayout()
+        setupConstraints()
+        updateAppearance() // Atualiza a aparência com base no estado atual
+    }
+
+    // Configura o layout da célula com um background view para margens
+    private func setupLayout() {
+        // Adiciona o backgroundCardView como uma subview
+        contentView.addSubview(backgroundCardView)
+        backgroundCardView.addSubview(sinLabel)
+    }
+
+    // Configura as constraints para o layout da célula
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            // Define margens (padding) ao redor do backgroundCardView
+            backgroundCardView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: bounds.height * 0.05),
+            backgroundCardView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            backgroundCardView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            backgroundCardView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: bounds.height * -0.05),
+            
+            // Define o posicionamento do texto (pecado)
+            sinLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            sinLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: bounds.width * 0.05),
+            sinLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: bounds.width * -0.05),
+        ])
+    }
+    
+    // Atualiza a aparência da célula com base no estado de seleção
+    private func updateAppearance() {
+        if isSinSelected {
+            backgroundCardView.backgroundColor = .lightGray   // Cor de fundo ao clicar
+            sinLabel.textColor = .black                       // Cor do texto
+            layer.borderColor = UIColor.black.cgColor         // Cor do Stroke
+            layer.borderWidth = 2                             // Largura do Stroke
+            layer.cornerRadius = 10                           // Raio dos cantos
+            clipsToBounds = true
+        } else {
+            // Retorna à aparência original
+            backgroundCardView.backgroundColor = .white       // Cor de fundo original
+            sinLabel.textColor = .black                       // Cor do texto original
+            sinLabel.font = UIFont.systemFont(ofSize: 16)     // Fonte normal
+            layer.borderWidth = 0                             // Remove a borda
+        }
+    }
+}
+
 
 // MARK: - Keyboard
 extension ConsciousnessExamSecondViewController {
@@ -397,8 +651,6 @@ extension ConsciousnessExamSecondViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    
-    
     //add gesture to Hide keyboard when touch outside
     private func setupTapGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
@@ -413,210 +665,19 @@ extension ConsciousnessExamSecondViewController {
     }
 }
 
+// MARK: - Sin extension
 
-// MARK: - Extensão para TableView
-extension ConsciousnessExamSecondViewController: UITableViewDelegate, UITableViewDataSource {
-
-    // Define o número de linhas considerando mandamentos e pecados
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var count = 0
-        for (index, commandment) in commandments.enumerated() {
-            count += 1  // Conta o mandamento
-            if expandedStates[index] {  // Se estiver expandido, conta os pecados
-                count += commandment.sins.count
-            }
+extension Sin {
+    var isSelected: Bool {
+        get {
+            return (objc_getAssociatedObject(self, &AssociatedKeys.isSelected) as? Bool) ?? false
         }
-        return count
-    }
-
-    // Configura cada célula da tabela
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var currentIndex = 0
-        
-        for (index, commandment) in commandments.enumerated() {
-            // Verifica se a linha atual é um mandamento
-            if currentIndex == indexPath.row {
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: CommandmentCell.reuseIdentifier, for: indexPath) as? CommandmentCell else {
-                    return UITableViewCell()
-                }
-                cell.configure(with: commandment)
-                
-                // Alterna entre os ícones chevron.right e chevron.down
-                let chevronImageName = expandedStates[index] ? "chevron.down" : "chevron.right"
-                cell.accessoryView = UIImageView(image: UIImage(systemName: chevronImageName))
-                cell.accessoryView?.tintColor = .black
-                
-                return cell
-            }
-            
-            currentIndex += 1
-            
-            // Verifica se a linha atual é um pecado
-            if expandedStates[index] {
-                for sin in commandment.sins {
-                    if currentIndex == indexPath.row {
-                        guard let cell = tableView.dequeueReusableCell(withIdentifier: SinCell.reuseIdentifier, for: indexPath) as? SinCell else {
-                            return UITableViewCell()
-                        }
-                        cell.configure(with: sin)
-                        return cell
-                    }
-                    currentIndex += 1
-                }
-            }
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.isSelected, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
-        
-        return UITableViewCell()
-    }
-
-    // Ação executada ao selecionar uma célula da tabela
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // Inicializa uma variável para acompanhar o índice da célula atual
-        var currentIndex = 0
-        
-        // Itera sobre a lista de mandamentos e seus índices
-        for (index, _) in commandments.enumerated() {
-            
-            // Verifica se a célula selecionada corresponde a um mandamento
-            if currentIndex == indexPath.row {
-                // Alterna o estado de expansão do mandamento (expande ou contrai)
-                expandedStates[index].toggle()
-                
-                // Recarrega os dados da tabela para refletir a alteração de estado (expansão ou contração)
-                tableView.reloadData()
-                
-                // Encerra o loop após encontrar a célula correspondente
-                break
-            }
-            
-            // Incrementa o índice para passar para a próxima linha
-            currentIndex += 1
-            
-            // Se o mandamento estiver expandido, conta os pecados (subcélulas) associados
-            if expandedStates[index] {
-                // Adiciona a quantidade de pecados associados ao mandamento expandido ao índice atual
-                currentIndex += commandments[index].sins.count
-            }
-        }
-    }
-
-
-    // Define a altura automática das células
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension + view.bounds.height * 0.1
-    }
-
-    // Define uma altura estimada para melhor desempenho
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return view.bounds.height * 0.2
     }
 }
 
-// MARK: - CommandmentCell
-class CommandmentCell: UITableViewCell {
-    
-    static let reuseIdentifier = "CommandmentCell"
-    
-    // Título do Mandamento
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    // Descrição do Mandamento
-    private let descriptionLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.textColor = .gray
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    // Método de configuração da célula
-    func configure(with commandment: Commandment) {
-        titleLabel.text = commandment.title
-        descriptionLabel.text = commandment.description
-        setupLayout()
-        
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: bounds.height * 0.2,
-                                                                     left: bounds.width * 0.1,
-                                                                     bottom: bounds.width * 0.1,
-                                                                     right: bounds.height * 0.2))
-    }
-    
-    // Configura o layout da célula
-    private func setupLayout() {
-        addSubview(titleLabel)
-        addSubview(descriptionLabel)
-        
-        NSLayoutConstraint.activate([
-            titleLabel.bottomAnchor.constraint(equalTo: centerYAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-            
-            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: bounds.height * 0.1),
-            descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            descriptionLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor)
-        ])
-    }
-}
-
-// MARK: - SinCell
-class SinCell: UITableViewCell {
-    
-    static let reuseIdentifier = "SinCell"
-    
-    // Label para o texto do pecado
-    private let sinLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 16)
-        label.textColor = .black
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    // UIView que será usada para adicionar margens internas
-    private let backgroundCardView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .lightText
-        view.layer.cornerRadius = 10
-        view.layer.masksToBounds = true
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-
-    // Método de configuração da célula
-    func configure(with sin: String) {
-        sinLabel.text = sin
-        setupLayout()
-        setupConstraints()
-    }
-
-    // Configura o layout da célula com um background view para margens
-    private func setupLayout() {
-        // Adiciona o backgroundCardView como uma subview
-        contentView.addSubview(backgroundCardView)
-        backgroundCardView.addSubview(sinLabel)
-    }
-
-    // Configura as constraints para o layout da célula
-    private func setupConstraints() {
-        NSLayoutConstraint.activate([
-            // Define margens (padding) ao redor do backgroundCardView
-            backgroundCardView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: bounds.height * 0.05),
-            backgroundCardView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            backgroundCardView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            backgroundCardView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: bounds.height * -0.05),
-            
-            // Define o posicionamento do texto (pecado)
-            sinLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            sinLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: bounds.width * 0.05),
-            sinLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: bounds.width * -0.05),
-        ])
-    }
+private struct AssociatedKeys {
+    static var isSelected = "isSelected"
 }

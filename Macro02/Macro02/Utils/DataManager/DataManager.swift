@@ -149,6 +149,7 @@ class DataManager {
         newSin.commandments = commandments
         newSin.commandmentDescription = commandmentDescription
         newSin.sinDescription = sinDescription
+        newSin.insertionDate = Date()
         
         saveContext()
         return newSin
@@ -203,6 +204,10 @@ class DataManager {
 
     public func fetchAllSins() -> [Sin] {
         let fetchRequest: NSFetchRequest<Sin> = Sin.fetchRequest()
+        
+        // Ordenar pela data de inserção ou outra propriedade que mantenha a ordem
+        let sortDescriptor = NSSortDescriptor(key: "insertionDate", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
         
         do {
             return try context.fetch(fetchRequest)
