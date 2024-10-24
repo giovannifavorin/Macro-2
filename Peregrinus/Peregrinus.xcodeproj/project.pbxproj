@@ -38,6 +38,7 @@
 		AFF9FA3D2CAF13D1004AB04F /* LiturgyCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF9FA3C2CAF13D1004AB04F /* LiturgyCardView.swift */; };
 		B84DEA082CA48F900010CEBC /* SinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84DEA072CA48F900010CEBC /* SinViewModel.swift */; };
 		B86E1B712CC997B7005F4FC6 /* SaintOfTheDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E1B702CC997B7005F4FC6 /* SaintOfTheDayView.swift */; };
+		B86E1C602CCACBFF005F4FC6 /* Saints.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86E1C5F2CCACBFF005F4FC6 /* Saints.swift */; };
 		B8783F822C99F32E00661148 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8783F812C99F32E00661148 /* CoordinatorProtocol.swift */; };
 		B8783F842C99F43800661148 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8783F832C99F43300661148 /* ViewModel.swift */; };
 		B8783F862C99F44200661148 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8783F852C99F44200661148 /* DataManager.swift */; };
@@ -119,6 +120,8 @@
 		B84D82EB2CC834EC0026A9FA /* PeregrinusUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PeregrinusUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B84DEA072CA48F900010CEBC /* SinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinViewModel.swift; sourceTree = "<group>"; };
 		B86E1B702CC997B7005F4FC6 /* SaintOfTheDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaintOfTheDayView.swift; sourceTree = "<group>"; };
+		B86E1C5E2CCABD82005F4FC6 /* Saints.JSON */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Saints.JSON; sourceTree = "<group>"; };
+		B86E1C5F2CCACBFF005F4FC6 /* Saints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Saints.swift; sourceTree = "<group>"; };
 		B8783F812C99F32E00661148 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		B8783F832C99F43300661148 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		B8783F852C99F44200661148 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
@@ -255,7 +258,9 @@
 				B8E9CC182CA1F1FE00B21598 /* SpiritualPreparation.swift */,
 				AFC683B62CA48B7900389DD8 /* LiturgiaDiariaAPI.swift */,
 				F1EDE1592C9E156A007A6403 /* Prayer.swift */,
+				B86E1C5F2CCACBFF005F4FC6 /* Saints.swift */,
 				AF0A93D72CB7210B005B194F /* Prayers.JSON */,
+				B86E1C5E2CCABD82005F4FC6 /* Saints.JSON */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -563,6 +568,7 @@
 				F1F6BE432C99FDD700F4C7FF /* ApplicationCoordinator.swift in Sources */,
 				F1EDE14A2C9CD045007A6403 /* ConsciousnessExamCoordinator.swift in Sources */,
 				AFF9FA3D2CAF13D1004AB04F /* LiturgyCardView.swift in Sources */,
+				B86E1C602CCACBFF005F4FC6 /* Saints.swift in Sources */,
 				B8783F902C99F63A00661148 /* DataModel.xcdatamodeld in Sources */,
 				F1F6BE742C9B644C00F4C7FF /* AuthManager.swift in Sources */,
 				AFC683B72CA48B7900389DD8 /* LiturgiaDiariaAPI.swift in Sources */,
