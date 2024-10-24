@@ -148,6 +148,56 @@ class SinViewModel {
 
         return groupedSins
     }
+    
+    // Filtra e agrupa pecados entre o Quarto e o Sétimo mandamento
+    func getGroupedSinsForFourthToSeventhCommandment() -> [(commandment: String, sins: [Sin])] {
+        var groupedSins: [(commandment: String, sins: [Sin])] = []
+
+        // Ordena os mandamentos com base nos números que eles contêm (palavras ou números)
+        let uniqueCommandments = Array(Set(_savedSins.compactMap { $0.commandments }).sorted { first, second in
+            return extractCommandmentNumber(from: first) < extractCommandmentNumber(from: second)
+        })
+
+        // Filtra os mandamentos do Quarto ao Sétimo
+        let filteredCommandments = uniqueCommandments.filter { commandment in
+            let commandmentNumber = extractCommandmentNumber(from: commandment)
+            return commandmentNumber >= 4 && commandmentNumber <= 7
+        }
+        
+        // Agrupa os pecados por mandamento
+        for commandment in filteredCommandments {
+            var sinsForCommandment = _savedSins.filter { $0.commandments == commandment }
+            sinsForCommandment = Array(Set(sinsForCommandment)) // Remove duplicatas
+            groupedSins.append((commandment: commandment, sins: sinsForCommandment))
+        }
+
+        return groupedSins
+    }
+
+    // Filtra e agrupa pecados entre o Oitavo e o Décimo mandamento
+    func getGroupedSinsForLastThreeCommandments() -> [(commandment: String, sins: [Sin])] {
+        var groupedSins: [(commandment: String, sins: [Sin])] = []
+
+        // Ordena os mandamentos com base nos números que eles contêm (palavras ou números)
+        let uniqueCommandments = Array(Set(_savedSins.compactMap { $0.commandments }).sorted { first, second in
+            return extractCommandmentNumber(from: first) < extractCommandmentNumber(from: second)
+        })
+
+        // Filtra os mandamentos do Oitavo ao Décimo
+        let filteredCommandments = uniqueCommandments.filter { commandment in
+            let commandmentNumber = extractCommandmentNumber(from: commandment)
+            return commandmentNumber >= 8 && commandmentNumber <= 10
+        }
+        
+        // Agrupa os pecados por mandamento
+        for commandment in filteredCommandments {
+            var sinsForCommandment = _savedSins.filter { $0.commandments == commandment }
+            sinsForCommandment = Array(Set(sinsForCommandment)) // Remove duplicatas
+            groupedSins.append((commandment: commandment, sins: sinsForCommandment))
+        }
+
+        return groupedSins
+    }
 
     // Função para mapear palavras como "Primeiro", "Segundo" para números e ordenar corretamente
     private func extractCommandmentNumber(from commandment: String) -> Int {

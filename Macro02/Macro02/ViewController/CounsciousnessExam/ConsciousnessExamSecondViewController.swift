@@ -3,7 +3,7 @@
 //  Macro02
 //
 //  Created by Victor Dantas on 16/10/24.
-//
+// k
 
 import UIKit
 
@@ -89,12 +89,15 @@ class ConsciousnessExamSecondViewController: UIViewController, UITextFieldDelega
         setupTableFooterView()
     }
     
+    // Barra de progresso estilo stories
     private func setupProgressBar() {
         self.progressBar = ProgressBarUI(index: 2)
         progressBar.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(progressBar)
     }
     
+    
+    // Título
     private func setupTitleLabel() {
         titleLabel.text = "Exame de Consciência"
         titleLabel.font = UIFont.boldSystemFont(ofSize: 32)
@@ -103,6 +106,7 @@ class ConsciousnessExamSecondViewController: UIViewController, UITextFieldDelega
         view.addSubview(titleLabel)
     }
     
+    // Botão X que volta pra Home
     private func setupCloseButton() {
         let largeConfig = UIImage.SymbolConfiguration(pointSize: 24, weight: .bold, scale: .large)
         let largeImage = UIImage(systemName: "xmark", withConfiguration: largeConfig)
@@ -113,6 +117,7 @@ class ConsciousnessExamSecondViewController: UIViewController, UITextFieldDelega
         view.addSubview(closeButton)
     }
     
+    // Texto descritivo da View
     private func setupDescriptionLabel() {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 10
@@ -130,6 +135,7 @@ class ConsciousnessExamSecondViewController: UIViewController, UITextFieldDelega
         view.addSubview(descriptionLabel)
     }
     
+    // TableView dos mandamentos e pecados
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -140,11 +146,8 @@ class ConsciousnessExamSecondViewController: UIViewController, UITextFieldDelega
         view.addSubview(tableView)
     }
     
-    private func setupButtons() {
-        setupBackButton()
-        setupNextButton()
-    }
-    
+    // Botões de navegação (voltar e avançar)
+    // Voltar
     private func setupBackButton() {
         backBt.setImage(UIImage(systemName: "arrow.left"), for: .normal)
         backBt.backgroundColor = .black
@@ -155,6 +158,7 @@ class ConsciousnessExamSecondViewController: UIViewController, UITextFieldDelega
         view.addSubview(backBt)
     }
     
+    // Avançar
     private func setupNextButton() {
         nextBt.setImage(UIImage(systemName: "arrow.right"), for: .normal)
         nextBt.backgroundColor = .black
@@ -165,6 +169,12 @@ class ConsciousnessExamSecondViewController: UIViewController, UITextFieldDelega
         view.addSubview(nextBt)
     }
     
+    private func setupButtons() {
+        setupBackButton()
+        setupNextButton()
+    }
+    
+    // Footer da Table View com o TextField e botão para adicionar pecados
     private func setupTableFooterView() {
         let footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.bounds.height * 0.1))
         
@@ -195,7 +205,7 @@ class ConsciousnessExamSecondViewController: UIViewController, UITextFieldDelega
 
     
     // MARK: - Ações
-    
+    // Navegação
     @objc private func closeButtonTapped() {
         coordinator?.handleNavigation(.popToRoot)
     }
@@ -208,6 +218,7 @@ class ConsciousnessExamSecondViewController: UIViewController, UITextFieldDelega
         coordinator?.handleNavigation(.consciousnessExamThird)
     }
     
+    // Adicionar pecado
     @objc private func addSin() {
         guard let newSin = sinTextField.text, !newSin.isEmpty else { return }
         
@@ -270,7 +281,6 @@ class ConsciousnessExamSecondViewController: UIViewController, UITextFieldDelega
     }
     
     // MARK: - Configurações de Layout
-    
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             progressBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -310,7 +320,6 @@ class ConsciousnessExamSecondViewController: UIViewController, UITextFieldDelega
 }
 
 // MARK: - ViewModel Delegate
-
 extension ConsciousnessExamSecondViewController: SinViewModelDelegate {
     
     func didUpdateSavedSins(_ savedSins: [Sin]) {
@@ -324,7 +333,7 @@ extension ConsciousnessExamSecondViewController: SinViewModelDelegate {
     }
     
     func didUpdateCommittedSins(_ committedSins: [SinsInExamination]) {
-        // Aqui você pode atualizar a interface para refletir os pecados confessados
+        // Atualizar a interface para refletir os pecados confessados
     }
     
     func didFailToAddSin(with message: String) {
@@ -335,7 +344,6 @@ extension ConsciousnessExamSecondViewController: SinViewModelDelegate {
 }
 
 // MARK: - Extensão para TableView
-
 extension ConsciousnessExamSecondViewController: UITableViewDelegate, UITableViewDataSource {
 
     // Número de linhas, considerando mandamentos e pecados expandidos
@@ -392,7 +400,6 @@ extension ConsciousnessExamSecondViewController: UITableViewDelegate, UITableVie
         return UITableViewCell()
     }
 
-
     // Expande ou contrai o mandamento ao tocar ou altera a aparência do pecado ao clicar nele
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var currentIndex = 0
@@ -430,7 +437,7 @@ extension ConsciousnessExamSecondViewController: UITableViewDelegate, UITableVie
             
             // Se o mandamento estiver expandido, verifique se a célula clicada é um pecado
             if expandedStates[index] {
-                for (sinIndex, sin) in commandment.sins.enumerated() {
+                for (_, sin) in commandment.sins.enumerated() {
                     if currentIndex == indexPath.row {
                         // Se for um pecado, alterna o estado de seleção e aparência
                         sin.isSelected.toggle()  // Alterna o estado do pecado
@@ -455,16 +462,10 @@ extension ConsciousnessExamSecondViewController: UITableViewDelegate, UITableVie
     func animateChevronRotation(for cell: CommandmentCell, expanded: Bool) {
         guard let chevronView = cell.accessoryView as? UIImageView else { return }
         
-        // Manter o tamanho do chevron fixo
-        let originalFrame = chevronView.frame
-        
-        let rotationAngle: CGFloat = expanded ? .pi / 2 : 0  // Rotaciona 90 graus se expandido, volta a 0 se colapsado
-        
-        UIView.animate(withDuration: 0.15, animations: {
-            chevronView.transform = CGAffineTransform(rotationAngle: rotationAngle)
-        }) { _ in
-            // Restaurar o frame original após a animação para manter o tamanho
-            chevronView.frame = originalFrame
+        if expanded {
+            chevronView.image = UIImage(systemName: "chevron.down")
+        } else {
+            chevronView.image = UIImage(systemName: "chevron.right")
         }
     }
 
@@ -479,140 +480,6 @@ extension ConsciousnessExamSecondViewController: UITableViewDelegate, UITableVie
         return view.bounds.height * 0.2
     }
 }
-
-
-// MARK: - CommandmentCell
-class CommandmentCell: UITableViewCell {
-    
-    static let reuseIdentifier = "CommandmentCell"
-    
-    // Título do Mandamento
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    // Descrição do Mandamento
-    private let descriptionLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.textColor = .gray
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    // Método de configuração que recebe o título e a descrição
-    func configure(withTitle title: String, description: String) {
-        titleLabel.text = title
-        descriptionLabel.text = description
-        setupLayout()
-    }
-    
-    // Configura o layout da célula
-    private func setupLayout() {
-        addSubview(titleLabel)
-        addSubview(descriptionLabel)
-        
-        NSLayoutConstraint.activate([
-            titleLabel.bottomAnchor.constraint(equalTo: centerYAnchor),
-            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            titleLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.6),
-            
-            descriptionLabel.topAnchor.constraint(equalTo: centerYAnchor),
-            descriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            descriptionLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.75)
-        ])
-    }
-}
-
-
-// MARK: - SinCell
-class SinCell: UITableViewCell {
-    
-    static let reuseIdentifier = "SinCell"
-    
-    // Label para o texto do pecado
-    let sinLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 16)
-        label.textColor = .black
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    // UIView que será usada para adicionar margens internas
-    let backgroundCardView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white
-        view.layer.cornerRadius = 10
-        view.layer.masksToBounds = true
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    // Propriedade customizada isSelected para controlar a aparência
-    var isSinSelected: Bool = false {
-        didSet {
-            updateAppearance()
-        }
-    }
-
-    // Método de configuração da célula
-    func configure(with sin: String, isSelected: Bool) {
-        sinLabel.text = sin
-        self.isSinSelected = isSelected
-        setupLayout()
-        setupConstraints()
-        updateAppearance() // Atualiza a aparência com base no estado atual
-    }
-
-    // Configura o layout da célula com um background view para margens
-    private func setupLayout() {
-        // Adiciona o backgroundCardView como uma subview
-        contentView.addSubview(backgroundCardView)
-        backgroundCardView.addSubview(sinLabel)
-    }
-
-    // Configura as constraints para o layout da célula
-    private func setupConstraints() {
-        NSLayoutConstraint.activate([
-            // Define margens (padding) ao redor do backgroundCardView
-            backgroundCardView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: bounds.height * 0.05),
-            backgroundCardView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            backgroundCardView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            backgroundCardView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: bounds.height * -0.05),
-            
-            // Define o posicionamento do texto (pecado)
-            sinLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            sinLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: bounds.width * 0.05),
-            sinLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: bounds.width * -0.05),
-        ])
-    }
-    
-    // Atualiza a aparência da célula com base no estado de seleção
-    private func updateAppearance() {
-        if isSinSelected {
-            backgroundCardView.backgroundColor = .lightGray   // Cor de fundo ao clicar
-            sinLabel.textColor = .black                       // Cor do texto
-            layer.borderColor = UIColor.black.cgColor         // Cor do Stroke
-            layer.borderWidth = 2                             // Largura do Stroke
-            layer.cornerRadius = 10                           // Raio dos cantos
-            clipsToBounds = true
-        } else {
-            // Retorna à aparência original
-            backgroundCardView.backgroundColor = .white       // Cor de fundo original
-            sinLabel.textColor = .black                       // Cor do texto original
-            sinLabel.font = UIFont.systemFont(ofSize: 16)     // Fonte normal
-            layer.borderWidth = 0                             // Remove a borda
-        }
-    }
-}
-
 
 // MARK: - Keyboard
 extension ConsciousnessExamSecondViewController {

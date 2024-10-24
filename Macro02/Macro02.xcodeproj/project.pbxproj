@@ -160,6 +160,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		F13C5E3E2CCAC1F700734115 /* TableViewCells */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = TableViewCells; sourceTree = "<group>"; };
 		F1BE740D2CB9A33B00989E80 /* Onboarding */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Onboarding; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -191,6 +192,7 @@
 		4AEF3A962CADBFE200BEB337 /* CounsciousnessExam */ = {
 			isa = PBXGroup;
 			children = (
+				F13C5E3E2CCAC1F700734115 /* TableViewCells */,
 				4AEF3A952CADBFE200BEB337 /* ConsciousnessExamViewController.swift */,
 				F1773CD72CC040DE00DBDE2E /* SacramentOfConfessionView.swift */,
 				F1773CB32CC02F7900DBDE2E /* PreparatoryPrayerView.swift */,
@@ -414,6 +416,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				F13C5E3E2CCAC1F700734115 /* TableViewCells */,
 				F1BE740D2CB9A33B00989E80 /* Onboarding */,
 			);
 			name = Macro02;
